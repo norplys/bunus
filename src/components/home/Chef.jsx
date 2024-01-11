@@ -7,6 +7,8 @@ export default function Chef() {
           src={"/chef.svg"}
           width={500}
           height={500}
+          alt="chef"
+          priority={true}
         ></Image>
       </div>
       <div className="w-[45%] flex flex-col justify-center gap-5">
