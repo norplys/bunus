@@ -1,4 +1,4 @@
-import Chef from "../components/home/Chef"
+import Chef from "@/components/home/Chef";
 import Intro from "../components/home/Intro";
 import FavouriteMenu from "../components/home/FavouriteMenu";
 import Contact from "../components/home/Contact";

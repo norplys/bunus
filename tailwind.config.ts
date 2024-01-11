@@ -22,6 +22,7 @@ const config: Config = {
           'blue' : '#EBF7FF',
           'red' : '#FF715B',
           'orange' : '#FFA400',
+          'brown' : '#333333'
         }
       }
     },

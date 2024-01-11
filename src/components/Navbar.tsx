@@ -6,9 +6,9 @@ export default function Navbar() {
         <Link href={"/"} className="text-black font-bold text-lg">BUBUR NUSANTARA</Link>
         <nav>
           <ul className="text-black flex gap-4">
-            <li>Home</li>
-            <li>About</li>
-            <li>Projects</li>
+            <Link href={'/'}>Menu</Link>
+            <Link href={'/'}>Services</Link>
+            <Link href={'/'}>Promo</Link>
           </ul>
         </nav>
         <div>
