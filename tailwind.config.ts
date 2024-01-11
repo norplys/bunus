@@ -13,6 +13,17 @@ const config: Config = {
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
+      animation : {
+        'spin-slow' : 'spin 60s linear infinite'
+      },
+      colors : {
+        'primary' : {
+          'cyan' : '#41ABC2',
+          'blue' : '#EBF7FF',
+          'red' : '#FF715B',
+          'orange' : '#FFA400',
+        }
+      }
     },
   },
   plugins: [],
