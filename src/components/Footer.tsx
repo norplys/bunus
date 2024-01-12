@@ -20,9 +20,9 @@ export default function Footer() {
           <div>07:00 - 20:00</div>
         </div>
         <div className="flex flex-col gap-2 text-slate-50">
-          <h1 className="font-bold ">Our Info</h1>
-          <div className="font-thin">Testimonial</div>
-          <div className="font-thin">Our Story</div>
+          <h1 className="font-bold ">Seputar Kami</h1>
+          <div className="font-thin">Testimoni</div>
+          <div className="font-thin">Tentang Kami</div>
         </div>
       </div>
       <div className="text-slate-50">
