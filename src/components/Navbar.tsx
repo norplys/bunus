@@ -1,12 +1,12 @@
 import Link from "next/link";
 export default function Navbar() {
   return (
-    <div className="navbar w-full  bg-opacity-5 backdrop-blur-3xl flex sticky top-0 z-10 shadow-sm">
+    <div className="navbar w-full bg-opacity-5 backdrop-blur-3xl flex sticky top-0 z-10 shadow-xl">
       <div className="flex mx-auto justify-between items-center  w-full max-w-7xl min-h-full py-5">
         <Link href={"/"} className="text-black font-bold text-lg">BUBUR NUSANTARA</Link>
         <nav>
           <ul className="text-black flex gap-4">
-            <Link href={'/'}>Menu</Link>
+            <Link href={'/menu'}>Menu</Link>
             <Link href={'/'}>Services</Link>
             <Link href={'/'}>Promo</Link>
           </ul>
