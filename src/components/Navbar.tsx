@@ -12,7 +12,7 @@ export default function Navbar() {
           </ul>
         </nav>
         <div>
-            <button className=" border border-primary-cyan font-bold text-primary-cyan px-4 py-1 rounded-md">Login</button>
+            <Link href={"/login"} className="border border-primary-cyan font-bold text-primary-cyan px-4 py-1 rounded-md">Login</Link>
         </div>
       </div>
     </div>

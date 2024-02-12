@@ -7,7 +7,7 @@ export default function MenuItem() {
         <h1 className="text-lg font-semibold">Menu 1</h1>
         <p className=" text-primary-orange font-semibold">Rp. 25000</p>
         <p className="text-sm">Deskripsi</p>
-        <button className="py-1 px-3 font-bold rounded-xl mb-4 w-fit bg-primary-red text-white text-lg">Pesan Sekarang</button>
+        <button className="py-1 px-3 font-bold rounded-xl mb-4 w-fit bg-primary-red text-white text-lg hover:bg-red-300 duration-300">Pesan Sekarang</button>
     </section>
     )
 }
