@@ -13,8 +13,15 @@ const config: Config = {
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
+      backgroundSize: {
+        '800%' : '800%',
+      },
+      backgroundPosition : {
+        "50%" : "0% 50%" ,
+        "100%" : "100% 50%",
+      },
       animation : {
-        'spin-slow' : 'spin 60s linear infinite'
+        'spin-slow' : 'spin 60s linear infinite',
       },
       colors : {
         'primary' : {
