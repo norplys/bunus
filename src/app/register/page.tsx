@@ -22,7 +22,7 @@ export default function Register() {
                 {inputArray.map((input, index) => (
                     <LoginInput key={index} label={input.label} type={input.type} register={register} error={errors} />
                 ))}
-                <button className="bg-primary-red text-white font-bold rounded-md p-2 ">Register</button>
+                <button className="bg-gradient-to-r from-primary-red via-purple-500 bg-800% bg-50% hover:bg-100% duration-700 to-primary-orange text-white font-bold rounded-md p-2 ">Register</button>
                 <p>Sudah Punya Akun ? <Link href={"/login"} className="font-bold hover:text-blue-600 duration-300">Masuk Disini !</Link></p>
             </form>
             </div>
