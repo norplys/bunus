@@ -14,7 +14,7 @@ type MenuProps = {
     image: string,
 }
 
-export default function Category ({category}: {category: CategoryProps}) {
+export default function Category ({category, setIsOpen, setModalId, isOpen}: {category: CategoryProps, setIsOpen: (value : boolean) => void, setModalId: (value : string) => void, isOpen: boolean}) {
     const {data, isLoading} = useCategoriesMenus(category?.id);
     if (isLoading) {
         return <h1>Loading...</h1>
@@ -26,7 +26,7 @@ export default function Category ({category}: {category: CategoryProps}) {
             {
                 data?.map((menu : MenuProps, i : number) => {
                     return (
-                        <MenuItem key={i} menu={menu}/>
+                        <MenuItem key={i} menu={menu} setIsOpen={setIsOpen} setModalId={setModalId} isOpen={isOpen}/>
                     )
                 })
             }

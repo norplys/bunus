@@ -1,6 +1,6 @@
 "use client"
 import Category from "@/components/menu/Category";
-import {useState } from "react";
+import {useState, useRef } from "react";
 import DetailModal from "@/components/menu/DetailModal";
 import { useCategoriesData } from "@/helper/hooks/useCategoryData";
 
@@ -10,8 +10,13 @@ type CategoryProps = {
 }
 
 export default function menu () {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
+  const modalId = useRef("");
   const { data, isLoading } = useCategoriesData();
+
+  const setModalId = (id : string) => {
+    modalId.current = id;
+  }
 
   return (
     <section className="min-h-screen">
@@ -22,13 +27,13 @@ export default function menu () {
         ) : (
           data.map((category : CategoryProps , i : number) => {
             return (
-              <Category key={i} category={category}/>
+              <Category key={i} category={category} setIsOpen={setOpen} isOpen={open} setModalId={setModalId}/>
             )
           })
         )
       }
     </div>
-    <DetailModal isOpen={open} setIsOpen={setOpen} />
+    <DetailModal isOpen={open} setIsOpen={setOpen} id={modalId} />
     </section>
   );
 }

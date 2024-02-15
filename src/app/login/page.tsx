@@ -4,15 +4,19 @@ import { IoLogoGoogle } from "react-icons/io5";
 import LoginInput from "@/components/login/loginInput";
 import {useForm, SubmitHandler } from "react-hook-form";
 import Link from "next/link";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
 const inputArray = [
     {label: "Email", type: "email"},
     {label: "Password", type: "password"}
 ]
+
 export default function Login() {
+    const { push }   = useRouter();
     const { register, handleSubmit, formState: { errors } } = useForm();
     const googleLogin = () => {
-        console.log("Google Login");
+        push("https://bunus-be-production.up.railway.app/auth/google");
     }
     const onSubmit: SubmitHandler<Record<string, any>> = data => console.log(data);
     return (
