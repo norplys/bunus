@@ -1,6 +1,7 @@
 import { Dialog } from "@headlessui/react";
 import Image from "next/image";
 import { useState } from "react";
+
 export default function DetailModal({
   isOpen,
   setIsOpen,
@@ -21,7 +22,7 @@ const [count, setCount] = useState(0);
           <h1 className="text-xl font-bold">Menu Title</h1>
         </Dialog.Title>
         <div className="flex gap-5">
-          <div className="overflow-hidden h-60 rounded-2xl">
+          <div className="overflow-hidden h-60 rounded-2xl shadow-xl">
             <Image
               src="https://res.cloudinary.com/dpg0tbbot/image/upload/v1704978248/bunus/rcqltvzeguzxmldbamko.webp"
               alt="menu1"
@@ -31,7 +32,7 @@ const [count, setCount] = useState(0);
             />
           </div>
           <Dialog.Description>
-            <p className="overflow-y-auto text-justify text-sm w-72 border border-primary-orange h-full rounded-2xl p-2 bg-orange-50">
+            <p className="overflow-y-auto text-justify text-sm w-72 border border-primary-orange h-full rounded-2xl p-2 bg-orange-50 shadow-xl">
               Deskripsi Lorem ipsum, dolor sit amet consectetur adipisicing
               elit. Eligendi magnam odio, doloribus nemo error quod quia
               architecto ex mollitia aperiam cum inventore expedita perspiciatis
@@ -51,7 +52,7 @@ const [count, setCount] = useState(0);
           <div className="flex items-center p-1 font-bold">{count}</div>
           <button className="text-xl bg-primary-orange text-white p-1 rounded-full" onClick={() => setCount(count + 1)}>+</button>
         </div>
-        <button className="py-1 px-3 font-bold rounded-xl mb-4 w-fit bg-primary-red text-white text-lg hover:bg-red-300 duration-300">
+        <button className="py-1 px-3 font-bold rounded-xl mb-4 text-white text-lg shadow-lg bg-gradient-to-r from-primary-red via-purple-500 to-primary-orange bg-800% bg-50% hover:bg-100% duration-700">
           Tambahkan Ke Keranjang
         </button>
       </Dialog.Panel>
