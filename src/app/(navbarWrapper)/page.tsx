@@ -9,8 +9,12 @@ import { useSearchParams } from "next/navigation";
 export default function Home() {
   const searchParams = useSearchParams();
   const token = searchParams.get("token");
-  const email = searchParams.get("email");
-  const name = searchParams.get("name");
+  useEffect(() => {
+    if (token) {
+      console.log(token);      
+      localStorage.setItem("token", token);
+    }
+  }, [token]);
   return (
     <section className="grid gap-14">
         <Intro />
