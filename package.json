@@ -10,6 +10,11 @@
     "prepare": "husky install"
 
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
   "lint-staged": {
     "**/*": "prettier --write --ignore-unknown"
   },
