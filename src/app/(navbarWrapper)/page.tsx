@@ -11,7 +11,6 @@ export default function Home() {
   const token = searchParams.get("token");
   useEffect(() => {
     if (token) {
-      console.log(token);
       localStorage.setItem("token", token);
     }
   }, [token]);

@@ -128,7 +128,7 @@ export default function Login() {
           alt="logo"
           width={350}
           height={350}
-          className="object-cover duration-300 rounded-full animate-spin-slow"
+          className="object-cover duration-300 rounded-full animate-spin-slow shadow-xl"
         />
         <h1 className="text-5xl font-extrabold text-white">BUBUR NUSANTARA</h1>
       </div>

@@ -12,15 +12,18 @@ type User = {
 type userContextProps = {
   user: User | null;
   setUser: (user: User | null) => void;
+  token: string | null;
+  setToken: (token: string | null) => void;
 };
 
 const userContext = createContext<userContextProps | null>(null);
 
 export function UserProvider({ children }: any) {
+  const [token, setToken] = useState<string | null>(null);
   const [user, setUser] = useState<User | null>(null);
+
   async function fetchUser() {
     try {
-      const token = localStorage.getItem("token");
       if (token) {
         const response = await axios.get(
           "https://bunus-be-production.up.railway.app/v1/get-me",
@@ -39,12 +42,12 @@ export function UserProvider({ children }: any) {
   }
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
     fetchUser();
-  }, []);
+    console.log("fetching user");
+  }, [token]);
 
   return (
-    <userContext.Provider value={{ user, setUser }}>
+    <userContext.Provider value={{ user, setUser, token, setToken }}>
       {children}
     </userContext.Provider>
   );
