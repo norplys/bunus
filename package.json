@@ -9,15 +9,11 @@
     "lint": "next lint",
     "prepare": "husky install",
     "prettier": "prettier --write ."
-
   },
   "husky": {
     "hooks": {
       "pre-commit": "npm run prettier"
     }
-  },
-  "lint-staged": {
-    "**/*": "prettier --write --ignore-unknown"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.18",

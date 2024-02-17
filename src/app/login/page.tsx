@@ -37,7 +37,7 @@ export default function Login() {
       };
       const res = axios.post(
         "https://bunus-be-production.up.railway.app/v1/login",
-        postData
+        postData,
       );
       const res2 = await toast.promise(
         res,
@@ -48,7 +48,7 @@ export default function Login() {
         },
         {
           position: "bottom-left",
-        }
+        },
       );
       localStorage.setItem("token", res2.data.data.token);
       setUser(res2.data.data);
@@ -66,7 +66,7 @@ export default function Login() {
             "Email tidak ditemukan, Silahkan daftar terlebih dahulu !",
             {
               position: "bottom-left",
-            }
+            },
           );
           return;
         }
@@ -74,7 +74,7 @@ export default function Login() {
           toast.error("Email belum terverifikasi silahkan periksa email anda", {
             position: "bottom-left",
           });
-        return;
+          return;
         }
       }
       toast.error("Terjadi Kesalahan, mohon coba kembali !", {

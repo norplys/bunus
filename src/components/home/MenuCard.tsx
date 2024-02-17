@@ -12,7 +12,11 @@ export default function MenuCard() {
         ></Image>
       </div>
       <h1 className="font-bold text-xl">Bubur Ayam Kampung</h1>
-      <p className="text-justify font-light text-slate-500 p-5">Bubur dengan daging ayam pilihan ditambah cakwe, dibalur dengan minyak wijen impor yang spesial dibuat di Malaysia menghasilkan bubur yang bukan hanya mengenyangkan, tetapi juga bermakna di hati</p>
+      <p className="text-justify font-light text-slate-500 p-5">
+        Bubur dengan daging ayam pilihan ditambah cakwe, dibalur dengan minyak
+        wijen impor yang spesial dibuat di Malaysia menghasilkan bubur yang
+        bukan hanya mengenyangkan, tetapi juga bermakna di hati
+      </p>
     </div>
   );
 }

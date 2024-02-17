@@ -24,11 +24,15 @@ export default function Navbar() {
         <div>
           {user ? (
             <div className="flex gap-5 justify-center items-center">
-            <p className="font-bold text-primary-orange">Halo, {user.name}</p>
-            <button onClick={logOut} className="border border-primary-red font-bold text-primary-red px-4 py-1 rounded-md hover:text-white hover:bg-primary-red duration-300">Keluar</button>
+              <p className="font-bold text-primary-orange">Halo, {user.name}</p>
+              <button
+                onClick={logOut}
+                className="border border-primary-red font-bold text-primary-red px-4 py-1 rounded-md hover:text-white hover:bg-primary-red duration-300"
+              >
+                Keluar
+              </button>
             </div>
-          ) :
-           (
+          ) : (
             <Link
               href={"/login"}
               className="border border-primary-cyan font-bold text-primary-cyan px-4 py-1 rounded-md hover:text-white hover:bg-primary-cyan duration-300"

@@ -1,5 +1,5 @@
-"use client"
-import { createContext,useState, useEffect, useContext } from "react";
+"use client";
+import { createContext, useState, useEffect, useContext } from "react";
 import axios from "axios";
 
 type User = {
@@ -12,23 +12,26 @@ type User = {
 type userContextProps = {
   user: User | null;
   setUser: (user: User | null) => void;
-}
+};
 
 const userContext = createContext<userContextProps | null>(null);
 
-export function UserProvider({ children } : any) {
+export function UserProvider({ children }: any) {
   const [user, setUser] = useState<User | null>(null);
   async function fetchUser() {
-    try { 
-    const token = localStorage.getItem("token");
-    if (token) {
-      const response = await axios.get("https://bunus-be-production.up.railway.app/v1/get-me", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      setUser(response.data.data);
-    }
+    try {
+      const token = localStorage.getItem("token");
+      if (token) {
+        const response = await axios.get(
+          "https://bunus-be-production.up.railway.app/v1/get-me",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          },
+        );
+        setUser(response.data.data);
+      }
     } catch (error) {
       localStorage.removeItem("token");
       setUser(null);
@@ -40,7 +43,11 @@ export function UserProvider({ children } : any) {
     fetchUser();
   }, []);
 
-  return <userContext.Provider value={{user, setUser}}>{children}</userContext.Provider>;
+  return (
+    <userContext.Provider value={{ user, setUser }}>
+      {children}
+    </userContext.Provider>
+  );
 }
 
 export function useUser() {

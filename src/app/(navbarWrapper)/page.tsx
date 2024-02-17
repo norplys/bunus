@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import Chef from "@/components/home/Chef";
 import Intro from "../../components/home/Intro";
 import FavouriteMenu from "../../components/home/FavouriteMenu";
@@ -11,16 +11,16 @@ export default function Home() {
   const token = searchParams.get("token");
   useEffect(() => {
     if (token) {
-      console.log(token);      
+      console.log(token);
       localStorage.setItem("token", token);
     }
   }, [token]);
   return (
     <section className="grid gap-14">
-        <Intro />
-        <Chef />
-        <FavouriteMenu />
-        <Contact />
+      <Intro />
+      <Chef />
+      <FavouriteMenu />
+      <Contact />
     </section>
   );
 }
