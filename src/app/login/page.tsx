@@ -50,8 +50,8 @@ export default function Login() {
           position: "bottom-left",
         },
       );
-      localStorage.setItem("token", res2.data.data.token);
       setUser(res2.data.data);
+      localStorage.setItem("token", res2.data.data.token);
       push("/");
     } catch (err) {
       if (err instanceof AxiosError) {

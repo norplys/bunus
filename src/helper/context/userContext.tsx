@@ -12,17 +12,14 @@ type User = {
 type userContextProps = {
   user: User | null;
   setUser: (user: User | null) => void;
-  token: string | null;
-  setToken: (token: string | null) => void;
 };
 
 const userContext = createContext<userContextProps | null>(null);
 
 export function UserProvider({ children }: any) {
-  const [token, setToken] = useState<string | null>(null);
   const [user, setUser] = useState<User | null>(null);
 
-  async function fetchUser() {
+  async function fetchUser(token: string | null) {
     try {
       if (token) {
         const response = await axios.get(
@@ -42,12 +39,13 @@ export function UserProvider({ children }: any) {
   }
 
   useEffect(() => {
-    fetchUser();
+    const token = localStorage.getItem("token");
+    fetchUser(token);
     console.log("fetching user");
-  }, [token]);
+  }, []);
 
   return (
-    <userContext.Provider value={{ user, setUser, token, setToken }}>
+    <userContext.Provider value={{ user, setUser }}>
       {children}
     </userContext.Provider>
   );
