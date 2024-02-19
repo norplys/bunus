@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useUser } from "@/helper/context/userContext";
+import { FaShoppingCart } from "react-icons/fa";
 
 export default function Navbar() {
   const { user, setUser } = useUser();
@@ -31,6 +32,9 @@ export default function Navbar() {
               >
                 Keluar
               </button>
+              <Link href={"/cart"}>
+                <FaShoppingCart className="text-xl text-primary-cyan" />
+              </Link>
             </div>
           ) : (
             <Link

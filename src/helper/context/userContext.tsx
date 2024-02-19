@@ -1,12 +1,12 @@
 "use client";
-import { createContext, useState, useEffect, useContext } from "react";
+import { createContext, useState, useEffect, useContext, useRef } from "react";
 import axios from "axios";
 
 type User = {
   name: string;
   email: string;
   role: string;
-  token: string;
+  isVerified: boolean;
 };
 
 type userContextProps = {
@@ -18,32 +18,6 @@ const userContext = createContext<userContextProps | null>(null);
 
 export function UserProvider({ children }: any) {
   const [user, setUser] = useState<User | null>(null);
-
-  async function fetchUser(token: string | null) {
-    try {
-      if (token) {
-        const response = await axios.get(
-          "https://bunus-be-production.up.railway.app/v1/get-me",
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          },
-        );
-        setUser(response.data.data);
-      }
-    } catch (error) {
-      localStorage.removeItem("token");
-      setUser(null);
-    }
-  }
-
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    fetchUser(token);
-    console.log("fetching user");
-  }, []);
-
   return (
     <userContext.Provider value={{ user, setUser }}>
       {children}

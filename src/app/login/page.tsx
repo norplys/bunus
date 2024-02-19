@@ -50,9 +50,7 @@ export default function Login() {
           position: "bottom-left",
         },
       );
-      setUser(res2.data.data);
-      localStorage.setItem("token", res2.data.data.token);
-      push("/");
+      push(`/?token=${res2.data.data.token}`);
     } catch (err) {
       if (err instanceof AxiosError) {
         if (err.response?.status === 400) {
