@@ -1,24 +1,42 @@
+type Validation = {
+  required: string;
+  validate?: (value: string) => boolean | string;
+};
+
+type Props = {
+  label: string;
+  type: string;
+  register: any;
+  error: any;
+  getValues?: any;
+  placeholder: string;
+};
+
 export default function LoginInput({
   label,
   type,
   register,
   error,
-}: {
-  label: string;
-  type: string;
-  register: any;
-  error: any;
-}) {
+  getValues,
+  placeholder,
+}: Props) {
+  let validates: Validation = {
+    required: "Mohon Isi Kolom Ini",
+  };
+  if (label === "Confirm Password") {
+    validates.validate = (value: string) => {
+      return value === getValues("Password") || "Password Tidak Sama";
+    };
+  }
   return (
     <div className="grid">
       <label htmlFor={label} className="text-xl font-bold">
         {label}
       </label>
       <input
-        {...register(label, {
-          required: { value: true, message: `${label} is required` },
-        })}
+        {...register(label, { ...validates })}
         type={type}
+        placeholder={placeholder}
         className={`border-2 rounded-md p-2 focus:outline-none ${
           error[label] && "border-red-500"
         }`}
