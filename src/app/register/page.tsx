@@ -6,6 +6,7 @@ import Link from "next/link";
 import axios, { AxiosError } from "axios";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import SideLogo from "@/components/SideLogo";
 
 const inputArray = [
   { label: "Email", type: "email", placeholder: "contoh@gmail.com" },
@@ -29,6 +30,7 @@ export default function Register() {
   const onSubmit: SubmitHandler<Record<string, any>> = async (data) => {
     try {
       const postData = {
+        name: data.Name,
         email: data.Email,
         password: data.Password,
         phone: data.Telephone,
@@ -98,16 +100,7 @@ export default function Register() {
           </p>
         </form>
       </div>
-      <div className="flex items-center justify-center gap-2 flex-1 bg-orange-400 min-h-screen">
-        <Image
-          src="./logo.svg"
-          alt="logo"
-          width={350}
-          height={350}
-          className="object-cover duration-300 rounded-full animate-spin-slow"
-        />
-        <h1 className="text-5xl font-extrabold text-white">BUBUR NUSANTARA</h1>
-      </div>
+      <SideLogo />
     </section>
   );
 }
