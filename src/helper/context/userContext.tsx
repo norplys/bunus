@@ -1,6 +1,5 @@
 "use client";
-import { createContext, useState, useEffect, useContext, useRef } from "react";
-import axios from "axios";
+import { createContext, useState, useContext } from "react";
 
 type User = {
   name: string;
