@@ -1,5 +1,5 @@
 import Image from "next/image";
-export default function Protection() {
+export default function Protector() {
   return (
     <div className="bg-[url(/pattern.svg)] min-h-screen grid justify-items-center items-center absolute top-0 z-50 min-w-full">
       <div className="flex justify-center items-center gap-5 animate-pulse">
