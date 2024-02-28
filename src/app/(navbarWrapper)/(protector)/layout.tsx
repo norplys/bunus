@@ -1,0 +1,41 @@
+"use client";
+import { ReactNode, useState, useEffect } from "react";
+import Protector from "@/components/Protector";
+import { useRouter } from "next/navigation";
+import axios from "axios";
+import { useUser } from "@/helper/context/userContext";
+
+export default function Layout({ children }: { children: ReactNode }) {
+  const { setUser } = useUser();
+  const { push } = useRouter();
+  const [loading, setLoading] = useState(true);
+  const validateToken = async (token: string | null) => {
+    try {
+      if (!token) {
+        throw new Error("Token not found");
+      }
+      const res = await axios.get(
+        "https://bunus-be-production.up.railway.app/v1/get-me",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
+      setUser(res.data);
+      setLoading(false);
+    } catch (error) {
+      localStorage.removeItem("token");
+      setUser(null);
+      push("/login?redirect=cart");
+    }
+  };
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    validateToken(token);
+  }, []);
+  if (loading) {
+    return <Protector />;
+  }
+  return <section>{children}</section>;
+}
