@@ -4,7 +4,7 @@ import Image from "next/image";
 export default function CartItem({ item }: { item: any }) {
   return (
     <div className="flex gap-5 border-b pb-5 border-primary-orange">
-      <div className="w-40 bg-gray-300 rounded-md h-40 overflow-hidden">
+      <div className="w-40 bg-gray-300 rounded-md h-40 overflow-hidden shadow-lg">
         <Image
           src={item.menu.image}
           alt="menu1"
