@@ -1,15 +1,17 @@
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm, SubmitHandler, set } from "react-hook-form";
 import LoginInput from "@/components/login/loginInput";
 import axios, { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
 import { toast } from "react-hot-toast";
+import { useUser } from "@/helper/context/userContext";
 
 const inputArray = [
   { label: "Email", type: "email", placeholder: "contoh@gmail.com" },
   { label: "Password", type: "password", placeholder: "Password" },
 ];
 
-export default function LoginForm() {
+export default function LoginForm({ redirect }: { redirect: string | null }) {
+  const { setUser } = useUser();
   const {
     register,
     handleSubmit,
@@ -38,6 +40,11 @@ export default function LoginForm() {
           position: "bottom-left",
         },
       );
+      if (redirect) {
+        localStorage.setItem("token", res2.data.data.token);
+        setUser(res2.data.data);
+        push(`/${redirect}`);
+      }
       push(`/?token=${res2.data.data.token}`);
     } catch (err) {
       if (err instanceof AxiosError) {

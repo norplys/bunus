@@ -2,7 +2,8 @@ import { Dialog } from "@headlessui/react";
 import Image from "next/image";
 import { useState } from "react";
 import { useDetailMenu } from "@/helper/hooks/useDetailMenu";
-import { motion, AnimatePresence, animate } from "framer-motion";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 export default function DetailModal({
   isOpen,
@@ -15,6 +16,39 @@ export default function DetailModal({
 }) {
   const [count, setCount] = useState(0);
   const { data, isLoading } = useDetailMenu(id.current);
+
+  const handleAddToCart = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const res = axios.post(
+        "https://bunus-be-production.up.railway.app/v1/cart-item",
+        {
+          menuId: id.current,
+          quantity: count,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
+      await toast.promise(
+        res,
+        {
+          loading: "Mohon Tunggu...",
+          success: "Berhasil Menambahkan Ke Keranjang !",
+          error: "Gagal Menambahkan Ke Keranjang !",
+        },
+        {
+          position: "bottom-left",
+        },
+      );
+      setIsOpen(false);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <Dialog
       open={isOpen}
@@ -73,7 +107,11 @@ export default function DetailModal({
                 +
               </button>
             </div>
-            <button className="py-1 px-3 font-bold rounded-xl mb-4 text-white text-lg shadow-lg bg-gradient-to-r from-primary-red via-purple-500 to-primary-orange bg-800% bg-50% hover:bg-100% duration-700">
+            <button
+              className="py-1 px-3 font-bold rounded-xl mb-4 text-white text-lg shadow-lg bg-gradient-to-r from-primary-red via-purple-500 to-primary-orange bg-800% bg-50% hover:bg-100% duration-700"
+              onClick={handleAddToCart}
+              disabled={count ? false : true}
+            >
               Tambahkan Ke Keranjang
             </button>
           </>

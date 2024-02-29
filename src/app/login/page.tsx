@@ -1,13 +1,15 @@
 "use client";
 import { IoLogoGoogle } from "react-icons/io5";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { toast } from "react-hot-toast";
 import SideLogo from "@/components/SideLogo";
 import LoginForm from "@/components/login/LoginForm";
 
 export default function Login() {
   const { push } = useRouter();
+  const searchParams = useSearchParams();
+  const redirect = searchParams.get("redirect");
   const googleLogin = () => {
     toast.loading("Mohon Tunggu...", {
       position: "bottom-left",
@@ -22,7 +24,7 @@ export default function Login() {
         <h1 className="text-5xl font-extrabold border-b-2 border-b-primary-orange pb-2">
           Selamat Datang !
         </h1>
-        <LoginForm />
+        <LoginForm redirect={redirect} />
         <button
           onClick={googleLogin}
           className="bg-gradient-to-l from-primary-orange via-purple-500 to-primary-red text-white flex items-center justify-center gap-2 font-bold rounded-md p-2 duration-700 w-96 shadow-2xl bg-800% bg-50% hover:bg-100%"
