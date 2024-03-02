@@ -2,6 +2,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useUser } from "@/helper/context/userContext";
 import { FaShoppingCart } from "react-icons/fa";
+import { CgProfile } from "react-icons/cg";
 
 export default function Navbar() {
   const { user, setUser } = useUser();
@@ -10,7 +11,7 @@ export default function Navbar() {
     setUser(null);
   };
   return (
-    <div className="navbar w-full bg-opacity-5 backdrop-blur-3xl flex sticky top-0 z-10 shadow-xl h-16">
+    <div className="navbar w-full bg-opacity-5 backdrop-blur-3xl flex sticky top-0 z-10 shadow-xl min-h-16">
       <div className="flex mx-auto justify-between items-center  w-full max-w-7xl min-h-full py-5">
         <Link href={"/"} className="text-black font-bold text-lg">
           BUBUR NUSANTARA
@@ -32,8 +33,17 @@ export default function Navbar() {
               >
                 Keluar
               </button>
-              <Link href={"/cart"}>
-                <FaShoppingCart className="text-xl text-primary-cyan" />
+              <Link
+                href={"/cart"}
+                className="relative bg-primary-cyan rounded-full p-2"
+              >
+                <div className="rounded-full w-4 h-4 text-center bg-primary-red absolute -right-1 -top-1 text-xs text-white font-bold">
+                  2
+                </div>
+                <FaShoppingCart className="text-md text-white" />
+              </Link>
+              <Link href={"/profile"}>
+                <CgProfile className="text-3xl" />
               </Link>
             </div>
           ) : (
