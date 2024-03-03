@@ -1,6 +1,6 @@
 import { Dialog } from "@headlessui/react";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDetailMenu } from "@/helper/hooks/useDetailMenu";
 import axios from "axios";
 import toast from "react-hot-toast";
@@ -16,7 +16,9 @@ export default function DetailModal({
 }) {
   const [count, setCount] = useState(0);
   const { data, isLoading } = useDetailMenu(id.current);
-
+  useEffect(() => {
+    setCount(0);
+  }, [isOpen]);
   const handleAddToCart = async () => {
     try {
       const token = localStorage.getItem("token");
