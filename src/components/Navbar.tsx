@@ -1,14 +1,16 @@
 import Link from "next/link";
-import { useEffect, useState } from "react";
 import { useUser } from "@/helper/context/userContext";
 import { FaShoppingCart } from "react-icons/fa";
 import { CgProfile } from "react-icons/cg";
+import { useRouter } from "next/navigation";
 
 export default function Navbar() {
+  const { push } = useRouter();
   const { user, setUser } = useUser();
   const logOut = () => {
     localStorage.removeItem("token");
     setUser(null);
+    push("/");
   };
   return (
     <div className="navbar w-full bg-opacity-5 backdrop-blur-3xl flex sticky top-0 z-10 shadow-xl min-h-16">

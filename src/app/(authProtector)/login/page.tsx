@@ -41,6 +41,15 @@ export default function Login() {
             Daftar Disini !
           </Link>
         </p>
+        <p>
+          Lupa Password ?{" "}
+          <Link
+            href={"/forgot-password"}
+            className="font-bold  hover:text-blue-500 duration-300"
+          >
+            Klik Disini
+          </Link>
+        </p>
       </div>
       <SideLogo />
     </section>
