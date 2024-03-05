@@ -4,7 +4,6 @@ import Protector from "@/components/Protector";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import { useUser } from "@/helper/context/userContext";
-import { set } from "react-hook-form";
 
 export default function Layout({ children }: { children: ReactNode }) {
   const { setUser } = useUser();
@@ -21,7 +20,7 @@ export default function Layout({ children }: { children: ReactNode }) {
             },
           },
         );
-        setUser(res.data);
+        setUser(res.data.data);
         setLoading(false);
         push("/");
       }
