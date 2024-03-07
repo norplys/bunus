@@ -1,10 +1,17 @@
+"use client";
 import Link from "next/link";
 import { useUser } from "@/helper/context/userContext";
 import { FaShoppingCart } from "react-icons/fa";
 import { CgProfile } from "react-icons/cg";
 import { useRouter } from "next/navigation";
+import { useCartNotif } from "@/helper/hooks/useCartNotif";
 
 export default function Navbar() {
+  let token = null;
+  if (typeof window !== "undefined") {
+    token = localStorage.getItem("token") || "";
+  }
+  const { data, isLoading } = useCartNotif(token);
   const { push } = useRouter();
   const { user, setUser } = useUser();
   const logOut = () => {
@@ -39,9 +46,13 @@ export default function Navbar() {
                 href={"/cart"}
                 className="relative bg-primary-cyan rounded-full p-2"
               >
-                <div className="rounded-full w-4 h-4 text-center bg-primary-red absolute -right-1 -top-1 text-xs text-white font-bold">
-                  2
-                </div>
+                {isLoading ? (
+                  ""
+                ) : (
+                  <div className="rounded-full w-4 h-4 text-center bg-primary-red absolute -right-1 -top-1 text-xs text-white font-bold">
+                    {data}
+                  </div>
+                )}
                 <FaShoppingCart className="text-md text-white" />
               </Link>
               <Link href={"/profile"}>
