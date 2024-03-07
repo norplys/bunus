@@ -22,7 +22,7 @@ export default function Layout({ children }: { children: ReactNode }) {
           },
         },
       );
-      setUser(res.data);
+      setUser(res.data.data);
       setLoading(false);
     } catch (error) {
       localStorage.removeItem("token");

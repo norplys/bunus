@@ -2,8 +2,10 @@ import { Dialog } from "@headlessui/react";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { useDetailMenu } from "@/helper/hooks/useDetailMenu";
+import { useQueryClient } from "react-query";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 export default function DetailModal({
   isOpen,
@@ -14,6 +16,8 @@ export default function DetailModal({
   setIsOpen: (value: boolean) => void;
   id: any;
 }) {
+  const { push } = useRouter();
+  const queryClient = useQueryClient();
   const [count, setCount] = useState(0);
   const { data, isLoading } = useDetailMenu(id.current);
   useEffect(() => {
@@ -22,6 +26,9 @@ export default function DetailModal({
   const handleAddToCart = async () => {
     try {
       const token = localStorage.getItem("token");
+      if (!token) {
+        return push("/login?redirect=cart");
+      }
       const res = axios.post(
         "https://bunus-be-production.up.railway.app/v1/cart-item",
         {
@@ -46,6 +53,7 @@ export default function DetailModal({
         },
       );
       setIsOpen(false);
+      await queryClient.invalidateQueries(["cartNotif", token]);
     } catch (err) {
       console.log(err);
     }

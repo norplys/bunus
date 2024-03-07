@@ -23,6 +23,7 @@ export default function CartItem({ item }: { item: any }) {
         error: "Gagal Menghapus Item !",
       });
       await queryClient.invalidateQueries(["cart", token]);
+      await queryClient.invalidateQueries(["cartNotif", token]);
     } catch (err) {
       console.log(err);
     }
