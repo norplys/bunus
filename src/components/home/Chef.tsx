@@ -1,8 +1,13 @@
+import LeftSlide from "@/helper/animation-framer/LeftSlide";
+import RightSlide from "@/helper/animation-framer/RightSlide";
 import Image from "next/image";
 export default function Chef() {
   return (
     <section className="w-full flex justify-between">
-      <div className=" bg-primary-orange bg-opacity-80 min-w-[45%] rounded-r-full px-5 pt-3 flex justify-center">
+      <LeftSlide
+        design="bg-primary-orange bg-opacity-80 min-w-[45%] rounded-r-full px-5 pt-3 flex justify-center"
+        delay={0}
+      >
         <Image
           src={"/chef.svg"}
           width={500}
@@ -10,8 +15,8 @@ export default function Chef() {
           alt="chef"
           priority={true}
         ></Image>
-      </div>
-      <div className="w-[45%] flex flex-col justify-center gap-5">
+      </LeftSlide>
+      <RightSlide design="w-[45%] flex flex-col justify-center gap-5">
         <h1 className="font-bold text-5xl">Tentang Kami</h1>
         <div className="text-justify pr-20">
           Berdiri sejak 2018 kami menghimpun lebih dari ribuan pelanggan dari
@@ -23,7 +28,7 @@ export default function Chef() {
           kualitas rasa yang tiada duanya. Untuk itu kami tunggu kehadirannya di
           Bubur Ayam Kampung Nusantara !
         </div>
-      </div>
+      </RightSlide>
     </section>
   );
 }

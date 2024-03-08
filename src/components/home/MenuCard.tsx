@@ -1,7 +1,11 @@
 import Image from "next/image";
+import BottomSlide from "@/helper/animation-framer/BottomSlide";
 export default function MenuCard() {
   return (
-    <div className="grid justify-items-center shadow-lg justify-between min-w-80 max-w-96 rounded-xl overflow-hidden scale-95 hover:scale-100 duration-300 hover:shadow-2xl gap-3">
+    <BottomSlide
+      design="grid justify-items-center shadow-lg justify-between min-w-80 max-w-96 rounded-xl overflow-hidden scale-95 hover:scale-100 duration-300 hover:shadow-2xl gap-3"
+      delay={0}
+    >
       <div className="overflow-hidden w-full">
         <Image
           src="https://res.cloudinary.com/dpg0tbbot/image/upload/v1704978248/bunus/rcqltvzeguzxmldbamko.webp"
@@ -17,6 +21,6 @@ export default function MenuCard() {
         wijen impor yang spesial dibuat di Malaysia menghasilkan bubur yang
         bukan hanya mengenyangkan, tetapi juga bermakna di hati
       </p>
-    </div>
+    </BottomSlide>
   );
 }
