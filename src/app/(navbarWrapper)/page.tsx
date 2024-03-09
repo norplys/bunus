@@ -2,11 +2,19 @@
 import Chef from "@/components/home/Chef";
 import Intro from "../../components/home/Intro";
 import FavouriteMenu from "../../components/home/FavouriteMenu";
+import Testimoni from "@/components/home/Testimoni";
 import Contact from "../../components/home/Contact";
 import { useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import { useUser } from "@/helper/context/userContext";
 import axios from "axios";
+import { Swiper, SwiperSlide } from "swiper/react";
+import Image from "next/image";
+import "swiper/css";
+import "swiper/css/pagination";
+import { Autoplay, Pagination } from "swiper/modules";
+
+const mockData = new Array(5).fill(0);
 
 export default function Home() {
   const searchParams = useSearchParams();
@@ -43,6 +51,7 @@ export default function Home() {
       <Intro />
       <Chef />
       <FavouriteMenu />
+      <Testimoni />
       <Contact />
     </section>
   );

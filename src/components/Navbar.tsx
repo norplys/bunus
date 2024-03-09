@@ -28,7 +28,7 @@ export default function Navbar() {
         <nav>
           <ul className="text-black flex gap-4">
             <Link href={"/menu"}>Menu</Link>
-            <Link href={"/testimoni"}>Testimoni</Link>
+            <a href="#testimoni">Testimoni</a>
             <Link href={"/"}>Promo</Link>
           </ul>
         </nav>

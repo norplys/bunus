@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 6rem;
+}
+
 * {
   box-sizing: border-box;
+}
+
+body {
+  overflow-x: hidden;
 }
