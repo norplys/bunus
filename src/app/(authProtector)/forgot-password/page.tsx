@@ -2,13 +2,37 @@
 import SideLogo from "@/components/SideLogo";
 import LoginInput from "@/components/login/loginInput";
 import { useForm, SubmitHandler } from "react-hook-form";
+import axios from "axios";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 export default function ForgotPassword() {
+  const { push } = useRouter();
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm();
+
+  const handleForgot: SubmitHandler<Record<string, string>> = async (data) => {
+    try {
+      const { Email } = data;
+      const res = axios.post(
+        "https://bunus-be-production.up.railway.app/v1/forgot-password",
+        {
+          email: Email,
+        },
+      );
+      const res2 = await toast.promise(res, {
+        loading: "Loading...",
+        success: "Email berhasil dikirim",
+        error: "Email gagal dikirim, silahkan coba lagi",
+      });
+      console.log(res2);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <section className="flex min-h-screen items-center justify-center">
@@ -16,7 +40,11 @@ export default function ForgotPassword() {
         <h1 className="text-5xl font-extrabold border-b-2 border-b-primary-orange pb-2">
           Lupa Password ?
         </h1>
-        <form action="" className="flex flex-col gap-5 max-w-96">
+        <form
+          action=""
+          className="flex flex-col gap-5 max-w-96"
+          onSubmit={handleSubmit(handleForgot)}
+        >
           <p>Masukkan Email Anda untuk mendapatkan link reset password</p>
           <LoginInput
             label="Email"
