@@ -6,6 +6,7 @@ import toast from "react-hot-toast";
 
 const inputArray = [
   { label: "Email", type: "email", placeholder: "contoh@gmail.com" },
+  { label: "Name", type: "text", placeholder: "Nama Lengkap" },
   { label: "Telephone", type: "tel", placeholder: "081234567890" },
   { label: "Password", type: "password", placeholder: "Password" },
   {
@@ -48,6 +49,7 @@ export default function RegisterForm() {
       );
       push("/login");
     } catch (err) {
+      console.log(err);
       if (err instanceof AxiosError) {
         if (err.response?.status === 400) {
           toast.error("Email Sudah Terdaftar !", {

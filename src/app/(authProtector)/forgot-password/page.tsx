@@ -2,7 +2,7 @@
 import SideLogo from "@/components/SideLogo";
 import LoginInput from "@/components/login/loginInput";
 import { useForm, SubmitHandler } from "react-hook-form";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 
@@ -23,13 +23,26 @@ export default function ForgotPassword() {
           email: Email,
         },
       );
-      const res2 = await toast.promise(res, {
-        loading: "Loading...",
-        success: "Email berhasil dikirim",
-        error: "Email gagal dikirim, silahkan coba lagi",
-      });
-      console.log(res2);
+      await toast.promise(
+        res,
+        {
+          loading: "Loading...",
+          success: "Email berhasil dikirim, silahkan cek email anda",
+          error: "Email gagal dikirim",
+        },
+        {
+          position: "bottom-left",
+        },
+      );
+      push("/login");
     } catch (error) {
+      if (error instanceof AxiosError) {
+        if (error.response?.status === 404) {
+          toast.error("Email tidak ditemukan", {
+            position: "bottom-left",
+          });
+        }
+      }
       console.log(error);
     }
   };
