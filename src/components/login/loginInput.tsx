@@ -23,7 +23,7 @@ export default function LoginInput({
   let validates: Validation = {
     required: "Mohon Isi Kolom Ini",
   };
-  if (label === "Confirm Password") {
+  if (label === "Ulangi Password") {
     validates.validate = (value: string) => {
       return value === getValues("Password") || "Password Tidak Sama";
     };
