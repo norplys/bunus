@@ -1,8 +1,27 @@
 import MenuCard from "./MenuCard";
-const array = [1, 2, 3];
+const array = [
+  {
+    name: "Bubur Ayam Kampung",
+    desc: "Bubur dengan daging ayam pilihan ditambah cakwe, dibalur dengan minyak wijen impor yang spesial dibuat di Malaysia menghasilkan bubur yang bukan hanya mengenyangkan, tetapi juga bermakna di hati",
+    image:
+      "https://res.cloudinary.com/dpg0tbbot/image/upload/v1704978248/bunus/rcqltvzeguzxmldbamko.webp",
+  },
+  {
+    name: "Bubur Polos",
+    desc: "Bubur polos yang sangat lezat, disajikan bersama daun bawang dan bawang goreng yang tentunya akan membuat anda ketagihan",
+    image:
+      "https://res.cloudinary.com/dpg0tbbot/image/upload/v1704978277/bunus/nsyd68vrqfqombcteb1t.webp",
+  },
+  {
+    name: "Telur Asin",
+    desc: "Telur asin yang sangat lezat, disajikan dengan bubur ayam kampung yang kaya cita rasa. Sangat cocok untuk sarapan atau makan malam",
+    image:
+      "https://res.cloudinary.com/dpg0tbbot/image/upload/v1704978287/bunus/z59fmlwb1fhm41e0q4js.webp",
+  },
+];
 export default function FavouriteMenu() {
   return (
-    <section className="grid justify-center items-center gap-5 w-full">
+    <section className="grid  gap-5 min-w-screen">
       <h1 className="text-5xl font-bold  text-primary-red  rounded-2xl py-2 w-fit px-5 justify-self-center ">
         Menu Favorit
       </h1>
@@ -11,9 +30,9 @@ export default function FavouriteMenu() {
         Perpaduan bubur kami dengan telur asin pilihan menghasilkan rasa yang
         dipercaya oleh banyak pelanggan kami
       </div>
-      <div className="grid grid-cols-3 gap-8 w-full">
+      <div className="grid grid-cols-3 justify-items-center px-52">
         {array.map((each, i) => (
-          <MenuCard key={i} />
+          <MenuCard key={i} menu={each} />
         ))}
       </div>
     </section>
