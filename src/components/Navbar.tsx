@@ -27,9 +27,12 @@ export default function Navbar() {
         </Link>
         <nav>
           <ul className="text-black flex gap-4">
-            <Link href={"/menu"}>Menu</Link>
-            <a href="#testimoni">Testimoni</a>
-            <Link href={"/"}>Promo</Link>
+            <Link href={"/menu"} className="hover:-translate-y-1 duration-300">
+              Menu
+            </Link>
+            <a href="#testimoni" className="hover:-translate-y-1 duration-300">
+              Testimoni
+            </a>
           </ul>
         </nav>
         <div>
