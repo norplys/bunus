@@ -8,6 +8,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      content: {
+        "[]": "''",
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
@@ -22,6 +25,20 @@ const config: Config = {
       },
       animation: {
         "spin-slow": "spin 60s linear infinite",
+        gradient: "gradient 15s ease infinite",
+      },
+      keyframes: {
+        gradient: {
+          "0%": {
+            backgroundPosition: "0% 50%",
+          },
+          "50%": {
+            backgroundPosition: "100% 50%",
+          },
+          "100%": {
+            backgroundPosition: "0% 50%",
+          },
+        },
       },
       colors: {
         primary: {

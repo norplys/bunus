@@ -4,6 +4,7 @@ import { createContext, useState, useContext } from "react";
 type User = {
   name: string;
   email: string;
+  phone: string;
   role: string;
   isVerified: boolean;
 };
