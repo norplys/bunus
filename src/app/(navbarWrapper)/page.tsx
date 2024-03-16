@@ -8,11 +8,8 @@ import { useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import { useUser } from "@/helper/context/userContext";
 import axios from "axios";
-import { Swiper, SwiperSlide } from "swiper/react";
-import Image from "next/image";
 import "swiper/css";
 import "swiper/css/pagination";
-import { Autoplay, Pagination } from "swiper/modules";
 
 const mockData = new Array(5).fill(0);
 
