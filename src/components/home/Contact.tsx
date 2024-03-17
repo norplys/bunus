@@ -30,8 +30,10 @@ const data = [
 export default function Contact() {
   return (
     <section className="grid justify-center items-center bg-slate-100 py-16 gap-5">
-      <h1 className="font-bold text-5xl justify-self-center">Hubungi Kami</h1>
-      <p className="max-w-3xl text-center">
+      <h1 className="font-bold xl:text-5xl justify-self-center md:text-4xl">
+        Hubungi Kami
+      </h1>
+      <p className="max-w-3xl text-center md:text-sm xl:text-base">
         Halo pelanggan tersayang bubur ayam kampung nusantara ! ada kritik,
         keluhan, saran, atau pertanyaan ? hubungi kami melalui form dibawah ini
       </p>
@@ -52,7 +54,7 @@ export default function Contact() {
               placeholder="Pesan"
               className="border-2 border-primary-orange rounded-xl px-3 py-1 w-full h-40"
             ></textarea>
-            <button className="py-1 px-3 font-bold rounded-xl mb-4 w-fit bg-primary-cyan shadow-xl text-white text-lg scale-95 hover:shadow-2xl hover:scale-100 duration-300">
+            <button className="py-1 px-3 font-bold rounded-xl mb-4 w-fit bg-primary-cyan shadow-xl text-white text-lg scale-95 hover:shadow-2xl hover:scale-100 duration-300 md:text-sm">
               Kirim Pesan
             </button>
           </LeftSlide>
@@ -66,7 +68,7 @@ export default function Contact() {
               allowFullScreen={true}
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
-              className="w-72 h-72 shadow-lg hover:shadow-none hover:scale-95 duration-300"
+              className="xl:w-72 xl:h-72 shadow-lg hover:shadow-none hover:scale-95 duration-300 md:w-60 md:h-60"
             ></iframe>
             <div className="mt-5 flex flex-wrap gap-5 max-w-72">
               {data.map((item, index) => (

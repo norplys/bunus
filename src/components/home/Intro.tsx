@@ -4,16 +4,18 @@ import Link from "next/link";
 export default function Intro() {
   return (
     <SlideIn>
-      <div className="flex min-w-full items-center justify-center gap-52 py-8 ">
+      <div className="flex min-w-full items-center justify-center xl:gap-52 py-8 md:gap-10">
         <div className=" grid gap-2">
-          <h1 className="font-bold text-6xl">Selamat Datang !</h1>
+          <h1 className="font-bold xl:text-6xl md:text-4xl">
+            Selamat Datang !
+          </h1>
           <div className="mt-2 text-lg">
             Laper ?? Tapi bingung mau makan apa ? <br />
             Bubur Nusantara jawabannya !
           </div>
           <Link
             href="/menu"
-            className="py-2 px-4 font-bold rounded-xl mt-2 w-fit bg-primary-red shadow-xl text-white text-xl scale-95 hover:scale-100 duration-300 hover:shadow-2xl"
+            className="py-2 px-4 font-bold rounded-xl mt-2 w-fit bg-primary-red shadow-xl text-white xl:text-xl md:text-lg scale-95 hover:scale-100 duration-300 hover:shadow-2xl"
           >
             Pesan Sekarang !
           </Link>
@@ -23,7 +25,7 @@ export default function Intro() {
             src={"/logo.svg"}
             width={400}
             height={400}
-            className="object-cover w-96 animate-spin-slow"
+            className="object-cover xl:w-96 animate-spin-slow md:w-72"
             alt="logo"
           ></Image>
         </div>

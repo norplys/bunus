@@ -22,15 +22,15 @@ const array = [
 export default function FavouriteMenu() {
   return (
     <section className="grid  gap-5 min-w-screen">
-      <h1 className="text-5xl font-bold  text-primary-red  rounded-2xl py-2 w-fit px-5 justify-self-center ">
+      <h1 className="xl:text-5xl font-bold  text-primary-red  rounded-2xl py-2 w-fit px-5 justify-self-center md:text-4xl">
         Menu Favorit
       </h1>
-      <div className="max-w-3xl text-center justify-self-center">
+      <div className="max-w-3xl text-center justify-self-center md:text-sm xl:text-base">
         Ini adalah menu favorit yang sangat disukai oleh pelanggan kami.
         Perpaduan bubur kami dengan telur asin pilihan menghasilkan rasa yang
         dipercaya oleh banyak pelanggan kami
       </div>
-      <div className="grid grid-cols-3 justify-items-center max-w-[1320px] justify-self-center gap-5">
+      <div className="grid grid-cols-3 justify-items-center max-w-[1320px] justify-self-center gap-5 md:px-2">
         {array.map((each, i) => (
           <MenuCard key={i} menu={each} />
         ))}

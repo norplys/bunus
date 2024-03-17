@@ -19,8 +19,10 @@ export default function MenuCard({
           alt="Menu"
         ></Image>
       </div>
-      <h1 className="font-bold text-xl">{menu.name}</h1>
-      <p className="text-justify font-light text-slate-500 p-5">{menu.desc}</p>
+      <h1 className="font-bold xl:text-xl md:text-lg">{menu.name}</h1>
+      <p className="text-justify font-light text-slate-500 p-5 md:text-sm xl:text-base">
+        {menu.desc}
+      </p>
     </BottomSlide>
   );
 }

@@ -14,11 +14,12 @@ export default function Chef() {
           height={500}
           alt="chef"
           priority={true}
+          className="md:w-80 xl:w-96"
         ></Image>
       </LeftSlide>
       <RightSlide design="w-[45%] flex flex-col justify-center gap-5">
-        <h1 className="font-bold text-5xl">Tentang Kami</h1>
-        <div className="text-justify pr-20">
+        <h1 className="font-bold xl:text-5xl md:text-4xl">Tentang Kami</h1>
+        <div className="text-justify pr-20 md:text-sm xl:text-base">
           Berdiri sejak 2018 kami menghimpun lebih dari ribuan pelanggan dari
           berbagai daerah. Kami berkomitmen untuk tetap menyajikan rasa dan
           kualitas yang sama setiap harinya untuk mencapai kepuasan pelanggan.
