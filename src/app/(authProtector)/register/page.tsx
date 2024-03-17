@@ -6,7 +6,7 @@ import RegisterForm from "@/components/register/RegisterForm";
 export default function Register() {
   return (
     <section className="flex min-h-screen items-center justify-center">
-      <div className="flex-1 min-h-screen bg-gradient-to-r from-transparent from-75% to-orange-400 flex justify-center items-center flex-col gap-5">
+      <div className="flex-1 min-h-screen bg-white flex justify-center items-center flex-col gap-5">
         <RegisterForm />
         <p>
           Sudah Punya Akun ?{" "}

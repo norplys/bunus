@@ -1,7 +1,15 @@
 "use client";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 export default function PaymentSuccess() {
+  const { push } = useRouter();
+  useEffect(() => {
+    setTimeout(() => {
+      push("/");
+    }, 5000);
+  }, []);
   return (
     <div className="min-h-screen flex flex-col justify-center items-center gap-10 bg-[url('/pattern.svg')]">
       <Image
@@ -15,7 +23,7 @@ export default function PaymentSuccess() {
         Terima Kasih, Pembayaran Anda Telah Kami Terima !
       </p>
       <p className="text-2xl text-white ">
-        Anda Akan Dialihkan ke Halaman Utama
+        Anda Akan Dialihkan ke Halaman Utama dalam 5 detik
       </p>
       <button className="bg-primary-cyan rounded-lg p-2 text-white font-bold shadow-xl">
         Atau Klik Disini
