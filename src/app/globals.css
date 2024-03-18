@@ -5,6 +5,7 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 6rem;
+  overflow-x: hidden;
 }
 
 * {
@@ -13,4 +14,5 @@ html {
 
 body {
   overflow-x: hidden;
+  position: relative;
 }

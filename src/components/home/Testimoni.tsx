@@ -9,10 +9,10 @@ const mockData = new Array(5).fill(0);
 export default function Testimoni() {
   return (
     <section
-      className="w-screen flex items-center flex-col gap-5"
+      className="flex items-center flex-col gap-5 overflow-hidden"
       id="testimoni"
     >
-      <h1 className="xl:text-5xl font-bold text-primary-cyan rounded-2xl py-2 w-fit md:text-4xl">
+      <h1 className="xl:text-5xl font-bold text-primary-cyan rounded-2xl py-2 w- md:text-4xl">
         Testimoni
       </h1>
       <div className="text-center justify-self-center md:text-sm xl:text-base">
@@ -35,7 +35,7 @@ export default function Testimoni() {
         >
           {mockData.map((_, i) => (
             <SwiperSlide key={i}>
-              <div className="bg-gray-300 w-fit h-96 rounded-xl mx-auto overflow-hidden flex justify-center items-center p-5 md:h-60">
+              <div className="bg-gray-300 w-fit xl:h-96 rounded-xl mx-auto overflow-hidden flex justify-center items-center p-5 md:h-60">
                 <Image
                   src={`/testimoni/testi${i + 1}.png`}
                   width={500}

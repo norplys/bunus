@@ -30,7 +30,7 @@ export default function FavouriteMenu() {
         Perpaduan bubur kami dengan telur asin pilihan menghasilkan rasa yang
         dipercaya oleh banyak pelanggan kami
       </div>
-      <div className="grid grid-cols-3 justify-items-center max-w-[1320px] justify-self-center gap-5 md:px-2">
+      <div className="grid grid-cols-3 justify-items-center max-w-[1320px] justify-self-center gap-5">
         {array.map((each, i) => (
           <MenuCard key={i} menu={each} />
         ))}

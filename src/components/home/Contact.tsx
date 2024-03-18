@@ -37,7 +37,7 @@ export default function Contact() {
         Halo pelanggan tersayang bubur ayam kampung nusantara ! ada kritik,
         keluhan, saran, atau pertanyaan ? hubungi kami melalui form dibawah ini
       </p>
-      <div className="flex justify-between mt-5">
+      <div className="flex justify-between mt-5 md:p-2">
         <form className="">
           <LeftSlide design="flex flex-col gap-5 min-w-96" delay={0}>
             <input

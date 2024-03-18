@@ -15,12 +15,12 @@ export default function MenuCard({
           src={menu.image}
           width={100}
           height={100}
-          className="object-cover w-full h-52"
+          className="object-cover w-full xl:h-52 md:h-32"
           alt="Menu"
         ></Image>
       </div>
       <h1 className="font-bold xl:text-xl md:text-lg">{menu.name}</h1>
-      <p className="text-justify font-light text-slate-500 p-5 md:text-sm xl:text-base">
+      <p className="text-justify font-light text-slate-500 p-5 md:text-xs xl:text-base">
         {menu.desc}
       </p>
     </BottomSlide>
