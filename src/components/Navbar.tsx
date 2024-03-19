@@ -5,6 +5,7 @@ import { FaShoppingCart } from "react-icons/fa";
 import { CgProfile } from "react-icons/cg";
 import { useRouter } from "next/navigation";
 import { useCartNotif } from "@/helper/hooks/useCartNotif";
+import { GiHamburgerMenu } from "react-icons/gi";
 
 export default function Navbar() {
   let token = null;
@@ -20,24 +21,30 @@ export default function Navbar() {
     push("/");
   };
   return (
-    <div className="navbar w-full bg-opacity-5 backdrop-blur-3xl flex sticky top-0 z-10 shadow-xl min-h-16">
+    <div className="navbar w-full bg-opacity-5 backdrop-blur-3xl flex sticky top-0 z-10 shadow-xl min-h-16 px-5 md:px-2">
       <div className="flex mx-auto justify-between items-center  w-full max-w-7xl min-h-full py-5">
         <Link href={"/"} className="text-black font-bold text-lg">
           BUBUR NUSANTARA
         </Link>
         <nav>
           <ul className="text-black flex gap-4">
-            <Link href={"/menu"} className="hover:-translate-y-1 duration-300">
+            <Link
+              href={"/menu"}
+              className="hover:-translate-y-1 duration-300 md:block hidden"
+            >
               Menu
             </Link>
-            <a href="#testimoni" className="hover:-translate-y-1 duration-300">
+            <a
+              href="#testimoni"
+              className="hover:-translate-y-1 duration-300 md:block hidden"
+            >
               Testimoni
             </a>
           </ul>
         </nav>
         <div>
           {user ? (
-            <div className="flex gap-5 justify-center items-center">
+            <div className="hidden md:flex gap-5 justify-center items-center">
               <p className="font-bold text-primary-orange">Halo, {user.name}</p>
               <button
                 onClick={logOut}
@@ -65,11 +72,12 @@ export default function Navbar() {
           ) : (
             <Link
               href={"/login"}
-              className="border border-primary-cyan font-bold text-primary-cyan px-4 py-1 rounded-md hover:text-white hover:bg-primary-cyan duration-300"
+              className="border border-primary-cyan font-bold text-primary-cyan px-4 py-1 rounded-md hover:text-white hover:bg-primary-cyan duration-300 hidden md:block"
             >
               Login
             </Link>
           )}
+          <GiHamburgerMenu className="text-3xl md:hidden" />
         </div>
       </div>
     </div>

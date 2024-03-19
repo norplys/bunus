@@ -6,8 +6,8 @@ export default function SideLogo() {
       <Image
         src="./logo.svg"
         alt="logo"
-        width={350}
-        height={350}
+        width={300}
+        height={300}
         className="object-cover duration-300 rounded-full animate-spin-slow"
       />
       <h1 className="text-5xl font-extrabold text-white">BUBUR NUSANTARA</h1>
