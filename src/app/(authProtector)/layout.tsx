@@ -2,32 +2,24 @@
 import { ReactNode, useState, useEffect } from "react";
 import Protector from "@/components/Protector";
 import { useRouter } from "next/navigation";
-import axios from "axios";
 import { useUser } from "@/helper/context/userContext";
+import Image from "next/image";
 
 export default function Layout({ children }: { children: ReactNode }) {
-  const { setUser } = useUser();
+  const { setToken } = useUser();
   const { push } = useRouter();
   const [loading, setLoading] = useState(true);
   const validateToken = async (token: string | null) => {
     try {
       if (token) {
-        const res = await axios.get(
-          "https://bunus-be-production.up.railway.app/v1/get-me",
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          },
-        );
-        setUser(res.data.data);
-        setLoading(false);
+        setToken(token);
         push("/");
+      } else {
+        throw new Error("Token not found");
       }
-      setLoading(false);
     } catch (error) {
       localStorage.removeItem("token");
-      setUser(null);
+      setToken(null);
       setLoading(false);
     }
   };

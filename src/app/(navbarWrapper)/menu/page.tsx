@@ -1,8 +1,9 @@
 "use client";
 import Category from "@/components/menu/Category";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect, use } from "react";
 import DetailModal from "@/components/menu/DetailModal";
 import { useCategoriesData } from "@/helper/hooks/useCategoryData";
+import { useUser } from "@/helper/context/userContext";
 
 type CategoryProps = {
   id: string;
@@ -10,6 +11,11 @@ type CategoryProps = {
 };
 
 export default function menu() {
+  const { setToken } = useUser();
+  useEffect(() => {
+    setToken(localStorage.getItem("token"));
+  }, []);
+
   const [open, setOpen] = useState(false);
   const modalId = useRef("");
   const { data, isLoading } = useCategoriesData();

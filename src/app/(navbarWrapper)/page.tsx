@@ -7,7 +7,6 @@ import Contact from "../../components/home/Contact";
 import { useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import { useUser } from "@/helper/context/userContext";
-import axios from "axios";
 import "swiper/css";
 import "swiper/css/pagination";
 
@@ -16,31 +15,12 @@ const mockData = new Array(5).fill(0);
 export default function Home() {
   const searchParams = useSearchParams();
   const token = searchParams.get("token");
-  const { setUser } = useUser();
-
-  const fetchUser = async (token: string | null) => {
-    try {
-      if (token) {
-        const response = await axios.get(
-          "https://bunus-be-production.up.railway.app/v1/get-me",
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          },
-        );
-        setUser(response.data.data);
-      }
-    } catch (error) {
-      localStorage.removeItem("token");
-      setUser(null);
-    }
-  };
+  const { setToken } = useUser();
 
   useEffect(() => {
-    if (token) {
-      localStorage.setItem("token", token);
-      fetchUser(token);
+    const localToken = localStorage.getItem("token");
+    if (token || localToken) {
+      setToken(token || localToken);
     }
   }, [token]);
   return (
