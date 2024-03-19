@@ -21,7 +21,7 @@ export default function Navbar() {
     push("/");
   };
   return (
-    <div className="navbar w-full bg-opacity-5 backdrop-blur-3xl flex sticky top-0 z-10 shadow-xl min-h-16 px-5 md:px-2">
+    <div className="navbar w-full bg-opacity-5 backdrop-blur-3xl flex fixed top-0 z-10 shadow-xl min-h-16 px-5 md:px-2">
       <div className="flex mx-auto justify-between items-center  w-full max-w-7xl min-h-full py-5">
         <Link href={"/"} className="text-black font-bold text-lg">
           BUBUR NUSANTARA

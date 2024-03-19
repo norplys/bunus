@@ -10,7 +10,7 @@ export default function NavbarWrapper({ children }: { children: ReactNode }) {
     <section>
       <QueryClientProvider client={queryClient}>
         <Navbar />
-        {children}
+        <div className="pt-20">{children}</div>
         <Footer />
       </QueryClientProvider>
     </section>

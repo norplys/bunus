@@ -33,6 +33,7 @@ export function UserProvider({ children }: any) {
             },
           },
         );
+        localStorage.setItem("token", token);
         setUser(response.data.data);
       } else {
         throw new Error("Token not found");
