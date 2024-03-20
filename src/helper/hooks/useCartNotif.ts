@@ -14,6 +14,7 @@ const fetchCartNotif = async (token: string | null) => {
 };
 
 export const useCartNotif = (token: string | null) => {
+  if (!token) return { data: { total: 0 } };
   return useQuery(["cartNotif", token], () => fetchCartNotif(token), {
     select: (data) => data.data,
   });

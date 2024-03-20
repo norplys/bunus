@@ -15,7 +15,7 @@ export default function MenuCard({
           src={menu.image}
           width={100}
           height={100}
-          className="object-cover w-full xl:h-52 md:h-32"
+          className="object-cover w-full xl:h-52 h-32"
           alt="Menu"
         ></Image>
       </div>

@@ -12,10 +12,10 @@ export default function Testimoni() {
       className="flex items-center flex-col gap-5 overflow-hidden"
       id="testimoni"
     >
-      <h1 className="xl:text-5xl font-bold text-primary-cyan rounded-2xl py-2 w- md:text-4xl">
+      <h1 className="xl:text-5xl font-bold text-primary-cyan rounded-2xl py-2 md:text-4xl text-2xl">
         Testimoni
       </h1>
-      <div className="text-center justify-self-center md:text-sm xl:text-base">
+      <div className="text-center justify-self-center md:text-sm xl:text-base px-5 md:px-0">
         Apa kata pelanggan kami tentang bubur nusantara ?
       </div>
       <BottomSlide design="w-full" delay={0}>
@@ -35,7 +35,7 @@ export default function Testimoni() {
         >
           {mockData.map((_, i) => (
             <SwiperSlide key={i}>
-              <div className="bg-gray-300 w-fit xl:h-96 rounded-xl mx-auto overflow-hidden flex justify-center items-center p-5 md:h-60">
+              <div className="bg-gray-300 w-fit xl:h-96 rounded-xl md:mx-auto overflow-hidden flex justify-center items-center p-5 md:h-60 h-40 mx-5">
                 <Image
                   src={`/testimoni/testi${i + 1}.png`}
                   width={500}
