@@ -72,7 +72,7 @@ export default function DetailModal({
         ) : (
           <>
             <Dialog.Title>
-              <h1 className="text-xl font-bold">{data?.name}</h1>
+              <div className="text-xl font-bold">{data?.name}</div>
             </Dialog.Title>
             <div className="flex gap-5 flex-col md:flex-row">
               <div className="overflow-hidden h-60 rounded-2xl shadow-xl">
@@ -84,18 +84,16 @@ export default function DetailModal({
                   className="object-cover hover:scale-110 duration-300 h-60"
                 />
               </div>
-              <Dialog.Description>
-                <p className="overflow-y-auto text-justify text-sm w-72 border border-primary-orange h-full rounded-2xl p-2 bg-orange-50 shadow-xl">
-                  {data?.description}
-                </p>
+              <Dialog.Description className="overflow-y-auto text-justify text-sm w-72 border border-primary-orange md:h-full rounded-2xl p-2 bg-orange-50 shadow-xl">
+                {data?.description}
               </Dialog.Description>
               '
             </div>
             <div className="w-full grid grid-rows-1 grid-cols-2">
-              <p className="md:text-xl font-semibold flex text-orange-600 text-lg">
+              <div className="md:text-xl font-semibold flex text-orange-600 text-lg">
                 Rp. {data?.price}
                 <p className="text-xs flex items-end">/pcs</p>
-              </p>
+              </div>
               <p className="text-orange-600 font-semibold md:text-xl text-lg">
                 Total : Rp. {count * data?.price}
               </p>
