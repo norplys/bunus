@@ -31,7 +31,9 @@ export default function Category({
   }
   return (
     <section className="grid justify-items-center gap-4 mx-2">
-      <h1 className="font-extrabold text-xl">{category.name.toUpperCase()}</h1>
+      <h1 className="font-extrabold md:text-xl text-lg">
+        {category.name.toUpperCase()}
+      </h1>
       <section className="flex flex-wrap gap-6 justify-center items-center">
         {data?.map((menu: MenuProps, i: number) => {
           return (

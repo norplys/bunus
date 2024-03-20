@@ -26,13 +26,13 @@ export default function MenuItem({
         setIsOpen(!isOpen), setModalId(menu.id);
       }}
     >
-      <div className="h-60 overflow-hidden">
+      <div className="md:h-60 overflow-hidden h-40">
         <Image
           src={menu.image}
           alt="menu1"
           width={300}
           height={300}
-          className="object-cover h-60 hover:scale-110 duration-300"
+          className="object-cover md:h-60 h-40 hover:scale-110 duration-300"
         />
       </div>
       <h1 className="text-lg font-semibold">{menu.name}</h1>

@@ -66,7 +66,7 @@ export default function DetailModal({
       as="div"
       className="fixed inset-1 flex justify-center items-center"
     >
-      <Dialog.Panel className="bg-white p-5 rounded-xl grid justify-items-center gap-5 z-30">
+      <Dialog.Panel className="bg-white p-5 rounded-xl grid justify-items-center gap-5 z-30 min-w-[315px] px-1 md:px-5">
         {isLoading ? (
           <h1>Loading...</h1>
         ) : (
@@ -74,7 +74,7 @@ export default function DetailModal({
             <Dialog.Title>
               <h1 className="text-xl font-bold">{data?.name}</h1>
             </Dialog.Title>
-            <div className="flex gap-5">
+            <div className="flex gap-5 flex-col md:flex-row">
               <div className="overflow-hidden h-60 rounded-2xl shadow-xl">
                 <Image
                   src={data?.image}
@@ -92,11 +92,11 @@ export default function DetailModal({
               '
             </div>
             <div className="w-full grid grid-rows-1 grid-cols-2">
-              <p className="text-xl font-semibold flex text-orange-600">
+              <p className="md:text-xl font-semibold flex text-orange-600 text-lg">
                 Rp. {data?.price}
                 <p className="text-xs flex items-end">/pcs</p>
               </p>
-              <p className="text-orange-600 font-semibold text-xl">
+              <p className="text-orange-600 font-semibold md:text-xl text-lg">
                 Total : Rp. {count * data?.price}
               </p>
             </div>
@@ -118,7 +118,7 @@ export default function DetailModal({
               </button>
             </div>
             <button
-              className="py-1 px-3 font-bold rounded-xl mb-4 text-white text-lg shadow-lg bg-gradient-to-r from-primary-red via-purple-500 to-primary-orange bg-800% bg-50% hover:bg-100% duration-700"
+              className="py-1 md:px-3 font-bold rounded-xl mb-4 text-white md:text-lg shadow-lg bg-gradient-to-r from-primary-red via-purple-500 to-primary-orange bg-800% bg-50% hover:bg-100% duration-700 text-base px-2"
               onClick={handleAddToCart}
               disabled={count ? false : true}
             >
