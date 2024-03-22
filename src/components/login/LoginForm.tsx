@@ -76,7 +76,10 @@ export default function LoginForm({ redirect }: { redirect: string | null }) {
     }
   };
   return (
-    <form className="grid gap-5 w-96" onSubmit={handleSubmit(onSubmit)}>
+    <form
+      className="grid gap-5 w-full max-w-96"
+      onSubmit={handleSubmit(onSubmit)}
+    >
       {inputArray.map((input, index) => (
         <LoginInput
           key={index}

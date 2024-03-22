@@ -2,15 +2,17 @@ import Image from "next/image";
 
 export default function SideLogo() {
   return (
-    <div className="flex items-center justify-center gap-2 flex-1 bg-orange-400 min-h-screen">
+    <div className="hidden md:flex items-center justify-center gap-2 xl:flex-1 bg-orange-400 xl:min-h-screen md:w-screen px-2 py-2">
       <Image
         src="./logo.svg"
         alt="logo"
         width={300}
         height={300}
-        className="object-cover duration-300 rounded-full animate-spin-slow"
+        className="object-cover duration-300 rounded-full animate-spin-slow w-60 xl:w-72"
       />
-      <h1 className="text-5xl font-extrabold text-white">BUBUR NUSANTARA</h1>
+      <h1 className="xl:text-5xl font-extrabold text-white md:text-4xl">
+        BUBUR NUSANTARA
+      </h1>
     </div>
   );
 }
