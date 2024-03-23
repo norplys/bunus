@@ -10,13 +10,9 @@ import { use, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaSpoon } from "react-icons/fa6";
 import { TbGrillFork } from "react-icons/tb";
-import { useEffect } from "react";
 
 export default function Navbar() {
-  let token = null;
-  if (typeof window !== "undefined") {
-    token = localStorage.getItem("token");
-  }
+  const token = localStorage.getItem("token");
   const [open, setOpen] = useState(false);
   const { data, isLoading } = useCartNotif(token);
   const { push } = useRouter();

@@ -65,7 +65,7 @@ export default function RegisterForm() {
       className="grid justify-center gap-5"
       onSubmit={handleSubmit(onSubmit)}
     >
-      <h1 className="text-5xl font-extrabold border-b-2 border-b-primary-orange pb-2">
+      <h1 className="xl:text-5xl text-4xl font-extrabold border-b-2 border-b-primary-orange pb-2">
         Selamat Datang !
       </h1>
       {inputArray.map((input, index) => (

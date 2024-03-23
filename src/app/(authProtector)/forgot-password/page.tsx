@@ -48,9 +48,9 @@ export default function ForgotPassword() {
   };
 
   return (
-    <section className="flex min-h-screen items-center justify-center">
-      <div className="flex-1 min-h-screen bg-gradient-to-r from-transparent from-75% to-orange-400 flex justify-center items-center flex-col gap-5">
-        <h1 className="text-5xl font-extrabold border-b-2 border-b-primary-orange pb-2">
+    <section className="flex h-screen overflow-hidden items-center justify-center md:flex-col xl:flex-row">
+      <div className="flex-1 xl:min-h-screen flex justify-center items-center flex-col gap-5 p-2">
+        <h1 className="xl:text-5xl text-4xl font-extrabold border-b-2 border-b-primary-orange pb-2">
           Lupa Password ?
         </h1>
         <form
@@ -66,7 +66,7 @@ export default function ForgotPassword() {
             placeholder="contoh@gmail.com"
             error={errors}
           />
-          <button className="bg-gradient-to-l from-primary-orange via-purple-500 to-primary-red text-white font-bold rounded-md p-2 duration-700 w-96 shadow-2xl bg-800% bg-50% hover:bg-100%">
+          <button className="bg-gradient-to-l from-primary-orange via-purple-500 to-primary-red text-white font-bold rounded-md p-2 duration-700 xl:w-96 shadow-2xl bg-800% bg-50% hover:bg-100%">
             Kirim
           </button>
         </form>

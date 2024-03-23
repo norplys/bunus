@@ -71,7 +71,7 @@ export default function ResetForm() {
         />
       ))}
       <button
-        className="bg-gradient-to-l from-primary-orange via-purple-500 to-primary-red text-white font-bold rounded-md p-2 duration-700 w-96 shadow-2xl bg-800% bg-50% hover:bg-100% flex justify-center"
+        className="bg-gradient-to-l from-primary-orange via-purple-500 to-primary-red text-white font-bold rounded-md p-2 duration-700 xl:w-96 shadow-2xl bg-800% bg-50% hover:bg-100% flex justify-center"
         onClick={handleSubmit(onSubmit)}
         disabled={isSubmitting}
       >
