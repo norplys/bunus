@@ -20,7 +20,7 @@ export default function Layout({ children }: { children: ReactNode }) {
     } catch (error) {
       localStorage.removeItem("token");
       setToken(null);
-      setLoading(false);
+      // setLoading(false);
     }
   };
   useEffect(() => {
