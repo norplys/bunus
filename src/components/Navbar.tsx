@@ -14,9 +14,9 @@ import { useEffect } from "react";
 
 export default function Navbar() {
   let token = null;
-  useEffect(() => {
+  if (typeof window !== "undefined") {
     token = localStorage.getItem("token");
-  }, []);
+  }
   const [open, setOpen] = useState(false);
   const { data, isLoading } = useCartNotif(token);
   const { push } = useRouter();
@@ -66,7 +66,7 @@ export default function Navbar() {
                   ""
                 ) : (
                   <div className="rounded-full w-4 h-4 text-center bg-primary-red absolute -right-1 -top-1 text-xs text-white font-bold">
-                    {data.total}
+                    {data}
                   </div>
                 )}
                 <FaShoppingCart className="text-md text-white" />
@@ -125,7 +125,7 @@ export default function Navbar() {
                           ""
                         ) : (
                           <div className="rounded-full w-4 h-4 text-center bg-primary-red absolute -right-1 -top-1 text-xs text-white font-bold">
-                            {data.total}
+                            {data}
                           </div>
                         )}
                         <FaShoppingCart className="text-md text-white" />

@@ -29,23 +29,27 @@ export default function CartItem({ item }: { item: any }) {
     }
   };
   return (
-    <div className="flex gap-5 border-b pb-5 border-primary-orange">
-      <div className="w-40 bg-gray-300 rounded-md h-40 overflow-hidden shadow-lg">
+    <div className="md:flex grid grid-cols-6 grid-rows-2 gap-5 border-b pb-5 border-primary-orange">
+      <div className="md:w-40 w-32 bg-gray-300 rounded-md md:h-40 h-32 overflow-hidden shadow-lg col-span-2">
         <Image
           src={item.menu.image}
           alt="menu1"
           width={300}
           height={300}
-          className="object-cover hover:scale-110 duration-300 h-40"
+          className="object-cover hover:scale-110 duration-300 md:h-40 h-32 "
         />
       </div>
-      <div className="flex-1">
-        <h1 className="text-lg font-bold">{item.menu.name}</h1>
-        <p className="text-sm">Harga per pcs: Rp. {item.menu.price}</p>
-        <p className="text-sm font-bold">Quantity: {item.quantity}</p>
+      <div className="flex-1 row-start-2 col-span-6">
+        <h1 className="md:text-lg font-bold">{item.menu.name}</h1>
+        <p className="md:text-sm text-xs">
+          Harga per pcs: Rp. {item.menu.price}
+        </p>
+        <p className="md:text-sm text-xs font-bold">
+          Quantity: {item.quantity}
+        </p>
       </div>
-      <div className="grid justify-items-end items-center">
-        <p className="font-bold">Rp. {item.total}</p>
+      <div className="grid justify-items-end items-center col-span-4">
+        <p className="font-bold text-sm md:text-lg">Rp. {item.total}</p>
         <button className="text-primary-red text-xl" onClick={handleDelete}>
           <FaTrash />
         </button>

@@ -58,9 +58,9 @@ export default function Cart() {
   };
   return (
     <div className="min-h-screen bg-blue-50 pt-9">
-      <div className="flex gap-5 justify-center items-start px-3 mx-auto w-[80%]">
-        <div className=" flex-1 grid gap-2">
-          <div className="text-xl font-bold bg-white rounded-t-xl  p-5 flex justify-between">
+      <div className="flex gap-5 justify-center items-start px-3 mx-auto xl:w-[80%] flex-col lg:flex-row">
+        <div className="flex-1 grid gap-2 w-full ">
+          <div className="lg:text-xl text-lg font-bold bg-white rounded-t-xl  p-5 flex justify-between">
             {isLoading ? (
               <h1>Loading...</h1>
             ) : (
@@ -81,18 +81,18 @@ export default function Cart() {
             )}
           </div>
         </div>
-        <div className="bg-white rounded-xl shadow-xl w-96 p-5 grid gap-5">
-          <h1 className="text-xl font-bold text-primary-orange">
+        <div className="bg-white rounded-xl shadow-xl lg:w-96 p-5 grid gap-5 w-full">
+          <h1 className="md:text-xl font-bold text-primary-orange">
             Ringkasan Belanja
           </h1>
-          <p className="text-lg flex justify-between border-b pb-2">
+          <p className="md:text-lg flex justify-between border-b pb-2">
             Total{" "}
-            <p className="font-bold">
+            <p className="font-bold text-sm md:text-base">
               Rp. {isLoading ? <h1>Loading...</h1> : data?.total}
             </p>
           </p>
           <button
-            className="bg-gradient-to-r from-primary-cyan via-purple-500 to-primary-orange text-white font-bold rounded-md p-2 bg-800% bg-50% hover:bg-100% duration-700 shadow-xl"
+            className="bg-gradient-to-r from-primary-cyan via-purple-500 to-primary-orange text-white font-bold rounded-md md:p-2 bg-800% bg-50% hover:bg-100% duration-700 shadow-xl py-1"
             onClick={() => handleCheckout(data?.total)}
             disabled={loading}
           >
