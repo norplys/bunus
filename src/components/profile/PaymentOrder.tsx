@@ -15,17 +15,21 @@ export default function PaymentOrder({ order }: { order: Order }) {
     <Link
       href={order.payment.snap_redirect_url}
       key={order.id}
-      className="flex justify-between items-center border-t-2 border-primary-orange py-5"
+      className="flex flex-col justify-between  border-t-2 border-primary-orange py-5"
     >
       <div>
-        <p className="text-lg font-bold">Order ID: {order.id}</p>
-        <p className="text-sm">Date: {order.createdAt}</p>
+        <p className="text-sm pb-2">Order ID: {order.id}</p>
+        <p className="text-sm">
+          Tanggal: {new Date(order.createdAt).toLocaleDateString()}
+        </p>
       </div>
       <div>
         <p className="text-lg font-bold">
           Total: {formatCurrency(order.total)}
         </p>
-        <p className="text-sm">Status: {order.payment?.status || "pending"}</p>
+        <p className="font-bold">
+          Status: {order.payment?.status || "pending"}
+        </p>
       </div>
     </Link>
   );

@@ -25,7 +25,7 @@ export default function ProfileForm() {
   return (
     <form
       action=""
-      className="grid gap-5 col-span-2 w-full border-l-2 border-primary-orange pl-10 border-dashed"
+      className="grid gap-5 col-span-2 w-full md:border-l-2 md:border-primary-orange md:pl-10 md:border-dashed p-3 md:p-0"
     >
       {inputArray.map((input, index) => (
         <LoginInput
