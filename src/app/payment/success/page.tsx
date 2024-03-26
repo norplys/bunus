@@ -17,12 +17,12 @@ export default function PaymentSuccess() {
         alt="icon"
         width={500}
         height={500}
-        className="border-8 border-white bg-orange-100 rounded-full shadow-2xl hover:scale-95 hover:shadow-none duration-300"
+        className="border-8 border-white bg-orange-100 rounded-full shadow-2xl hover:scale-95 hover:shadow-none duration-300 md:w-96 w-60"
       />
-      <p className="text-white font-extrabold text-5xl">
+      <p className="text-white font-extrabold xl:text-5xl md:text-4xl text-center text-xl px-2">
         Terima Kasih, Pembayaran Anda Telah Kami Terima !
       </p>
-      <p className="text-2xl text-white ">
+      <p className="xl:text-2xl text-white md:text-xl text-center text-base">
         Anda Akan Dialihkan ke Halaman Utama dalam 5 detik
       </p>
       <button className="bg-primary-cyan rounded-lg p-2 text-white font-bold shadow-xl">
