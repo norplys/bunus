@@ -6,16 +6,17 @@ import { CgProfile } from "react-icons/cg";
 import { useRouter } from "next/navigation";
 import { useCartNotif } from "@/helper/hooks/useCartNotif";
 import { Menu } from "@headlessui/react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaSpoon } from "react-icons/fa6";
 import { TbGrillFork } from "react-icons/tb";
 
 export default function Navbar() {
   let token = null;
-  useEffect(() => {
+  if (typeof window !== "undefined") {
     token = localStorage.getItem("token");
-  }, []);
+  }
+
   const [open, setOpen] = useState(false);
   const { data, isLoading } = useCartNotif(token);
   const { push } = useRouter();
