@@ -12,9 +12,11 @@ export default function PaymentHistory() {
         ? LoadingArray.map((_, index) => {
             return <PaymentLoading key={index} />;
           })
-        : data.map((order: any, index: number) => {
-            return <PaymentOrder order={order} key={index} />;
-          })}
+        : data
+            .map((order: any, index: number) => {
+              return <PaymentOrder order={order} key={index} />;
+            })
+            .reverse()}
     </div>
   );
 }
