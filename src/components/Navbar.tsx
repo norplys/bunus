@@ -109,8 +109,6 @@ export default function Navbar() {
                       <p className="font-bold text-primary-orange">
                         Halo, {user.name}
                       </p>
-                      <Link href={"/menu"}>Menu</Link>
-                      <Link href={"/#testimoni"}>Testimoni</Link>
                       <button
                         onClick={logOut}
                         className="border border-primary-red font-bold text-primary-red px-4 py-1 rounded-md hover:text-white hover:bg-primary-red duration-300"
@@ -142,6 +140,12 @@ export default function Navbar() {
                       Login
                     </Link>
                   )}
+                  <Link href={"/menu"} className="text-center">
+                    Menu
+                  </Link>
+                  <Link href={"/#testimoni"} className="text-center">
+                    Testimoni
+                  </Link>
                 </Menu.Items>
               )}
             </AnimatePresence>
