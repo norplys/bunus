@@ -9,6 +9,18 @@ type Order = {
     snap_redirect_url: string;
   };
 };
+const checkStatus = (status: string | null) => {
+  switch (status) {
+    case "settlement":
+      return <p className="font-bold text-green-600">Pembayaran Berhasil</p>;
+    case "pending":
+      return <p className="font-bold text-yellow-600">Menunggu Pembayaran</p>;
+    case "expire":
+      return <p className="font-bold text-red-600">Pembayaran Kadaluarsa</p>;
+    default:
+      return <p className="font-bold text-red-600">Pembayaran Gagal</p>;
+  }
+};
 
 export default function PaymentOrder({ order }: { order: Order }) {
   return (
@@ -27,9 +39,7 @@ export default function PaymentOrder({ order }: { order: Order }) {
         <p className="text-lg font-bold">
           Total: {formatCurrency(order.total)}
         </p>
-        <p className="font-bold">
-          Status: {order.payment?.status || "pending"}
-        </p>
+        Status: {checkStatus(order.payment?.status)}
       </div>
     </Link>
   );
