@@ -20,7 +20,7 @@ export default function PaymentError() {
         className="border-8 border-white bg-orange-100 rounded-full shadow-2xl hover:scale-95 hover:shadow-none duration-300 md:w-96 w-60"
       />
       <p className="text-white font-extrabold xl:text-5xl md:text-4xl text-center text-xl px-2">
-        Mohon Maaf, Pembayaran Anda Gagal !
+        Mohon Maaf, Pembayaran Anda Gagal ! Mohon Coba Kembali{" "}
       </p>
       <p className="xl:text-2xl text-white md:text-xl text-center text-base">
         Anda Akan Dialihkan ke Halaman Utama dalam 5 detik
