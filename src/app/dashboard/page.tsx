@@ -1,46 +1,26 @@
 import Image from "next/image";
 import Link from "next/link";
+import SideBarAdmin from "@/components/admin/SideBarAdmin";
+import OrderItem from "@/components/admin/dashboard/OrderItem";
 
+const arrays = new Array(10).fill(0);
 export default function Dashboard() {
   return (
     <section className="w-screen flex min-h-screen">
-      <nav className="flex flex-col bg-primary-orange p-2 gap-5">
-        <div className="flex gap-2">
-          <Image
-            src="/logo.svg"
-            alt="logo"
-            width={100}
-            height={100}
-            className="h-16 w-16 rounded-full"
-          />
-          <h1 className="text-xl flex items-center font-bold text-white">
-            BUBUR NUSANTARA
-          </h1>
-        </div>
-        <Link
-          href="/dashboard"
-          className="text-center text-lg text-white border-t-2 border-orange-300 pt-3"
-        >
-          Dashboard
-        </Link>
-        <Link
-          href="/dashboard"
-          className="text-center text-lg text-white border-t-2 border-orange-300 pt-3"
-        >
-          Setting
-        </Link>
-        <Link
-          href="/dashboard"
-          className="text-center text-lg text-white border-t-2 border-orange-300 pt-3"
-        >
-          LogOut
-        </Link>
-      </nav>
+      <SideBarAdmin />
       <div className="flex-1 w-full">
-        <nav className="w-full bg-primary-orange h-24 p-2 flex justify-end items-center">
-          <p className="text-white text-lg font-bold">Halo, Admin</p>
+        <nav className="w-full bg-primary-orange p-2 flex justify-end items-center">
+          <p className="text-white text-lg font-bold">Dashboard</p>
         </nav>
-        <div className="flex"></div>
+        <div className="flex gap-10 p-2 justify-center shadow-xl h-16 items-center">
+          <p className="font-bold text-lg">Sedang Disiapkan</p>
+          <p className="font-bold text-lg">Selesai</p>
+        </div>
+        <div className="flex flex-wrap pt-5 px-5 gap-5">
+          {arrays.map((_, index) => (
+            <OrderItem key={index} index={index} />
+          ))}
+        </div>
       </div>
     </section>
   );
