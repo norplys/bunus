@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function SideBarAdmin() {
   return (
-    <nav className="flex flex-col p-2 gap-5 shadow-2xl bg-primary-orange">
+    <nav className="flex flex-col p-2 gap-5 shadow-2xl bg-primary-orange min-h-screen fixed top-0">
       <div className="flex gap-2">
         <Image
           src="/logo.svg"
@@ -17,22 +17,22 @@ export default function SideBarAdmin() {
         </h1>
       </div>
       <Link
-        href="/dashboard"
+        href="/admin/dashboard"
         className="text-center text-lg text-white  border-t-2 border-orange-300 pt-3"
       >
         Dashboard
       </Link>
       <Link
-        href="/dashboard"
+        href="/admin/menu"
         className="text-center text-lg  text-white  border-t-2 border-orange-300 pt-3"
       >
-        Setting
+        Menu
       </Link>
       <Link
-        href="/dashboard"
+        href="/admin/analytics"
         className="text-center text-lg text-white  border-t-2 border-orange-300 pt-3"
       >
-        LogOut
+        Analytics
       </Link>
     </nav>
   );

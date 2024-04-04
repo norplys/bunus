@@ -12,7 +12,7 @@ const inputArray = [
 ];
 
 export default function LoginAdmin() {
-  const { setUser } = useUser();
+  const { setToken } = useUser();
   const {
     register,
     handleSubmit,
@@ -40,30 +40,44 @@ export default function LoginAdmin() {
           position: "bottom-left",
         },
       );
-      push(`/dashboard?token=${res2.data.data.token}`);
+      setToken(res2.data.data.token);
+      push(`/admin/dashboard`);
     } catch (err) {
       if (err instanceof AxiosError) {
-        if (err.response?.status === 400) {
-          toast.error("Email Atau Password Salah !", {
-            position: "bottom-left",
-          });
-          return;
-        }
-        if (err.response?.status === 404) {
-          toast.error(
-            "Email tidak ditemukan, Silahkan daftar terlebih dahulu !",
-            {
+        switch (err.response?.status) {
+          case 400:
+            toast.error("Email Atau Password Salah !", {
               position: "bottom-left",
-            },
-          );
-          return;
+            });
+            break;
+          case 404:
+            toast.error(
+              "Email tidak ditemukan, Silahkan daftar terlebih dahulu !",
+              {
+                position: "bottom-left",
+              },
+            );
+            break;
+          case 401:
+            toast.error(
+              "Email belum terverifikasi silahkan periksa email anda",
+              {
+                position: "bottom-left",
+              },
+            );
+            break;
+          case 403:
+            toast.error("Anda tidak memiliki akses", {
+              position: "bottom-left",
+            });
+            break;
+          default:
+            toast.error("Terjadi Kesalahan, mohon coba kembali !", {
+              position: "bottom-left",
+            });
+            break;
         }
-        if (err.response?.status === 401) {
-          toast.error("Email belum terverifikasi silahkan periksa email anda", {
-            position: "bottom-left",
-          });
-          return;
-        }
+        return;
       }
       toast.error("Terjadi Kesalahan, mohon coba kembali !", {
         position: "bottom-left",

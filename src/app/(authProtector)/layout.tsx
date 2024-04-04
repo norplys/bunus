@@ -3,7 +3,6 @@ import { ReactNode, useState, useEffect } from "react";
 import Protector from "@/components/Protector";
 import { useRouter } from "next/navigation";
 import { useUser } from "@/helper/context/userContext";
-import Image from "next/image";
 
 export default function Layout({ children }: { children: ReactNode }) {
   const { setToken } = useUser();
