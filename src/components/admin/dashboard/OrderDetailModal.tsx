@@ -26,7 +26,7 @@ export default function OrderDetailModal({
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
         >
-          <Dialog.Panel className="bg-white p-5 rounded-xl grid justify-items-center gap-5 z-30 min-w-[315px] px-1 md:px-5">
+          <Dialog.Panel className="bg-white p-5 rounded-xl grid justify-items-center gap-5 z-30 min-w-[315px] px-1 md:px-5 max-h-[80%] overflow-y-auto">
             {isLoading ? (
               <Image
                 src="/loadingAnimation.gif"
@@ -40,6 +40,7 @@ export default function OrderDetailModal({
                   <p className="font-bold text-lg">Pembeli</p>
                 </div>
                 <div className="w-full">
+                  <p className="font-semibold text-lg">Order Id : {data.id}</p>
                   <p className="font-semibold text-lg">
                     Nama : {data.user.name}
                   </p>

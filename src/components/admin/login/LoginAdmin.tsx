@@ -40,6 +40,7 @@ export default function LoginAdmin() {
           position: "bottom-left",
         },
       );
+      localStorage.setItem("token", res2.data.data.token);
       setToken(res2.data.data.token);
       push(`/admin/dashboard`);
     } catch (err) {

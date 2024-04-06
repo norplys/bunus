@@ -12,6 +12,7 @@ export default function Dashboard() {
   if (typeof window !== "undefined") {
     token = localStorage.getItem("token");
   }
+
   const { data, isLoading } = useOrderAdmin(token!);
   return (
     <div className="flex-1 w-full pl-72">

@@ -11,7 +11,6 @@ export default function AdminWrapper({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(true);
   const validateAdmin = async (token: string | null) => {
     try {
-      console.log(token);
       await axios.get(
         "https://bunus-be-production.up.railway.app/v1/validate/admin",
         {
@@ -30,6 +29,7 @@ export default function AdminWrapper({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
+    console.log(token);
     validateAdmin(token);
   }, []);
 

@@ -1,5 +1,8 @@
+import formatCurrency from "@/helper/currencyFormatter";
+import OrderRow from "./OrderRow";
+
 type Order = {
-  id: number;
+  id: string;
   user: {
     name: string;
     email: string;
@@ -34,29 +37,13 @@ export default function OrderTable({
       </thead>
       <tbody>
         {data?.map((order: Order, index: number) => (
-          <tr
+          <OrderRow
             key={order.id}
-            className="border-b-2 border-orange-100 text-center font-semibold bg-orange-50"
-          >
-            <td className="p-2">{index + 1}</td>
-            <td className="p-2">{order.id}</td>
-            <td className="p-2">{order.user.name}</td>
-            <td className="p-2">{order.user.email}</td>
-            <td className="p-2">{order.total}</td>
-            <td className="p-2 flex gap-5 justify-center">
-              <button className="bg-green-500 text-white font-bold p-2 rounded-md">
-                Selesai
-              </button>
-              <button
-                onClick={() => {
-                  setIsOpen(true), (refId.current = order.id);
-                }}
-                className="bg-primary-red text-white font-bold p-2 rounded-md"
-              >
-                Lihat
-              </button>
-            </td>
-          </tr>
+            order={order}
+            index={index}
+            refId={refId}
+            setIsOpen={setIsOpen}
+          />
         ))}
       </tbody>
     </table>
