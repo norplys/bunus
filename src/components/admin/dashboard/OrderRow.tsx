@@ -3,6 +3,7 @@ import { useState } from "react";
 import axios from "axios";
 import { VscLoading } from "react-icons/vsc";
 import toast from "react-hot-toast";
+import { useQueryClient } from "react-query";
 type Order = {
   id: string;
   user: {
@@ -24,6 +25,7 @@ export default function OrderRow({
   setIsOpen: (value: boolean) => void;
 }) {
   const [loading, setLoading] = useState(false);
+  const queryClient = useQueryClient();
   const setDone = async (id: string) => {
     try {
       setLoading(true);
@@ -42,6 +44,7 @@ export default function OrderRow({
         success: "Order Selesai",
         error: "Gagal menyelesaikan order",
       });
+      await queryClient.invalidateQueries(["orderAdmin", token]);
       setLoading(false);
     } catch (error) {
       console.log(error);

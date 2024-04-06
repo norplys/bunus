@@ -3,16 +3,25 @@ import { useOrderAdmin } from "@/helper/hooks/useOrderAdmin";
 import OrderTable from "@/components/admin/dashboard/OrderTable";
 import Image from "next/image";
 import OrderDetailModal from "@/components/admin/dashboard/OrderDetailModal";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
+import io from "socket.io-client";
+import { useQueryClient } from "react-query";
 
+const socket = io("https://bunus-be-production.up.railway.app/");
 export default function Dashboard() {
+  const queryClient = useQueryClient();
   const [isOpen, setIsOpen] = useState(false);
   const id = useRef(null);
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    socket.on("order", () => {
+      queryClient.invalidateQueries(["orderAdmin", token]);
+    });
+  }, [socket]);
   let token = null;
   if (typeof window !== "undefined") {
     token = localStorage.getItem("token");
   }
-
   const { data, isLoading } = useOrderAdmin(token!);
   return (
     <div className="flex-1 w-full pl-72">
