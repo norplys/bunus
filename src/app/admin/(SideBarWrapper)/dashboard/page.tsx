@@ -26,9 +26,9 @@ export default function Dashboard() {
   return (
     <div className="flex-1 w-full pl-72">
       <OrderDetailModal setIsOpen={setIsOpen} isOpen={isOpen} refId={id} />
-      <nav className="w-full bg-primary-orange p-2 flex justify-end items-center">
+      <h1 className="w-full bg-primary-orange p-2 flex justify-end items-center">
         <p className="text-white text-lg font-bold">Dashboard</p>
-      </nav>
+      </h1>
       <div className="flex gap-10 p-2 justify-center shadow-xl h-16 items-center">
         <p className="font-bold text-lg">Sedang Disiapkan</p>
         <p className="font-bold text-lg">Selesai</p>
