@@ -1,13 +1,41 @@
 import { Dialog } from "@headlessui/react";
 import Image from "next/image";
-import { useState, useEffect } from "react";
 import { useDetailMenu } from "@/helper/hooks/useDetailMenu";
 import { useQueryClient } from "react-query";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
+import { useForm } from "react-hook-form";
+import AdminInput from "./AdminInput";
+import { useCategoriesData } from "@/helper/hooks/useCategoryData";
 
+const inputArray = [
+  {
+    label: "Nama",
+    name: "name",
+    type: "text",
+    placeholder: "Name",
+  },
+  {
+    label: "Gambar",
+    name: "image",
+    type: "text",
+    placeholder: "Image",
+  },
+  {
+    label: "Harga",
+    name: "price",
+    type: "text",
+    placeholder: "Price",
+  },
+  {
+    label: "Deskripsi",
+    name: "description",
+    type: "text",
+    placeholder: "Description",
+  },
+];
 export default function AdminForm({
   isOpen,
   setIsOpen,
@@ -17,47 +45,26 @@ export default function AdminForm({
   setIsOpen: (value: boolean) => void;
   id: any;
 }) {
+  const { data, isLoading } = useDetailMenu(id.current);
+  const { data: categories, isLoading: categoriesLoading } =
+    useCategoriesData();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    values: {
+      name: data?.name,
+      image: data?.image,
+      price: data?.price,
+      description: data?.description,
+      category: data?.category?.id,
+    },
+  });
   const { push } = useRouter();
   const queryClient = useQueryClient();
-  const [count, setCount] = useState(0);
-  const { data, isLoading } = useDetailMenu(id.current);
-  useEffect(() => {
-    setCount(0);
-  }, [isOpen]);
-  const handleAddToCart = async () => {
-    try {
-      const token = localStorage.getItem("token");
-      if (!token) {
-        return push("/login?redirect=cart");
-      }
-      const res = axios.post(
-        "https://bunus-be-production.up.railway.app/v1/cart-item",
-        {
-          menuId: id.current,
-          quantity: count,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      );
-      await toast.promise(
-        res,
-        {
-          loading: "Mohon Tunggu...",
-          success: "Berhasil Menambahkan Ke Keranjang !",
-          error: "Gagal Menambahkan Ke Keranjang !",
-        },
-        {
-          position: "bottom-left",
-        },
-      );
-      setIsOpen(false);
-      await queryClient.invalidateQueries(["cartNotif", token]);
-    } catch (err) {
-      console.log(err);
-    }
+  const handleUpdateMenu = async (data: any) => {
+    console.log(data);
   };
   return (
     <AnimatePresence>
@@ -78,55 +85,59 @@ export default function AdminForm({
             ) : (
               <>
                 <Dialog.Title>
-                  <div className="text-xl font-bold">{data?.name}</div>
+                  <div className="text-xl font-bold">Edit Menu</div>
                 </Dialog.Title>
                 <div className="flex gap-5 flex-col md:flex-row">
-                  <div className="overflow-hidden h-60 rounded-2xl shadow-xl">
+                  <div className="overflow-hidden rounded-2xl shadow-xl h-72">
                     <Image
                       src={data?.image}
                       alt="menu1"
                       width={300}
                       height={300}
-                      className="object-cover hover:scale-110 duration-300 h-60"
+                      className="object-cover hover:scale-110 duration-300 h-72"
                     />
                   </div>
-                  <Dialog.Description className="overflow-y-auto text-justify text-sm w-72 border border-primary-orange md:h-full rounded-2xl p-2 bg-orange-50 shadow-xl">
-                    {data?.description}
-                  </Dialog.Description>
+                  <form className="overflow-y-auto overflow-x-hidden text-justify text-sm min-w-72 md:h-full rounded-2xl p-2  shadow-xl flex flex-col gap-3 border">
+                    {inputArray.map((input, i) => (
+                      <AdminInput
+                        key={i}
+                        register={register}
+                        errors={errors}
+                        label={input.label}
+                        name={input.name}
+                        type={input.type}
+                        placeholder={input.placeholder}
+                      />
+                    ))}
+                    <div className="flex flex-col gap-2">
+                      <label className="font-bold">Category</label>
+                      <select
+                        className="border border-primary-orange rounded-md p-1"
+                        {...register("category", { required: true })}
+                      >
+                        {categories?.map((category: any, i: number) => (
+                          <option key={i} value={category.id}>
+                            {category.name}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  </form>
                 </div>
-                <div className="w-full grid grid-rows-1 grid-cols-2">
-                  <div className="md:text-xl font-semibold flex text-orange-600 text-lg">
-                    Rp. {data?.price}
-                    <p className="text-xs flex items-end">/pcs</p>
-                  </div>
-                  <p className="text-orange-600 font-semibold md:text-xl text-lg">
-                    Total : Rp. {count * data?.price}
-                  </p>
-                </div>
-                <div className="flex gap-5 justify-beetween items-center">
+                <div className="flex gap-2">
                   <button
-                    className="text-xl bg-primary-orange text-white p-1 rounded-full"
-                    onClick={() =>
-                      count > 0 ? setCount(count - 1) : setCount(count)
-                    }
+                    className="py-1 md:px-3 font-bold rounded-xl mb-4 text-white md:text-lg shadow-lg bg-gradient-to-r from-primary-red via-purple-500 to-primary-orange bg-800% bg-50% hover:bg-100% duration-700 text-base px-2"
+                    onClick={handleUpdateMenu}
                   >
-                    -
+                    Delete Menu
                   </button>
-                  <div className="flex items-center p-1 font-bold">{count}</div>
                   <button
-                    className="text-xl bg-primary-orange text-white p-1 rounded-full"
-                    onClick={() => setCount(count + 1)}
+                    className="py-1 md:px-3 font-bold rounded-xl mb-4 text-white md:text-lg shadow-lg bg-gradient-to-r from-primary-cyan via-purple-500 to-primary-orange bg-800% bg-50% hover:bg-100% duration-700 text-base px-2"
+                    onClick={handleSubmit(handleUpdateMenu)}
                   >
-                    +
+                    Update Menu
                   </button>
                 </div>
-                <button
-                  className="py-1 md:px-3 font-bold rounded-xl mb-4 text-white md:text-lg shadow-lg bg-gradient-to-r from-primary-red via-purple-500 to-primary-orange bg-800% bg-50% hover:bg-100% duration-700 text-base px-2"
-                  onClick={handleAddToCart}
-                  disabled={count ? false : true}
-                >
-                  Tambahkan Ke Keranjang
-                </button>
               </>
             )}
           </Dialog.Panel>

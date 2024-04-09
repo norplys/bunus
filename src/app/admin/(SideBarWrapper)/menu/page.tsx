@@ -4,6 +4,8 @@ import { useState, useRef, useEffect } from "react";
 import AdminForm from "@/components/admin/menu/AdminForm";
 import { useCategoriesData } from "@/helper/hooks/useCategoryData";
 import { useUser } from "@/helper/context/userContext";
+import { FaPlusSquare } from "react-icons/fa";
+import CreateMenuModal from "@/components/admin/menu/CreateMenuModal";
 
 type CategoryProps = {
   id: string;
@@ -17,6 +19,7 @@ export default function Adminenu() {
   }, []);
 
   const [open, setOpen] = useState(false);
+  const [isCreateOpen, setIsCreateOpen] = useState(false);
   const modalId = useRef("");
   const { data, isLoading } = useCategoriesData();
 
@@ -29,7 +32,19 @@ export default function Adminenu() {
       <h1 className="w-full bg-primary-orange p-2 flex justify-end items-center">
         <p className="text-white text-lg font-bold">Menu</p>
       </h1>
-      <div className="w-full bg-primary-cyan p-2 flex"></div>
+      <div className="w-full bg-primary-cyan p-2 flex gap-2">
+        <button
+          className="flex bg-green-500 border border-green-200 justify-center items-center px-2 py-1 rounded-lg font-bold gap-2 text-white shadow-lg"
+          onClick={() => setIsCreateOpen(true)}
+        >
+          {" "}
+          <FaPlusSquare /> Tambah Menu
+        </button>
+        <button className="flex bg-green-500 border border-green-200 justify-center items-center px-2 py-1 rounded-lg font-bold gap-2 text-white shadow-lg">
+          {" "}
+          <FaPlusSquare /> Tambah Kategori
+        </button>
+      </div>
       <section className="flex justify-center items-center w-full">
         <div className="grid gap-14 my-8">
           {isLoading ? (
@@ -49,6 +64,7 @@ export default function Adminenu() {
           )}
         </div>
         <AdminForm isOpen={open} setIsOpen={setOpen} id={modalId} />
+        <CreateMenuModal isOpen={isCreateOpen} setIsOpen={setIsCreateOpen} />
       </section>
     </div>
   );
