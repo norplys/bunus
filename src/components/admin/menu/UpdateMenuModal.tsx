@@ -20,7 +20,7 @@ const inputArray = [
   {
     label: "Gambar",
     name: "image",
-    type: "text",
+    type: "file",
     placeholder: "Image",
   },
   {
@@ -36,7 +36,7 @@ const inputArray = [
     placeholder: "Description",
   },
 ];
-export default function AdminForm({
+export default function UpdateMenuModal({
   isOpen,
   setIsOpen,
   id,
@@ -55,7 +55,6 @@ export default function AdminForm({
   } = useForm({
     values: {
       name: data?.name,
-      image: data?.image,
       price: data?.price,
       description: data?.description,
       category: data?.category?.id,
@@ -129,7 +128,7 @@ export default function AdminForm({
                     className="py-1 md:px-3 font-bold rounded-xl mb-4 text-white md:text-lg shadow-lg bg-gradient-to-r from-primary-red via-purple-500 to-primary-orange bg-800% bg-50% hover:bg-100% duration-700 text-base px-2"
                     onClick={handleUpdateMenu}
                   >
-                    Delete Menu
+                    Hapus Menu
                   </button>
                   <button
                     className="py-1 md:px-3 font-bold rounded-xl mb-4 text-white md:text-lg shadow-lg bg-gradient-to-r from-primary-cyan via-purple-500 to-primary-orange bg-800% bg-50% hover:bg-100% duration-700 text-base px-2"

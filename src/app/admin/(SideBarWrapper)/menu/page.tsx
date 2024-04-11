@@ -1,7 +1,7 @@
 "use client";
 import Category from "@/components/menu/Category";
 import { useState, useRef, useEffect } from "react";
-import AdminForm from "@/components/admin/menu/AdminForm";
+import AdminForm from "@/components/admin/menu/UpdateMenuModal";
 import { useCategoriesData } from "@/helper/hooks/useCategoryData";
 import { useUser } from "@/helper/context/userContext";
 import { FaPlusSquare } from "react-icons/fa";
