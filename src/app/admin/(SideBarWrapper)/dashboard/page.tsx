@@ -34,21 +34,13 @@ export default function Dashboard() {
         <p className="font-bold text-lg">Selesai</p>
       </div>
       <section className="flex justify-center items-center w-full">
-        {isLoading ? (
-          <Image
-            width={200}
-            height={200}
-            alt="loading"
-            src="/loadingAnimation.gif"
-          />
-        ) : (
-          <OrderTable
-            data={data}
-            setIsOpen={setIsOpen}
-            isOpen={isOpen}
-            refId={id}
-          />
-        )}
+        <OrderTable
+          data={data}
+          setIsOpen={setIsOpen}
+          isOpen={isOpen}
+          refId={id}
+          isLoading={isLoading}
+        />
       </section>
     </div>
   );
