@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import DetailModal from "@/components/menu/DetailModal";
 import { useCategoriesData } from "@/helper/hooks/useCategoryData";
 import { useUser } from "@/helper/context/userContext";
+import LoadingImage from "@/components/LoadingImage";
 
 type CategoryProps = {
   id: string;
@@ -28,7 +29,7 @@ export default function menu() {
     <section className="min-h-screen">
       <div className="grid gap-14 my-8">
         {isLoading ? (
-          <h1>Loading...</h1>
+          <LoadingImage />
         ) : (
           data.map((category: CategoryProps, i: number) => {
             return (

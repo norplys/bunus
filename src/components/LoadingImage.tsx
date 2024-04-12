@@ -7,7 +7,7 @@ export default function LoadingImage() {
       width={100}
       height={1}
       alt="loading"
-      className="w-24 h-6"
+      className="w-24 h-6 mx-auto"
     />
   );
 }
