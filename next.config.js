@@ -10,5 +10,6 @@ module.exports = {
         pathname: "**",
       },
     ],
+    domains: ["res.cloudinary.com"],
   },
 };

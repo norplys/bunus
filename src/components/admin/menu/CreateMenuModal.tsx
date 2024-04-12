@@ -1,10 +1,10 @@
 import { Dialog } from "@headlessui/react";
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import { useDetailMenu } from "@/helper/hooks/useDetailMenu";
 import { useQueryClient } from "react-query";
 import axios from "axios";
 import toast from "react-hot-toast";
+import imageValidator from "@/helper/imageValidator";
 import { useForm } from "react-hook-form";
 import AdminInput from "./AdminInput";
 import { useCategoriesData } from "@/helper/hooks/useCategoryData";
@@ -49,12 +49,44 @@ export default function CreateMenuModal({
   const {
     register,
     handleSubmit,
+    watch,
+    reset,
     formState: { errors },
   } = useForm();
   const queryClient = useQueryClient();
+  const [image, setImage] = useState(null);
+  const imageFile = watch("image");
+  useEffect(() => {
+    imageValidator(imageFile, setImage, image, reset);
+  }, [imageFile]);
   useEffect(() => {}, [isOpen]);
   const handleAddToCart = async (data: any) => {
-    console.log(data);
+    const formData = new FormData();
+    formData.append("name", data.name);
+    formData.append("price", data.price);
+    formData.append("description", data.description);
+    formData.append("categoryId", data.category);
+    formData.append("image", imageFile[0]);
+    try {
+      const res = axios.post(
+        "https://bunus-be-production.up.railway.app/v1/menus",
+        formData,
+        {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        },
+      );
+      await toast.promise(res, {
+        loading: "Menambahkan menu...",
+        success: "Menu berhasil ditambahkan",
+        error: "Gagal menambahkan menu",
+      });
+      queryClient.invalidateQueries("menus");
+      setIsOpen(false);
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <AnimatePresence>
@@ -72,12 +104,22 @@ export default function CreateMenuModal({
           <Dialog.Panel className="bg-white p-5 rounded-xl grid justify-items-center gap-5 z-30 min-w-[315px] px-1 md:px-5">
             <>
               <Dialog.Title>
-                <div className="text-xl font-bold text-green-600">
-                  Tambah Menu
-                </div>
+                <div className="text-xl font-bold">Tambah Menu</div>
               </Dialog.Title>
               <div className="flex gap-5 flex-col md:flex-row">
-                <div className="overflow-hidden rounded-2xl shadow-xl h-72 w-72 bg-gray-300"></div>
+                <div className="overflow-hidden rounded-2xl shadow-xl h-72 w-72">
+                  <Image
+                    src={
+                      image
+                        ? image
+                        : "https://res.cloudinary.com/dpg0tbbot/image/upload/v1704978359/bunus/ntqqtbkh2zme9tpo3zcn.svg"
+                    }
+                    alt="menu1"
+                    width={300}
+                    height={300}
+                    className="object-cover hover:scale-110 duration-300 h-72"
+                  />
+                </div>
                 <form className="overflow-y-auto overflow-x-hidden text-justify text-sm min-w-72 md:h-full rounded-2xl p-2  shadow-xl flex flex-col gap-3 border">
                   {inputArray.map((input, i) => (
                     <AdminInput
@@ -107,7 +149,7 @@ export default function CreateMenuModal({
               </div>
               <button
                 className="py-1 md:px-3 font-bold rounded-xl mb-4 text-white md:text-lg shadow-lg bg-gradient-to-r from-primary-cyan via-purple-500 to-primary-orange bg-800% bg-50% hover:bg-100% duration-700 text-base px-2"
-                onClick={handleAddToCart}
+                onClick={handleSubmit(handleAddToCart)}
               >
                 Tambah Menu
               </button>

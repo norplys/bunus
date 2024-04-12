@@ -3,8 +3,9 @@ import Image from "next/image";
 import { useDetailMenu } from "@/helper/hooks/useDetailMenu";
 import { useQueryClient } from "react-query";
 import axios from "axios";
+import imageValidator from "@/helper/imageValidator";
 import toast from "react-hot-toast";
-import { useRouter } from "next/navigation";
+import { useState, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useForm } from "react-hook-form";
 import AdminInput from "./AdminInput";
@@ -52,15 +53,22 @@ export default function UpdateMenuModal({
     register,
     handleSubmit,
     formState: { errors },
+    watch,
+    reset,
   } = useForm({
     values: {
       name: data?.name,
       price: data?.price,
       description: data?.description,
       category: data?.category?.id,
+      image: null,
     },
   });
-  const { push } = useRouter();
+  const [image, setImage] = useState<any>(null);
+  const imageFile = watch<any>("image");
+  useEffect(() => {
+    imageValidator(imageFile, setImage, image, reset);
+  }, [imageFile]);
   const queryClient = useQueryClient();
   const handleUpdateMenu = async (data: any) => {
     console.log(data);
@@ -89,7 +97,7 @@ export default function UpdateMenuModal({
                 <div className="flex gap-5 flex-col md:flex-row">
                   <div className="overflow-hidden rounded-2xl shadow-xl h-72">
                     <Image
-                      src={data?.image}
+                      src={image ? image : data?.image}
                       alt="menu1"
                       width={300}
                       height={300}
