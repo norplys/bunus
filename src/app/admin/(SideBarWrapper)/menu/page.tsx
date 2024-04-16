@@ -33,7 +33,7 @@ export default function Adminenu() {
       <h1 className="w-full bg-primary-orange p-2 flex justify-end items-center">
         <p className="text-white text-lg font-bold">Menu</p>
       </h1>
-      <div className="w-full bg-primary-cyan p-2 flex gap-2">
+      <div className="w-full bg-orange-200 p-2 flex gap-2">
         <button
           className="flex bg-green-500 border border-green-200 justify-center items-center px-2 py-1 rounded-lg font-bold gap-2 text-white shadow-lg"
           onClick={() => setIsCreateOpen(true)}

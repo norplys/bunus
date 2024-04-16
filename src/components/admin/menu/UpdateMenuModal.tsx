@@ -20,12 +20,6 @@ const inputArray = [
     placeholder: "Name",
   },
   {
-    label: "Gambar",
-    name: "image",
-    type: "file",
-    placeholder: "Image",
-  },
-  {
     label: "Harga",
     name: "price",
     type: "text",
@@ -63,6 +57,7 @@ export default function UpdateMenuModal({
       description: data?.description,
       category: data?.category?.id,
       image: null,
+      id: data?.id,
     },
   });
   const [image, setImage] = useState<any>(null);
@@ -72,7 +67,34 @@ export default function UpdateMenuModal({
   }, [imageFile]);
   const queryClient = useQueryClient();
   const handleUpdateMenu = async (data: any) => {
-    console.log(data);
+    const formData = new FormData();
+    formData.append("name", data.name);
+    formData.append("price", data.price);
+    formData.append("description", data.description);
+    formData.append("categoryId", data.category);
+    if (imageFile) {
+      formData.append("image", imageFile[0]);
+    }
+    try {
+      const res = axios.put(
+        `https://bunus-be-production.up.railway.app/v1/menus/${data.id}`,
+        formData,
+        {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        },
+      );
+      await toast.promise(res, {
+        loading: "Memperbaharui menu...",
+        success: "Menu berhasil dibaharui",
+        error: "Gagal memperbaharui menu",
+      });
+      queryClient.invalidateQueries("categoryMenus");
+      setIsOpen(false);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const deleteMenu = async (id: string) => {
@@ -140,6 +162,20 @@ export default function UpdateMenuModal({
                         placeholder={input.placeholder}
                       />
                     ))}
+                    <div className="flex flex-col gap-2">
+                      <label className="font-bold">Gambar</label>
+                      <input
+                        type="file"
+                        placeholder="gambar"
+                        className="border border-primary-orange rounded-md p-1"
+                        {...register("image")}
+                      />
+                      {errors.name && (
+                        <span className="text-red-500">
+                          {errors.image?.message}
+                        </span>
+                      )}
+                    </div>
                     <div className="flex flex-col gap-2">
                       <label className="font-bold">Category</label>
                       <select
