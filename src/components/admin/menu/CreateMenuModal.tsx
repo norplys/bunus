@@ -82,7 +82,7 @@ export default function CreateMenuModal({
         success: "Menu berhasil ditambahkan",
         error: "Gagal menambahkan menu",
       });
-      queryClient.invalidateQueries("menus");
+      queryClient.invalidateQueries("categoryMenus");
       setIsOpen(false);
     } catch (error) {
       console.log(error);

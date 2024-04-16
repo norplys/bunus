@@ -10,6 +10,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useForm } from "react-hook-form";
 import AdminInput from "./AdminInput";
 import { useCategoriesData } from "@/helper/hooks/useCategoryData";
+import LoadingImage from "@/components/LoadingImage";
 
 const inputArray = [
   {
@@ -73,6 +74,29 @@ export default function UpdateMenuModal({
   const handleUpdateMenu = async (data: any) => {
     console.log(data);
   };
+
+  const deleteMenu = async (id: string) => {
+    try {
+      const token = localStorage.getItem("token");
+      const res = axios.delete(
+        `https://bunus-be-production.up.railway.app/v1/menus/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
+      await toast.promise(res, {
+        loading: "Loading...",
+        success: "Menu Berhasil Dihapus",
+        error: "Gagal menghapus menu",
+      });
+      queryClient.invalidateQueries("categoryMenus");
+      setIsOpen(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <AnimatePresence>
       {isOpen && (
@@ -88,7 +112,7 @@ export default function UpdateMenuModal({
         >
           <Dialog.Panel className="bg-white p-5 rounded-xl grid justify-items-center gap-5 z-30 min-w-[315px] px-1 md:px-5">
             {isLoading ? (
-              <h1>Loading...</h1>
+              <LoadingImage />
             ) : (
               <>
                 <Dialog.Title>
@@ -134,7 +158,7 @@ export default function UpdateMenuModal({
                 <div className="flex gap-2">
                   <button
                     className="py-1 md:px-3 font-bold rounded-xl mb-4 text-white md:text-lg shadow-lg bg-gradient-to-r from-primary-red via-purple-500 to-primary-orange bg-800% bg-50% hover:bg-100% duration-700 text-base px-2"
-                    onClick={handleUpdateMenu}
+                    onClick={() => deleteMenu(data.id)}
                   >
                     Hapus Menu
                   </button>
