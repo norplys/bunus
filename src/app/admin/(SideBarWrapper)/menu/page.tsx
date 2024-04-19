@@ -6,6 +6,7 @@ import { useCategoriesData } from "@/helper/hooks/useCategoryData";
 import { useUser } from "@/helper/context/userContext";
 import { FaPlusSquare } from "react-icons/fa";
 import CreateMenuModal from "@/components/admin/menu/CreateMenuModal";
+import CreateCategoryModal from "@/components/admin/menu/CreateCategoryModal";
 import LoadingImage from "@/components/LoadingImage";
 
 type CategoryProps = {
@@ -21,6 +22,7 @@ export default function Adminenu() {
 
   const [open, setOpen] = useState(false);
   const [isCreateOpen, setIsCreateOpen] = useState(false);
+  const [isCategoryOpen, setIsCategoryOpen] = useState(false);
   const modalId = useRef("");
   const { data, isLoading } = useCategoriesData();
 
@@ -41,7 +43,10 @@ export default function Adminenu() {
           {" "}
           <FaPlusSquare /> Tambah Menu
         </button>
-        <button className="flex bg-green-500 border border-green-200 justify-center items-center px-2 py-1 rounded-lg font-bold gap-2 text-white shadow-lg">
+        <button
+          className="flex bg-green-500 border border-green-200 justify-center items-center px-2 py-1 rounded-lg font-bold gap-2 text-white shadow-lg"
+          onClick={() => setIsCategoryOpen(true)}
+        >
           {" "}
           <FaPlusSquare /> Tambah Kategori
         </button>
@@ -66,6 +71,10 @@ export default function Adminenu() {
         </div>
         <AdminForm isOpen={open} setIsOpen={setOpen} id={modalId} />
         <CreateMenuModal isOpen={isCreateOpen} setIsOpen={setIsCreateOpen} />
+        <CreateCategoryModal
+          isOpen={isCategoryOpen}
+          setIsOpen={setIsCategoryOpen}
+        />
       </section>
     </div>
   );
