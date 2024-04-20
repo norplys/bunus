@@ -1,5 +1,5 @@
 "use client";
-import Category from "@/components/menu/Category";
+import AdminCategory from "@/components/admin/menu/AdminCategory";
 import { useState, useRef, useEffect } from "react";
 import AdminForm from "@/components/admin/menu/UpdateMenuModal";
 import { useCategoriesData } from "@/helper/hooks/useCategoryData";
@@ -58,7 +58,7 @@ export default function Adminenu() {
           ) : (
             data.map((category: CategoryProps, i: number) => {
               return (
-                <Category
+                <AdminCategory
                   key={i}
                   category={category}
                   setIsOpen={setOpen}

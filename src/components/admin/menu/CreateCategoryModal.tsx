@@ -3,7 +3,6 @@ import { useQueryClient } from "react-query";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useForm } from "react-hook-form";
-import { useCategoriesData } from "@/helper/hooks/useCategoryData";
 import { AnimatePresence, motion } from "framer-motion";
 
 export default function CreateCategoryModal({
@@ -69,7 +68,9 @@ export default function CreateCategoryModal({
                     {...register("name", { required: "Kolom ini wajib diisi" })}
                   />
                   {errors.name && (
-                    <span className="text-red-500">{errors.name?.message}</span>
+                    <span className="text-red-500">
+                      {errors.name?.message?.toString()}
+                    </span>
                   )}
                 </div>
               </form>

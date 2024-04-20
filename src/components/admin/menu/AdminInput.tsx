@@ -22,7 +22,9 @@ export default function AdminInput({
         className="border border-primary-orange rounded-md p-1"
         {...register(name, { required: true })}
       />
-      {errors.name && <span className="text-red-500">{errors.message}</span>}
+      {errors.name && (
+        <span className="text-red-500">{errors.name?.message}</span>
+      )}
     </div>
   );
 }
