@@ -12,6 +12,7 @@ import LoadingImage from "@/components/LoadingImage";
 type CategoryProps = {
   id: string;
   name: string;
+  orderIndex: number;
 };
 
 export default function Adminenu() {

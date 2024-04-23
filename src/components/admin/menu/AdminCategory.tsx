@@ -9,6 +9,7 @@ import { useQueryClient } from "react-query";
 type CategoryProps = {
   id: string;
   name: string;
+  orderIndex: number;
 };
 
 type MenuProps = {
@@ -54,9 +55,44 @@ export default function AdminCategory({
       console.log(error);
     }
   };
+  const changeCategoryOrder = async (id: string, orderIndex: number) => {
+    try {
+      const res = axios.put(
+        `https://bunus-be-production.up.railway.app/v1/categories/order`,
+        {
+          id,
+          newIndex: orderIndex,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        },
+      );
+      await toast.promise(res, {
+        loading: "Mengubah urutan kategori...",
+        success: "Urutan kategori berhasil diubah",
+        error: "Gagal mengubah urutan kategori",
+      });
+      queryClient.invalidateQueries("categories");
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <section className="grid justify-items-center gap-4 mx-2">
       <h1 className="font-extrabold md:text-xl text-lg flex gap-2 items-center">
+        <select
+          onChange={(e) =>
+            changeCategoryOrder(category.id, parseInt(e.target.value))
+          }
+          className="border border-primary-blue rounded-md p-1"
+          value={category.orderIndex}
+        >
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+        </select>
         {category.name.toUpperCase()}{" "}
         <FaTrash
           className="text-base text-primary-red cursor-pointer"
