@@ -35,6 +35,7 @@ export default function CreateCategoryModal({
         error: "Gagal menambahkan kategori",
       });
       queryClient.invalidateQueries("categories");
+      queryClient.invalidateQueries("categoriesCount");
       setIsOpen(false);
     } catch (error) {
       console.log(error);

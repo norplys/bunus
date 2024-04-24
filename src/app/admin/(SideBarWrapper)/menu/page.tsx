@@ -8,6 +8,7 @@ import { FaPlusSquare } from "react-icons/fa";
 import CreateMenuModal from "@/components/admin/menu/CreateMenuModal";
 import CreateCategoryModal from "@/components/admin/menu/CreateCategoryModal";
 import LoadingImage from "@/components/LoadingImage";
+import { useCategoriesCount } from "@/helper/hooks/useCategoriesCount";
 
 type CategoryProps = {
   id: string;
@@ -26,6 +27,8 @@ export default function Adminenu() {
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
   const modalId = useRef("");
   const { data, isLoading } = useCategoriesData();
+  const { data: categoryCount, isLoading: categoryCountLoading } =
+    useCategoriesCount();
 
   const setModalId = (id: string) => {
     modalId.current = id;
@@ -54,7 +57,7 @@ export default function Adminenu() {
       </div>
       <section className="flex justify-center items-center w-full">
         <div className="grid gap-14 my-8">
-          {isLoading ? (
+          {isLoading || categoryCountLoading ? (
             <LoadingImage />
           ) : (
             data.map((category: CategoryProps, i: number) => {
@@ -65,6 +68,7 @@ export default function Adminenu() {
                   setIsOpen={setOpen}
                   isOpen={open}
                   setModalId={setModalId}
+                  count={categoryCount}
                 />
               );
             })

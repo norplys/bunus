@@ -1,9 +1,25 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import { usePathname } from "next/navigation";
+
+const navArray = [
+  {
+    name: "Dashboard",
+    path: "/admin/dashboard",
+  },
+  {
+    name: "Menu",
+    path: "/admin/menu",
+  },
+  {
+    name: "Analytics",
+    path: "/admin/analytics",
+  },
+];
 
 export default function SideBarAdmin() {
-  const [now, setNow] = useState("dashboard");
+  const pathname = usePathname();
   return (
     <nav className="flex flex-col p-2 shadow-2xl bg-primary-orange min-h-screen fixed top-0">
       <div className="flex gap-2 py-2">
@@ -18,27 +34,19 @@ export default function SideBarAdmin() {
           BUBUR NUSANTARA
         </h1>
       </div>
-      <Link
-        href="/admin/dashboard"
-        onClick={() => setNow("dashboard")}
-        className={`text-center text-lg text-white  border-t-2 border-orange-300 py-5 ${now === "dashboard" ? "bg-orange-400" : ""}`}
-      >
-        Dashboard
-      </Link>
-      <Link
-        href="/admin/menu"
-        onClick={() => setNow("menu")}
-        className={`text-center text-lg text-white  border-t-2 border-orange-300 py-5 ${now === "menu" ? "bg-orange-400" : ""}`}
-      >
-        Menu
-      </Link>
-      <Link
-        href="/admin/analytics"
-        onClick={() => setNow("analytics")}
-        className={`text-center text-lg text-white  border-t-2 border-orange-300 py-5 ${now === "analytics" ? "bg-orange-400" : ""}`}
-      >
-        Analytics
-      </Link>
+      <section className="flex flex-col gap-2">
+        {navArray.map((nav, i) => (
+          <Link
+            href={nav.path}
+            key={i}
+            className={`${
+              pathname.includes(nav.path) ? "bg-orange-400" : ""
+            } p-3 rounded-md text-white text-lg duration-300 text-center`}
+          >
+            {nav.name}
+          </Link>
+        ))}
+      </section>
     </nav>
   );
 }

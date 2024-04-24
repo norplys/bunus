@@ -27,11 +27,13 @@ export default function AdminCategory({
   setIsOpen,
   setModalId,
   isOpen,
+  count,
 }: {
   category: CategoryProps;
   setIsOpen: (value: boolean) => void;
   setModalId: (value: string) => void;
   isOpen: boolean;
+  count: number;
 }) {
   const queryClient = useQueryClient();
   const { data, isLoading } = useCategoriesMenus(category?.id);
@@ -51,6 +53,7 @@ export default function AdminCategory({
         error: "Gagal menghapus kategori",
       });
       queryClient.invalidateQueries("categories");
+      queryClient.invalidateQueries("categoriesCount");
     } catch (error) {
       console.log(error);
     }
@@ -86,12 +89,14 @@ export default function AdminCategory({
           onChange={(e) =>
             changeCategoryOrder(category.id, parseInt(e.target.value))
           }
-          className="border border-primary-blue rounded-md p-1"
+          className="border rounded-md p-1 border-black"
           value={category.orderIndex}
         >
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
+          {new Array(count).fill(0).map((_, i) => (
+            <option key={i} value={i + 1}>
+              {i + 1}
+            </option>
+          ))}
         </select>
         {category.name.toUpperCase()}{" "}
         <FaTrash
