@@ -1,7 +1,7 @@
 "use client";
 import { useOrderAdmin } from "@/helper/hooks/useOrderAdmin";
+import { useOrderFinish } from "@/helper/hooks/useOrderFinish";
 import OrderTable from "@/components/admin/dashboard/OrderTable";
-import Image from "next/image";
 import OrderDetailModal from "@/components/admin/dashboard/OrderDetailModal";
 import { useState, useRef, useEffect } from "react";
 import io from "socket.io-client";
@@ -10,6 +10,8 @@ import { useQueryClient } from "react-query";
 const socket = io("https://bunus-be-production.up.railway.app/");
 export default function Dashboard() {
   const queryClient = useQueryClient();
+  const [now, setNow] = useState(true);
+  const [date, setDate] = useState(new Date());
   const [isOpen, setIsOpen] = useState(false);
   const id = useRef(null);
   useEffect(() => {
@@ -22,24 +24,53 @@ export default function Dashboard() {
   if (typeof window !== "undefined") {
     token = localStorage.getItem("token");
   }
+  const { data: finishData, isLoading: finishLoading } = useOrderFinish(
+    date.toISOString().split("T")[0],
+  );
   const { data, isLoading } = useOrderAdmin(token!);
   return (
     <div className="flex-1 w-full pl-72">
-      <OrderDetailModal setIsOpen={setIsOpen} isOpen={isOpen} refId={id} />
+      <OrderDetailModal
+        setIsOpen={setIsOpen}
+        isOpen={isOpen}
+        refId={id}
+        now={now}
+      />
       <h1 className="w-full bg-primary-orange p-2 flex justify-end items-center">
         <p className="text-white text-lg font-bold">Dashboard</p>
       </h1>
       <div className="flex gap-10 p-2 justify-center shadow-xl h-16 items-center">
-        <p className="font-bold text-lg">Sedang Disiapkan</p>
-        <p className="font-bold text-lg">Selesai</p>
+        <button
+          className={`font-bold text-lg ${now && "border-b-2 border-black"}`}
+          onClick={() => setNow(true)}
+        >
+          Sedang Disiapkan
+        </button>
+        <button
+          className={`font-bold text-lg ${!now && "border-b-2 border-black"}`}
+          onClick={() => setNow(false)}
+        >
+          Selesai
+        </button>
       </div>
+      {!now && (
+        <div className="flex justify-center items-center gap-5 p-2">
+          <p className="text-lg font-bold">Tanggal :</p>
+          <input
+            type="date"
+            className="onFocus:outline-none border-b-2 border-primary-orange p-1 w-40 text-lg font-bold bg-transparent"
+            value={date.toISOString().split("T")[0]}
+            onChange={(e) => setDate(new Date(e.target.value))}
+          />
+        </div>
+      )}
       <section className="flex justify-center items-center w-full">
         <OrderTable
-          data={data}
+          now={now}
+          data={now ? data : finishData}
           setIsOpen={setIsOpen}
-          isOpen={isOpen}
           refId={id}
-          isLoading={isLoading}
+          isLoading={isLoading || finishLoading}
         />
       </section>
     </div>

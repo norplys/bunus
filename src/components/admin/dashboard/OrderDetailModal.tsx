@@ -10,6 +10,7 @@ import { VscLoading } from "react-icons/vsc";
 import LoadingImage from "@/components/LoadingImage";
 
 export default function OrderDetailModal({
+  now,
   isOpen,
   setIsOpen,
   refId,
@@ -17,6 +18,7 @@ export default function OrderDetailModal({
   isOpen: boolean;
   setIsOpen: (value: boolean) => void;
   refId: any;
+  now: boolean;
 }) {
   const { data, isLoading: isLoadingData } = useOrderDetail(refId.current);
   const [isLoading, setLoading] = useState(false);
@@ -108,7 +110,7 @@ export default function OrderDetailModal({
                 <div className="flex gap-5">
                   <button
                     onClick={() => setDone(data.id)}
-                    className="bg-green-500 text-white font-bold p-2 rounded-md"
+                    className={`bg-green-500 text-white font-bold p-2 rounded-md ${!now && "hidden"}`}
                   >
                     {isLoading ? (
                       <VscLoading className="animate-spin w-14" />

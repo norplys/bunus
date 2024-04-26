@@ -18,11 +18,13 @@ export default function OrderRow({
   index,
   refId,
   setIsOpen,
+  now,
 }: {
   order: Order;
   index: number;
   refId: any;
   setIsOpen: (value: boolean) => void;
+  now: boolean;
 }) {
   const [loading, setLoading] = useState(false);
   const queryClient = useQueryClient();
@@ -64,7 +66,7 @@ export default function OrderRow({
       <td className="p-2">{formatCurrency(order.total)}</td>
       <td className="p-2 flex gap-5 justify-center">
         <button
-          className="bg-green-500 text-white font-bold p-2 rounded-md"
+          className={`bg-green-500 text-white font-bold p-2 rounded-md ${now ? "" : "hidden"}`}
           onClick={() => setDone(order.id)}
         >
           {loading ? <VscLoading className="animate-spin w-14" /> : "Selesai"}

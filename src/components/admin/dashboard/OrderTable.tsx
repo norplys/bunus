@@ -14,16 +14,16 @@ const thArray = ["No", "Order Id", "Nama", "Email", "Total", "Action"];
 
 export default function OrderTable({
   data,
-  isOpen,
   setIsOpen,
   isLoading,
   refId,
+  now,
 }: {
   data: any;
-  isOpen: boolean;
   isLoading: boolean;
   setIsOpen: (value: boolean) => void;
   refId: any;
+  now: boolean;
 }) {
   return (
     <table className="w-full">
@@ -47,6 +47,7 @@ export default function OrderTable({
               index={index}
               refId={refId}
               setIsOpen={setIsOpen}
+              now={now}
             />
           ))
         )}
