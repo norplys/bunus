@@ -12,6 +12,7 @@ type User = {
 
 type userContextProps = {
   user: User | null;
+  token: string | null;
   setUser: (user: User | null) => void;
   setToken: (token: string | null) => void;
 };
@@ -52,7 +53,7 @@ export function UserProvider({ children }: any) {
   }, [token]);
 
   return (
-    <userContext.Provider value={{ user, setUser, setToken }}>
+    <userContext.Provider value={{ user, setUser, setToken, token }}>
       {children}
     </userContext.Provider>
   );

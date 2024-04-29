@@ -31,6 +31,8 @@ export default function Cart() {
         {
           total,
           items,
+          merchant: "PUSAT",
+          table: null,
         },
         {
           headers: {
