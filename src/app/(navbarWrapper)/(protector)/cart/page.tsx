@@ -33,6 +33,7 @@ export default function Cart() {
           items,
           merchant: "PUSAT",
           table: null,
+          type: "SELF_PICKUP",
         },
         {
           headers: {

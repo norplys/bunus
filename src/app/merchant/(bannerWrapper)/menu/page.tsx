@@ -1,8 +1,6 @@
 "use client";
-import Image from "next/image";
+
 import { useEffect } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/autoplay";
@@ -21,7 +19,6 @@ type CategoryProps = {
 };
 
 export default function MerchantMenu() {
-  const mockData = new Array(5).fill(0);
   const { token, setToken } = useUser();
   useEffect(() => {
     setToken(localStorage.getItem("token"));
@@ -34,34 +31,7 @@ export default function MerchantMenu() {
   };
   const { data: notif, isLoading: cartLoading } = useCartNotif(token);
   return (
-    <section className="bg-white min-h-screen overflow-auto z-0 pb-20">
-      <Swiper
-        slidesPerView={1}
-        spaceBetween={30}
-        loop={true}
-        pagination={{
-          clickable: true,
-        }}
-        className="border-b-8 border-orange-400 bg-gray-600 "
-        autoplay={{
-          delay: 3000,
-          disableOnInteraction: false,
-        }}
-        modules={[Autoplay, Pagination]}
-      >
-        {mockData.map((_, i) => (
-          <SwiperSlide key={i}>
-            <div className="bg-gray-300 w-full h-fit">
-              <Image
-                src={`/comingSoon.png`}
-                width={1000}
-                height={1000}
-                alt={`banner${i}`}
-              ></Image>
-            </div>
-          </SwiperSlide>
-        ))}
-      </Swiper>
+    <section className="bg-white min-h-screen overflow-auto z-0 pb-20 mt-4">
       <div className="grid gap-14 my-8">
         {isLoading ? (
           <LoadingImage />
