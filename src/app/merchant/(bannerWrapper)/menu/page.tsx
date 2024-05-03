@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect } from "react";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/autoplay";
@@ -9,9 +8,10 @@ import DetailModal from "@/components/menu/DetailModal";
 import { useCategoriesData } from "@/helper/hooks/useCategoryData";
 import { useUser } from "@/helper/context/userContext";
 import LoadingImage from "@/components/LoadingImage";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useCartNotif } from "@/helper/hooks/useCartNotif";
 import { FaShoppingCart, FaArrowRight } from "react-icons/fa";
+import CartModal from "@/components/merchant/CartModal";
 
 type CategoryProps = {
   id: string;
@@ -24,6 +24,7 @@ export default function MerchantMenu() {
     setToken(localStorage.getItem("token"));
   }, []);
   const [open, setOpen] = useState(false);
+  const [cartOpen, setCartOpen] = useState(false);
   const modalId = useRef("");
   const { data, isLoading } = useCategoriesData();
   const setModalId = (id: string) => {
@@ -49,7 +50,10 @@ export default function MerchantMenu() {
           })
         )}
       </div>
-      <button className="fixed bottom-5 right-20 flex gap-5 w-[80%] bg-orange-400 h-20 rounded-xl items-center p-5 text-white text-2xl justify-between">
+      <button
+        className="fixed bottom-5 right-20 flex gap-5 w-[80%] bg-orange-400 h-20 rounded-xl items-center p-5 text-white text-2xl justify-between"
+        onClick={() => setCartOpen(true)}
+      >
         <div className="flex items-center justify-center gap-2">
           <FaShoppingCart />
           <p className="font-bold">{cartLoading ? "" : notif}</p>
@@ -60,6 +64,7 @@ export default function MerchantMenu() {
         </div>
       </button>
       <DetailModal isOpen={open} setIsOpen={setOpen} id={modalId} />
+      <CartModal isOpen={cartOpen} setIsOpen={setCartOpen} />
     </section>
   );
 }

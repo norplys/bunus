@@ -67,7 +67,7 @@ export default function DetailModal({
           static
           onClose={() => setIsOpen(false)}
           as={motion.div}
-          className="fixed inset-1 flex justify-center items-center"
+          className="fixed inset-1 flex justify-center items-center z-50"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}

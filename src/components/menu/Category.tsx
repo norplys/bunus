@@ -37,7 +37,7 @@ export default function Category({
       </h1>
       <section className="flex flex-wrap gap-6 justify-center items-center">
         {isLoading
-          ? LoadingArray.map((item) => <MenuLoading />)
+          ? LoadingArray.map((item, i) => <MenuLoading key={i} />)
           : data?.map((menu: MenuProps, i: number) => {
               return (
                 <MenuItem
