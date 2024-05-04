@@ -3,7 +3,7 @@ import axios from "axios";
 
 const fetchCartData = async (token: string | null) => {
   const { data } = await axios.get(
-    "https://bunus-be-production.up.railway.app/v1/cart",
+    `${process.env.NEXT_PUBLIC_BACKEND_LINK}/v1/cart`,
     {
       headers: {
         Authorization: `Bearer ${token}`,

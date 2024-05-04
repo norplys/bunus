@@ -11,7 +11,7 @@ const inputArray = [
   { label: "Password", type: "password", placeholder: "Password" },
 ];
 
-export default function LoginAdmin() {
+export default function LoginMerchant() {
   const { setToken } = useUser();
   const {
     register,
@@ -42,7 +42,7 @@ export default function LoginAdmin() {
       );
       localStorage.setItem("token", res2.data.data.token);
       setToken(res2.data.data.token);
-      push(`/admin/dashboard`);
+      push(`/merchant/home`);
     } catch (err) {
       if (err instanceof AxiosError) {
         switch (err.response?.status) {
@@ -101,7 +101,8 @@ export default function LoginAdmin() {
         />
       ))}
       <button
-        className="bg-gradient-to-r from-primary-cyan via-purple-500 to-primary-orange text-white font-bold rounded-md p-2 bg-800% bg-50% hover:bg-100% duration-700 shadow-xl flex justify-center items-center"
+        className="bg-gradient-to-r from-primary-cyan via-purple-500 to-primary-orange text-white 
+        font-bold rounded-md p-2 bg-800% bg-50% hover:bg-100% duration-700 shadow-xl flex justify-center items-center"
         type="submit"
         disabled={isSubmitting}
       >

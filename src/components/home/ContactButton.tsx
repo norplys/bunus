@@ -1,5 +1,3 @@
-import { IconType } from "react-icons";
-
 type ContactButtonProps = {
   icon: JSX.Element;
   text: string;

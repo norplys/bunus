@@ -26,7 +26,7 @@ export default function LoginForm({ redirect }: { redirect: string | null }) {
         password: data.Password,
       };
       const res = axios.post(
-        "https://bunus-be-production.up.railway.app/v1/login",
+        `${process.env.NEXT_PUBLIC_BACKEND_LINK}/v1/login`,
         postData,
       );
       const res2 = await toast.promise(

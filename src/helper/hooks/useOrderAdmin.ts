@@ -3,7 +3,7 @@ import axios from "axios";
 
 const fetchOrderAdmin = async (token: string) => {
   const { data } = await axios.get(
-    "https://bunus-be-production.up.railway.app/v1/orders/admin",
+    `${process.env.NEXT_PUBLIC_BACKEND_LINK}/v1/orders/admin`,
     {
       headers: {
         Authorization: `Bearer ${token}`,

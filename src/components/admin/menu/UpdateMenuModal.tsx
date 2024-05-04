@@ -77,7 +77,7 @@ export default function UpdateMenuModal({
     }
     try {
       const res = axios.put(
-        `https://bunus-be-production.up.railway.app/v1/menus/${data.id}`,
+        `${process.env.NEXT_PUBLIC_BACKEND_LINK}/v1/menus/${data.id}`,
         formData,
         {
           headers: {

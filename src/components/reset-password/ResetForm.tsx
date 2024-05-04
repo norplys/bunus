@@ -26,7 +26,7 @@ export default function ResetForm() {
   const onSubmit: SubmitHandler<Record<string, string>> = async (data) => {
     try {
       const res = axios.put(
-        `https://bunus-be-production.up.railway.app/v1/reset-password/${token}`,
+        `${process.env.NEXT_PUBLIC_BACKEND_LINK}/v1/reset-password/${token}`,
         {
           password: data.Password,
         },

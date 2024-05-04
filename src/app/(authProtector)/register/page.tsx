@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import SideLogo from "@/components/SideLogo";
-import RegisterForm from "@/components/register/RegisterForm";
+import RegisterForm from "@/components/profile/register/RegisterForm";
 
 export default function Register() {
   return (

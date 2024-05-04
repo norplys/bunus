@@ -39,7 +39,7 @@ export default function CreateCategoryModal({
         return;
       }
       const res = axios.post(
-        "https://bunus-be-production.up.railway.app/v1/orders",
+        `${process.env.NEXT_PUBLIC_BACKEND_LINK}/v1/orders`,
         {
           total,
           items,

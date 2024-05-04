@@ -27,7 +27,7 @@ export function UserProvider({ children }: any) {
     try {
       if (token) {
         const response = await axios.get(
-          "https://bunus-be-production.up.railway.app/v1/get-me",
+          `${process.env.NEXT_PUBLIC_BACKEND_LINK}/v1/get-me`,
           {
             headers: {
               Authorization: `Bearer ${token}`,

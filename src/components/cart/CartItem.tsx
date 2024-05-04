@@ -10,7 +10,7 @@ export default function CartItem({ item }: { item: any }) {
     try {
       const token = localStorage.getItem("token");
       const res = axios.delete(
-        `https://bunus-be-production.up.railway.app/v1/cart-item/${item.id}`,
+        `${process.env.NEXT_PUBLIC_BACKEND_LINK}/v1/cart-item/${item.id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

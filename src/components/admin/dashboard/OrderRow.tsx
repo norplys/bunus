@@ -33,7 +33,7 @@ export default function OrderRow({
       setLoading(true);
       const token = localStorage.getItem("token");
       const res = axios.put(
-        `https://bunus-be-production.up.railway.app/v1/orders/finish/${id}`,
+        `${process.env.NEXT_PUBLIC_BACKEND_LINK}/v1/orders/finish/${id}`,
         {},
         {
           headers: {

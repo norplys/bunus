@@ -69,7 +69,7 @@ export default function CreateMenuModal({
     formData.append("image", imageFile[0]);
     try {
       const res = axios.post(
-        "https://bunus-be-production.up.railway.app/v1/menus",
+        `${process.env.NEXT_PUBLIC_BACKEND_LINK}/v1/menus`,
         formData,
         {
           headers: {

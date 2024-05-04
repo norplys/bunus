@@ -12,7 +12,7 @@ export default function MerchantHome(): JSX.Element {
     push("/merchant/menu?type=TAKE_AWAY");
   };
   return (
-    <section className="flex justify-center items-center min-h-screen">
+    <section className="flex justify-center items-center min-h-screen overflow-hidden">
       <div className={`${type ? "hidden" : ""} flex gap-10`}>
         <button
           className="bg-orange-400 text-white rounded-xl text-3xl font-bold flex items-center justify-center py-2 px-4"

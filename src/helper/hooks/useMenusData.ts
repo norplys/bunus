@@ -3,7 +3,7 @@ import axios from "axios";
 
 const fetchCategoryMenus = async (id: string) => {
   const { data } = await axios.get(
-    `https://bunus-be-production.up.railway.app/v1/menus?id=${id}`,
+    `${process.env.NEXT_PUBLIC_BACKEND_LINK}/v1/menus?id=${id}`,
   );
   return data;
 };

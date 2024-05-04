@@ -61,7 +61,7 @@ export default function AdminCategory({
   const changeCategoryOrder = async (id: string, orderIndex: number) => {
     try {
       const res = axios.put(
-        `https://bunus-be-production.up.railway.app/v1/categories/order`,
+        `${process.env.NEXT_PUBLIC_BACKEND_LINK}/v1/categories/order`,
         {
           id,
           newIndex: orderIndex,

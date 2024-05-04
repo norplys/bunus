@@ -34,7 +34,7 @@ export default function RegisterForm() {
         phone: data.Telephone,
       };
       const res = axios.post(
-        "https://bunus-be-production.up.railway.app/v1/register",
+        `${process.env.NEXT_PUBLIC_BACKEND_LINK}/v1/register`,
         postData,
       );
       await toast.promise(
