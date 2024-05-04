@@ -10,7 +10,7 @@ type Order = {
   total: number;
 };
 
-const thArray = ["No", "Order Id", "Nama", "Email", "Total", "Action"];
+const thArray = ["No", "Table", "Nama", "Type", "Total", "Action"];
 
 export default function OrderTable({
   data,

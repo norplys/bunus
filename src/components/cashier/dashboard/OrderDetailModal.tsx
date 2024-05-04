@@ -1,5 +1,4 @@
 import { Dialog } from "@headlessui/react";
-import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import { useOrderDetail } from "@/helper/hooks/useOrderDetail";
 import axios from "axios";

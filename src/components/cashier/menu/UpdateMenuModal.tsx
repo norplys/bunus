@@ -8,7 +8,7 @@ import toast from "react-hot-toast";
 import { useState, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useForm } from "react-hook-form";
-import AdminInput from "./AdminInput";
+import AdminInput from "./CashierInput";
 import { useCategoriesData } from "@/helper/hooks/useCategoryData";
 import LoadingImage from "@/components/LoadingImage";
 

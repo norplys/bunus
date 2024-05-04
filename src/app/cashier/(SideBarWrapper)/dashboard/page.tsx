@@ -1,14 +1,14 @@
 "use client";
-import { useOrderAdmin } from "@/helper/hooks/useOrderAdmin";
+import { useOrderAdmin } from "@/helper/hooks/useOrderCashier";
 import { useOrderFinish } from "@/helper/hooks/useOrderFinish";
-import OrderTable from "@/components/admin/dashboard/OrderTable";
-import OrderDetailModal from "@/components/admin/dashboard/OrderDetailModal";
+import OrderTable from "@/components/cashier/dashboard/OrderTable";
+import OrderDetailModal from "@/components/cashier/dashboard/OrderDetailModal";
 import { useState, useRef, useEffect } from "react";
 import io from "socket.io-client";
 import { useQueryClient } from "react-query";
 
-const socket = io("https://bunus-be-production.up.railway.app/");
-export default function Dashboard() {
+const socket = io(`${process.env.NEXT_PUBLIC_BACKEND_LINK}/`);
+export default function CashierDahboard() {
   const queryClient = useQueryClient();
   const [now, setNow] = useState(true);
   const [date, setDate] = useState(new Date());
@@ -28,6 +28,7 @@ export default function Dashboard() {
     date.toISOString().split("T")[0],
   );
   const { data, isLoading } = useOrderAdmin(token!);
+  console.log(data);
   return (
     <div className="flex-1 w-full pl-72">
       <OrderDetailModal
@@ -37,7 +38,7 @@ export default function Dashboard() {
         now={now}
       />
       <h1 className="w-full bg-primary-orange p-2 flex justify-end items-center">
-        <p className="text-white text-lg font-bold">Dashboard</p>
+        <p className="text-white text-lg font-bold">Order</p>
       </h1>
       <div className="flex gap-10 p-2 justify-center shadow-xl h-16 items-center">
         <button

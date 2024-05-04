@@ -11,7 +11,7 @@ const inputArray = [
   { label: "Password", type: "password", placeholder: "Password" },
 ];
 
-export default function LoginAdmin() {
+export default function LoginCashier() {
   const { setToken } = useUser();
   const {
     register,
@@ -42,7 +42,7 @@ export default function LoginAdmin() {
       );
       localStorage.setItem("token", res2.data.data.token);
       setToken(res2.data.data.token);
-      push(`/admin/dashboard`);
+      push(`/cashier/dashboard`);
     } catch (err) {
       if (err instanceof AxiosError) {
         switch (err.response?.status) {

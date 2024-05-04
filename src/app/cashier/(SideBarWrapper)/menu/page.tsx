@@ -1,12 +1,12 @@
 "use client";
-import AdminCategory from "@/components/admin/menu/AdminCategory";
+import CashierCategory from "@/components/cashier/menu/CashierCategory";
 import { useState, useRef, useEffect } from "react";
-import AdminForm from "@/components/admin/menu/UpdateMenuModal";
+import CashierForm from "@/components/cashier/menu/UpdateMenuModal";
 import { useCategoriesData } from "@/helper/hooks/useCategoryData";
 import { useUser } from "@/helper/context/userContext";
 import { FaPlusSquare } from "react-icons/fa";
-import CreateMenuModal from "@/components/admin/menu/CreateMenuModal";
-import CreateCategoryModal from "@/components/admin/menu/CreateCategoryModal";
+import CreateMenuModal from "@/components/cashier/menu/CreateMenuModal";
+import CreateCategoryModal from "@/components/cashier/menu/CreateCategoryModal";
 import LoadingImage from "@/components/LoadingImage";
 import { useCategoriesCount } from "@/helper/hooks/useCategoriesCount";
 
@@ -16,7 +16,7 @@ type CategoryProps = {
   orderIndex: number;
 };
 
-export default function Adminenu() {
+export default function CashierMenu() {
   const { setToken } = useUser();
   useEffect(() => {
     setToken(localStorage.getItem("token"));
@@ -62,7 +62,7 @@ export default function Adminenu() {
           ) : (
             data.map((category: CategoryProps, i: number) => {
               return (
-                <AdminCategory
+                <CashierCategory
                   key={i}
                   category={category}
                   setIsOpen={setOpen}
@@ -74,7 +74,7 @@ export default function Adminenu() {
             })
           )}
         </div>
-        <AdminForm isOpen={open} setIsOpen={setOpen} id={modalId} />
+        <CashierForm isOpen={open} setIsOpen={setOpen} id={modalId} />
         <CreateMenuModal isOpen={isCreateOpen} setIsOpen={setIsCreateOpen} />
         <CreateCategoryModal
           isOpen={isCategoryOpen}

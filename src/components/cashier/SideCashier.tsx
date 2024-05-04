@@ -12,7 +12,7 @@ export default function SideAdmin() {
       />
       <h1 className="xl:text-5xl font-extrabold text-white md:text-4xl">
         BUBUR NUSANTARA
-        <p className="text-xs md:text-lg text-end">Admin</p>
+        <p className="text-xs md:text-lg text-end">Cashier</p>
       </h1>
     </div>
   );

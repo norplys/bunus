@@ -4,16 +4,16 @@ import { usePathname } from "next/navigation";
 
 const navArray = [
   {
-    name: "Dashboard",
-    path: "/admin/dashboard",
+    name: "Order",
+    path: "/cashier/dashboard",
   },
   {
     name: "Menu",
-    path: "/admin/menu",
+    path: "/cashier/menu",
   },
   {
     name: "Analytics",
-    path: "/admin/analytics",
+    path: "/cashier/analytics",
   },
 ];
 

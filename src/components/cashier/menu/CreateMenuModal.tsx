@@ -6,7 +6,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import imageValidator from "@/helper/imageValidator";
 import { useForm } from "react-hook-form";
-import AdminInput from "./AdminInput";
+import AdminInput from "./CashierInput";
 import { useCategoriesData } from "@/helper/hooks/useCategoryData";
 import { AnimatePresence, motion } from "framer-motion";
 

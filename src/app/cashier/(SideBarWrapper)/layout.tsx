@@ -1,18 +1,18 @@
 "use client";
 import { ReactNode } from "react";
-import SideBarAdmin from "@/components/admin/SideBarAdmin";
+import SideBarCashier from "@/components/cashier/SideBarCashier";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Protector from "@/components/Protector";
 import { useRouter } from "next/navigation";
 
-export default function AdminWrapper({ children }: { children: ReactNode }) {
+export default function CashierWrapper({ children }: { children: ReactNode }) {
   const { push } = useRouter();
   const [loading, setLoading] = useState(true);
   const validateAdmin = async (token: string | null) => {
     try {
       await axios.get(
-        "https://bunus-be-production.up.railway.app/v1/validate/admin",
+        `${process.env.NEXT_PUBLIC_BACKEND_LINK}/v1/validate/admin`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -23,7 +23,7 @@ export default function AdminWrapper({ children }: { children: ReactNode }) {
     } catch (error) {
       console.log(error);
       localStorage.removeItem("token");
-      push("/admin/login");
+      push("/cashier/login");
     }
   };
 
@@ -38,7 +38,7 @@ export default function AdminWrapper({ children }: { children: ReactNode }) {
   }
   return (
     <section className="min-h-screen">
-      <SideBarAdmin />
+      <SideBarCashier />
       {children}
     </section>
   );
