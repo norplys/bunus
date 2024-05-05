@@ -55,6 +55,7 @@ export default function DetailModal({
       );
       setIsOpen(false);
       await queryClient.invalidateQueries(["cartNotif", token]);
+      await queryClient.invalidateQueries(["cart", token]);
     } catch (err) {
       console.log(err);
     }

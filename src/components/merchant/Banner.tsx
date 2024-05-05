@@ -15,7 +15,7 @@ export default function Banner() {
       pagination={{
         clickable: true,
       }}
-      className="border-b-8 border-orange-400 bg-gray-600 -mb-10"
+      className="border-b-8 border-orange-400 bg-gray-600 -mb-28"
       autoplay={{
         delay: 3000,
         disableOnInteraction: false,

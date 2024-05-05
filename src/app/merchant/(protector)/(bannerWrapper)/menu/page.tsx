@@ -32,7 +32,7 @@ export default function MerchantMenu() {
   };
   const { data: notif, isLoading: cartLoading } = useCartNotif(token);
   return (
-    <section className="bg-white min-h-screen overflow-auto z-0 pb-20 mt-4">
+    <section className="bg-white min-h-screen overflow-auto z-0 pb-20 mt-28">
       <div className="grid gap-14 my-8">
         {isLoading ? (
           <LoadingImage />

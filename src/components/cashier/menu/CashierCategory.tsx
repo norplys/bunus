@@ -40,7 +40,7 @@ export default function AdminCategory({
   const deleteCategory = async (id: string) => {
     try {
       const res = axios.delete(
-        `https://bunus-be-production.up.railway.app/v1/categories/${id}`,
+        `${process.env.NEXT_PUBLIC_BACKEND_LINK}/v1/categories/${id}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,

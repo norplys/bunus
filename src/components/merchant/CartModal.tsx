@@ -9,6 +9,7 @@ import CartItem from "../cart/CartItem";
 import { useRouter } from "next/navigation";
 import { useUser } from "@/helper/context/userContext";
 import { useSearchParams } from "next/navigation";
+import playAudio from "@/helper/audio/playAudio";
 
 export default function CreateCategoryModal({
   isOpen,
@@ -44,7 +45,7 @@ export default function CreateCategoryModal({
           total,
           items,
           merchant: "PUSAT",
-          table: table ? table : null,
+          table: table ? Number(table) : null,
           type,
         },
         {
@@ -53,7 +54,7 @@ export default function CreateCategoryModal({
           },
         },
       );
-      const res2 = await toast.promise(
+      await toast.promise(
         res,
         {
           loading: "Mohon Tunggu...",
@@ -66,6 +67,7 @@ export default function CreateCategoryModal({
       );
       setLoading(false);
       push("/merchant/success");
+      playAudio("/audio/sound3.mp3");
     } catch (err) {
       console.log(err);
       setLoading(false);

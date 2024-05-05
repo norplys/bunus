@@ -1,4 +1,5 @@
 import Image from "next/image";
+import playAudio from "@/helper/audio/playAudio";
 
 type MenuProps = {
   id: string;
@@ -23,7 +24,7 @@ export default function MenuItem({
     <section
       className="grid justify-items-center gap-2 border rounded-2xl overflow-hidden shadow-lg cursor-pointer scale-95 hover:scale-100 duration-300"
       onClick={() => {
-        setIsOpen(!isOpen), setModalId(menu.id);
+        setIsOpen(!isOpen), setModalId(menu.id), playAudio("/audio/sound5.mp3");
       }}
     >
       <div className="md:h-60 overflow-hidden h-40">

@@ -1,7 +1,6 @@
 import MenuItem from "./MenuItem";
 import { useCategoriesMenus } from "@/helper/hooks/useMenusData";
-import LoadingImage from "../LoadingImage";
-import MenuLoading from "../admin/MenuLoading";
+import MenuLoading from "../cashier/MenuLoading";
 
 type CategoryProps = {
   id: string;
