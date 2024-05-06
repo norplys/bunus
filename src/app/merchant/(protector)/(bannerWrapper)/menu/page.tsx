@@ -3,7 +3,7 @@
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/autoplay";
-import Category from "@/components/menu/Category";
+import MerchantCategory from "@/components/merchant/MerchantCategory";
 import DetailModal from "@/components/menu/DetailModal";
 import { useCategoriesData } from "@/helper/hooks/useCategoryData";
 import { useUser } from "@/helper/context/userContext";
@@ -39,7 +39,7 @@ export default function MerchantMenu() {
         ) : (
           data.map((category: CategoryProps, i: number) => {
             return (
-              <Category
+              <MerchantCategory
                 key={i}
                 category={category}
                 setIsOpen={setOpen}

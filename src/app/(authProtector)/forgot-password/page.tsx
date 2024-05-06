@@ -18,7 +18,7 @@ export default function ForgotPassword() {
     try {
       const { Email } = data;
       const res = axios.post(
-        "https://bunus-be-production.up.railway.app/v1/forgot-password",
+        `${process.env.NEXT_PUBLIC_BACKEND_LINK}/v1/forgot-password`,
         {
           email: Email,
         },

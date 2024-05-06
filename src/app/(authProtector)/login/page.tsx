@@ -15,7 +15,7 @@ export default function Login() {
       position: "bottom-left",
       duration: 1500,
     });
-    push("https://bunus-be-production.up.railway.app/auth/google");
+    push(`${process.env.NEXT_PUBLIC_BACKEND_LINK}/auth/google`);
   };
 
   return (

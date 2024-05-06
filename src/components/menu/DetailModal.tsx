@@ -31,7 +31,7 @@ export default function DetailModal({
         return push("/login?redirect=cart");
       }
       const res = axios.post(
-        "https://bunus-be-production.up.railway.app/v1/cart-item",
+        `${process.env.NEXT_PUBLIC_BACKEND_LINK}/v1/cart-item`,
         {
           menuId: id.current,
           quantity: count,
