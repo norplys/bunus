@@ -33,8 +33,10 @@ export default function OrderRow({
       setLoading(true);
       const token = localStorage.getItem("token");
       const res = axios.put(
-        `${process.env.NEXT_PUBLIC_BACKEND_LINK}/v1/orders/finish/${id}`,
-        {},
+        `${process.env.NEXT_PUBLIC_BACKEND_LINK}/v1/orders/${id}`,
+        {
+          isDone: true,
+        },
         {
           headers: {
             Authorization: `Bearer ${token}`,
