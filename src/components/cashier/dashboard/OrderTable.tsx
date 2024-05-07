@@ -8,9 +8,11 @@ type Order = {
     email: string;
   };
   total: number;
+  table: number | null;
+  type: string;
 };
 
-const thArray = ["No", "Table", "Nama", "Type", "Total", "Action"];
+const thArray = ["No", "No Meja", "Nama", "Tipe Pesanan", "Total", "Aksi"];
 
 export default function OrderTable({
   data,

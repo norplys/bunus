@@ -11,6 +11,8 @@ type Order = {
     email: string;
   };
   total: number;
+  table: number | null;
+  type: string;
 };
 
 export default function OrderRow({
@@ -26,6 +28,7 @@ export default function OrderRow({
   setIsOpen: (value: boolean) => void;
   now: boolean;
 }) {
+  console.log(order);
   const [loading, setLoading] = useState(false);
   const queryClient = useQueryClient();
   const setDone = async (id: string) => {
@@ -62,17 +65,19 @@ export default function OrderRow({
       className="border-b-2 border-orange-100 text-center font-semibold bg-orange-50"
     >
       <td className="p-2">{index + 1}</td>
-      <td className="p-2">{order.id}</td>
+      <td className="p-2">{order.table}</td>
       <td className="p-2">{order.user.name}</td>
-      <td className="p-2">{order.user.email}</td>
+      <td className="p-2">{order.type}</td>
       <td className="p-2">{formatCurrency(order.total)}</td>
       <td className="p-2 flex gap-5 justify-center">
-        <button
-          className={`bg-green-500 text-white font-bold p-2 rounded-md ${now ? "" : "hidden"}`}
-          onClick={() => setDone(order.id)}
-        >
-          {loading ? <VscLoading className="animate-spin w-14" /> : "Selesai"}
-        </button>
+        {order.type !== "SELF_PICKUP" && (
+          <button
+            className={`bg-primary-orange text-white font-bold p-2 rounded-md ${now ? "" : "hidden"}`}
+            onClick={() => setDone(order.id)}
+          >
+            {loading ? <VscLoading className="animate-spin w-14" /> : "Bayar"}
+          </button>
+        )}
         <button
           onClick={() => {
             setIsOpen(true), (refId.current = order.id);
@@ -80,6 +85,12 @@ export default function OrderRow({
           className="bg-primary-red text-white font-bold p-2 rounded-md"
         >
           Lihat
+        </button>
+        <button
+          className={`bg-green-500 text-white font-bold p-2 rounded-md ${now ? "" : "hidden"}`}
+          onClick={() => setDone(order.id)}
+        >
+          {loading ? <VscLoading className="animate-spin w-14" /> : "Selesai"}
         </button>
       </td>
     </tr>
