@@ -1,0 +1,19 @@
+{
+  "id": "test_id",
+  "name": "Bubur Nusantara",
+  "description": "An app by Bubur Nusantara",
+  "version": "1.0",
+  "icons": [
+    {
+      "src": "logo.svg",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/merchant/home",
+  "scope": "/merchant/home",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f0f0f0",
+  "theme_color": "#f0f0f0"
+}
