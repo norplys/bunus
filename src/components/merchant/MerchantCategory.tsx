@@ -31,10 +31,8 @@ export default function MerchantCategory({
   const { data, isLoading } = useCategoriesMenus(category?.id);
   return (
     <section className="grid justify-items-center gap-4 mx-2">
-      <h1 className="font-extrabold md:text-xl text-lg">
-        {category.name.toUpperCase()}
-      </h1>
-      <section className="flex flex-wrap gap-6 justify-center items-center">
+      <h1 className="font-extrabold text-xl">{category.name.toUpperCase()}</h1>
+      <section className="flex flex-wrap justify-center items-center">
         {isLoading
           ? LoadingArray.map((item, i) => <MenuLoading key={i} />)
           : data?.map((menu: MenuProps, i: number) => {

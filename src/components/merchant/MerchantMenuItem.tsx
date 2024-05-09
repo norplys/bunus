@@ -36,10 +36,10 @@ export default function MerchantMenuItem({
           className="object-cover md:h-60 h-40 hover:scale-110 duration-300"
         />
       </div>
-      <h1 className="text-lg font-semibold">{menu.name}</h1>
-      <p className=" text-primary-orange font-semibold mb-3">
-        Rp. {menu.price}
-      </p>
+      <h1 className="text-xl font-semibold border-b-2 border-primary-orange pb-2">
+        {menu.name}
+      </h1>
+      <p className="font-semibold mb-3 text-lg">Rp. {menu.price}</p>
     </section>
   );
 }
