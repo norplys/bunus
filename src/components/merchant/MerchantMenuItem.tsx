@@ -27,11 +27,11 @@ export default function MerchantMenuItem({
         setIsOpen(!isOpen), setModalId(menu.id), playAudio("/audio/sound5.mp3");
       }}
     >
-      <div className="md:h-60 overflow-hidden h-40">
+      <div className=" overflow-hidden h-40">
         <Image
           src={menu.image}
           alt="menu1"
-          width={300}
+          width={260}
           height={300}
           className="object-cover md:h-60 h-40 hover:scale-110 duration-300"
         />
