@@ -24,7 +24,7 @@ export default function Banner() {
     >
       {mockData.map((_, i) => (
         <SwiperSlide key={i}>
-          <div className="bg-gray-300 w-full h-fit">
+          <div className="bg-gray-300 w-full h-40">
             <Image
               src={`/comingSoon.png`}
               width={1000}

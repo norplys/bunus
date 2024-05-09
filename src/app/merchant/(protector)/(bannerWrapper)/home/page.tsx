@@ -32,18 +32,18 @@ export default function MerchantHome(): JSX.Element {
           Tekan untuk memesan
         </p>
       </div>
-      <div className={`${type ? "hidden" : ""} flex gap-10`}>
+      <div className={`${type ? "hidden" : ""} grid gap-10`}>
         <button
-          className="bg-orange-400 text-white rounded-xl text-3xl font-bold flex items-center justify-center py-2 px-4"
+          className="bg-orange-500 text-white rounded-xl text-5xl font-bold flex items-center justify-center py-2 px-4 font-serif"
           onClick={() => {
             setType("DINE_IN"), playAudio("/audio/sound2.mp3");
           }}
         >
-          <LiaUtensilsSolid className="text-5xl" />
+          <LiaUtensilsSolid className="text-6xl" />
           Makan Ditempat
         </button>
         <button
-          className="bg-orange-400 text-white rounded-xl flex items-center justify-center text-3xl font-bold py-2 px-4 gap-2"
+          className="bg-orange-500 text-white rounded-xl flex items-center justify-center text-5xl font-bold py-3 px-4 gap-2 font-serif"
           onClick={handleTakeAway}
         >
           <RiTakeawayFill className="text-5xl font-normal" />
