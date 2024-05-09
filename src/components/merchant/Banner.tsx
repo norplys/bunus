@@ -15,7 +15,7 @@ export default function Banner() {
       pagination={{
         clickable: true,
       }}
-      className="border-b-8 border-orange-400 bg-gray-600 -mb-28"
+      className="bg-gray-600 -mb-28"
       autoplay={{
         delay: 3000,
         disableOnInteraction: false,
@@ -26,7 +26,7 @@ export default function Banner() {
         <SwiperSlide key={i}>
           <div className="bg-gray-300 w-full h-40">
             <Image
-              src={`/comingSoon.png`}
+              src={`/comingSoon.jpg`}
               width={1000}
               height={1000}
               alt={`banner${i}`}
