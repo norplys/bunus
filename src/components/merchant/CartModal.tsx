@@ -1,6 +1,5 @@
 import { Dialog } from "@headlessui/react";
 import { AnimatePresence, motion } from "framer-motion";
-import { FaTrash } from "react-icons/fa";
 import { useCartData } from "@/helper/hooks/useCartData";
 import axios from "axios";
 import toast from "react-hot-toast";
@@ -94,12 +93,10 @@ export default function CreateCategoryModal({
                     {isLoading ? (
                       <h1>Loading...</h1>
                     ) : (
-                      <p>Total item ({data?.items.length})</p>
+                      <p>Total Makanan ({data?.items.length})</p>
                     )}
-                    <button className="text-primary-red text-base">
-                      <FaTrash />
-                    </button>
                   </div>
+                  <button></button>
                   {/* Item */}
                   <div className="bg-white rounded-b-xl  p-5 grid gap-5">
                     {isLoading ? (
@@ -112,17 +109,15 @@ export default function CreateCategoryModal({
                   </div>
                 </div>
                 <div className="bg-white rounded-xl shadow-xl lg:w-96 p-5 grid gap-5 w-full">
-                  <h1 className="md:text-xl font-bold text-primary-orange">
-                    Ringkasan Belanja
-                  </h1>
-                  <p className="md:text-lg flex justify-between border-b pb-2">
+                  <h1 className="text-xl font-bold ">Ringkasan Belanja</h1>
+                  <p className="text-lg font-semibold flex justify-between border-b border-primary-orange pb-2">
                     Total{" "}
-                    <p className="font-bold text-sm md:text-base">
+                    <p className="font-bold text-xl">
                       Rp. {isLoading ? <h1>Loading...</h1> : data?.total}
                     </p>
                   </p>
                   <button
-                    className="bg-gradient-to-r from-primary-cyan via-purple-500 to-primary-orange text-white font-bold rounded-md md:p-2 bg-800% bg-50% hover:bg-100% duration-700 shadow-xl py-1"
+                    className="bg-gradient-to-r from-primary-cyan via-purple-500 to-primary-orange text-white font-bold rounded-md md:p-2 bg-800% bg-50% hover:bg-100% duration-700 shadow-xl py-1 text-xl"
                     onClick={() => handleCheckout(data?.total)}
                     disabled={loading}
                   >

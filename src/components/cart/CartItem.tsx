@@ -3,6 +3,7 @@ import Image from "next/image";
 import axios from "axios";
 import { useQueryClient } from "react-query";
 import toast from "react-hot-toast";
+import formatCurrency from "@/helper/currencyFormatter";
 
 export default function CartItem({ item }: { item: any }) {
   const queryClient = useQueryClient();
@@ -40,16 +41,14 @@ export default function CartItem({ item }: { item: any }) {
         />
       </div>
       <div className="flex-1 row-start-2 col-span-6">
-        <h1 className="md:text-lg font-bold">{item.menu.name}</h1>
-        <p className="md:text-sm text-xs">
-          Harga per pcs: Rp. {item.menu.price}
+        <h1 className="text-xl font-bold">{item.menu.name}</h1>
+        <p className="text-sm">
+          Harga per pcs: {formatCurrency(item.menu.price)}
         </p>
-        <p className="md:text-sm text-xs font-bold">
-          Quantity: {item.quantity}
-        </p>
+        <p className="font-bold">Quantity: {item.quantity}</p>
       </div>
       <div className="grid justify-items-end items-center col-span-4">
-        <p className="font-bold text-sm md:text-lg">Rp. {item.total}</p>
+        <p className="font-bold text-xl">{formatCurrency(item.total)}</p>
         <button className="text-primary-red text-xl" onClick={handleDelete}>
           <FaTrash />
         </button>
