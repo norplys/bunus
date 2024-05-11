@@ -7,6 +7,7 @@ import { useQueryClient } from "react-query";
 import { useState } from "react";
 import { VscLoading } from "react-icons/vsc";
 import LoadingImage from "@/components/LoadingImage";
+import OrderDetailItem from "./OrderDetailItem";
 
 export default function OrderDetailModal({
   now,
@@ -28,8 +29,10 @@ export default function OrderDetailModal({
       setLoading(true);
       const token = localStorage.getItem("token");
       const res = axios.put(
-        `${process.env.NEXT_PUBLIC_BACKEND_LINK}/v1/orders/finish/${id}`,
-        {},
+        `${process.env.NEXT_PUBLIC_BACKEND_LINK}/v1/orders/${id}`,
+        {
+          isDone: true,
+        },
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -62,51 +65,25 @@ export default function OrderDetailModal({
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
         >
-          <Dialog.Panel className="bg-white p-5 rounded-xl grid justify-items-center gap-5 z-30 min-w-[315px] px-1 md:px-5 max-h-[80%] overflow-y-auto">
+          <Dialog.Panel className="bg-white rounded-lg grid justify-items-center z-30 min-w-[315px] max-h-[80%] overflow-y-auto pb-2">
             {isLoadingData ? (
               <LoadingImage />
             ) : (
               <>
-                <div className="bg-primary-orange text-white p-2 rounded-md w-full text-center">
-                  <p className="font-bold text-lg">Pembeli</p>
+                <div className="bg-primary-orange text-white p-2 w-full text-center">
+                  <p className="font-bold text-lg">Detail</p>
                 </div>
-                <div className="w-full">
-                  <p className="font-semibold text-lg">Order Id : {data.id}</p>
-                  <p className="font-semibold text-lg">
-                    Nama : {data.user.name}
-                  </p>
-                  <p className="font-semibold text-lg">
-                    Email : {data.user.email}
-                  </p>
+                <div className="w-full font-semibold text-lg pl-2 py-5">
+                  <p>Meja : {data.table || "-"}</p>
+                  <p>Nama : {data.user.name}</p>
+                  <p>Email : {data.user.email}</p>
                 </div>
                 <div className="bg-primary-orange text-white p-2 rounded-md w-full text-center">
                   <p className="font-bold text-lg">Barang</p>
                 </div>
+                <OrderDetailItem data={data} />
 
-                <table className="w-full bg-orange-50">
-                  <tr className="text-center">
-                    <th className="p-5">Quantity</th>
-                    <th className="p-5">Menu</th>
-                    <th className="p-5">Total</th>
-                  </tr>
-                  {data.items.map((product: any) => (
-                    <tr
-                      key={product.menu.id}
-                      className="text-center border-t-2 border-t-orange-200"
-                    >
-                      <td className="p-5">{product.quantity}x</td>
-                      <td className="p-5">{product.menu.name}</td>
-                      <td className="p-5">{product.total}</td>
-                    </tr>
-                  ))}
-                  <tr className="text-center border-t-2 border-t-orange-200">
-                    <td></td>
-                    <td className="col-span-2 p-5 font-bold">Total Harga</td>
-                    <td className="font-bold">{data.total}</td>
-                  </tr>
-                </table>
-
-                <div className="flex gap-5">
+                <div className="flex gap-5 pt-5">
                   <button
                     onClick={() => setDone(data.id)}
                     className={`bg-green-500 text-white font-bold p-2 rounded-md ${!now && "hidden"}`}
