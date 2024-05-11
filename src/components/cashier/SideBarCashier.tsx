@@ -17,10 +17,10 @@ const navArray = [
   },
 ];
 
-export default function SideBarAdmin() {
+export default function SideBarCashier() {
   const pathname = usePathname();
   return (
-    <nav className="flex flex-col p-2 shadow-2xl bg-primary-orange min-h-screen fixed top-0">
+    <nav className="md:flex flex-col p-2 shadow-2xl bg-primary-orange min-h-screen fixed top-0 hidden">
       <div className="flex gap-2 py-2">
         <Image
           src="/logo.svg"

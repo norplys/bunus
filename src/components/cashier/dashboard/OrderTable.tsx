@@ -28,7 +28,7 @@ export default function OrderTable({
   now: boolean;
 }) {
   return (
-    <table className="w-full">
+    <table className="w-full hidden lg:table">
       <thead className="bg-primary-cyan text-white">
         <tr className="text-center">
           {thArray.map((th) => (

@@ -29,7 +29,6 @@ export default function CashierWrapper({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    console.log(token);
     validateAdmin(token);
   }, []);
 

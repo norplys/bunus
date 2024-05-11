@@ -6,6 +6,7 @@ import OrderDetailModal from "@/components/cashier/dashboard/OrderDetailModal";
 import { useState, useRef, useEffect } from "react";
 import io from "socket.io-client";
 import { useQueryClient } from "react-query";
+import OrderMobile from "@/components/cashier/dashboard/OrderMobile";
 
 const socket = io(`${process.env.NEXT_PUBLIC_BACKEND_LINK}/`);
 export default function CashierDahboard() {
@@ -28,9 +29,8 @@ export default function CashierDahboard() {
     date.toISOString().split("T")[0],
   );
   const { data, isLoading } = useOrderAdmin(token!);
-  console.log(data);
   return (
-    <div className="flex-1 w-full pl-72">
+    <div className="flex-1 w-full md:pl-72">
       <OrderDetailModal
         setIsOpen={setIsOpen}
         isOpen={isOpen}
@@ -65,15 +65,20 @@ export default function CashierDahboard() {
           />
         </div>
       )}
-      <section className="flex justify-center items-center w-full">
-        <OrderTable
-          now={now}
-          data={now ? data : finishData}
-          setIsOpen={setIsOpen}
-          refId={id}
-          isLoading={isLoading || finishLoading}
-        />
-      </section>
+      <OrderTable
+        now={now}
+        data={now ? data : finishData}
+        setIsOpen={setIsOpen}
+        refId={id}
+        isLoading={isLoading || finishLoading}
+      />
+      <OrderMobile
+        now={now}
+        data={now ? data : finishData}
+        setIsOpen={setIsOpen}
+        refId={id}
+        isLoading={isLoading || finishLoading}
+      />
     </div>
   );
 }
