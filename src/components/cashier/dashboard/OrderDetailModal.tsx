@@ -52,6 +52,35 @@ export default function OrderDetailModal({
       setLoading(false);
     }
   };
+
+  const setPaid = async (id: string) => {
+    try {
+      setLoading(true);
+      const token = localStorage.getItem("token");
+      const res = axios.put(
+        `${process.env.NEXT_PUBLIC_BACKEND_LINK}/v1/orders/payment/${id}`,
+        {
+          status: "settlement",
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
+      await toast.promise(res, {
+        loading: "Loading...",
+        success: "Pembayaran Berhasil",
+        error: "Gagal bayar order",
+      });
+      await queryClient.invalidateQueries(["orderAdmin", token]);
+      setLoading(false);
+      setIsOpen(false);
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    }
+  };
   return (
     <AnimatePresence>
       {isOpen && (
@@ -84,6 +113,18 @@ export default function OrderDetailModal({
                 <OrderDetailItem data={data} />
 
                 <div className="flex gap-5 pt-5">
+                  {data.payment.status === "cashierPending" && (
+                    <button
+                      onClick={() => setPaid(data.id)}
+                      className={`bg-orange-400 text-white font-bold p-2 rounded-md ${!now && "hidden"}`}
+                    >
+                      {isLoading ? (
+                        <VscLoading className="animate-spin w-14" />
+                      ) : (
+                        "Bayar"
+                      )}
+                    </button>
+                  )}
                   <button
                     onClick={() => setDone(data.id)}
                     className={`bg-green-500 text-white font-bold p-2 rounded-md ${!now && "hidden"}`}

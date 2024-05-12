@@ -12,13 +12,14 @@ export default function OrderMobile({
   refId: any;
   now: boolean;
 }) {
+  console.log(data);
   return (
     <div className="flex flex-col md:hidden">
       {isLoading
         ? "loading"
         : data.map((order: any, index: number) => (
             <div
-              className={`justify-between items-center p-2 h-32 border-b-2 border-orange-600 bg-orange-50 grid grid-cols-3 grid-rows-2 ${index === 0 && "border-t-2"}`}
+              className={`justify-between items-center p-2 h-32 border-b-2 ${order.payment.status === "settlement" ? "bg-orange-50 border-primary-orange" : "bg-red-100 border-primary-red"}  grid grid-cols-3 grid-rows-2 ${index === 0 && "border-t-2"}`}
               onClick={() => {
                 setIsOpen(true);
                 refId.current = order.id;
