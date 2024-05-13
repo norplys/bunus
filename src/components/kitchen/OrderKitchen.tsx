@@ -1,5 +1,4 @@
-import formatCurrency from "@/helper/currencyFormatter";
-export default function OrderMobile({
+export default function OrderKitchen({
   data,
   setIsOpen,
   isLoading,
@@ -16,7 +15,7 @@ export default function OrderMobile({
         ? "loading"
         : data.map((order: any, index: number) => (
             <div
-              className={`justify-between items-center p-2 h-32 border-b-2 ${order.payment.status === "settlement" ? "bg-orange-50 border-primary-orange" : "bg-red-100 border-primary-red"}  grid grid-cols-3 grid-rows-2 ${index === 0 && "border-t-2"}`}
+              className={`justify-between items-center p-2 h-32 border-b-2 bg-orange-50 border-primary-orange grid grid-cols-3 grid-rows-2 ${index === 0 && "border-t-2"}`}
               onClick={() => {
                 setIsOpen(true);
                 refId.current = order.id;
@@ -29,9 +28,6 @@ export default function OrderMobile({
                 {order.type}
               </p>
               <p className="text-lg font-bold">MEJA : {order.table || "-"}</p>
-              <p className="text-lg font-bold col-span-2 text-end">
-                {formatCurrency(order.total)}
-              </p>
             </div>
           ))}
     </div>

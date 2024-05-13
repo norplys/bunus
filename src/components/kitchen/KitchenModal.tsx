@@ -7,9 +7,9 @@ import { useQueryClient } from "react-query";
 import { useState } from "react";
 import { VscLoading } from "react-icons/vsc";
 import LoadingImage from "@/components/LoadingImage";
-import OrderDetailItem from "./OrderDetailItem";
+import OrderKitchenItem from "./OrderKitchenItem";
 
-export default function OrderDetailModal({
+export default function KitchenModal({
   now,
   isOpen,
   setIsOpen,
@@ -31,7 +31,7 @@ export default function OrderDetailModal({
       const res = axios.put(
         `${process.env.NEXT_PUBLIC_BACKEND_LINK}/v1/orders/${id}`,
         {
-          isDone: true,
+          isCooked: true,
         },
         {
           headers: {
@@ -44,36 +44,7 @@ export default function OrderDetailModal({
         success: "Order Selesai",
         error: "Gagal menyelesaikan order",
       });
-      await queryClient.invalidateQueries(["orderCashier", token]);
-      setLoading(false);
-      setIsOpen(false);
-    } catch (error) {
-      console.log(error);
-      setLoading(false);
-    }
-  };
-
-  const setPaid = async (id: string) => {
-    try {
-      setLoading(true);
-      const token = localStorage.getItem("token");
-      const res = axios.put(
-        `${process.env.NEXT_PUBLIC_BACKEND_LINK}/v1/orders/payment/${id}`,
-        {
-          status: "settlement",
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      );
-      await toast.promise(res, {
-        loading: "Loading...",
-        success: "Pembayaran Berhasil",
-        error: "Gagal bayar order",
-      });
-      await queryClient.invalidateQueries(["orderCashier", token]);
+      await queryClient.invalidateQueries(["orderKitchen", token]);
       setLoading(false);
       setIsOpen(false);
     } catch (error) {
@@ -111,21 +82,8 @@ export default function OrderDetailModal({
                 <div className="bg-primary-orange text-white p-2 rounded-md w-full text-center">
                   <p className="font-bold text-lg">Barang</p>
                 </div>
-                <OrderDetailItem data={data} />
-
+                <OrderKitchenItem data={data} />
                 <div className="flex gap-5 pt-5">
-                  {data.payment.status === "cashierPending" && (
-                    <button
-                      onClick={() => setPaid(data.id)}
-                      className={`bg-orange-400 text-white font-bold p-2 rounded-md ${!now && "hidden"}`}
-                    >
-                      {isLoading ? (
-                        <VscLoading className="animate-spin w-14" />
-                      ) : (
-                        "Bayar"
-                      )}
-                    </button>
-                  )}
                   <button
                     onClick={() => setDone(data.id)}
                     className={`bg-green-500 text-white font-bold p-2 rounded-md ${!now && "hidden"}`}
