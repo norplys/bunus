@@ -10,7 +10,6 @@ import LoadingImage from "@/components/LoadingImage";
 import OrderKitchenItem from "./OrderKitchenItem";
 
 export default function KitchenModal({
-  now,
   isOpen,
   setIsOpen,
   refId,
@@ -18,7 +17,6 @@ export default function KitchenModal({
   isOpen: boolean;
   setIsOpen: (value: boolean) => void;
   refId: any;
-  now: boolean;
 }) {
   const { data, isLoading: isLoadingData } = useOrderDetail(refId.current);
   const [isLoading, setLoading] = useState(false);
@@ -86,7 +84,7 @@ export default function KitchenModal({
                 <div className="flex gap-5 pt-5">
                   <button
                     onClick={() => setDone(data.id)}
-                    className={`bg-green-500 text-white font-bold p-2 rounded-md ${!now && "hidden"}`}
+                    className={`bg-green-500 text-white font-bold p-2 rounded-md`}
                   >
                     {isLoading ? (
                       <VscLoading className="animate-spin w-14" />

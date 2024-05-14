@@ -4,17 +4,17 @@ import { useOrderFinish } from "@/helper/hooks/useOrderFinish";
 import OrderTable from "@/components/cashier/dashboard/OrderTable";
 import OrderDetailModal from "@/components/cashier/dashboard/OrderDetailModal";
 import { useState, useRef, useEffect } from "react";
-import io from "socket.io-client";
+import { getSockets } from "@/helper/socket";
 import { useQueryClient } from "react-query";
 import OrderMobile from "@/components/cashier/dashboard/OrderMobile";
 
-const socket = io(`${process.env.NEXT_PUBLIC_BACKEND_LINK}/`);
 export default function CashierDahboard() {
   const queryClient = useQueryClient();
   const [now, setNow] = useState(true);
   const [date, setDate] = useState(new Date());
   const [isOpen, setIsOpen] = useState(false);
   const id = useRef(null);
+  const socket = getSockets();
   useEffect(() => {
     const token = localStorage.getItem("token");
     socket.on("order", () => {
