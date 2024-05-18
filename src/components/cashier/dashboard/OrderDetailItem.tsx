@@ -1,7 +1,6 @@
 import formatCurrency from "@/helper/currencyFormatter";
 
 export default function OrderDetailItem({ data }: { data: any }) {
-  console.log(data);
   return (
     <div className="flex flex-col gap-2 bg-orange-50">
       {data.items.map((item: any, index: number) => (

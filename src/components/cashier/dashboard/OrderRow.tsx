@@ -21,18 +21,15 @@ export default function OrderRow({
   refId,
   setIsOpen,
   now,
-  setLoading,
-  loading,
 }: {
   order: Order;
   index: number;
   refId: any;
   setIsOpen: (value: boolean) => void;
   now: boolean;
-  setLoading: (value: boolean) => void;
-  loading: boolean;
 }) {
   const queryClient = useQueryClient();
+  const [loading, setLoading] = useState(false);
   const setDone = async (id: string) => {
     try {
       setLoading(true);

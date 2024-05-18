@@ -1,11 +1,7 @@
 import { Dialog } from "@headlessui/react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useOrderDetail } from "@/helper/hooks/useOrderDetail";
-import axios from "axios";
-import toast from "react-hot-toast";
-import { useQueryClient } from "react-query";
 import { useState } from "react";
-import { VscLoading } from "react-icons/vsc";
 import LoadingImage from "@/components/LoadingImage";
 import OrderItem from "./OrderItem";
 import OrderPayment from "./OrderPayment";
