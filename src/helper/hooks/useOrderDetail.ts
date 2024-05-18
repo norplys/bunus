@@ -2,6 +2,7 @@ import { useQuery } from "react-query";
 import axios from "axios";
 
 const fetchOrderDetail = async (id: string) => {
+  if (!id) return;
   const { data } = await axios.get(
     `${process.env.NEXT_PUBLIC_BACKEND_LINK}/v1/orders/${id}`,
   );
