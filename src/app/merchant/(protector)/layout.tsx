@@ -11,7 +11,7 @@ export default function AdminWrapper({ children }: { children: ReactNode }) {
   const validateAdmin = async (token: string | null) => {
     try {
       await axios.get(
-        "https://bunus-be-production.up.railway.app/v1/validate/admin",
+        `${process.env.NEXT_PUBLIC_BACKEND_LINK}/v1/validate/admin`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

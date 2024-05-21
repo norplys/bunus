@@ -11,7 +11,7 @@ export default function Success() {
     }, 5000);
   }, []);
   return (
-    <div className="min-h-screen flex flex-col justify-center items-center gap-10 bg-[url('/pattern.svg')]">
+    <div className="min-h-screen flex flex-col justify-center items-center gap-10 bg-[url('/pattern.svg')] bg-cover">
       <Image
         src="/thumbs-up.svg"
         alt="icon"
@@ -19,11 +19,11 @@ export default function Success() {
         height={500}
         className="border-8 border-white bg-orange-100 rounded-full shadow-2xl hover:scale-95 hover:shadow-none duration-300 md:w-96 w-60"
       />
-      <p className="text-white font-extrabold xl:text-5xl md:text-4xl text-center text-xl px-2">
+      <p className="text-white font-extrabold text-3xl">
         Pesanan Anda Telah Kami Terima !
       </p>
-      <p className=" text-white md:text-4xl text-center text-base font-bold">
-        Silahkan lakukan pembayaran di kasir
+      <p className=" text-white text-2xl">
+        Silahkan lakukan pembayaran ke kasir
       </p>
     </div>
   );
