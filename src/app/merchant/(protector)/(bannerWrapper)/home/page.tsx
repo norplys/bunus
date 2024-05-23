@@ -22,19 +22,17 @@ export default function MerchantHome(): JSX.Element {
   return (
     <section className="flex justify-center items-center h-screen overflow-hidden">
       <div
-        className={`absolute bg-white w-full h-screen z-50 top-0 justify-center items-center flex-col ${play ? "hidden" : "flex"}`}
+        className={`absolute bg-[url(/pattern.svg)] animate-gradient bg-800% w-full h-screen z-50 top-0 justify-center items-center flex-col ${play ? "hidden" : "flex"}`}
         onClick={() => handleStart("/audio/sound1.mp3")}
       >
-        <h1 className="text-6xl font-bold text-center border-b-4 border-primary-orange pb-5">
+        <h1 className="text-6xl font-bold text-center border-b-4 border-white pb-5">
           Selamat Datang
         </h1>
-        <p className="text-center text-2xl mt-2 animate-pulse">
-          Tekan untuk memesan
-        </p>
+        <p className="text-center text-3xl mt-2">Tekan untuk memesan</p>
       </div>
       <div className={`${type ? "hidden" : ""} grid gap-10`}>
         <button
-          className="bg-orange-500 text-white rounded-xl text-5xl font-bold flex items-center justify-center py-2 px-4 font-serif"
+          className="bg-orange-500 text-white rounded-xl text-5xl font-bold flex items-center justify-center py-2 px-4"
           onClick={() => {
             setType("DINE_IN"), playAudio("/audio/sound2.mp3");
           }}
@@ -43,7 +41,7 @@ export default function MerchantHome(): JSX.Element {
           Makan Ditempat
         </button>
         <button
-          className="bg-orange-500 text-white rounded-xl flex items-center justify-center text-5xl font-bold py-3 px-4 gap-2 font-serif"
+          className="bg-orange-500 text-white rounded-xl flex items-center justify-center text-5xl font-bold py-3 px-4 gap-2"
           onClick={handleTakeAway}
         >
           <RiTakeawayFill className="text-5xl font-normal" />

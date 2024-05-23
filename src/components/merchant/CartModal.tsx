@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import { useUser } from "@/helper/context/userContext";
 import { useSearchParams } from "next/navigation";
 import playAudio from "@/helper/audio/playAudio";
+import { VscLoading } from "react-icons/vsc";
 
 export default function CreateCategoryModal({
   isOpen,
@@ -24,6 +25,7 @@ export default function CreateCategoryModal({
   const { push } = useRouter();
   const [loading, setLoading] = useState(false);
   const { data, isLoading } = useCartData(token);
+
   const handleCheckout = async (total: number) => {
     try {
       setLoading(true);
@@ -85,47 +87,45 @@ export default function CreateCategoryModal({
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
         >
-          <Dialog.Panel className="bg-white rounded-xl grid justify-items-center gap-5 z-30 min-w-[315px] px-1 overflow-y-scroll h-[80%]">
-            <div className="bg-blue-50 py-9">
-              <div className="flex gap-5 justify-center items-start px-3 mx-auto xl:w-[80%] flex-col lg:flex-row">
-                <div className="flex-1 grid gap-2 w-full ">
-                  <div className="lg:text-xl text-lg font-bold bg-white rounded-t-xl  p-5 flex justify-between">
-                    {isLoading ? (
-                      <h1>Loading...</h1>
-                    ) : (
+          <Dialog.Panel
+            className={`rounded-xl grid justify-items-center gap-5 z-30 min-w-[315px] px-1 overflow-y-scroll h-[80%] ${isLoading ? "" : "bg-white"}`}
+          >
+            {isLoading ? (
+              <div className="flex justify-center items-center w-full h-full">
+                <VscLoading className="animate-spin text-6xl font-bold text-primary-orange" />
+              </div>
+            ) : (
+              <div className="bg-blue-50 py-9 ">
+                <div className="flex gap-5 justify-center items-start px-3 mx-auto xl:w-[80%] flex-col lg:flex-row">
+                  <div className="flex-1 grid gap-2 w-full ">
+                    <div className="lg:text-xl text-lg font-bold bg-white rounded-t-xl  p-5 flex justify-between">
                       <p>Total Makanan ({data?.items.length})</p>
-                    )}
-                  </div>
-                  <button></button>
-                  {/* Item */}
-                  <div className="bg-white rounded-b-xl  p-5 grid gap-5">
-                    {isLoading ? (
-                      <h1>Loading...</h1>
-                    ) : (
-                      data?.items.map((item: any, i: any) => {
+                    </div>
+                    <button></button>
+                    {/* Item */}
+                    <div className="bg-white rounded-b-xl  p-5 grid gap-5">
+                      {data?.items.map((item: any, i: any) => {
                         return <CartItem key={i} item={item} />;
-                      })
-                    )}
+                      })}
+                    </div>
                   </div>
-                </div>
-                <div className="bg-white rounded-xl shadow-xl lg:w-96 p-5 grid gap-5 w-full">
-                  <h1 className="text-xl font-bold ">Ringkasan Belanja</h1>
-                  <p className="text-lg font-semibold flex justify-between border-b border-primary-orange pb-2">
-                    Total{" "}
-                    <p className="font-bold text-xl">
-                      Rp. {isLoading ? <h1>Loading...</h1> : data?.total}
+                  <div className="bg-white rounded-xl shadow-xl lg:w-96 p-5 grid gap-5 w-full">
+                    <h1 className="text-xl font-bold ">Ringkasan Belanja</h1>
+                    <p className="text-lg font-semibold flex justify-between border-b border-primary-orange pb-2">
+                      Total{" "}
+                      <p className="font-bold text-xl">Rp. {data?.total}</p>
                     </p>
-                  </p>
-                  <button
-                    className="bg-gradient-to-r from-primary-cyan via-purple-500 to-primary-orange text-white font-bold rounded-md md:p-2 bg-800% bg-50% hover:bg-100% duration-700 shadow-xl py-1 text-xl"
-                    onClick={() => handleCheckout(data?.total)}
-                    disabled={loading}
-                  >
-                    Buat Pesanan
-                  </button>
+                    <button
+                      className="bg-gradient-to-r from-primary-cyan via-purple-500 to-primary-orange text-white font-bold rounded-md md:p-2 bg-800% bg-50% hover:bg-100% duration-700 shadow-xl py-1 text-xl"
+                      onClick={() => handleCheckout(data?.total)}
+                      disabled={loading}
+                    >
+                      Buat Pesanan
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
+            )}
           </Dialog.Panel>
           <div
             className="fixed inset-0 bg-black/70 z-auto"

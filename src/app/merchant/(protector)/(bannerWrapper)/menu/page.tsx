@@ -53,6 +53,7 @@ export default function MerchantMenu() {
       <button
         className="fixed bottom-5 right-20 flex gap-5 w-[80%] bg-orange-400 h-20 rounded-xl items-center p-5 text-white text-2xl justify-between"
         onClick={() => setCartOpen(true)}
+        disabled={notif === 0}
       >
         <div className="flex items-center justify-center gap-2">
           <FaShoppingCart />
