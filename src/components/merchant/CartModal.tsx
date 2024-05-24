@@ -10,6 +10,7 @@ import { useUser } from "@/helper/context/userContext";
 import { useSearchParams } from "next/navigation";
 import playAudio from "@/helper/audio/playAudio";
 import { VscLoading } from "react-icons/vsc";
+import formatCurrency from "@/helper/currencyFormatter";
 
 export default function CreateCategoryModal({
   isOpen,
@@ -113,7 +114,9 @@ export default function CreateCategoryModal({
                     <h1 className="text-xl font-bold ">Ringkasan Belanja</h1>
                     <p className="text-lg font-semibold flex justify-between border-b border-primary-orange pb-2">
                       Total{" "}
-                      <p className="font-bold text-xl">Rp. {data?.total}</p>
+                      <p className="font-bold text-xl">
+                        {formatCurrency(data?.total)}
+                      </p>
                     </p>
                     <button
                       className="bg-gradient-to-r from-primary-cyan via-purple-500 to-primary-orange text-white font-bold rounded-md md:p-2 bg-800% bg-50% hover:bg-100% duration-700 shadow-xl py-1 text-xl"
