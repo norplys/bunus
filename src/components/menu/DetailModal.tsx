@@ -125,7 +125,7 @@ export default function DetailModal({
                   </button>
                 </div>
                 <button
-                  className="py-1 md:px-3 font-bold rounded-xl mb-4 text-white md:text-lg shadow-lg bg-gradient-to-r from-primary-red via-purple-500 to-primary-orange bg-800% bg-50% hover:bg-100% duration-700 text-base px-2 text-xl"
+                  className="py-1 md:px-3 font-bold rounded-xl mb-4 text-white md:text-lg shadow-lg bg-gradient-to-r from-primary-red via-purple-500 to-primary-orange bg-800% bg-50% hover:bg-100% duration-700 px-2 text-xl"
                   onClick={handleAddToCart}
                   disabled={count ? false : true}
                 >
