@@ -7,6 +7,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
+import formatCurrency from "@/helper/currencyFormatter";
 
 export default function DetailModal({
   isOpen,
@@ -97,11 +98,11 @@ export default function DetailModal({
                 </div>
                 <div className="w-full grid grid-rows-1 grid-cols-2">
                   <div className="md:text-xl font-semibold flex text-xl mx-auto">
-                    Rp. {data?.price}
+                    {formatCurrency(data?.price)}
                     <p className="text-xs flex items-end">/pcs</p>
                   </div>
                   <p className="font-semibold md:text-xl text-xl mx-auto">
-                    Total : Rp. {count * data?.price}
+                    Total : {formatCurrency(data?.price * count)}
                   </p>
                 </div>
                 <div className="flex gap-5 justify-beetween items-center">
