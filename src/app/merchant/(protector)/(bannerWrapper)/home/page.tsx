@@ -22,7 +22,7 @@ export default function MerchantHome(): JSX.Element {
   return (
     <section className="flex justify-center items-center h-screen overflow-hidden">
       <div
-        className={`absolute bg-[url(/pattern.svg)] animate-gradient bg-800% w-full h-screen z-50 top-0 justify-center items-center flex-col ${play ? "hidden" : "flex"}`}
+        className={`absolute bg-[url(/pattern.svg)] animate-gradient bg-800% w-full h-screen z-50 top-0 justify-center items-center flex-col text-white ${play ? "hidden" : "flex"}`}
         onClick={() => handleStart("/audio/sound1.mp3")}
       >
         <h1 className="text-6xl font-bold text-center border-b-4 border-white pb-5">

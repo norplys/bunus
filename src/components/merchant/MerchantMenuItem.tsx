@@ -30,7 +30,7 @@ export default function MerchantMenuItem({
       <div className="w-full overflow-hidden h-40">
         <Image
           src={menu.image}
-          alt="menu1"
+          alt="menuImage"
           width={260}
           height={300}
           className="object-cover md:h-60 h-40 hover:scale-110 duration-300 w-full"

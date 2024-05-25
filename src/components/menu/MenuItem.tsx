@@ -1,5 +1,4 @@
 import Image from "next/image";
-import playAudio from "@/helper/audio/playAudio";
 
 type MenuProps = {
   id: string;
@@ -30,7 +29,7 @@ export default function MenuItem({
       <div className="md:h-60 overflow-hidden h-40">
         <Image
           src={menu.image}
-          alt="menu1"
+          alt="menuImage"
           width={300}
           height={300}
           className="object-cover md:h-60 h-40 hover:scale-110 duration-300"

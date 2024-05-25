@@ -8,6 +8,7 @@ import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import formatCurrency from "@/helper/currencyFormatter";
+import { VscLoading } from "react-icons/vsc";
 
 export default function DetailModal({
   isOpen,
@@ -22,6 +23,7 @@ export default function DetailModal({
   const queryClient = useQueryClient();
   const [count, setCount] = useState(0);
   const { data, isLoading } = useDetailMenu(id.current);
+
   useEffect(() => {
     setCount(0);
   }, [isOpen]);
@@ -74,9 +76,11 @@ export default function DetailModal({
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
         >
-          <Dialog.Panel className="bg-white p-5 rounded-xl grid justify-items-center gap-5 z-30 min-w-[70%]">
+          <Dialog.Panel
+            className={`${isLoading ? "" : "bg-white"} p-5 rounded-xl grid justify-items-center gap-5 z-30 min-w-[70%]`}
+          >
             {isLoading ? (
-              <h1>Loading...</h1>
+              <VscLoading className="animate-spin text-6xl text-primary-orange" />
             ) : (
               <>
                 <Dialog.Title>
@@ -86,7 +90,7 @@ export default function DetailModal({
                   <div className="overflow-hidden h-60 rounded-2xl shadow-2xl">
                     <Image
                       src={data?.image}
-                      alt="menu1"
+                      alt="menuImage"
                       width={300}
                       height={300}
                       className="object-cover hover:scale-110 duration-300 h-60"
@@ -125,7 +129,7 @@ export default function DetailModal({
                   </button>
                 </div>
                 <button
-                  className="py-1 md:px-3 font-bold rounded-xl mb-4 text-white md:text-lg shadow-lg bg-gradient-to-r from-primary-red via-purple-500 to-primary-orange bg-800% bg-50% hover:bg-100% duration-700 px-2 text-xl"
+                  className="py-1 md:px-3 font-bold rounded-xl mb-4 text-white md:text-lg shadow-lg bg-gradient-to-r from-primary-red via-purple-500 to-primary-orange bg-800% bg-50% hover:bg-100% duration-700 px-2 text-lg"
                   onClick={handleAddToCart}
                   disabled={count ? false : true}
                 >
