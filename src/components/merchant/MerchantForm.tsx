@@ -24,7 +24,9 @@ export default function MerchantForm({
       className={`flex flex-col gap-5 ${type ? "" : "hidden"}`}
       onSubmit={handleSubmit(handleTable)}
     >
-      <label className="font-bold text-4xl text-center">Masukkan no meja</label>
+      <label className="font-bold text-4xl text-center">
+        Masukkan nomor antrian
+      </label>
       <input
         type="number"
         {...register("table", { required: true })}
