@@ -47,16 +47,42 @@ export default function OrderItem({
     }
   };
 
+  const handleCall = async (tableNumber: number) => {
+    const stringNumber = tableNumber.toString();
+    const arrayNumber = stringNumber.split("");
+    let index = 0;
+    let audioString = `/audio/sound6.mp3`;
+    const audio = new Audio(`/audio/sound6.mp3`);
+    const playNext = () => {
+      if (index < arrayNumber.length) {
+        const newAudio = `/audio/count${arrayNumber[index]}.mp3`;
+        audio.src = newAudio;
+        audioString = newAudio;
+        audio.load();
+        audio.play();
+        index++;
+        return;
+      }
+      if (index === arrayNumber.length) {
+        const newAudio = `/audio/sound7.mp3`;
+        audio.src = newAudio;
+        audioString = newAudio;
+        audio.load();
+        audio.play();
+        audio.onended = null;
+        return;
+      }
+    };
+    audio.onended = playNext;
+    audio.play();
+  };
   return (
     <>
       <div className="bg-primary-orange text-white p-2 w-full text-center">
-        <p className="font-bold text-lg">Detail</p>
+        <p className="font-bold text-lg">{data.table || data.user.name}</p>
       </div>
       <div className="w-full font-semibold text-lg pl-2 py-5">
         <p>Tipe : {data.type}</p>
-        <p>Meja : {data.table || "-"}</p>
-        <p>Nama : {data.user.name}</p>
-        <p>Email : {data.user.email}</p>
       </div>
       <div className="bg-primary-orange text-white p-2 rounded-md w-full text-center">
         <p className="font-bold text-lg">Barang</p>
@@ -70,6 +96,14 @@ export default function OrderItem({
             className={`bg-orange-400 text-white font-bold p-2 rounded-md ${!now && "hidden"}`}
           >
             {isLoading ? <VscLoading className="animate-spin w-14" /> : "Bayar"}
+          </button>
+        )}
+        {data.payment.status === "settlement" && data.table && (
+          <button
+            className="bg-primary-cyan px-2 py-1 rounded-lg text-white font-bold"
+            onClick={() => handleCall(data.table)}
+          >
+            Panggil
           </button>
         )}
         <button

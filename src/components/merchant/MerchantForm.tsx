@@ -19,6 +19,7 @@ export default function MerchantForm({
       setFocus("table");
     }
   }, [type]);
+
   return (
     <form
       className={`flex flex-col gap-5 ${type ? "" : "hidden"}`}

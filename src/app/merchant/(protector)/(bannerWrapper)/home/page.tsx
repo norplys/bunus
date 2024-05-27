@@ -1,5 +1,4 @@
 "use client";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { LiaUtensilsSolid } from "react-icons/lia";
 import { RiTakeawayFill } from "react-icons/ri";
@@ -14,10 +13,9 @@ export default function MerchantHome(): JSX.Element {
     playAudio(url);
   };
   const [type, setType] = useState<string | null>(null);
-  const { push } = useRouter();
 
   const handleClick = (type: string) => {
-    setType("DINE_IN");
+    setType(type);
     playAudio("/audio/sound2.mp3");
   };
 

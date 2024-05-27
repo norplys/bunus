@@ -22,14 +22,15 @@ export default function OrderMobile({
                 refId.current = order.id;
               }}
             >
-              <p className="rounded-full border text-center py-1 px-3 text-xl font-bold bg-primary-orange text-white w-fit">
-                {index + 1}
+              <p
+                className={`rounded-full border text-center py-1  font-bold bg-primary-orange text-white w-fit ${order.table ? "text-xl rounded-full px-3" : "text-lg col-span-3 rounded-lg px-2"}`}
+              >
+                {order.table ? order.table : order.user.name}
               </p>
               <p className="col-start-2 col-span-2 text-end font-bold text-lg ">
                 {order.type}
               </p>
-              <p className="text-lg font-bold">MEJA : {order.table || "-"}</p>
-              <p className="text-lg font-bold col-span-2 text-end">
+              <p className="text-lg font-bold text-end">
                 {formatCurrency(order.total)}
               </p>
             </div>

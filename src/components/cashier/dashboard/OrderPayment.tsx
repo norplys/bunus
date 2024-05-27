@@ -20,7 +20,6 @@ export default function OrderPayment({
   refId: any;
   setIsPayment: (value: boolean) => void;
 }) {
-  const [loading, setLoading] = useState(false);
   const { register, handleSubmit, watch, setFocus, setValue } = useForm();
   const [type, setType] = useState<string | null>(null);
   useEffect(() => {
@@ -30,7 +29,6 @@ export default function OrderPayment({
   const queryClient = useQueryClient();
   const setPaid = async (id: string) => {
     try {
-      setLoading(true);
       const token = localStorage.getItem("token");
       const res = axios.put(
         `${process.env.NEXT_PUBLIC_BACKEND_LINK}/v1/orders/payment/${id}`,
@@ -50,12 +48,11 @@ export default function OrderPayment({
         error: "Gagal bayar order",
       });
       await queryClient.invalidateQueries(["orderCashier", token]);
-      setLoading(false);
+      await queryClient.invalidateQueries(["orderDetail", id]);
       setIsOpen(false);
       setIsPayment(false);
     } catch (error) {
       console.log(error);
-      setLoading(false);
     }
   };
   return (
