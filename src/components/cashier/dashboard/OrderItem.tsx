@@ -81,7 +81,7 @@ export default function OrderItem({
       <div className="bg-primary-orange text-white p-2 w-full text-center">
         <p className="font-bold text-lg">{data.table || data.user.name}</p>
       </div>
-      <div className="w-full font-semibold text-lg pl-2 py-5">
+      <div className="w-full font-bold text-lg pl-2 py-5">
         <p>Tipe : {data.type}</p>
       </div>
       <div className="bg-primary-orange text-white p-2 rounded-md w-full text-center">

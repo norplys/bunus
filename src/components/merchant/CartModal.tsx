@@ -119,11 +119,15 @@ export default function CreateCategoryModal({
                       </p>
                     </p>
                     <button
-                      className="bg-gradient-to-r from-primary-cyan via-purple-500 to-primary-orange text-white font-bold rounded-md md:p-2 bg-800% bg-50% hover:bg-100% duration-700 shadow-xl py-1 text-xl"
+                      className="bg-gradient-to-r from-primary-cyan via-purple-500 to-primary-orange text-white font-bold rounded-md md:p-2 bg-800% bg-50% hover:bg-100% duration-700 shadow-xl py-1 text-xl flex justify-center"
                       onClick={() => handleCheckout(data?.total)}
                       disabled={loading}
                     >
-                      Buat Pesanan
+                      {loading ? (
+                        <VscLoading className="animate-spin w-14 text-2xl font-bold" />
+                      ) : (
+                        "Buat Pesanan"
+                      )}
                     </button>
                   </div>
                 </div>

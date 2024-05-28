@@ -23,15 +23,19 @@ export default function DetailModal({
   const queryClient = useQueryClient();
   const [count, setCount] = useState(0);
   const { data, isLoading } = useDetailMenu(id.current);
+  const [submitLoading, setSubmitLoading] = useState(false);
 
   useEffect(() => {
     setCount(0);
   }, [isOpen]);
   const handleAddToCart = async () => {
     try {
+      setSubmitLoading(true);
       const token = localStorage.getItem("token");
       if (!token) {
-        return push("/login?redirect=cart");
+        push("/login?redirect=cart");
+        setSubmitLoading(false);
+        return;
       }
       const res = axios.post(
         `${process.env.NEXT_PUBLIC_BACKEND_LINK}/v1/cart-item`,
@@ -57,9 +61,11 @@ export default function DetailModal({
         },
       );
       setIsOpen(false);
-      await queryClient.invalidateQueries(["cartNotif", token]);
-      await queryClient.invalidateQueries(["cart", token]);
+      await queryClient.invalidateQueries(["cartNotif"]);
+      await queryClient.invalidateQueries(["cart"]);
+      setSubmitLoading(false);
     } catch (err) {
+      setSubmitLoading(false);
       console.log(err);
     }
   };
@@ -77,7 +83,7 @@ export default function DetailModal({
           exit={{ opacity: 0 }}
         >
           <Dialog.Panel
-            className={`${isLoading ? "" : "bg-white"} p-5 rounded-xl grid justify-items-center gap-5 z-30 min-w-[70%]`}
+            className={`${isLoading ? "" : "bg-white"} p-5 rounded-xl grid justify-items-center gap-5 z-30 `}
           >
             {isLoading ? (
               <VscLoading className="animate-spin text-6xl text-primary-orange" />
@@ -131,9 +137,13 @@ export default function DetailModal({
                 <button
                   className="py-1 md:px-3 font-bold rounded-xl mb-4 text-white md:text-lg shadow-lg bg-gradient-to-r from-primary-red via-purple-500 to-primary-orange bg-800% bg-50% hover:bg-100% duration-700 px-2 text-lg"
                   onClick={handleAddToCart}
-                  disabled={count ? false : true}
+                  disabled={count && !submitLoading ? false : true}
                 >
-                  OK
+                  {submitLoading ? (
+                    <VscLoading className="animate-spin w-14 text-xl font-bold" />
+                  ) : (
+                    "OK"
+                  )}
                 </button>
               </>
             )}

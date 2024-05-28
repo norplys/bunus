@@ -4,12 +4,12 @@ import { useQueryClient } from "react-query";
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import formatCurrency from "@/helper/currencyFormatter";
+import LoadingImage from "@/components/LoadingImage";
 
 const typeArray = ["cash", "qris", "debit"];
 
 export default function OrderPayment({
   data,
-  isPayment,
   setIsOpen,
   refId,
   setIsPayment,
@@ -20,7 +20,14 @@ export default function OrderPayment({
   refId: any;
   setIsPayment: (value: boolean) => void;
 }) {
-  const { register, handleSubmit, watch, setFocus, setValue } = useForm();
+  const {
+    register,
+    handleSubmit,
+    watch,
+    setFocus,
+    setValue,
+    formState: { isSubmitting },
+  } = useForm();
   const [type, setType] = useState<string | null>(null);
   useEffect(() => {
     type === "cash" ? setFocus("money") : "";
@@ -99,7 +106,7 @@ export default function OrderPayment({
           type="submit"
           className={`bg-green-500 text-white font-bold p-2 rounded-md`}
         >
-          Bayar
+          {isSubmitting ? <LoadingImage /> : "Bayar"}
         </button>
       </form>
     </section>

@@ -34,7 +34,9 @@ export default function OrderDetailModal({
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
         >
-          <Dialog.Panel className="bg-white rounded-lg grid justify-items-center z-30 min-w-[315px] max-h-[80%] overflow-y-auto pb-2">
+          <Dialog.Panel
+            className={`${!isLoadingData && "bg-white"} rounded-lg grid justify-items-center z-30 min-w-[315px] max-h-[80%] overflow-y-auto pb-2`}
+          >
             {isLoadingData ? (
               <LoadingImage />
             ) : isPayment ? (
