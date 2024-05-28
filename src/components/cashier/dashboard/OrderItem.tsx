@@ -38,7 +38,8 @@ export default function OrderItem({
         success: "Order Selesai",
         error: "Gagal menyelesaikan order",
       });
-      await queryClient.invalidateQueries(["orderCashier", token]);
+      await queryClient.invalidateQueries(["orderCashier"]);
+      await queryClient.invalidateQueries(["orderFinish"]);
       setLoading(false);
       setIsOpen(false);
     } catch (error) {
