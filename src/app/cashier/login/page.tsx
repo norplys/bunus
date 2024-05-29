@@ -14,7 +14,7 @@ export default function CashierLogin() {
     try {
       const token = localStorage.getItem("token");
       await axios.get(
-        `${process.env.NEXT_PUBLIC_BACKEND_LINK}/v1/validate/admin`,
+        `${process.env.NEXT_PUBLIC_BACKEND_LINK}/v1/validate/cashier`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
