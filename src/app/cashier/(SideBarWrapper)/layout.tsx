@@ -2,34 +2,25 @@
 import { ReactNode } from "react";
 import SideBarCashier from "@/components/cashier/SideBarCashier";
 import { useEffect, useState } from "react";
-import axios from "axios";
 import Protector from "@/components/Protector";
 import { useRouter } from "next/navigation";
+import { useUser } from "@/helper/context/userContext";
 
 export default function CashierWrapper({ children }: { children: ReactNode }) {
+  const { useAuth } = useUser();
   const { push } = useRouter();
   const [loading, setLoading] = useState(true);
-  const validateAdmin = async (token: string | null) => {
+  const validateAdmin = async () => {
     try {
-      await axios.get(
-        `${process.env.NEXT_PUBLIC_BACKEND_LINK}/v1/validate/admin`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      );
+      await useAuth("admin");
       setLoading(false);
     } catch (error) {
-      console.log(error);
-      localStorage.removeItem("token");
       push("/cashier/login");
     }
   };
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    validateAdmin(token);
+    validateAdmin();
   }, []);
 
   if (loading) {

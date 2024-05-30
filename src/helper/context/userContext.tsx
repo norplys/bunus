@@ -1,5 +1,5 @@
 "use client";
-import { createContext, useState, useContext, useEffect } from "react";
+import { createContext, useState, useContext } from "react";
 import axios from "axios";
 
 type User = {
@@ -14,6 +14,7 @@ type userContextProps = {
   user: User | null;
   token: string | null;
   setUser: (user: User | null) => void;
+  useAuth: (type: string | null) => Promise<void>;
   setToken: (token: string | null) => void;
 };
 
@@ -22,38 +23,36 @@ const userContext = createContext<userContextProps | null>(null);
 export function UserProvider({ children }: any) {
   const [token, setToken] = useState<string | null>(null);
   const [user, setUser] = useState<User | null>(null);
-
-  const fetchUser = async (token: string | null) => {
+  const useAuth = async (type: string | null) => {
     try {
+      const token = localStorage.getItem("token");
+      console.log(token);
       if (token) {
         const response = await axios.get(
-          `${process.env.NEXT_PUBLIC_BACKEND_LINK}/v1/get-me`,
+          `${process.env.NEXT_PUBLIC_BACKEND_LINK}/v1/${type ? `validate/${type}` : "get-me"}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
             },
           },
         );
+        setToken(token);
         localStorage.setItem("token", token);
         setUser(response.data.data);
       } else {
         throw new Error("Token not found");
       }
     } catch (error) {
+      console.log(error);
+      setToken(null);
       localStorage.removeItem("token");
       setUser(null);
+      throw error;
     }
   };
 
-  useEffect(() => {
-    if (token) {
-      localStorage.getItem("token");
-      fetchUser(token);
-    }
-  }, [token]);
-
   return (
-    <userContext.Provider value={{ user, setUser, setToken, token }}>
+    <userContext.Provider value={{ user, setUser, useAuth, token, setToken }}>
       {children}
     </userContext.Provider>
   );

@@ -3,7 +3,6 @@ import LoginInput from "@/components/login/loginInput";
 import axios, { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
 import { toast } from "react-hot-toast";
-import { useUser } from "@/helper/context/userContext";
 import LoadingImage from "@/components/LoadingImage";
 
 const inputArray = [
@@ -12,7 +11,6 @@ const inputArray = [
 ];
 
 export default function LoginKitchen() {
-  const { setToken } = useUser();
   const {
     register,
     handleSubmit,
@@ -26,7 +24,7 @@ export default function LoginKitchen() {
         password: data.Password,
       };
       const res = axios.post(
-        `${process.env.NEXT_PUBLIC_BACKEND_LINK}/v1/login/admin`,
+        `${process.env.NEXT_PUBLIC_BACKEND_LINK}/v1/login/kitchen`,
         postData,
       );
       const res2 = await toast.promise(
@@ -41,7 +39,6 @@ export default function LoginKitchen() {
         },
       );
       localStorage.setItem("token", res2.data.data.token);
-      setToken(res2.data.data.token);
       push(`/kitchen/dashboard`);
     } catch (err) {
       if (err instanceof AxiosError) {

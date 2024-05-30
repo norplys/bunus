@@ -4,23 +4,16 @@ import SideCashier from "@/components/cashier/SideCashier";
 import LoginCashier from "@/components/cashier/login/LoginCashier";
 import { useEffect, useState } from "react";
 import Protector from "@/components/Protector";
-import axios from "axios";
 import { useRouter } from "next/navigation";
+import { useUser } from "@/helper/context/userContext";
 
 export default function CashierLogin() {
   const [loading, setLoading] = useState(true);
   const { push } = useRouter();
+  const { useAuth } = useUser();
   const validateJWT = async () => {
     try {
-      const token = localStorage.getItem("token");
-      await axios.get(
-        `${process.env.NEXT_PUBLIC_BACKEND_LINK}/v1/validate/cashier`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      );
+      await useAuth("cashier");
       push("/cashier/dashboard");
     } catch (error) {
       setLoading(false);

@@ -15,14 +15,23 @@ const mockData = new Array(5).fill(0);
 export default function Home() {
   const searchParams = useSearchParams();
   const token = searchParams.get("token");
-  const { setToken } = useUser();
+  const { useAuth } = useUser();
+
+  const validateToken = async () => {
+    try {
+      await useAuth(null);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
-    const localToken = localStorage.getItem("token");
-    if (token || localToken) {
-      setToken(token || localToken);
+    if (token) {
+      localStorage.setItem("token", token);
     }
+    validateToken();
   }, [token]);
+
   return (
     <section className="grid gap-14">
       <Intro />

@@ -7,6 +7,7 @@ import { useState, useRef, useEffect } from "react";
 import { getSockets } from "@/helper/socket";
 import { useQueryClient } from "react-query";
 import OrderMobile from "@/components/cashier/dashboard/OrderMobile";
+import { useUser } from "@/helper/context/userContext";
 
 export default function CashierDahboard() {
   const queryClient = useQueryClient();
@@ -14,6 +15,7 @@ export default function CashierDahboard() {
   const [date, setDate] = useState(new Date());
   const [isOpen, setIsOpen] = useState(false);
   const id = useRef(null);
+  const { token } = useUser();
   const socket = getSockets();
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -21,10 +23,7 @@ export default function CashierDahboard() {
       queryClient.invalidateQueries(["orderCashier", token]);
     });
   }, [socket]);
-  let token = null;
-  if (typeof window !== "undefined") {
-    token = localStorage.getItem("token");
-  }
+
   const { data: finishData, isLoading: finishLoading } = useOrderFinish(
     date.toISOString().split("T")[0],
   );

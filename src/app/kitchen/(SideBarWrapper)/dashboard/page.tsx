@@ -1,31 +1,23 @@
 "use client";
 import { useOrderKitchen } from "@/helper/hooks/useOrderKitchen";
-import { useOrderFinish } from "@/helper/hooks/useOrderFinish";
 import KitchenModal from "@/components/kitchen/KitchenModal";
 import { useState, useRef, useEffect } from "react";
 import io from "socket.io-client";
 import { useQueryClient } from "react-query";
 import OrderKitchen from "@/components/kitchen/OrderKitchen";
+import { useUser } from "@/helper/context/userContext";
 
 const socket = io(`${process.env.NEXT_PUBLIC_BACKEND_LINK}/`);
 export default function Kitchen() {
+  const { token } = useUser();
   const queryClient = useQueryClient();
-  const [date, setDate] = useState(new Date());
   const [isOpen, setIsOpen] = useState(false);
   const id = useRef(null);
   useEffect(() => {
-    const token = localStorage.getItem("token");
     socket.on("payment", () => {
-      queryClient.invalidateQueries(["orderKitchen", token]);
+      queryClient.invalidateQueries(["orderKitchen"]);
     });
   }, [socket]);
-  let token = null;
-  if (typeof window !== "undefined") {
-    token = localStorage.getItem("token");
-  }
-  const { data: finishData, isLoading: finishLoading } = useOrderFinish(
-    date.toISOString().split("T")[0],
-  );
   const { data, isLoading } = useOrderKitchen(token!);
   return (
     <div className="flex-1 w-full md:pl-72">
@@ -40,7 +32,7 @@ export default function Kitchen() {
         data={data}
         setIsOpen={setIsOpen}
         refId={id}
-        isLoading={isLoading || finishLoading}
+        isLoading={isLoading}
       />
     </div>
   );

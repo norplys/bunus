@@ -5,20 +5,15 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Protector from "@/components/Protector";
 import { useRouter } from "next/navigation";
+import { useUser } from "@/helper/context/userContext";
 
 export default function CashierWrapper({ children }: { children: ReactNode }) {
+  const { useAuth } = useUser();
   const { push } = useRouter();
   const [loading, setLoading] = useState(true);
   const validateAdmin = async (token: string | null) => {
     try {
-      await axios.get(
-        `${process.env.NEXT_PUBLIC_BACKEND_LINK}/v1/validate/admin`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      );
+      await useAuth("kitchen");
       setLoading(false);
     } catch (error) {
       console.log(error);
