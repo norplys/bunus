@@ -25,6 +25,7 @@ export default function OrderMobile({
               setIsOpen(true);
               refId.current = order.id;
             }}
+            key={index}
           >
             <p
               className={`rounded-full border text-center py-1  font-bold bg-primary-orange text-white w-fit ${order.table ? "text-xl rounded-full px-3" : "text-lg col-span-3 rounded-lg px-2"}`}

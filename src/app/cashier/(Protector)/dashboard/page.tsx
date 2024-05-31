@@ -18,8 +18,9 @@ export default function CashierDahboard() {
   const { token } = useUser();
   const socket = getSockets();
   useEffect(() => {
-    const token = localStorage.getItem("token");
     socket.on("order", () => {
+      const audio = new Audio("/audio/notification.mp3");
+      audio.play();
       queryClient.invalidateQueries(["orderCashier"]);
     });
   }, [socket]);

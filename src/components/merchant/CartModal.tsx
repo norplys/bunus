@@ -133,9 +133,12 @@ export default function CreateCategoryModal({
                 </div>
               </div>
             ) : (
-              <div className="flex justify-center items-center w-full h-full">
+              <div className="flex justify-center items-center w-full h-full flex-col gap-2">
                 <p className="text-2xl font-bold text-primary-orange animate-pulse">
-                  Keranjang Kosong Mohon Tunggu...
+                  Keranjang Kosong
+                </p>
+                <p className="text-2xl font-bold text-primary-orange animate-pulse">
+                  Mohon Tunggu...
                 </p>
               </div>
             )}
