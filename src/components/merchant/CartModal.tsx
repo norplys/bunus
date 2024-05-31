@@ -95,7 +95,7 @@ export default function CreateCategoryModal({
               <div className="flex justify-center items-center w-full h-full">
                 <VscLoading className="animate-spin text-6xl font-bold text-primary-orange" />
               </div>
-            ) : (
+            ) : data.total ? (
               <div className="bg-blue-50 py-9 ">
                 <div className="flex gap-5 justify-center items-start px-3 mx-auto xl:w-[80%] flex-col lg:flex-row">
                   <div className="flex-1 grid gap-2 w-full ">
@@ -131,6 +131,12 @@ export default function CreateCategoryModal({
                     </button>
                   </div>
                 </div>
+              </div>
+            ) : (
+              <div className="flex justify-center items-center w-full h-full">
+                <p className="text-2xl font-bold text-primary-orange animate-pulse">
+                  Keranjang Kosong Mohon Tunggu...
+                </p>
               </div>
             )}
           </Dialog.Panel>
