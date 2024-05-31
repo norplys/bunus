@@ -109,7 +109,7 @@ export default function OrderItem({
         )}
         <button
           onClick={() => setDone(data.id)}
-          className={`bg-green-500 text-white font-bold p-2 rounded-md ${!now && "hidden"}`}
+          className={`bg-green-500 text-white font-bold p-2 rounded-md ${(!now || data.payment.status !== "settlement") && "hidden"}`}
         >
           {isLoading ? <VscLoading className="animate-spin w-14" /> : "Selesai"}
         </button>
