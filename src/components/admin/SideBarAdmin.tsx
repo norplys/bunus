@@ -4,23 +4,19 @@ import { usePathname } from "next/navigation";
 
 const navArray = [
   {
-    name: "Order",
-    path: "/cashier/dashboard",
-  },
-  {
     name: "Menu",
-    path: "/cashier/menu",
+    path: "/admin/menu",
   },
   {
     name: "Analytics",
-    path: "/cashier/analytics",
+    path: "/admin/analytics",
   },
 ];
 
-export default function SideBarCashier() {
+export default function SideBarAdmin() {
   const pathname = usePathname();
   return (
-    <nav className="md:flex flex-col p-2 shadow-2xl bg-primary-orange min-h-screen fixed top-0 hidden">
+    <nav className="md:flex flex-col p-2 shadow-2xl bg-primary-orange min-h-screen fixed top-0 hidden w-72">
       <div className="flex gap-2 py-2">
         <Image
           src="/logo.svg"

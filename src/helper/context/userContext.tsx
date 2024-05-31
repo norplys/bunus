@@ -26,7 +26,6 @@ export function UserProvider({ children }: any) {
   const useAuth = async (type: string | null) => {
     try {
       const token = localStorage.getItem("token");
-      console.log(token);
       if (token) {
         const response = await axios.get(
           `${process.env.NEXT_PUBLIC_BACKEND_LINK}/v1/${type ? `validate/${type}` : "get-me"}`,
@@ -43,7 +42,6 @@ export function UserProvider({ children }: any) {
         throw new Error("Token not found");
       }
     } catch (error) {
-      console.log(error);
       setToken(null);
       localStorage.removeItem("token");
       setUser(null);

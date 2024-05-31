@@ -1,10 +1,11 @@
 import MenuItem from "@/components/menu/MenuItem";
 import { useCategoriesMenus } from "@/helper/hooks/useMenusData";
-import MenuLoading from "../MenuLoading";
+import MenuLoading from "@/components/cashier/MenuLoading";
 import { FaTrash } from "react-icons/fa";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useQueryClient } from "react-query";
+import { useUser } from "@/helper/context/userContext";
 
 type CategoryProps = {
   id: string;
@@ -35,6 +36,7 @@ export default function AdminCategory({
   isOpen: boolean;
   count: number;
 }) {
+  const { token } = useUser();
   const queryClient = useQueryClient();
   const { data, isLoading } = useCategoriesMenus(category?.id);
   const deleteCategory = async (id: string) => {
@@ -43,7 +45,7 @@ export default function AdminCategory({
         `${process.env.NEXT_PUBLIC_BACKEND_LINK}/v1/categories/${id}`,
         {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            Authorization: `Bearer ${token}`,
           },
         },
       );
@@ -68,7 +70,7 @@ export default function AdminCategory({
         },
         {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            Authorization: `Bearer ${token}`,
           },
         },
       );

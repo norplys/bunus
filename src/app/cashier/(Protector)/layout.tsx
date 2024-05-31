@@ -9,20 +9,17 @@ export default function CashierWrapper({ children }: { children: ReactNode }) {
   const { useAuth } = useUser();
   const { push } = useRouter();
   const [loading, setLoading] = useState(true);
-  const validateAdmin = async (token: string | null) => {
+  const validateAdmin = async () => {
     try {
-      await useAuth("kitchen");
+      await useAuth("admin");
       setLoading(false);
     } catch (error) {
-      console.log(error);
-      localStorage.removeItem("token");
-      push("/kitchen/login");
+      push("/cashier/login");
     }
   };
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    validateAdmin(token);
+    validateAdmin();
   }, []);
 
   if (loading) {

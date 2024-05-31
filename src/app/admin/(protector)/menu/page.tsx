@@ -1,12 +1,12 @@
 "use client";
-import CashierCategory from "@/components/cashier/menu/CashierCategory";
+import CashierCategory from "@/components/admin/menu/CashierCategory";
 import { useState, useRef, useEffect } from "react";
-import CashierForm from "@/components/cashier/menu/UpdateMenuModal";
+import CashierForm from "@/components/admin/menu/UpdateMenuModal";
 import { useCategoriesData } from "@/helper/hooks/useCategoryData";
 import { useUser } from "@/helper/context/userContext";
 import { FaPlusSquare } from "react-icons/fa";
-import CreateMenuModal from "@/components/cashier/menu/CreateMenuModal";
-import CreateCategoryModal from "@/components/cashier/menu/CreateCategoryModal";
+import CreateMenuModal from "@/components/admin/menu/CreateMenuModal";
+import CreateCategoryModal from "@/components/admin/menu/CreateCategoryModal";
 import LoadingImage from "@/components/LoadingImage";
 import { useCategoriesCount } from "@/helper/hooks/useCategoriesCount";
 
@@ -16,7 +16,7 @@ type CategoryProps = {
   orderIndex: number;
 };
 
-export default function CashierMenu() {
+export default function AdminMenu() {
   const { setToken } = useUser();
   useEffect(() => {
     setToken(localStorage.getItem("token"));
@@ -35,7 +35,7 @@ export default function CashierMenu() {
   };
 
   return (
-    <div className="flex-1 w-full pl-72">
+    <div className="flex-1 w-full">
       <h1 className="w-full bg-primary-orange p-2 flex justify-end items-center">
         <p className="text-white text-lg font-bold">Menu</p>
       </h1>

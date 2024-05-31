@@ -20,7 +20,7 @@ export default function CashierDahboard() {
   useEffect(() => {
     const token = localStorage.getItem("token");
     socket.on("order", () => {
-      queryClient.invalidateQueries(["orderCashier", token]);
+      queryClient.invalidateQueries(["orderCashier"]);
     });
   }, [socket]);
 
@@ -29,7 +29,7 @@ export default function CashierDahboard() {
   );
   const { data, isLoading } = useOrderCashier(token!);
   return (
-    <div className="flex-1 w-full md:pl-72">
+    <div className="flex-1 w-full">
       <OrderDetailModal
         setIsOpen={setIsOpen}
         isOpen={isOpen}
@@ -60,7 +60,9 @@ export default function CashierDahboard() {
             type="date"
             className="onFocus:outline-none border-b-2 border-primary-orange p-1 w-40 text-lg font-bold bg-transparent"
             value={date.toISOString().split("T")[0]}
-            onChange={(e) => setDate(new Date(e.target.value))}
+            onChange={(e) =>
+              setDate(new Date(e.target.value ? e.target.value : new Date()))
+            }
           />
         </div>
       )}
