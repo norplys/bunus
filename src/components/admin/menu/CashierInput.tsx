@@ -20,7 +20,7 @@ export default function AdminInput({
         type={type}
         placeholder={placeholder}
         className="border border-primary-orange rounded-md p-1"
-        {...register(name, { required: true })}
+        {...register(name, { required: name === "image" ? false : true })}
       />
       {errors.name && (
         <span className="text-red-500">{errors.name?.message}</span>

@@ -26,7 +26,7 @@ const inputArray = [
   {
     label: "Harga",
     name: "price",
-    type: "text",
+    type: "number",
     placeholder: "Harga Menu",
   },
   {
