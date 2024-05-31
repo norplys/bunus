@@ -22,7 +22,7 @@ export default function MerchantMenuItem({
 }) {
   return (
     <section
-      className="grid justify-items-center gap-2 border rounded-2xl overflow-hidden shadow-lg cursor-pointer scale-95 hover:scale-100 duration-300 w-72"
+      className="grid justify-items-center gap-2 border rounded-2xl overflow-hidden shadow-lg cursor-pointer scale-95 hover:scale-100 duration-300 w-72 pb-2"
       onClick={() => {
         setIsOpen(!isOpen), setModalId(menu.id), playAudio("/audio/sound5.mp3");
       }}
@@ -39,7 +39,15 @@ export default function MerchantMenuItem({
       <h1 className="text-lg font-semibold border-b-2 border-primary-orange pb-2 px-2">
         {menu.name}
       </h1>
-      <p className="font-semibold mb-3 text-lg">Rp. {menu.price}</p>
+      <div className="flex flex-wrap gap-5 items-center">
+        {menu.price === 25000 && (
+          <p className="line-through font-bold">Rp. 28000</p>
+        )}
+        {menu.price === 18000 && (
+          <p className="line-through font-bold">Rp. 20000</p>
+        )}
+        <p className="font-semibold text-lg">Rp. {menu.price}</p>
+      </div>
     </section>
   );
 }
