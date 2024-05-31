@@ -28,7 +28,7 @@ export default function MerchantHome(): JSX.Element {
         <h1 className="text-6xl font-bold text-center border-b-4 border-white pb-5">
           Selamat Datang
         </h1>
-        <p className="text-center text-3xl mt-2">Tekan untuk memesan</p>
+        <p className="text-center text-3xl mt-2">Sentuh untuk pesan</p>
       </div>
       <div className={`${type ? "hidden" : ""} grid gap-10`}>
         <button
