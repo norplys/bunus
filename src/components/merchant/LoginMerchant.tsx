@@ -3,7 +3,6 @@ import LoginInput from "@/components/login/loginInput";
 import axios, { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
 import { toast } from "react-hot-toast";
-import { useUser } from "@/helper/context/userContext";
 import LoadingImage from "@/components/LoadingImage";
 
 const inputArray = [
@@ -12,7 +11,6 @@ const inputArray = [
 ];
 
 export default function LoginMerchant() {
-  const { setToken } = useUser();
   const {
     register,
     handleSubmit,
@@ -41,7 +39,6 @@ export default function LoginMerchant() {
         },
       );
       localStorage.setItem("token", res2.data.data.token);
-      setToken(res2.data.data.token);
       push(`/merchant/home`);
     } catch (err) {
       if (err instanceof AxiosError) {

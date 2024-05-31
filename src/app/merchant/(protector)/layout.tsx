@@ -1,23 +1,17 @@
 "use client";
 import { ReactNode } from "react";
 import { useEffect, useState } from "react";
-import axios from "axios";
 import Protector from "@/components/Protector";
 import { useRouter } from "next/navigation";
+import { useUser } from "@/helper/context/userContext";
 
 export default function AdminWrapper({ children }: { children: ReactNode }) {
   const { push } = useRouter();
+  const { useAuth } = useUser();
   const [loading, setLoading] = useState(true);
-  const validateAdmin = async (token: string | null) => {
+  const validateAdmin = async () => {
     try {
-      await axios.get(
-        `${process.env.NEXT_PUBLIC_BACKEND_LINK}/v1/validate/admin`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        },
-      );
+      await useAuth("merchant");
       setLoading(false);
     } catch (error) {
       localStorage.removeItem("token");
@@ -26,8 +20,7 @@ export default function AdminWrapper({ children }: { children: ReactNode }) {
   };
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    validateAdmin(token);
+    validateAdmin();
   }, []);
 
   if (loading) {
