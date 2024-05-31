@@ -26,7 +26,7 @@ export default function Banner() {
         <SwiperSlide key={i}>
           <div className="bg-gray-300 w-full h-40">
             <Image
-              src={`/comingSoon.jpg`}
+              src={`/banner${i}.png`}
               width={1000}
               height={1000}
               alt={`banner${i}`}
