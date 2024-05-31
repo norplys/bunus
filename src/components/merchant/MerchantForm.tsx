@@ -1,6 +1,5 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useRouter } from "next/navigation";
-import playAudio from "@/helper/audio/playAudio";
 import { useEffect } from "react";
 
 export default function MerchantForm({
@@ -12,7 +11,6 @@ export default function MerchantForm({
   const { push } = useRouter();
   const handleTable: SubmitHandler<Record<string, any>> = (data) => {
     push(`/merchant/menu?table=${data.table}&type=${type}`);
-    playAudio("/audio/sound4.mp3");
   };
   useEffect(() => {
     if (type) {
