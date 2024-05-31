@@ -38,6 +38,11 @@ export default function OrderMobile({
             <p className="text-lg font-bold text-end">
               {formatCurrency(order.total)}
             </p>
+            {order.payment.status === "settlement" && (
+              <p className="text-lg font-bold text-end col-span-2 text-green-600">
+                {order.payment.method}
+              </p>
+            )}
           </div>
         ))
       )}

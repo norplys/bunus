@@ -12,7 +12,6 @@ import { useState, useRef, useEffect } from "react";
 import { useCartNotif } from "@/helper/hooks/useCartNotif";
 import { FaShoppingCart, FaArrowRight } from "react-icons/fa";
 import CartModal from "@/components/merchant/CartModal";
-import playAudio from "@/helper/audio/playAudio";
 
 type CategoryProps = {
   id: string;
@@ -21,9 +20,6 @@ type CategoryProps = {
 
 export default function MerchantMenu() {
   const { token } = useUser();
-  useEffect(() => {
-    playAudio("/audio/sound4.mp3");
-  }, []);
   const [open, setOpen] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
   const modalId = useRef("");
