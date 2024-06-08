@@ -4,6 +4,7 @@ import toast from "react-hot-toast";
 import { useQueryClient } from "react-query";
 import { VscLoading } from "react-icons/vsc";
 import OrderDetailItem from "./OrderDetailItem";
+import { getSockets } from "@/helper/socket";
 
 export default function OrderItem({
   data,
@@ -16,6 +17,11 @@ export default function OrderItem({
   now: boolean;
   setIsPayment: (value: boolean) => void;
 }) {
+  const socket = getSockets();
+  const handleReceipt = (data: any) => {
+    socket.emit("orderReceipt", data);
+  };
+
   const [isLoading, setLoading] = useState(false);
   const queryClient = useQueryClient();
   const setDone = async (id: string) => {
@@ -48,35 +54,6 @@ export default function OrderItem({
     }
   };
 
-  const handleCall = async (tableNumber: number) => {
-    const stringNumber = tableNumber.toString();
-    const arrayNumber = stringNumber.split("");
-    let index = 0;
-    let audioString = `/audio/sound6.mp3`;
-    const audio = new Audio(`/audio/sound6.mp3`);
-    const playNext = () => {
-      if (index < arrayNumber.length) {
-        const newAudio = `/audio/count${arrayNumber[index]}.mp3`;
-        audio.src = newAudio;
-        audioString = newAudio;
-        audio.load();
-        audio.play();
-        index++;
-        return;
-      }
-      if (index === arrayNumber.length) {
-        const newAudio = `/audio/sound7.mp3`;
-        audio.src = newAudio;
-        audioString = newAudio;
-        audio.load();
-        audio.play();
-        audio.onended = null;
-        return;
-      }
-    };
-    audio.onended = playNext;
-    audio.play();
-  };
   return (
     <>
       <div className="bg-primary-orange text-white p-2 w-full text-center">
@@ -99,14 +76,13 @@ export default function OrderItem({
             {isLoading ? <VscLoading className="animate-spin w-14" /> : "Bayar"}
           </button>
         )}
-        {data.payment.status === "settlement" && data.table && (
-          <button
-            className="bg-primary-cyan px-2 py-1 rounded-lg text-white font-bold"
-            onClick={() => handleCall(data.table)}
-          >
-            Panggil
-          </button>
-        )}
+        <button
+          className="bg-primary-cyan px-2 py-1 rounded-lg text-white font-bold"
+          onClick={() => handleReceipt(data)}
+        >
+          Tampilkan
+        </button>
+
         <button
           onClick={() => setDone(data.id)}
           className={`bg-green-500 text-white font-bold p-2 rounded-md ${(!now || data.payment.status !== "settlement") && "hidden"}`}
