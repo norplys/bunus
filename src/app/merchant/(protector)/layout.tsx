@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Protector from "@/components/Protector";
 import { useRouter } from "next/navigation";
 import { useUser } from "@/helper/context/userContext";
+import OrderReceipt from "@/components/merchant/OrderReceipt";
 
 export default function AdminWrapper({ children }: { children: ReactNode }) {
   const { push } = useRouter();
@@ -26,5 +27,10 @@ export default function AdminWrapper({ children }: { children: ReactNode }) {
   if (loading) {
     return <Protector />;
   }
-  return <section className="min-h-screen">{children}</section>;
+  return (
+    <section className="min-h-screen">
+      <OrderReceipt />
+      {children}
+    </section>
+  );
 }
