@@ -28,13 +28,13 @@ export default function OrderReceipt() {
           static
           onClose={() => setIsOpen(false)}
           as={motion.div}
-          className="fixed inset-1 flex justify-center items-center -z-50"
+          className="fixed inset-1 flex justify-center items-center z-50"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
         >
           <Dialog.Panel
-            className={`rounded-xl flex flex-col items-center z-30 min-w-[315px] gap-2 p-5 px-2 overflow-y-scroll bg-white`}
+            className={`rounded-xl flex flex-col items-center z-40 min-w-[315px] gap-2 p-5 px-2 overflow-y-scroll bg-white`}
           >
             <h1 className="font-bold text-2xl border-b-2 border-primary-orange h-min pb-2">
               Order Receipt
