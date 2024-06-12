@@ -48,7 +48,7 @@ export default function MerchantMenu() {
   useEffect(() => {
     const category = searchParams.get("category");
     if (category) {
-      setCategory(category.toLocaleLowerCase());
+      setCategory(category);
     }
   }, [searchParams]);
   useEffect(() => {
