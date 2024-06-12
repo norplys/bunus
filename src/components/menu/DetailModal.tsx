@@ -1,5 +1,3 @@
-"use client";
-
 import { Dialog } from "@headlessui/react";
 import Image from "next/image";
 import { useState, useEffect } from "react";
@@ -63,8 +61,8 @@ export default function DetailModal({
         },
       );
       setIsOpen(false);
-      queryClient.invalidateQueries({ queryKey: ["cartNotif"] });
-      queryClient.invalidateQueries({ queryKey: ["cart"] });
+      await queryClient.invalidateQueries(["cartNotif"]);
+      await queryClient.invalidateQueries(["cart"]);
       setSubmitLoading(false);
     } catch (err) {
       setSubmitLoading(false);
