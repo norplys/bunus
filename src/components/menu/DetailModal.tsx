@@ -63,6 +63,7 @@ export default function DetailModal({
       setIsOpen(false);
       await queryClient.invalidateQueries(["cartNotif"]);
       await queryClient.invalidateQueries(["cart"]);
+      console.log("done invalidate");
       setSubmitLoading(false);
     } catch (err) {
       setSubmitLoading(false);
