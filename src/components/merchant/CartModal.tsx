@@ -40,7 +40,7 @@ export default function CreateCategoryModal({
           <Dialog.Panel
             className={`rounded-xl grid justify-items-center gap-5 z-30 min-w-[315px] overflow-y-scroll h-[80%] ${isLoading ? "" : "bg-white"}`}
           >
-            {now === "cart" ? (
+            {/* {now === "cart" ? (
               <CartModalItem
                 data={data}
                 isLoading={isLoading}
@@ -52,7 +52,7 @@ export default function CreateCategoryModal({
               <MerchantForm type={orderType} data={data} />
             ) : (
               ""
-            )}
+            )} */}
           </Dialog.Panel>
           <div
             className="fixed inset-0 bg-black/90 z-auto"

@@ -61,7 +61,7 @@ export default function MerchantMenu() {
   return (
     <section className="bg-white overflow-auto z-0 mt-28 pb-20">
       <div className="w-screen overflow-x-scroll shadow-lg">
-        <ul className="flex gap-5 w-max py-2 shadow-lg px-1">
+        {/* <ul className="flex gap-5 w-max py-2 shadow-lg px-1">
           {isLoading ? (
             <LoadingImage />
           ) : (
@@ -79,7 +79,7 @@ export default function MerchantMenu() {
               );
             })
           )}
-        </ul>
+        </ul> */}
       </div>
       <div className="flex flex-wrap justify-center items-center pt-5">
         {itemLoading ? (
