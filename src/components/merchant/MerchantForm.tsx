@@ -1,4 +1,5 @@
-import { useForm, SubmitHandler } from "react-hook-form";
+"use client";
+import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { useEffect, useState, useRef } from "react";
 import playAudio from "@/helper/audio/playAudio";
