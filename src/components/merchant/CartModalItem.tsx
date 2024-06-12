@@ -25,6 +25,7 @@ export default function CartModalItem({
               <div className="lg:text-xl text-lg font-bold bg-white rounded-t-xl  p-5 flex justify-between">
                 <h6>Total Makanan ({data?.items.length})</h6>
               </div>
+              <button></button>
               {/* Item */}
               <div className="bg-white rounded-b-xl  p-5 grid gap-5">
                 {data?.items.map((item: any, i: any) => {
