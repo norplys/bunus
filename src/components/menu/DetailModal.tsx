@@ -1,3 +1,5 @@
+"use client";
+
 import { Dialog } from "@headlessui/react";
 import Image from "next/image";
 import { useState, useEffect } from "react";
