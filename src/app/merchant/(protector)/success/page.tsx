@@ -7,7 +7,7 @@ export default function Success() {
   const { push } = useRouter();
   useEffect(() => {
     setTimeout(() => {
-      push("/merchant/menu");
+      push("/merchant/home");
     }, 5000);
   }, []);
   return (

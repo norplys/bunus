@@ -24,7 +24,7 @@ export default function LoginMerchant() {
         password: data.Password,
       };
       const res = axios.post(
-        `${process.env.NEXT_PUBLIC_BACKEND_LINK}/v1/login/merchant`,
+        `${process.env.NEXT_PUBLIC_BACKEND_LINK}/v1/login/admin`,
         postData,
       );
       const res2 = await toast.promise(
@@ -39,7 +39,7 @@ export default function LoginMerchant() {
         },
       );
       localStorage.setItem("token", res2.data.data.token);
-      push(`/merchant/menu`);
+      push(`/merchant/home`);
     } catch (err) {
       if (err instanceof AxiosError) {
         switch (err.response?.status) {
