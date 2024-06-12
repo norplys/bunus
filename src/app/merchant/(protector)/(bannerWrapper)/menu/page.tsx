@@ -37,7 +37,7 @@ export default function MerchantMenu() {
   const params = new URLSearchParams(searchParams);
   const pathname = usePathname();
   const { push } = useRouter();
-  const { data, isLoading } = useCategoriesData();
+  // const { data, isLoading } = useCategoriesData();
   const setModalId = (id: string) => {
     modalId.current = id;
   };
@@ -48,7 +48,7 @@ export default function MerchantMenu() {
   useEffect(() => {
     const category = searchParams.get("category");
     if (category) {
-      setCategory(category);
+      setCategory(category.toLocaleLowerCase());
     }
   }, [searchParams]);
   useEffect(() => {
@@ -60,8 +60,8 @@ export default function MerchantMenu() {
     useCategoriesMenus(category);
   return (
     <section className="bg-white overflow-auto z-0 mt-28 pb-20">
-      <div className="w-screen overflow-x-scroll shadow-lg">
-        {/* <ul className="flex gap-5 w-max py-2 shadow-lg px-1">
+      {/* <div className="w-screen overflow-x-scroll shadow-lg">
+        <ul className="flex gap-5 w-max py-2 shadow-lg px-1">
           {isLoading ? (
             <LoadingImage />
           ) : (
@@ -79,8 +79,8 @@ export default function MerchantMenu() {
               );
             })
           )}
-        </ul> */}
-      </div>
+        </ul>
+      </div> */}
       <div className="flex flex-wrap justify-center items-center pt-5">
         {itemLoading ? (
           <LoadingImage />
