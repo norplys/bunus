@@ -1,14 +1,16 @@
 "use client";
+"use client";
 
+import { useState } from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import type { ReactNode } from "react";
 
-export default function ReactQueryContext({
+export function ReactQueryContext({
   children,
 }: {
   children: ReactNode;
-}) {
-  const queryClient = new QueryClient();
+}): JSX.Element {
+  const [queryClient] = useState(() => new QueryClient());
 
   return (
     <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>

@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { UserProvider } from "@/helper/context/userContext";
 import { Toaster } from "react-hot-toast";
-import ReactQueryContext from "@/helper/context/reactQueryContext";
+import { ReactQueryContext } from "@/helper/context/reactQueryContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
