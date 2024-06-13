@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import playAudio from "@/helper/audio/playAudio";
+import { SubmitHandler } from "react-hook-form";
 
 export default function MerchantForm({
   type,
