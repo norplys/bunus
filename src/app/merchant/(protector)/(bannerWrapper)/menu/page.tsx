@@ -30,18 +30,22 @@ export default function MerchantMenu() {
   const { data: notif, isLoading: cartLoading } = useCartNotif(token);
   return (
     <section className="bg-white min-h-screen overflow-auto z-0 pb-20 mt-28">
-      <div className="flex flex-wrap justify-center shadow-lg">
-        {data.map((category: CategoryProps, i: number) => (
-          <button
-            key={i}
-            className="flex items-center justify-between px-5 py-3"
-          >
-            <h1 className="text-2xl font-bold">
-              {category.name.toUpperCase()}
-            </h1>
-          </button>
-        ))}
-      </div>
+      {isLoading ? (
+        "loading"
+      ) : (
+        <div className="flex flex-wrap justify-center shadow-lg">
+          {data.map((category: CategoryProps, i: number) => (
+            <button
+              key={i}
+              className="flex items-center justify-between px-5 py-3"
+            >
+              <h1 className="text-2xl font-bold">
+                {category.name.toUpperCase()}
+              </h1>
+            </button>
+          ))}
+        </div>
+      )}
       <div className="grid gap-14 my-8">
         {isLoading ? (
           <LoadingImage />
