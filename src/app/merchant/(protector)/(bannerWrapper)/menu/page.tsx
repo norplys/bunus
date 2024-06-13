@@ -26,6 +26,11 @@ type MenuProps = {
 };
 
 export default function MerchantMenu() {
+  const viewportmeta = document.querySelector('meta[name="viewport"]');
+  if (viewportmeta instanceof HTMLMetaElement) {
+    viewportmeta.content =
+      "width=device-width, minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0";
+  }
   const { token } = useUser();
   const [open, setOpen] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
