@@ -1,9 +1,5 @@
 "use client";
 
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/autoplay";
-import MerchantCategory from "@/components/merchant/MerchantCategory";
 import DetailModal from "@/components/menu/DetailModal";
 import { useCategoriesData } from "@/helper/hooks/useCategoryData";
 import { useUser } from "@/helper/context/userContext";
@@ -12,10 +8,21 @@ import { useState, useRef, useEffect } from "react";
 import { useCartNotif } from "@/helper/hooks/useCartNotif";
 import { FaShoppingCart, FaArrowRight } from "react-icons/fa";
 import CartModal from "@/components/merchant/CartModal";
+import { useSearchParams, useRouter, usePathname } from "next/navigation";
+import { useCategoriesMenus } from "@/helper/hooks/useMenusData";
+import MerchantMenuItem from "@/components/merchant/MerchantMenuItem";
 
 type CategoryProps = {
   id: string;
   name: string;
+};
+
+type MenuProps = {
+  id: string;
+  name: string;
+  price: number;
+  description: string;
+  image: string;
 };
 
 export default function MerchantMenu() {
@@ -23,41 +30,69 @@ export default function MerchantMenu() {
   const [open, setOpen] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
   const modalId = useRef("");
+  const [category, setCategory] = useState<string>(
+    "f338198b-9eee-43fc-a496-f99b0fd2cb67",
+  );
+  const searchParams = useSearchParams();
+  const params = new URLSearchParams(searchParams);
+  const pathname = usePathname();
+  const { push } = useRouter();
   const { data, isLoading } = useCategoriesData();
   const setModalId = (id: string) => {
     modalId.current = id;
   };
+  const createQueryString = (name: string, value: string) => {
+    params.set(name, value);
+    return params.toString();
+  };
+  useEffect(() => {
+    const category = searchParams.get("category");
+    if (category) {
+      setCategory(category.toLocaleLowerCase());
+    }
+  }, [searchParams]);
+  useEffect(() => {
+    push(pathname + "?" + createQueryString("category", category));
+  }, [category]);
+
   const { data: notif, isLoading: cartLoading } = useCartNotif(token);
+  const { data: itemData, isLoading: itemLoading } =
+    useCategoriesMenus(category);
   return (
-    <section className="bg-white min-h-screen overflow-auto z-0 pb-20 mt-28">
-      {isLoading ? (
-        "loading"
-      ) : (
-        <div className="flex flex-wrap justify-center shadow-lg">
-          {data.map((category: CategoryProps, i: number) => (
-            <button
-              key={i}
-              className="flex items-center justify-between px-5 py-3"
-            >
-              <h1 className="text-2xl font-bold">
-                {category.name.toUpperCase()}
-              </h1>
-            </button>
-          ))}
-        </div>
-      )}
-      <div className="grid gap-14 my-8">
-        {isLoading ? (
+    <section className="bg-white overflow-auto z-0 mt-28 pb-20">
+      <div className="w-screen overflow-x-scroll shadow-lg">
+        <ul className="flex gap-5 w-max py-2 shadow-lg px-1">
+          {isLoading ? (
+            <LoadingImage />
+          ) : (
+            data.map((categoryItem: CategoryProps, i: number) => {
+              return (
+                <li
+                  key={i}
+                  className={`font-extrabold text-2xl ${category === categoryItem.id && "text-primary-orange underline"} duration-300`}
+                  onClick={() => {
+                    setCategory(categoryItem.id);
+                  }}
+                >
+                  {categoryItem.name.toLocaleUpperCase()}
+                </li>
+              );
+            })
+          )}
+        </ul>
+      </div>
+      <div className="flex flex-wrap justify-center items-center pt-5">
+        {itemLoading ? (
           <LoadingImage />
         ) : (
-          data.map((category: CategoryProps, i: number) => {
+          itemData.map((menu: MenuProps, i: number) => {
             return (
-              <MerchantCategory
+              <MerchantMenuItem
                 key={i}
-                category={category}
+                menu={menu}
                 setIsOpen={setOpen}
-                isOpen={open}
                 setModalId={setModalId}
+                isOpen={open}
               />
             );
           })

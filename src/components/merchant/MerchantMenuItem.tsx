@@ -41,12 +41,12 @@ export default function MerchantMenuItem({
       </h1>
       <div className="flex flex-wrap gap-5 items-center">
         {menu.price === 25000 && (
-          <p className="line-through font-bold">Rp. 28000</p>
+          <div className="line-through font-bold">Rp. 28000</div>
         )}
         {menu.price === 18000 && (
-          <p className="line-through font-bold">Rp. 20000</p>
+          <div className="line-through font-bold">Rp. 20000</div>
         )}
-        <p className="font-semibold text-lg">Rp. {menu.price}</p>
+        <div className="font-semibold text-lg">Rp. {menu.price}</div>
       </div>
     </section>
   );
