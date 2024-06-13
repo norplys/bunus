@@ -22,7 +22,7 @@ export default function Validate() {
   const verify = async (token: string) => {
     try {
       const res = axios.put(
-        `https://bunus-be-production.up.railway.app/v1/validate-email/${token}`,
+        `${process.env.NEXT_PUBLIC_BACKEND_LINK}/v1/validate-email/${token}`,
       );
       await toast.promise(res, {
         loading: "Loading...",
