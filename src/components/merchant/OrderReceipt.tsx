@@ -46,10 +46,7 @@ export default function OrderReceipt() {
             <div className="grid bg-primary-orange p-5 rounded-md gap-2 text-white font-bold text-lg">
               {data?.items.map((item: any, index: number) => {
                 return (
-                  <div
-                    className="grid grid-cols-6 gap-5 border-b-orange-200 border-b-2 pb-2 justify-items-center"
-                    key={index}
-                  >
+                  <div className="grid grid-cols-6 gap-5 border-b-orange-200 border-b-2 pb-2 justify-items-center">
                     <div>{item.quantity}x</div>
                     <div className="col-span-4">{item.menu.name}</div>
                     <div>{item.total}</div>
