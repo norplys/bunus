@@ -61,11 +61,8 @@ export default function DetailModal({
         },
       );
       setIsOpen(false);
-      setInterval(() => {
-        queryClient.invalidateQueries({ queryKey: ["cartNotif"] });
-        queryClient.invalidateQueries({ queryKey: ["cart"] });
-        console.log("invalidate");
-      }, 5000);
+      queryClient.invalidateQueries(["cartNotif"]);
+      queryClient.invalidateQueries(["cart"]);
       setSubmitLoading(false);
     } catch (err) {
       setSubmitLoading(false);
