@@ -87,7 +87,7 @@ export default function RegisterForm() {
         {isSubmitting ? (
           <VscLoading className="animate-spin text-2xl font-extrabold" />
         ) : (
-          "Ubah Password"
+          "Daftar"
         )}
       </button>
     </form>
