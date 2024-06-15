@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import DetailModal from "@/components/menu/DetailModal";
 import { useCategoriesData } from "@/helper/hooks/useCategoryData";
 import LoadingImage from "@/components/LoadingImage";
+import { useUser } from "@/helper/context/userContext";
 
 type CategoryProps = {
   id: string;
@@ -14,6 +15,17 @@ export default function menu() {
   const [open, setOpen] = useState(false);
   const modalId = useRef("");
   const { data, isLoading } = useCategoriesData();
+  const { useAuth } = useUser();
+  const validateToken = async () => {
+    try {
+      await useAuth(null);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    validateToken();
+  }, []);
 
   const setModalId = (id: string) => {
     modalId.current = id;
