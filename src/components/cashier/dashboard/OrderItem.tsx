@@ -21,6 +21,19 @@ export default function OrderItem({
   const handleReceipt = (data: any) => {
     socket.emit("orderReceipt", data);
   };
+  const handleConnect = async () => {
+    console.log("connect");
+    navigator.bluetooth
+      .requestDevice({
+        acceptAllDevices: true,
+      })
+      .then((device) => {
+        console.log(device);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
 
   const [isLoading, setLoading] = useState(false);
   const queryClient = useQueryClient();
@@ -67,7 +80,7 @@ export default function OrderItem({
       </div>
       <OrderDetailItem data={data} />
 
-      <div className="flex gap-5 pt-5">
+      <div className="flex gap-5 pt-5 flex-wrap justify-center">
         {data.payment.status === "cashierPending" && (
           <button
             onClick={() => setIsPayment(true)}
@@ -95,6 +108,18 @@ export default function OrderItem({
           className="bg-primary-red text-white font-bold p-2 rounded-md"
         >
           Tutup
+        </button>
+        <button
+          className="bg-green-600 px-2 py-1 rounded-lg text-white font-bold"
+          onClick={() => handleReceipt(data)}
+        >
+          Print
+        </button>
+        <button
+          className="bg-green-600 px-2 py-1 rounded-lg text-white font-bold"
+          onClick={() => handleConnect()}
+        >
+          Connect
         </button>
       </div>
     </>

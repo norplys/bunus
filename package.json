@@ -35,6 +35,7 @@
     "@types/nodemailer": "^6.4.14",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@types/web-bluetooth": "^0.0.20",
     "autoprefixer": "^10.0.1",
     "husky": "^9.0.11",
     "lint-staged": "^15.2.2",
