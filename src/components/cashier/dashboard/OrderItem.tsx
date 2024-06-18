@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, use } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useQueryClient } from "react-query";
@@ -21,20 +21,71 @@ export default function OrderItem({
   const handleReceipt = (data: any) => {
     socket.emit("orderReceipt", data);
   };
+  let deviceHandle = useRef<any>();
+  let characteristic = useRef<any>();
+
+  var DATA =
+    "" +
+    "\x1B" +
+    "\x61" +
+    "\x31" + // center align
+    "\x1D" +
+    "\x21" +
+    "\x11" +
+    "Bubur\nNusantara\n\n" + // double font size
+    "\x1D" +
+    "\x21" +
+    "\x00" +
+    "order receipt" + // normal font size
+    "\n\n\n\n\n\n\n";
+  // feed paper                                                    // feed paper
+
   const handleConnect = async () => {
-    console.log("connect");
+    let SERVICE = "000018f0-0000-1000-8000-00805f9b34fb";
+    let WRITE = "00002af1-0000-1000-8000-00805f9b34fb";
+
     navigator.bluetooth
-      .requestDevice({
-        acceptAllDevices: true,
-      })
+      .requestDevice({ filters: [{ services: [SERVICE] }] })
       .then((device) => {
-        console.log(device);
+        deviceHandle.current = device;
+        return device.gatt?.connect();
+      })
+      .then((server) => {
+        return server?.getPrimaryService(SERVICE);
+      })
+      .then((service) => {
+        return service?.getCharacteristic(WRITE);
+      })
+      .then((channel) => {
+        characteristic.current = channel;
+        console.log("Connected");
       })
       .catch((error) => {
         console.error(error);
       });
   };
 
+  const handlePrint = () => {
+    if (characteristic) {
+      characteristic.current
+        .writeValue(new TextEncoder().encode(DATA))
+        .then(() => {
+          console.log("Printed");
+        })
+        .catch((error: any) => {
+          console.error(error);
+        });
+    } else {
+      console.error("Device not connected");
+    }
+  };
+
+  const handleDisconnect = () => {
+    if (deviceHandle) {
+      deviceHandle.current.gatt?.disconnect();
+    }
+    console.log("Disconnected");
+  };
   const [isLoading, setLoading] = useState(false);
   const queryClient = useQueryClient();
   const setDone = async (id: string) => {
@@ -111,15 +162,22 @@ export default function OrderItem({
         </button>
         <button
           className="bg-green-600 px-2 py-1 rounded-lg text-white font-bold"
-          onClick={() => handleReceipt(data)}
-        >
-          Print
-        </button>
-        <button
-          className="bg-green-600 px-2 py-1 rounded-lg text-white font-bold"
           onClick={() => handleConnect()}
         >
           Connect
+        </button>
+        <button
+          className="bg-green-600 px-2 py-1 rounded-lg text-white font-bold"
+          onClick={() => handleDisconnect()}
+        >
+          Disconnect
+        </button>
+
+        <button
+          className="bg-green-600 px-2 py-1 rounded-lg text-white font-bold"
+          onClick={() => handlePrint()}
+        >
+          Print
         </button>
       </div>
     </>
