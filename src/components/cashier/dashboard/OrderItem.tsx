@@ -58,22 +58,15 @@ export default function OrderItem({
   // receiptData += `${"Total:".padEnd(29 - data.total.toString().length)}${"Rp." + data.total.toString()}\n`;
   // receiptData += "\n\n\n\n\n\n\n\n\n\n";
 
-  var DATA =
-    "" +
-    "\x1B" +
-    "\x61" +
-    "\x31" + // center align
-    "\x1D" +
-    "\x21" +
-    "\x11" +
-    "Bubur\nNusantara\n\n" + // double font size
-    "\x1D" +
-    "\x21" +
-    "\x00" +
-    "order receipt" + // normal font size
-    "\n\n\n\n\n\n\n" +
-    "\n\n\n\n\n\n\n" +
-    "\n\n\n\n\n\n\n";
+  const DATA = `
+  BUBUR NUSANTARA   
+ I Pujasera Citra Garden 5
+
+
+TOTAL: IDR 20.000
+
+
+`;
 
   const [isLoading, setLoading] = useState(false);
   const queryClient = useQueryClient();
