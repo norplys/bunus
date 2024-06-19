@@ -32,7 +32,6 @@ export async function handleConnect(
 
 export async function handlePrint(data: any, characteristicDevice: any) {
   try {
-    console.log(characteristicDevice.current);
     if (characteristicDevice.current) {
       await characteristicDevice.current.writeValue(
         new TextEncoder().encode(data),
@@ -42,7 +41,6 @@ export async function handlePrint(data: any, characteristicDevice: any) {
       toast.error("Device not connected");
     }
   } catch (error) {
-    console.log(error);
     toast.error("Device not connected");
   }
 }

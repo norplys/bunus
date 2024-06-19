@@ -1,5 +1,4 @@
 import { useState } from "react";
-import formatCurrency from "@/helper/currencyFormatter";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useQueryClient } from "react-query";
@@ -34,13 +33,13 @@ export default function OrderItem({
       item.menu.price.toString().padEnd(19 - item.total.toString().length);
     return `${item.menu.name}\n${quantity}${price}${item.total.toString()}\n`;
   }
-  const ESC = "\x1b"; // Escape character
-  const INIT = ESC + "@"; // Initialize printer
-  const ALIGN_LEFT = ESC + "a" + "\x00"; // Align left
-  const ALIGN_CENTER = ESC + "a" + "\x01"; // Align center
-  const ALIGN_RIGHT = ESC + "a" + "\x02"; // Align right
-  const BOLD_ON = ESC + "E" + "\x01"; // Bold on
-  const BOLD_OFF = ESC + "E" + "\x00"; // Bold off
+  // const ESC = "\x1b"; // Escape character
+  // const INIT = ESC + "@"; // Initialize printer
+  // const ALIGN_LEFT = ESC + "a" + "\x00"; // Align left
+  // const ALIGN_CENTER = ESC + "a" + "\x01"; // Align center
+  // const ALIGN_RIGHT = ESC + "a" + "\x02"; // Align right
+  // const BOLD_ON = ESC + "E" + "\x01"; // Bold on
+  // const BOLD_OFF = ESC + "E" + "\x00"; // Bold off
 
   // Create the receipt data
   // let receiptData = INIT; // Initialize printer settings
@@ -57,20 +56,6 @@ export default function OrderItem({
   // receiptData += "--------------------------------\n";
   // receiptData += `${"Total:".padEnd(29 - data.total.toString().length)}${"Rp." + data.total.toString()}\n`;
   // receiptData += "\n\n\n\n\n\n\n\n\n\n";
-
-  const DATA = `
-  \x1b E 1
-  BUBUR NUSANTARA
-  \x1b E 0
-  
-  I LOVE EMILIA AND REM
-  
-  \x1b A 0
-  TOTAL: IDR 20.000
-  \x1b A 1
-  
-  \n\n\n\n\n
-  `;
 
   const [isLoading, setLoading] = useState(false);
   const queryClient = useQueryClient();
@@ -103,6 +88,19 @@ export default function OrderItem({
       setLoading(false);
     }
   };
+
+  const DATA = `
+    Bubur Nusantara
+    Pujasera Citra Garden 5
+    Kamal, Kalideres, Jakarta Barat
+    085692807048
+    --------------------------------
+    ${data.items.map((item: any) => {
+      return formatItemLine(item);
+    })}
+    --------------------------------
+    ${"Total:".padEnd(29 - data.total.toString().length)}${"Rp." + data.total.toString()}
+    `;
 
   return (
     <>
