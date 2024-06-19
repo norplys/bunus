@@ -25,6 +25,7 @@ export async function handleConnect(
       localStorage.removeItem("deviceID");
     }
   } catch (error) {
+    console.log(error);
     toast.error("Cannot connect to device");
   }
 }

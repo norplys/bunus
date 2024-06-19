@@ -41,7 +41,6 @@ export default function OrderItem({
   const ALIGN_RIGHT = ESC + "a" + "\x02"; // Align right
   const BOLD_ON = ESC + "E" + "\x01"; // Bold on
   const BOLD_OFF = ESC + "E" + "\x00"; // Bold off
-  const CUT_PAPER = ESC + "i"; // Full cut paper
 
   // Create the receipt data
   let receiptData = INIT; // Initialize printer settings
@@ -57,7 +56,7 @@ export default function OrderItem({
   });
   receiptData += "--------------------------------\n";
   receiptData += `${"Total:".padEnd(29 - data.total.toString().length)}${"Rp." + data.total.toString()}\n`;
-  receiptData += CUT_PAPER;
+  receiptData += "\n\n\n\n\n\n\n\n\n\n";
 
   const [isLoading, setLoading] = useState(false);
   const queryClient = useQueryClient();
