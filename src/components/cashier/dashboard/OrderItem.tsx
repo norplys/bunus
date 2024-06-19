@@ -65,9 +65,9 @@ export default function OrderItem({
   
   I LOVE EMILIA AND REM
   
-  \x1b a 0
+  \x1b A 0
   TOTAL: IDR 20.000
-  \x1b a 1
+  \x1b A 1
   
   \n\n\n\n\n
   `;
