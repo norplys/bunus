@@ -59,15 +59,15 @@ export default function OrderItem({
   // receiptData += "\n\n\n\n\n\n\n\n\n\n";
 
   const DATA = `
-  ESC E 1
+  \x1b E 1
   BUBUR NUSANTARA
-  ESC E 0
+  \x1b E 0
   
   I LOVE EMILIA AND REM
   
-  ESC a 0
+  \x1b a 0
   TOTAL: IDR 20.000
-  ESC a 1
+  \x1b a 1
   
   \n\n\n\n\n
   `;
