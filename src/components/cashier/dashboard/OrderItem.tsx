@@ -59,14 +59,18 @@ export default function OrderItem({
   // receiptData += "\n\n\n\n\n\n\n\n\n\n";
 
   const DATA = `
-  BUBUR NUSANTARA   
- I Pujasera Citra Garden 5
-
-
-TOTAL: IDR 20.000
-
-\n\n\n\n\n
-`;
+  ESC E 1
+  BUBUR NUSANTARA
+  ESC E 0
+  
+  I LOVE EMILIA AND REM
+  
+  ESC a 0
+  TOTAL: IDR 20.000
+  ESC a 1
+  
+  \n\n\n\n\n
+  `;
 
   const [isLoading, setLoading] = useState(false);
   const queryClient = useQueryClient();
