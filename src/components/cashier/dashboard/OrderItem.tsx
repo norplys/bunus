@@ -65,7 +65,7 @@ export default function OrderItem({
 
 TOTAL: IDR 20.000
 
-
+\n\n\n\n\n
 `;
 
   const [isLoading, setLoading] = useState(false);
