@@ -3,11 +3,13 @@ import { useOrderCashier } from "@/helper/hooks/useOrderCashier";
 import { useOrderFinish } from "@/helper/hooks/useOrderFinish";
 import OrderTable from "@/components/cashier/dashboard/OrderTable";
 import OrderDetailModal from "@/components/cashier/dashboard/OrderDetailModal";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, use } from "react";
 import { getSockets } from "@/helper/socket";
 import { useQueryClient } from "react-query";
 import OrderMobile from "@/components/cashier/dashboard/OrderMobile";
 import { useUser } from "@/helper/context/userContext";
+import { FaPrint } from "react-icons/fa";
+import { handleConnect } from "@/helper/printer";
 
 export default function CashierDahboard() {
   const queryClient = useQueryClient();
@@ -15,6 +17,8 @@ export default function CashierDahboard() {
   const [date, setDate] = useState(new Date());
   const [isOpen, setIsOpen] = useState(false);
   const id = useRef(null);
+  const deviceCharacteristic = useRef<any>();
+  const [deviceHandle, setDeviceHandle] = useState(null);
   const { token } = useUser();
   const socket = getSockets();
   useEffect(() => {
@@ -34,6 +38,7 @@ export default function CashierDahboard() {
         isOpen={isOpen}
         refId={id}
         now={now}
+        characteristic={deviceCharacteristic}
       />
       <h1 className="w-full bg-primary-orange p-2 flex justify-end items-center">
         <p className="text-white text-lg font-bold">Order</p>
@@ -78,6 +83,14 @@ export default function CashierDahboard() {
         refId={id}
         isLoading={isLoading || finishLoading}
       />
+      <button
+        className={`absolute right-1 bottom-1 ${deviceHandle ? "bg-green-600" : "bg-primary-red"} rounded-full p-3 text-white hover:scale-90 duration-300`}
+        onClick={() =>
+          handleConnect(deviceHandle, setDeviceHandle, deviceCharacteristic)
+        }
+      >
+        <FaPrint className="text-3xl" />
+      </button>
     </div>
   );
 }

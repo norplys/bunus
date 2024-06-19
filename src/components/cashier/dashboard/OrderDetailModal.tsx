@@ -11,11 +11,13 @@ export default function OrderDetailModal({
   isOpen,
   setIsOpen,
   refId,
+  characteristic,
 }: {
   isOpen: boolean;
   setIsOpen: (value: boolean) => void;
   refId: any;
   now: boolean;
+  characteristic: any;
 }) {
   const { data, isLoading: isLoadingData } = useOrderDetail(refId.current);
   const [isPayment, setIsPayment] = useState(false);
@@ -53,6 +55,7 @@ export default function OrderDetailModal({
                 setIsOpen={setIsOpen}
                 now={now}
                 setIsPayment={setIsPayment}
+                characteristic={characteristic}
               />
             )}
           </Dialog.Panel>

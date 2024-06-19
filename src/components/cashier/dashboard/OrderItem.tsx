@@ -1,91 +1,64 @@
-import { useState, useRef, use } from "react";
+import { useState } from "react";
+import formatCurrency from "@/helper/currencyFormatter";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useQueryClient } from "react-query";
 import { VscLoading } from "react-icons/vsc";
 import OrderDetailItem from "./OrderDetailItem";
 import { getSockets } from "@/helper/socket";
+import { handlePrint } from "@/helper/printer";
 
 export default function OrderItem({
   data,
   setIsOpen,
   now,
   setIsPayment,
+  characteristic,
 }: {
   data: any;
   setIsOpen: (value: boolean) => void;
   now: boolean;
   setIsPayment: (value: boolean) => void;
+  characteristic: any;
 }) {
   const socket = getSockets();
   const handleReceipt = (data: any) => {
     socket.emit("orderReceipt", data);
   };
-  let deviceHandle = useRef<any>();
-  let characteristic = useRef<any>();
+  function formatItemLine(item: any) {
+    const quantity =
+      item.quantity.toString() +
+      "x".padEnd(12 - item.quantity.toString().length);
+    const price =
+      "@" +
+      item.menu.price.toString().padEnd(19 - item.total.toString().length);
+    return `${item.menu.name}\n${quantity}${price}${item.total.toString()}\n`;
+  }
+  const ESC = "\x1b"; // Escape character
+  const INIT = ESC + "@"; // Initialize printer
+  const ALIGN_LEFT = ESC + "a" + "\x00"; // Align left
+  const ALIGN_CENTER = ESC + "a" + "\x01"; // Align center
+  const ALIGN_RIGHT = ESC + "a" + "\x02"; // Align right
+  const BOLD_ON = ESC + "E" + "\x01"; // Bold on
+  const BOLD_OFF = ESC + "E" + "\x00"; // Bold off
+  const CUT_PAPER = ESC + "i"; // Full cut paper
 
-  var DATA =
-    "" +
-    "\x1B" +
-    "\x61" +
-    "\x31" + // center align
-    "\x1D" +
-    "\x21" +
-    "\x11" +
-    "Bubur\nNusantara\n\n" + // double font size
-    "\x1D" +
-    "\x21" +
-    "\x00" +
-    "order receipt" + // normal font size
-    "\n\n\n\n\n\n\n";
-  // feed paper                                                    // feed paper
+  // Create the receipt data
+  let receiptData = INIT; // Initialize printer settings
+  receiptData += ALIGN_CENTER; // Center align the following text
+  receiptData += BOLD_ON + "Bubur Nusantara\n" + BOLD_OFF; // Print store name in bold
+  receiptData += "Pujasera Citra Garden 5\n";
+  receiptData += "Kamal, Kalideres, Jakarta Barat\n";
+  receiptData += "085692807048\n";
+  receiptData += ALIGN_LEFT; // Left align the following text
+  receiptData += "--------------------------------\n";
+  data.items.map((item: any) => {
+    receiptData += formatItemLine(item);
+  });
+  receiptData += "--------------------------------\n";
+  receiptData += `${"Total:".padEnd(29 - data.total.toString().length)}${"Rp." + data.total.toString()}\n`;
+  receiptData += CUT_PAPER;
 
-  const handleConnect = async () => {
-    let SERVICE = "000018f0-0000-1000-8000-00805f9b34fb";
-    let WRITE = "00002af1-0000-1000-8000-00805f9b34fb";
-
-    navigator.bluetooth
-      .requestDevice({ filters: [{ services: [SERVICE] }] })
-      .then((device) => {
-        deviceHandle.current = device;
-        return device.gatt?.connect();
-      })
-      .then((server) => {
-        return server?.getPrimaryService(SERVICE);
-      })
-      .then((service) => {
-        return service?.getCharacteristic(WRITE);
-      })
-      .then((channel) => {
-        characteristic.current = channel;
-        console.log("Connected");
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
-
-  const handlePrint = () => {
-    if (characteristic) {
-      characteristic.current
-        .writeValue(new TextEncoder().encode(DATA))
-        .then(() => {
-          console.log("Printed");
-        })
-        .catch((error: any) => {
-          console.error(error);
-        });
-    } else {
-      console.error("Device not connected");
-    }
-  };
-
-  const handleDisconnect = () => {
-    if (deviceHandle) {
-      deviceHandle.current.gatt?.disconnect();
-    }
-    console.log("Disconnected");
-  };
   const [isLoading, setLoading] = useState(false);
   const queryClient = useQueryClient();
   const setDone = async (id: string) => {
@@ -162,20 +135,7 @@ export default function OrderItem({
         </button>
         <button
           className="bg-green-600 px-2 py-1 rounded-lg text-white font-bold"
-          onClick={() => handleConnect()}
-        >
-          Connect
-        </button>
-        <button
-          className="bg-green-600 px-2 py-1 rounded-lg text-white font-bold"
-          onClick={() => handleDisconnect()}
-        >
-          Disconnect
-        </button>
-
-        <button
-          className="bg-green-600 px-2 py-1 rounded-lg text-white font-bold"
-          onClick={() => handlePrint()}
+          onClick={() => handlePrint(receiptData, characteristic)}
         >
           Print
         </button>
