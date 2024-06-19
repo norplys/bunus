@@ -91,11 +91,9 @@ export default function OrderItem({
     Kamal, Kalideres, Jakarta Barat
     085692807048
     --------------------------------
-    ${data.items.map((item: any) => {
-      return formatItemLine(item);
-    })}
     --------------------------------
-    ${"Total:Rp." + data.total.toString()}
+    \n\n\n\n\n\n\n\
+    test
     `;
 
   return (
