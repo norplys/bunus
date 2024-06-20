@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useQueryClient } from "react-query";
@@ -20,7 +20,6 @@ export default function OrderItem({
   setIsPayment: (value: boolean) => void;
   characteristic: any;
 }) {
-  const printData = useRef<string>("");
   const socket = getSockets();
   const handleReceipt = (data: any) => {
     socket.emit("orderReceipt", data);
@@ -34,13 +33,13 @@ export default function OrderItem({
       item.menu.price.toString().padEnd(19 - item.total.toString().length);
     return `${item.menu.name}\n${quantity}${price}${item.total.toString()}\n`;
   }
-  // const ESC = "\x1b"; // Escape character
-  // const INIT = ESC + "@"; // Initialize printer
-  // const ALIGN_LEFT = ESC + "a" + "\x00"; // Align left
-  // const ALIGN_CENTER = ESC + "a" + "\x01"; // Align center
-  // const ALIGN_RIGHT = ESC + "a" + "\x02"; // Align right
-  // const BOLD_ON = ESC + "E" + "\x01"; // Bold on
-  // const BOLD_OFF = ESC + "E" + "\x00"; // Bold off
+  const ESC = "\x1b"; // Escape character
+  const INIT = ESC + "@"; // Initialize printer
+  const ALIGN_LEFT = ESC + "a" + "\x00"; // Align left
+  const ALIGN_CENTER = ESC + "a" + "\x01"; // Align center
+  const ALIGN_RIGHT = ESC + "a" + "\x02"; // Align right
+  const BOLD_ON = ESC + "E" + "\x01"; // Bold on
+  const BOLD_OFF = ESC + "E" + "\x00"; // Bold off
 
   // Create the receipt data
   // let receiptData = INIT; // Initialize printer settings
@@ -58,16 +57,19 @@ export default function OrderItem({
   // receiptData += `${"Total:".padEnd(29 - data.total.toString().length)}${"Rp." + data.total.toString()}\n`;
   // receiptData += "\n\n\n\n\n\n\n\n\n\n";
 
-  useEffect(() => {
-    printData.current =
-      data.items
-        .map((item: any) => {
-          return formatItemLine(item);
-        })
-        .join("") + "\n\n\n";
-  }, [data.items]);
-
-  console.log(printData.current);
+  const receipData = `
+    ${BOLD_ON}Bubur Nusantara${BOLD_OFF}
+    Pujasera Citra Garden 5
+    Kamal, Kalideres, Jakarta Barat
+    085692807048
+    --------------------------------
+    ${data.items.map((item: any) => {
+      return formatItemLine(item);
+    })}
+    --------------------------------
+    ${"Total:".padEnd(29 - data.total.toString().length)}${"Rp." + data.total.toString()}
+    \n\n\n\n\n\n\n\n\n\n
+  `;
 
   const [isLoading, setLoading] = useState(false);
   const queryClient = useQueryClient();
@@ -144,7 +146,7 @@ export default function OrderItem({
         </button>
         <button
           className="bg-green-600 px-2 py-1 rounded-lg text-white font-bold"
-          onClick={() => handlePrint(printData.current, characteristic)}
+          onClick={() => handlePrint(receipData, characteristic)}
         >
           Print
         </button>
