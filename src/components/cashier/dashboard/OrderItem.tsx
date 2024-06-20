@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useQueryClient } from "react-query";
@@ -20,6 +20,7 @@ export default function OrderItem({
   setIsPayment: (value: boolean) => void;
   characteristic: any;
 }) {
+  const printData = useRef<string>("");
   const socket = getSockets();
   const handleReceipt = (data: any) => {
     socket.emit("orderReceipt", data);
@@ -53,6 +54,16 @@ export default function OrderItem({
   // receiptData += `${"Total:".padEnd(29 - data.total.toString().length)}${"Rp." + data.total.toString()}\n`;
   // receiptData += "\n\n\n\n\n\n\n\n\n\n";
 
+  useEffect(() => {
+    printData.current = data.items
+      .map((item: any) => {
+        return formatItemLine(item);
+      })
+      .join("");
+  }, [data.items]);
+
+  console.log(printData.current);
+
   const [isLoading, setLoading] = useState(false);
   const queryClient = useQueryClient();
   const setDone = async (id: string) => {
@@ -84,18 +95,6 @@ export default function OrderItem({
       setLoading(false);
     }
   };
-
-  const DATA = `
-    Bubur Nusantara
-    Pujasera Citra Garden 5
-    Kamal, Kalideres, Jakarta Barat
-    085692807048
-    --------------------------------
-    --------------------------------
-    \n\n\n\n\n\n\n\
-    test
-    `;
-
   return (
     <>
       <div className="bg-primary-orange text-white p-2 w-full text-center">
@@ -140,7 +139,7 @@ export default function OrderItem({
         </button>
         <button
           className="bg-green-600 px-2 py-1 rounded-lg text-white font-bold"
-          onClick={() => handlePrint(DATA, characteristic)}
+          onClick={() => handlePrint(printData.current, characteristic)}
         >
           Print
         </button>

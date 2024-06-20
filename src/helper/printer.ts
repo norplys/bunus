@@ -30,8 +30,9 @@ export async function handleConnect(
   }
 }
 
-export async function handlePrint(data: any, characteristicDevice: any) {
+export async function handlePrint(data: string, characteristicDevice: any) {
   try {
+    console.log(data);
     if (characteristicDevice.current) {
       await characteristicDevice.current.writeValue(
         new TextEncoder().encode(data),
