@@ -1,4 +1,5 @@
 import { useState } from "react";
+import formatCurrency from "@/helper/currencyFormatter";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useQueryClient } from "react-query";
@@ -57,6 +58,7 @@ ${data.items
 ${"Total:".padEnd(29 - data.total.toString().length)}${"Rp." + data.total.toString()}
 \n
 `;
+
 
   const [isLoading, setLoading] = useState(false);
   const queryClient = useQueryClient();
