@@ -29,17 +29,19 @@ export async function handleConnect(
   }
 }
 
-export async function handlePrint(data: any, characteristicDevice: any) {
+export async function handlePrint(data: string, characteristicDevice: any) {
   try {
-    console.log(characteristicDevice.current);
-    if (characteristicDevice.current) {
+    const dataLength = data.length;
+    const chunkSize = 20;
+    let chunk = 0;
+    while (chunk < dataLength) {
+      let chunkData = data.substring(chunk, chunk + chunkSize);
       await characteristicDevice.current.writeValue(
-        new TextEncoder().encode(data),
+        new TextEncoder().encode(chunkData),
       );
-      toast.success("Printed");
-    } else {
-      toast.error("Device not connected");
+      chunk += chunkSize;
     }
+    toast.success("Printed");
   } catch (error) {
     console.log(error);
     toast.error("Device not connected");

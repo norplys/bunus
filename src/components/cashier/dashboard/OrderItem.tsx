@@ -34,30 +34,31 @@ export default function OrderItem({
       item.menu.price.toString().padEnd(19 - item.total.toString().length);
     return `${item.menu.name}\n${quantity}${price}${item.total.toString()}\n`;
   }
-  const ESC = "\x1b"; // Escape character
-  const INIT = ESC + "@"; // Initialize printer
-  const ALIGN_LEFT = ESC + "a" + "\x00"; // Align left
-  const ALIGN_CENTER = ESC + "a" + "\x01"; // Align center
-  const ALIGN_RIGHT = ESC + "a" + "\x02"; // Align right
-  const BOLD_ON = ESC + "E" + "\x01"; // Bold on
-  const BOLD_OFF = ESC + "E" + "\x00"; // Bold off
-  const CUT_PAPER = ESC + "i"; // Full cut paper
+  const ESC = "\x1b";
+  const INIT = ESC + "@";
+  const ALIGN_LEFT = ESC + "a" + "\x00";
+  const ALIGN_CENTER = ESC + "a" + "\x01";
+  const BOLD_ON = ESC + "E" + "\x01";
+  const BOLD_OFF = ESC + "E" + "\x00";
+  const receipData = `
+${INIT}
+${ALIGN_CENTER}
+${BOLD_ON}Bubur Nusantara${BOLD_OFF}
+Pujasera Citra Garden 5
+Kamal, Kalideres, Jakarta Barat
+085692807048
+${ALIGN_LEFT}
+--------------------------------
+${data.items
+  .map((item: any) => {
+    return formatItemLine(item);
+  })
+  .join("")}
+--------------------------------
+${"Total:".padEnd(29 - data.total.toString().length)}${"Rp." + data.total.toString()}
+\n
+`;
 
-  // Create the receipt data
-  let receiptData = INIT; // Initialize printer settings
-  receiptData += ALIGN_CENTER; // Center align the following text
-  receiptData += BOLD_ON + "Bubur Nusantara\n" + BOLD_OFF; // Print store name in bold
-  receiptData += "Pujasera Citra Garden 5\n";
-  receiptData += "Kamal, Kalideres, Jakarta Barat\n";
-  receiptData += "085692807048\n";
-  receiptData += ALIGN_LEFT; // Left align the following text
-  receiptData += "--------------------------------\n";
-  data.items.map((item: any) => {
-    receiptData += formatItemLine(item);
-  });
-  receiptData += "--------------------------------\n";
-  receiptData += `${"Total:".padEnd(29 - data.total.toString().length)}${"Rp." + data.total.toString()}\n`;
-  receiptData += CUT_PAPER;
 
   const [isLoading, setLoading] = useState(false);
   const queryClient = useQueryClient();
@@ -90,7 +91,6 @@ export default function OrderItem({
       setLoading(false);
     }
   };
-
   return (
     <>
       <div className="bg-primary-orange text-white p-2 w-full text-center">
@@ -135,7 +135,7 @@ export default function OrderItem({
         </button>
         <button
           className="bg-green-600 px-2 py-1 rounded-lg text-white font-bold"
-          onClick={() => handlePrint(receiptData, characteristic)}
+          onClick={() => handlePrint(receipData, characteristic)}
         >
           Print
         </button>
