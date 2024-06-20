@@ -26,8 +26,12 @@ export default function OrderItem({
     socket.emit("orderReceipt", data);
   };
   function formatItemLine(item: any) {
-    const quantity = item.quantity.toString() + "x";
-    const price = "@" + item.menu.price.toString();
+    const quantity =
+      item.quantity.toString() +
+      "x".padEnd(12 - item.quantity.toString().length);
+    const price =
+      "@" +
+      item.menu.price.toString().padEnd(19 - item.total.toString().length);
     return `${item.menu.name}\n${quantity}${price}${item.total.toString()}\n`;
   }
   // const ESC = "\x1b"; // Escape character
@@ -60,29 +64,8 @@ export default function OrderItem({
         .map((item: any) => {
           return formatItemLine(item);
         })
-        .join("") + "\n\n\n\n\n\n";
+        .join("") + "\n\n\n";
   }, [data.items]);
-
-  const DATA = `
-  1-------------------------------
-  2-------------------------------
-  3-------------------------------
-  4-------------------------------
-  5-------------------------------
-  6-------------------------------
-  7-------------------------------
-  8-------------------------------
-  9-------------------------------
-  10-------------------------------
-  11-------------------------------
-  12-------------------------------
-  13-------------------------------
-  14-------------------------------
-  15-------------------------------
-  16-------------------------------
-  17-------------------------------
-  18-------------------------------
-  `;
 
   console.log(printData.current);
 
