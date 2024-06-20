@@ -33,43 +33,30 @@ export default function OrderItem({
       item.menu.price.toString().padEnd(19 - item.total.toString().length);
     return `${item.menu.name}\n${quantity}${price}${item.total.toString()}\n`;
   }
-  const ESC = "\x1b"; // Escape character
-  const INIT = ESC + "@"; // Initialize printer
-  const ALIGN_LEFT = ESC + "a" + "\x00"; // Align left
-  const ALIGN_CENTER = ESC + "a" + "\x01"; // Align center
-  const ALIGN_RIGHT = ESC + "a" + "\x02"; // Align right
-  const BOLD_ON = ESC + "E" + "\x01"; // Bold on
-  const BOLD_OFF = ESC + "E" + "\x00"; // Bold off
-
-  // Create the receipt data
-  // let receiptData = INIT; // Initialize printer settings
-  // receiptData += ALIGN_CENTER; // Center align the following text
-  // receiptData += BOLD_ON + "Bubur Nusantara\n" + BOLD_OFF; // Print store name in bold
-  // receiptData += "Pujasera Citra Garden 5\n";
-  // receiptData += "Kamal, Kalideres, Jakarta Barat\n";
-  // receiptData += "085692807048\n";
-  // receiptData += ALIGN_LEFT; // Left align the following text
-  // receiptData += "--------------------------------\n";
-  // data.items.map((item: any) => {
-  //   receiptData += formatItemLine(item);
-  // });
-  // receiptData += "--------------------------------\n";
-  // receiptData += `${"Total:".padEnd(29 - data.total.toString().length)}${"Rp." + data.total.toString()}\n`;
-  // receiptData += "\n\n\n\n\n\n\n\n\n\n";
-
+  const ESC = "\x1b";
+  const INIT = ESC + "@";
+  const ALIGN_LEFT = ESC + "a" + "\x00";
+  const ALIGN_CENTER = ESC + "a" + "\x01";
+  const BOLD_ON = ESC + "E" + "\x01";
+  const BOLD_OFF = ESC + "E" + "\x00";
   const receipData = `
-    ${BOLD_ON}Bubur Nusantara${BOLD_OFF}
-    Pujasera Citra Garden 5
-    Kamal, Kalideres, Jakarta Barat
-    085692807048
-    --------------------------------
-    ${data.items.map((item: any) => {
-      return formatItemLine(item);
-    })}
-    --------------------------------
-    ${"Total:".padEnd(29 - data.total.toString().length)}${"Rp." + data.total.toString()}
-    \n\n\n\n\n\n\n\n\n\n
-  `;
+${INIT}
+${ALIGN_CENTER}
+${BOLD_ON}Bubur Nusantara${BOLD_OFF}
+Pujasera Citra Garden 5
+Kamal, Kalideres, Jakarta Barat
+085692807048
+${ALIGN_LEFT}
+--------------------------------
+${data.items
+  .map((item: any) => {
+    return formatItemLine(item);
+  })
+  .join("")}
+--------------------------------
+${"Total:".padEnd(29 - data.total.toString().length)}${"Rp." + data.total.toString()}
+\n
+`;
 
   const [isLoading, setLoading] = useState(false);
   const queryClient = useQueryClient();
