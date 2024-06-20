@@ -55,11 +55,12 @@ export default function OrderItem({
   // receiptData += "\n\n\n\n\n\n\n\n\n\n";
 
   useEffect(() => {
-    printData.current = data.items
-      .map((item: any) => {
-        return formatItemLine(item);
-      })
-      .join("");
+    printData.current =
+      data.items
+        .map((item: any) => {
+          return formatItemLine(item);
+        })
+        .join("") + "\n\n\n\n\n\n";
   }, [data.items]);
 
   console.log(printData.current);
