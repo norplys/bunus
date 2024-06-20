@@ -1,5 +1,4 @@
 import { useState } from "react";
-import formatCurrency from "@/helper/currencyFormatter";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useQueryClient } from "react-query";
@@ -14,12 +13,14 @@ export default function OrderItem({
   now,
   setIsPayment,
   characteristic,
+  deviceHandle,
 }: {
   data: any;
   setIsOpen: (value: boolean) => void;
   now: boolean;
   setIsPayment: (value: boolean) => void;
   characteristic: any;
+  deviceHandle: any;
 }) {
   const socket = getSockets();
   const handleReceipt = (data: any) => {
@@ -40,7 +41,7 @@ export default function OrderItem({
   const ALIGN_CENTER = ESC + "a" + "\x01";
   const BOLD_ON = ESC + "E" + "\x01";
   const BOLD_OFF = ESC + "E" + "\x00";
-  const receipData = `
+  const receiptData = `
 ${INIT}
 ${ALIGN_CENTER}
 ${BOLD_ON}Bubur Nusantara${BOLD_OFF}
@@ -58,8 +59,6 @@ ${data.items
 ${"Total:".padEnd(29 - data.total.toString().length)}${"Rp." + data.total.toString()}
 \n
 `;
-
-
   const [isLoading, setLoading] = useState(false);
   const queryClient = useQueryClient();
   const setDone = async (id: string) => {
@@ -133,12 +132,14 @@ ${"Total:".padEnd(29 - data.total.toString().length)}${"Rp." + data.total.toStri
         >
           Tutup
         </button>
-        <button
-          className="bg-green-600 px-2 py-1 rounded-lg text-white font-bold"
-          onClick={() => handlePrint(receipData, characteristic)}
-        >
-          Print
-        </button>
+        {deviceHandle && (
+          <button
+            className="bg-green-600 px-2 py-1 rounded-lg text-white font-bold"
+            onClick={() => handlePrint(receiptData, characteristic)}
+          >
+            Print
+          </button>
+        )}
       </div>
     </>
   );

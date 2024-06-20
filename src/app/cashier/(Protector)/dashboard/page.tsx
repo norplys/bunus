@@ -39,6 +39,7 @@ export default function CashierDahboard() {
         refId={id}
         now={now}
         characteristic={deviceCharacteristic}
+        deviceHandle={deviceHandle}
       />
       <h1 className="w-full bg-primary-orange p-2 flex justify-end items-center">
         <p className="text-white text-lg font-bold">Order</p>
