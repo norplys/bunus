@@ -161,7 +161,7 @@ export default function OrderItem({
         </button>
         <button
           className="bg-green-600 px-2 py-1 rounded-lg text-white font-bold"
-          onClick={() => handlePrint(DATA, characteristic)}
+          onClick={() => handlePrint(printData.current, characteristic)}
         >
           Print
         </button>
