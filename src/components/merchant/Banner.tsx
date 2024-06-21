@@ -30,6 +30,7 @@ export default function Banner() {
               width={1000}
               height={1000}
               alt={`banner${i}`}
+              priority={true}
             ></Image>
           </div>
         </SwiperSlide>
