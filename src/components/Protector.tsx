@@ -9,6 +9,7 @@ export default function Protector() {
           width={300}
           height={300}
           className="w-24 h-24 border-8 border-white bg-orange-100 rounded-full shadow-2xl hover:scale-95 hover:shadow-none duration-300 md:w-52 md:h-52 xl:w-80 xl:h-80"
+          priority={true}
         />
         <h1 className="xl:text-7xl font-bold text-white md:text-5xl text-xl">
           BUBUR NUSANTARA
