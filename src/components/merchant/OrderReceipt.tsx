@@ -15,6 +15,12 @@ export default function OrderReceipt() {
       clearTimeout(timeOut);
     };
   }, [data]);
+  useEffect(() => {
+    socket.connect();
+    return () => {
+      socket.disconnect();
+    };
+  }, []);
   socket.on("orderReceipt", (data) => {
     setData(data);
     setIsOpen(true);

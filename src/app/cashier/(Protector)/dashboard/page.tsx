@@ -22,6 +22,12 @@ export default function CashierDahboard() {
   const { token } = useUser();
   const socket = getSockets();
   useEffect(() => {
+    socket.connect();
+    return () => {
+      socket.disconnect();
+    };
+  }, []);
+  useEffect(() => {
     socket.on("order", () => {
       queryClient.invalidateQueries(["orderCashier"]);
     });
