@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useQueryClient } from "react-query";
@@ -23,6 +23,12 @@ export default function OrderItem({
   deviceHandle: any;
 }) {
   const socket = getSockets();
+  useEffect(() => {
+    socket.connect();
+    return () => {
+      socket.disconnect();
+    };
+  }, []);
   const handleReceipt = (data: any) => {
     socket.emit("orderReceipt", data);
   };
