@@ -113,7 +113,7 @@ export default function MerchantMenu() {
           <p className="font-bold">{cartLoading ? "" : notif}</p>
         </div>
         <div className="flex items-center justify-center gap-2">
-          <p className="font-bold">Lihat Keranjang</p>
+          <p className="font-bold">Buat Pesanan</p>
           <FaArrowRight />
         </div>
       </button>
