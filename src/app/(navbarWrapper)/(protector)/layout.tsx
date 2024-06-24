@@ -5,24 +5,19 @@ import { useRouter } from "next/navigation";
 import { useUser } from "@/helper/context/userContext";
 
 export default function Layout({ children }: { children: ReactNode }) {
-  const { setToken } = useUser();
+  const { useAuth } = useUser();
   const { push } = useRouter();
   const [loading, setLoading] = useState(true);
-  const validateToken = async (token: string | null) => {
+  const validateUser = async () => {
     try {
-      if (!token) {
-        throw new Error("Token not found");
-      }
-      setToken(token);
-      setLoading(false);
+      await useAuth(null);
+      push("/");
     } catch (error) {
-      setToken(null);
-      push("/login?redirect=cart");
+      setLoading(false);
     }
   };
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    validateToken(token);
+    validateUser();
   }, []);
   if (loading) {
     return <Protector />;
