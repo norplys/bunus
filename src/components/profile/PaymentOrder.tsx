@@ -25,7 +25,9 @@ const checkStatus = (status: string | null) => {
 export default function PaymentOrder({ order }: { order: Order }) {
   return (
     <Link
-      href={order.payment.snap_redirect_url}
+      href={
+        order.payment.snap_redirect_url ? order.payment.snap_redirect_url : "/"
+      }
       key={order.id}
       className="flex flex-col justify-between  border-t-2 border-primary-orange py-5"
     >
