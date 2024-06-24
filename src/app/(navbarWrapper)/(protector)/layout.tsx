@@ -11,9 +11,9 @@ export default function Layout({ children }: { children: ReactNode }) {
   const validateUser = async () => {
     try {
       await useAuth(null);
-      push("/");
-    } catch (error) {
       setLoading(false);
+    } catch (error) {
+      push("/login");
     }
   };
   useEffect(() => {
