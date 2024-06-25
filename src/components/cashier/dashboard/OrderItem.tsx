@@ -122,7 +122,7 @@ ${"Total:".padEnd(29 - data.total.toString().length)}${"Rp." + data.total.toStri
           className="bg-primary-cyan px-2 py-1 rounded-lg text-white font-bold"
           onClick={() => handleReceipt(data)}
         >
-          Tampilkan
+          Tampilkan qris
         </button>
 
         <button

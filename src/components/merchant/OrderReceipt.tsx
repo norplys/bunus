@@ -2,6 +2,8 @@ import { Dialog } from "@headlessui/react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { getSockets } from "@/helper/socket";
+import formatCurrency from "@/helper/currencyFormatter";
+import Image from "next/image";
 
 export default function OrderReceipt() {
   const [isOpen, setIsOpen] = useState(false);
@@ -10,7 +12,7 @@ export default function OrderReceipt() {
   useEffect(() => {
     let timeOut = setTimeout(() => {
       setIsOpen(false);
-    }, 5000);
+    }, 10000);
     return () => {
       clearTimeout(timeOut);
     };
@@ -43,27 +45,25 @@ export default function OrderReceipt() {
             className={`rounded-xl flex flex-col items-center z-40 min-w-[315px] gap-2 p-5 px-2 overflow-y-scroll bg-white`}
           >
             <h1 className="font-bold text-2xl border-b-2 border-primary-orange h-min pb-2">
-              Order Receipt
+              {formatCurrency(data?.total)}
             </h1>
-            <h2 className="text-center">
-              Foto Layar Ini Jika Anda <br />
-              Membutuhkan Bukti Pembayaran
+            <h2 className="text-center font-bold">
+              Silahkan scan QRIS Dibawah Ini
             </h2>
-            <div className="grid bg-primary-orange p-5 rounded-md gap-2 text-white font-bold text-lg">
-              {data?.items.map((item: any, index: number) => {
-                return (
-                  <div
-                    className="grid grid-cols-6 gap-5 border-b-orange-200 border-b-2 pb-2 justify-items-center"
-                    key={index}
-                  >
-                    <div>{item.quantity}x</div>
-                    <div className="col-span-4">{item.menu.name}</div>
-                    <div>{item.total}</div>
-                  </div>
-                );
-              })}
-              <div className="text-center">total : {data?.total}</div>
-            </div>
+            <Image
+              src="/qris.png"
+              width={400}
+              height={400}
+              alt="qris.png"
+              className="border-4 border-primary-orange rounded-md"
+              priority={true}
+            />
+            <button
+              className="bg-primary-red px-2 py-1 text-lg rounded-lg font-bold text-white"
+              onClick={() => setIsOpen(false)}
+            >
+              Tutup
+            </button>
           </Dialog.Panel>
           <div
             className="fixed inset-0 bg-black/100 z-auto"
