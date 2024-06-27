@@ -4,7 +4,6 @@ import { useAdminOrder } from "@/helper/hooks/useAdminOrder";
 import { useUser } from "@/helper/context/userContext";
 import LoadingImage from "@/components/LoadingImage";
 import { useState, ChangeEvent } from "react";
-import { useQueryClient } from "react-query";
 
 const array = [
   {
@@ -19,6 +18,10 @@ const array = [
     label: "Debit",
     value: "debit",
   },
+  {
+    label: "Total",
+    value: "total",
+  },
 ];
 
 export default function Analytics() {
@@ -30,7 +33,6 @@ export default function Analytics() {
   );
   const handleChange = async (e: ChangeEvent<HTMLInputElement>) => {
     setDate(new Date(e.target.value ? e.target.value : new Date()));
-    console.log("refetching");
   };
   return (
     <div className="flex-1 w-full">
@@ -40,30 +42,32 @@ export default function Analytics() {
       <div className="w-full bg-orange-200 p-2 text-end h-10">
         <h1 className="text-lg font-bold">Total Penjualan Hari Ini</h1>
       </div>
-      <section className="flex flex-wrap w-full justify-center pt-5 gap-10">
+      <div className="grid justify-center">
+        <label className="font-bold text-center pt-2">Tanggal :</label>
         <input
+          id="date"
           type="date"
           className="onFocus:outline-none border-b-2 border-primary-orange p-1 w-40 text-lg font-bold bg-transparent h-fit"
           value={date.toISOString().split("T")[0]}
           onChange={handleChange}
         />
-        <div className="grid gap-2">
-          {array.map((item, index) => (
-            <div
-              key={index}
-              className="bg-orange-200 p-5 rounded-lg shadow-lg border-primary-orange border-4 min-w-80"
-            >
-              <h1 className="text-center text-xl font-bold">{item.label}</h1>
-              {isLoading ? (
-                <LoadingImage />
-              ) : (
-                <p className="text-center text-2xl font-bold">
-                  {formatCurrency(data[item.value])}
-                </p>
-              )}
-            </div>
-          ))}
-        </div>
+      </div>
+      <section className="flex flex-wrap w-full justify-center pt-5 gap-10">
+        {array.map((item, index) => (
+          <div
+            key={index}
+            className="p-5 rounded-lg shadow-lg border-primary-orange border-4 min-w-80"
+          >
+            <h1 className="text-center text-xl font-bold">{item.label}</h1>
+            {isLoading ? (
+              <LoadingImage />
+            ) : (
+              <p className="text-center text-2xl font-bold">
+                {formatCurrency(data[item.value])}
+              </p>
+            )}
+          </div>
+        ))}
       </section>
     </div>
   );
