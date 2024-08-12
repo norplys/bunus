@@ -38,13 +38,14 @@ export default function CreateCategoryModal({
           exit={{ opacity: 0 }}
         >
           <Dialog.Panel
-            className={`rounded-xl grid justify-items-center gap-5 z-30 min-w-[315px] overflow-y-scroll h-[80%] ${isLoading ? "" : "bg-white"}`}
+            className={`rounded-xl grid justify-items-center gap-5 z-30 min-w-[315px] overflow-y-hidden h-[90%] ${isLoading ? "" : "bg-white"}`}
           >
             {now === "cart" ? (
               <CartModalItem
                 data={data}
                 isLoading={isLoading}
                 setNow={setNow}
+                setIsOpen={setIsOpen}
               />
             ) : now === "type" ? (
               <ModalType setNow={setNow} setOrderType={setOrderType} />

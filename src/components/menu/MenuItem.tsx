@@ -33,6 +33,7 @@ export default function MenuItem({
           width={300}
           height={300}
           className="object-cover md:h-60 h-40 hover:scale-110 duration-300"
+          loading="lazy"
         />
       </div>
       <h1 className="text-lg font-semibold">{menu.name}</h1>

@@ -100,6 +100,7 @@ export default function DetailModal({
                       width={300}
                       height={300}
                       className="object-cover hover:scale-110 duration-300 h-60"
+                      loading="lazy"
                     />
                   </div>
                   <Dialog.Description className="overflow-y-auto text-justify text-sm w-72 border border-primary-orange md:h-full rounded-lg p-2 bg-orange-50 shadow-xl">
