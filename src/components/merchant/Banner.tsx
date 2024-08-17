@@ -4,7 +4,7 @@ import { Autoplay, Pagination } from "swiper/modules";
 import Image from "next/image";
 import "swiper/css";
 
-const mockData = new Array(5).fill(0);
+const mockData = new Array(2).fill(0);
 
 export default function Banner() {
   return (
