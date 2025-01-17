@@ -26,7 +26,7 @@ export default function Footer() {
         </div>
       </div>
       <div className="text-slate-50 text-center md:text-start">
-        Copyright © 2022 Bubur Nusantara. All rights reserved.
+        Copyright © 2019 Bubur Nusantara. All rights reserved.
       </div>
     </footer>
   );
