@@ -6,7 +6,7 @@ import Testimoni from "@/components/home/Testimoni";
 import Contact from "../../components/home/Contact";
 import { useEffect } from "react";
 import { useSearchParams } from "next/navigation";
-import { useUser } from "@/helper/context/userContext";
+import { useUser } from "@/lib/context/user-context";
 import "swiper/css";
 import "swiper/css/pagination";
 

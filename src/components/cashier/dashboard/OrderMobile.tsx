@@ -1,4 +1,4 @@
-import formatCurrency from "@/helper/currencyFormatter";
+import formatCurrency from "@/lib/currencyFormatter";
 import LoadingImage from "@/components/LoadingImage";
 export default function OrderMobile({
   data,

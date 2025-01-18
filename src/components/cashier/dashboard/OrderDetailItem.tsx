@@ -1,4 +1,4 @@
-import formatCurrency from "@/helper/currencyFormatter";
+import formatCurrency from "@/lib/currencyFormatter";
 
 export default function OrderDetailItem({ data }: { data: any }) {
   return (

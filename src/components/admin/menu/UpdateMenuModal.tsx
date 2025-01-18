@@ -1,15 +1,15 @@
 import { Dialog } from "@headlessui/react";
 import Image from "next/image";
-import { useDetailMenu } from "@/helper/hooks/useDetailMenu";
+import { useDetailMenu } from "@/lib/hooks/query/use-detail-menu";
 import { useQueryClient } from "react-query";
 import axios from "axios";
-import imageValidator from "@/helper/imageValidator";
+import imageValidator from "@/lib/imageValidator";
 import toast from "react-hot-toast";
 import { useState, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useForm } from "react-hook-form";
 import AdminInput from "./CashierInput";
-import { useCategoriesData } from "@/helper/hooks/useCategoryData";
+import { useCategories } from "@/lib/hooks/query/use-categories";
 import LoadingImage from "@/components/LoadingImage";
 
 const inputArray = [
@@ -42,8 +42,7 @@ export default function UpdateMenuModal({
   id: any;
 }) {
   const { data, isLoading } = useDetailMenu(id.current);
-  const { data: categories, isLoading: categoriesLoading } =
-    useCategoriesData();
+  const { data: categories, isLoading: categoriesLoading } = useCategories();
   const {
     register,
     handleSubmit,

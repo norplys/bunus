@@ -1,8 +1,8 @@
 import { Dialog } from "@headlessui/react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useState, useEffect } from "react";
-import { getSockets } from "@/helper/socket";
-import formatCurrency from "@/helper/currencyFormatter";
+import { getSockets } from "@/lib/socket";
+import formatCurrency from "@/lib/currencyFormatter";
 import Image from "next/image";
 
 export default function OrderReceipt() {

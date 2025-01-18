@@ -1,6 +1,6 @@
 import { Dialog } from "@headlessui/react";
 import { AnimatePresence, motion } from "framer-motion";
-import { useOrderDetail } from "@/helper/hooks/useOrderDetail";
+import { useOrderDetail } from "@/lib/hooks/query/use-order-detail";
 import { useState } from "react";
 import LoadingImage from "@/components/LoadingImage";
 import OrderItem from "./OrderItem";

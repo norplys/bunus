@@ -1,5 +1,5 @@
 import Image from "next/image";
-import BottomSlide from "@/helper/animation-framer/BottomSlide";
+import BottomSlide from "@/lib/animation-framer/BottomSlide";
 export default function MenuCard({
   menu,
 }: {

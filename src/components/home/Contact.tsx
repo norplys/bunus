@@ -2,7 +2,7 @@ import ContactButton from "./ContactButton";
 import { FaLocationDot, FaInstagram } from "react-icons/fa6";
 import { MdOutlineAlternateEmail } from "react-icons/md";
 import { FaWhatsapp } from "react-icons/fa";
-import RightSlide from "@/helper/animation-framer/RightSlide";
+import RightSlide from "@/lib/animation-framer/RightSlide";
 import ContactForm from "@/components/home/ContactForm";
 
 const data = [

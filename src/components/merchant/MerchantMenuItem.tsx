@@ -1,5 +1,5 @@
 import Image from "next/image";
-import playAudio from "@/helper/audio/playAudio";
+import playAudio from "@/lib/audio/playAudio";
 
 type MenuProps = {
   id: string;

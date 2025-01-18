@@ -3,7 +3,7 @@ import { ReactNode } from "react";
 import { useEffect, useState } from "react";
 import Protector from "@/components/Protector";
 import { useRouter } from "next/navigation";
-import { useUser } from "@/helper/context/userContext";
+import { useUser } from "@/lib/context/user-context";
 
 export default function CashierWrapper({ children }: { children: ReactNode }) {
   const { useAuth } = useUser();

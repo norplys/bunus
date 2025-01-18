@@ -2,13 +2,13 @@
 import CashierCategory from "@/components/admin/menu/CashierCategory";
 import { useState, useRef, useEffect } from "react";
 import CashierForm from "@/components/admin/menu/UpdateMenuModal";
-import { useCategoriesData } from "@/helper/hooks/useCategoryData";
-import { useUser } from "@/helper/context/userContext";
+import { useCategories } from "@/lib/hooks/query/use-categories";
+import { useUser } from "@/lib/context/user-context";
 import { FaPlusSquare } from "react-icons/fa";
 import CreateMenuModal from "@/components/admin/menu/CreateMenuModal";
 import CreateCategoryModal from "@/components/admin/menu/CreateCategoryModal";
 import LoadingImage from "@/components/LoadingImage";
-import { useCategoriesCount } from "@/helper/hooks/useCategoriesCount";
+import { useCategoryCount } from "@/lib/hooks/query/use-category-count";
 
 type CategoryProps = {
   id: string;
@@ -26,9 +26,9 @@ export default function AdminMenu() {
   const [isCreateOpen, setIsCreateOpen] = useState(false);
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
   const modalId = useRef("");
-  const { data, isLoading } = useCategoriesData();
+  const { data, isLoading } = useCategories();
   const { data: categoryCount, isLoading: categoryCountLoading } =
-    useCategoriesCount();
+    useCategoryCount();
 
   const setModalId = (id: string) => {
     modalId.current = id;

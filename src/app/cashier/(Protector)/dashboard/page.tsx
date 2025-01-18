@@ -1,15 +1,15 @@
 "use client";
-import { useOrderCashier } from "@/helper/hooks/useOrderCashier";
-import { useOrderFinish } from "@/helper/hooks/useOrderFinish";
+import { useOrderCashier } from "@/lib/hooks/query/use-order-cashier";
+import { useOrderFinish } from "@/lib/hooks/query/use-order-finish";
 import OrderTable from "@/components/cashier/dashboard/OrderTable";
 import OrderDetailModal from "@/components/cashier/dashboard/OrderDetailModal";
 import { useState, useRef, useEffect, use } from "react";
-import { getSockets } from "@/helper/socket";
+import { getSockets } from "@/lib/socket";
 import { useQueryClient } from "react-query";
 import OrderMobile from "@/components/cashier/dashboard/OrderMobile";
-import { useUser } from "@/helper/context/userContext";
+import { useUser } from "@/lib/context/user-context";
 import { FaPrint } from "react-icons/fa";
-import { handleConnect } from "@/helper/printer";
+import { handleConnect } from "@/lib/printer";
 
 export default function CashierDahboard() {
   const queryClient = useQueryClient();

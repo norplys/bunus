@@ -5,7 +5,7 @@ import LoginCashier from "@/components/cashier/login/LoginCashier";
 import { useEffect, useState } from "react";
 import Protector from "@/components/Protector";
 import { useRouter } from "next/navigation";
-import { useUser } from "@/helper/context/userContext";
+import { useUser } from "@/lib/context/user-context";
 
 export default function CashierLogin() {
   const [loading, setLoading] = useState(true);

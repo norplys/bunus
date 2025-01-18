@@ -1,10 +1,10 @@
 "use client";
 import Link from "next/link";
-import { useUser } from "@/helper/context/userContext";
+import { useUser } from "@/lib/context/user-context";
 import { FaShoppingCart } from "react-icons/fa";
 import { CgProfile } from "react-icons/cg";
 import { useRouter } from "next/navigation";
-import { useCartNotif } from "@/helper/hooks/useCartNotif";
+import { useCartNotif } from "@/lib/hooks/query/use-cart-notif";
 import { Menu } from "@headlessui/react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";

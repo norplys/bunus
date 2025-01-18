@@ -1,6 +1,6 @@
 import LoginInput from "../login/loginInput";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { useUser } from "@/helper/context/userContext";
+import { useUser } from "@/lib/context/user-context";
 
 const inputArray = [
   { label: "Nama", type: "text", placeholder: "Nama" },

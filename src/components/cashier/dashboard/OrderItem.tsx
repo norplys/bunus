@@ -4,8 +4,8 @@ import toast from "react-hot-toast";
 import { useQueryClient } from "react-query";
 import { VscLoading } from "react-icons/vsc";
 import OrderDetailItem from "./OrderDetailItem";
-import { getSockets } from "@/helper/socket";
-import { handlePrint } from "@/helper/printer";
+import { getSockets } from "@/lib/socket";
+import { handlePrint } from "@/lib/printer";
 
 export default function OrderItem({
   data,

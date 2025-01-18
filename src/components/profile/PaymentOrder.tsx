@@ -1,4 +1,4 @@
-import formatCurrency from "@/helper/currencyFormatter";
+import formatCurrency from "@/lib/currencyFormatter";
 import Link from "next/link";
 type Order = {
   id: string;

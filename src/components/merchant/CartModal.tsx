@@ -1,8 +1,8 @@
 import { Dialog } from "@headlessui/react";
 import { AnimatePresence, motion } from "framer-motion";
-import { useCartData } from "@/helper/hooks/useCartData";
+import { useCartData } from "@/lib/hooks/query/use-cart";
 import { useState } from "react";
-import { useUser } from "@/helper/context/userContext";
+import { useUser } from "@/lib/context/user-context";
 import CartModalItem from "./CartModalItem";
 import ModalType from "./ModalType";
 import MerchantForm from "./MerchantForm";

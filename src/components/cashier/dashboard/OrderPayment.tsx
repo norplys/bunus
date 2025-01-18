@@ -3,7 +3,7 @@ import toast from "react-hot-toast";
 import { useQueryClient } from "react-query";
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import formatCurrency from "@/helper/currencyFormatter";
+import formatCurrency from "@/lib/currencyFormatter";
 import LoadingImage from "@/components/LoadingImage";
 
 const typeArray = ["cash", "qris", "debit"];

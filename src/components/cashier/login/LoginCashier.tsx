@@ -3,7 +3,7 @@ import LoginInput from "@/components/login/loginInput";
 import axios, { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
 import { toast } from "react-hot-toast";
-import { useUser } from "@/helper/context/userContext";
+import { useUser } from "@/lib/context/user-context";
 import LoadingImage from "@/components/LoadingImage";
 
 const inputArray = [

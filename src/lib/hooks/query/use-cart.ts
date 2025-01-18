@@ -5,7 +5,7 @@ import { ApplicationError, fetcher } from "@/lib/fetcher";
 
 type CartResponse = APIResponse<unknown>;
 
-export function useCartData(
+export function useCart(
   token: string | null,
 ): UseQueryResult<CartResponse, ApplicationError> {
   const result = useQuery<CartResponse, ApplicationError>({

@@ -1,11 +1,11 @@
 import MenuItem from "@/components/menu/MenuItem";
-import { useCategoriesMenus } from "@/helper/hooks/useMenusData";
+import { useMenuData } from "@/lib/hooks/query/use-menu-data";
 import MenuLoading from "@/components/cashier/MenuLoading";
 import { FaTrash } from "react-icons/fa";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useQueryClient } from "react-query";
-import { useUser } from "@/helper/context/userContext";
+import { useUser } from "@/lib/context/user-context";
 
 type CategoryProps = {
   id: string;
@@ -38,7 +38,7 @@ export default function AdminCategory({
 }) {
   const { token } = useUser();
   const queryClient = useQueryClient();
-  const { data, isLoading } = useCategoriesMenus(category?.id);
+  const { data, isLoading } = useMenuData(category?.id);
   const deleteCategory = async (id: string) => {
     try {
       const res = axios.delete(

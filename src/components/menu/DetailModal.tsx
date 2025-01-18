@@ -1,13 +1,13 @@
 import { Dialog } from "@headlessui/react";
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import { useDetailMenu } from "@/helper/hooks/useDetailMenu";
+import { useDetailMenu } from "@/lib/hooks/query/use-detail-menu";
 import { useQueryClient } from "react-query";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
-import formatCurrency from "@/helper/currencyFormatter";
+import formatCurrency from "@/lib/currencyFormatter";
 import { VscLoading } from "react-icons/vsc";
 
 export default function DetailModal({

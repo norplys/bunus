@@ -4,7 +4,7 @@ import Image from "next/image";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Autoplay, Pagination } from "swiper/modules";
-import BottomSlide from "@/helper/animation-framer/BottomSlide";
+import BottomSlide from "@/lib/animation-framer/BottomSlide";
 const mockData = new Array(5).fill(0);
 export default function Testimoni() {
   return (

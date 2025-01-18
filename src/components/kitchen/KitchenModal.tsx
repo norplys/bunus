@@ -1,6 +1,6 @@
 import { Dialog } from "@headlessui/react";
 import { AnimatePresence, motion } from "framer-motion";
-import { useOrderDetail } from "@/helper/hooks/useOrderDetail";
+import { useOrderDetail } from "@/lib/hooks/query/use-order-detail";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useQueryClient } from "react-query";

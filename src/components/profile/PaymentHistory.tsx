@@ -1,7 +1,7 @@
-import { useOrderData } from "@/helper/hooks/useOrderData";
+import { useOrderData } from "@/lib/hooks/query/use-order-data";
 import PaymentOrder from "./PaymentOrder";
 import PaymentLoading from "./PaymentLoading";
-import { useUser } from "@/helper/context/userContext";
+import { useUser } from "@/lib/context/user-context";
 
 const LoadingArray = new Array(6).fill(0);
 export default function PaymentHistory() {

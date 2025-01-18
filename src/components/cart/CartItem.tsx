@@ -3,7 +3,7 @@ import Image from "next/image";
 import axios from "axios";
 import { useQueryClient } from "react-query";
 import toast from "react-hot-toast";
-import formatCurrency from "@/helper/currencyFormatter";
+import formatCurrency from "@/lib/currencyFormatter";
 
 export default function CartItem({ item }: { item: any }) {
   const queryClient = useQueryClient();

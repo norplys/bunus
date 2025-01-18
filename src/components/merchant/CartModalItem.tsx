@@ -1,8 +1,8 @@
 import { VscLoading } from "react-icons/vsc";
 import CartItem from "../cart/CartItem";
-import formatCurrency from "@/helper/currencyFormatter";
-import playAudio from "@/helper/audio/playAudio";
-import { use, useEffect } from "react";
+import formatCurrency from "@/lib/currencyFormatter";
+import playAudio from "@/lib/audio/playAudio";
+import { useEffect } from "react";
 
 export default function CartModalItem({
   data,

@@ -4,7 +4,7 @@ import SideAdmin from "@/components/admin/SideAdmin";
 import LoginAdmin from "@/components/admin/LoginAdmin";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { useUser } from "@/helper/context/userContext";
+import { useUser } from "@/lib/context/user-context";
 import Protector from "@/components/Protector";
 
 export default function KitchenLogin() {

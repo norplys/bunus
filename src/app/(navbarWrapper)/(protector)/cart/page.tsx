@@ -1,7 +1,7 @@
 "use client";
 import CartItem from "@/components/cart/CartItem";
 import { FaTrash } from "react-icons/fa";
-import { useCartData } from "@/helper/hooks/useCartData";
+import { useCart } from "@/lib/hooks/query/use-cart";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
@@ -11,7 +11,7 @@ export default function Cart() {
   const { push } = useRouter();
   const [loading, setLoading] = useState(false);
   const token = localStorage.getItem("token");
-  const { data, isLoading } = useCartData(token);
+  const { data, isLoading } = useCart(token);
   const handleCheckout = async (total: number) => {
     try {
       setLoading(true);

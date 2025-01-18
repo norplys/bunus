@@ -1,5 +1,5 @@
 "use client";
-import LeftSlide from "@/helper/animation-framer/LeftSlide";
+import LeftSlide from "@/lib/animation-framer/LeftSlide";
 import { useForm, SubmitHandler } from "react-hook-form";
 import toast from "react-hot-toast";
 import axios from "axios";

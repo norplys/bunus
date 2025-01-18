@@ -2,9 +2,9 @@
 import Category from "@/components/menu/Category";
 import { useState, useRef, useEffect } from "react";
 import DetailModal from "@/components/menu/DetailModal";
-import { useCategoriesData } from "@/helper/hooks/useCategoryData";
+import { useCategories } from "@/lib/hooks/query/use-categories";
 import LoadingImage from "@/components/LoadingImage";
-import { useUser } from "@/helper/context/userContext";
+import { useUser } from "@/lib/context/user-context";
 
 type CategoryProps = {
   id: string;
@@ -14,7 +14,7 @@ type CategoryProps = {
 export default function menu() {
   const [open, setOpen] = useState(false);
   const modalId = useRef("");
-  const { data, isLoading } = useCategoriesData();
+  const { data, isLoading } = useCategories();
   const { useAuth } = useUser();
   const validateToken = async () => {
     try {

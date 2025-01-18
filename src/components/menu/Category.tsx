@@ -1,5 +1,5 @@
 import MenuItem from "./MenuItem";
-import { useCategoriesMenus } from "@/helper/hooks/useMenusData";
+import { useMenuData } from "@/lib/hooks/query/use-menu-data";
 import MenuLoading from "../cashier/MenuLoading";
 
 type CategoryProps = {
@@ -28,7 +28,7 @@ export default function Category({
   setModalId: (value: string) => void;
   isOpen: boolean;
 }) {
-  const { data, isLoading } = useCategoriesMenus(category?.id);
+  const { data, isLoading } = useMenuData(category?.id);
   return (
     <section className="grid justify-items-center gap-4 mx-2">
       <h1 className="font-extrabold md:text-xl text-lg">

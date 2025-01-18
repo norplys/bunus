@@ -1,6 +1,6 @@
 import { LiaUtensilsSolid } from "react-icons/lia";
 import { RiTakeawayFill } from "react-icons/ri";
-import playAudio from "@/helper/audio/playAudio";
+import playAudio from "@/lib/audio/playAudio";
 export default function ModalType({
   setNow,
   setOrderType,

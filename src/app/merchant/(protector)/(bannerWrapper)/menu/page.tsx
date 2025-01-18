@@ -1,15 +1,15 @@
 "use client";
 
 import DetailModal from "@/components/menu/DetailModal";
-import { useCategoriesData } from "@/helper/hooks/useCategoryData";
-import { useUser } from "@/helper/context/userContext";
+import { useCategories } from "@/lib/hooks/query/use-categories";
+import { useUser } from "@/lib/context/user-context";
 import LoadingImage from "@/components/LoadingImage";
 import { useState, useRef, useEffect } from "react";
-import { useCartNotif } from "@/helper/hooks/useCartNotif";
+import { useCartNotif } from "@/lib/hooks/query/use-cart-notif";
 import { FaShoppingCart, FaArrowRight } from "react-icons/fa";
 import CartModal from "@/components/merchant/CartModal";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
-import { useCategoriesMenus } from "@/helper/hooks/useMenusData";
+import { useMenuData } from "@/lib/hooks/query/use-menu-data";
 import MerchantMenuItem from "@/components/merchant/MerchantMenuItem";
 
 type CategoryProps = {
@@ -42,7 +42,7 @@ export default function MerchantMenu() {
   const params = new URLSearchParams(searchParams.toString());
   const pathname = usePathname();
   const { push } = useRouter();
-  const { data, isLoading } = useCategoriesData();
+  const { data, isLoading } = useCategories();
   const setModalId = (id: string) => {
     modalId.current = id;
   };
@@ -61,8 +61,7 @@ export default function MerchantMenu() {
   }, [category]);
 
   const { data: notif, isLoading: cartLoading } = useCartNotif(token);
-  const { data: itemData, isLoading: itemLoading } =
-    useCategoriesMenus(category);
+  const { data: itemData, isLoading: itemLoading } = useMenuData(category);
   return (
     <section className="bg-white z-0 mt-28 pb-32">
       <ul className="flex flex-wrap py-2 shadow-lg gap-x-3 gap-y-2 justify-center items-center">

@@ -1,4 +1,4 @@
-import formatCurrency from "@/helper/currencyFormatter";
+import formatCurrency from "@/lib/currencyFormatter";
 import { useState } from "react";
 import axios from "axios";
 import { VscLoading } from "react-icons/vsc";

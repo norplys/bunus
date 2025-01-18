@@ -4,10 +4,10 @@ import { useState, useEffect } from "react";
 import { useQueryClient } from "react-query";
 import axios from "axios";
 import toast from "react-hot-toast";
-import imageValidator from "@/helper/imageValidator";
+import imageValidator from "@/lib/imageValidator";
 import { useForm } from "react-hook-form";
 import AdminInput from "./CashierInput";
-import { useCategoriesData } from "@/helper/hooks/useCategoryData";
+import { useCategories } from "@/lib/hooks/query/use-categories";
 import { AnimatePresence, motion } from "framer-motion";
 
 const inputArray = [
@@ -44,8 +44,7 @@ export default function CreateMenuModal({
   isOpen: boolean;
   setIsOpen: (value: boolean) => void;
 }) {
-  const { data: categories, isLoading: categoriesLoading } =
-    useCategoriesData();
+  const { data: categories, isLoading: categoriesLoading } = useCategories();
   const {
     register,
     handleSubmit,
