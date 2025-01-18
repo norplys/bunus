@@ -31,13 +31,15 @@ export default function menu() {
     modalId.current = id;
   };
 
+  const categories = data?.data;
+
   return (
     <section className="min-h-screen">
       <div className="grid gap-14 my-8">
         {isLoading ? (
           <LoadingImage />
         ) : (
-          data.map((category: CategoryProps, i: number) => {
+          categories?.map((category: CategoryProps, i: number) => {
             return (
               <Category
                 key={i}

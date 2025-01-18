@@ -1,6 +1,6 @@
 import { useQuery, type UseQueryResult } from "react-query";
 import type { APIResponse } from "@/lib/types/api";
-// import type { Category } from "@/lib/types/schema" chane to schema;
+import type { Category } from "@/lib/types/schema";
 import { ApplicationError, fetcher } from "@/lib/fetcher";
 
 type AdminOrderResponse = APIResponse<unknown>;

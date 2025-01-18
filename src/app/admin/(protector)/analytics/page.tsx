@@ -26,14 +26,20 @@ const array = [
 
 export default function Analytics() {
   const { token } = useUser();
+
   const [date, setDate] = useState(new Date());
+
   const { data, isLoading } = useAdminOrder(
     token,
     date.toISOString().split("T")[0],
   );
+
   const handleChange = async (e: ChangeEvent<HTMLInputElement>) => {
     setDate(new Date(e.target.value ? e.target.value : new Date()));
   };
+
+  const adminOrder = data?.data;
+
   return (
     <div className="flex-1 w-full">
       <h1 className="w-full bg-primary-orange p-2 flex justify-end items-center">
@@ -63,7 +69,7 @@ export default function Analytics() {
               <LoadingImage />
             ) : (
               <p className="text-center text-2xl font-bold">
-                {formatCurrency(data[item.value])}
+                {formatCurrency(adminOrder[item.value])}
               </p>
             )}
           </div>

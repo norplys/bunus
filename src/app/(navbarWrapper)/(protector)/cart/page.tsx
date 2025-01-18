@@ -6,6 +6,7 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { useState } from "react";
+import { NEXT_PUBLIC_BACKEND_URL } from "@/lib/env";
 
 export default function Cart() {
   const { push } = useRouter();
@@ -33,7 +34,7 @@ export default function Cart() {
         return;
       }
       const res = axios.post(
-        "https://bunus-be-production.up.railway.app/v1/orders",
+        NEXT_PUBLIC_BACKEND_URL + "/v1/orders",
         {
           total,
           items,
