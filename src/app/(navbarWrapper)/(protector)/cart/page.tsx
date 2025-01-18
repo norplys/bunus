@@ -9,20 +9,26 @@ import { useState } from "react";
 
 export default function Cart() {
   const { push } = useRouter();
+
   const [loading, setLoading] = useState(false);
+
   const token = localStorage.getItem("token");
+
   const { data, isLoading } = useCart(token);
+
+  const cart = data?.data;
+
   const handleCheckout = async (total: number) => {
     try {
       setLoading(true);
-      const items = data?.items.map((item: any) => {
+      const items = cart?.items.map((item: any) => {
         return {
           menuId: item.menu.id,
           quantity: item.quantity,
           total: item.total,
         };
       });
-      if (!items.length) {
+      if (items?.length) {
         setLoading(false);
         return;
       }
@@ -67,7 +73,7 @@ export default function Cart() {
             {isLoading ? (
               <h1>Loading...</h1>
             ) : (
-              <p>Total item ({data?.items.length})</p>
+              <p>Total item ({cart?.items.length})</p>
             )}
             <button className="text-primary-red text-base">
               <FaTrash />
@@ -78,7 +84,7 @@ export default function Cart() {
             {isLoading ? (
               <h1>Loading...</h1>
             ) : (
-              data?.items.map((item: any, i: any) => {
+              cart?.items.map((item: any, i: any) => {
                 return <CartItem key={i} item={item} />;
               })
             )}
@@ -91,12 +97,12 @@ export default function Cart() {
           <p className="md:text-lg flex justify-between border-b pb-2">
             Total{" "}
             <p className="font-bold text-sm md:text-base">
-              Rp. {isLoading ? <h1>Loading...</h1> : data?.total}
+              Rp. {isLoading ? <h1>Loading...</h1> : cart?.total}
             </p>
           </p>
           <button
             className="bg-gradient-to-r from-primary-cyan via-purple-500 to-primary-orange text-white font-bold rounded-md md:p-2 bg-800% bg-50% hover:bg-100% duration-700 shadow-xl py-1"
-            onClick={() => handleCheckout(data?.total)}
+            onClick={() => handleCheckout(cart!.total)}
             disabled={loading}
           >
             Bayar
