@@ -1,6 +1,6 @@
 import { Dialog } from "@headlessui/react";
 import { AnimatePresence, motion } from "framer-motion";
-import { useCartData } from "@/lib/hooks/query/use-cart";
+import { useCart } from "@/lib/hooks/query/use-cart";
 import { useState } from "react";
 import { useUser } from "@/lib/context/user-context";
 import CartModalItem from "./CartModalItem";
@@ -15,7 +15,7 @@ export default function CreateCategoryModal({
   setIsOpen: (value: boolean) => void;
 }) {
   const { token } = useUser();
-  const { data, isLoading } = useCartData(token);
+  const { data, isLoading } = useCart(token);
   const [now, setNow] = useState<string>("cart");
   const [orderType, setOrderType] = useState<string>("DINE_IN");
 
