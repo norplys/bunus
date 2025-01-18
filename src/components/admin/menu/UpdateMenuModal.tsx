@@ -99,14 +99,11 @@ export default function UpdateMenuModal({
   const deleteMenu = async (id: string) => {
     try {
       const token = localStorage.getItem("token");
-      const res = axios.delete(
-        `https://bunus-be-production.up.railway.app/v1/menus/${id}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
+      const res = axios.delete(`https://bunus.joywinata.my.id/v1/menus/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
         },
-      );
+      });
       await toast.promise(res, {
         loading: "Loading...",
         success: "Menu Berhasil Dihapus",
