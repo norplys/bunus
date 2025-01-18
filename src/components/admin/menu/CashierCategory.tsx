@@ -37,8 +37,13 @@ export default function AdminCategory({
   count: number;
 }) {
   const { token } = useUser();
+
   const queryClient = useQueryClient();
+
   const { data, isLoading } = useMenuData(category?.id);
+
+  const menuData = data?.data;
+
   const deleteCategory = async (id: string) => {
     try {
       const res = axios.delete(
@@ -60,6 +65,7 @@ export default function AdminCategory({
       console.log(error);
     }
   };
+
   const changeCategoryOrder = async (id: string, orderIndex: number) => {
     try {
       const res = axios.put(
@@ -84,6 +90,7 @@ export default function AdminCategory({
       console.log(error);
     }
   };
+
   return (
     <section className="grid justify-items-center gap-4 mx-2">
       <h1 className="font-extrabold md:text-xl text-lg flex gap-2 items-center">
@@ -109,7 +116,7 @@ export default function AdminCategory({
       <section className="flex flex-wrap gap-6 justify-center items-center">
         {isLoading
           ? LoadingArray.map((item) => <MenuLoading />)
-          : data?.map((menu: MenuProps, i: number) => {
+          : menuData?.map((menu: MenuProps, i: number) => {
               return (
                 <MenuItem
                   key={i}

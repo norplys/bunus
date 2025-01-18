@@ -24,3 +24,14 @@ export type Menu = BaseRecord & {
   price: number;
   description: string;
 };
+
+export type DetailMenu = Menu & {
+  category: Category;
+};
+
+export type Analytics = {
+  qris: number;
+  cash: number;
+  debit: number;
+  total: number;
+};

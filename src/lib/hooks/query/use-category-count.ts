@@ -1,9 +1,8 @@
 import { useQuery, type UseQueryResult } from "react-query";
 import type { APIResponse } from "@/lib/types/api";
-// import type { Category } from "@/lib/types/schema" chane to schema;
 import { ApplicationError, fetcher } from "@/lib/fetcher";
 
-type CategoriesCountResponse = APIResponse<unknown>;
+type CategoriesCountResponse = APIResponse<number>;
 
 export function useCategoryCount(): UseQueryResult<
   CategoriesCountResponse,

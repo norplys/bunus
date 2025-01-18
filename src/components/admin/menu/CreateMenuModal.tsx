@@ -45,6 +45,9 @@ export default function CreateMenuModal({
   setIsOpen: (value: boolean) => void;
 }) {
   const { data: categories, isLoading: categoriesLoading } = useCategories();
+
+  const categoriesData = categories?.data;
+
   const {
     register,
     handleSubmit,
@@ -52,12 +55,17 @@ export default function CreateMenuModal({
     reset,
     formState: { errors },
   } = useForm();
+
   const queryClient = useQueryClient();
+
   const [image, setImage] = useState(null);
+
   const imageFile = watch("image");
+
   useEffect(() => {
     imageValidator(imageFile, setImage, image, reset);
   }, [imageFile]);
+
   useEffect(() => {}, [isOpen]);
   const handleAddToCart = async (data: any) => {
     const formData = new FormData();
@@ -87,6 +95,7 @@ export default function CreateMenuModal({
       console.log(error);
     }
   };
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -137,7 +146,7 @@ export default function CreateMenuModal({
                       className="border border-primary-orange rounded-md p-1"
                       {...register("category", { required: true })}
                     >
-                      {categories?.map((category: any, i: number) => (
+                      {categoriesData?.map((category: any, i: number) => (
                         <option key={i} value={category.id}>
                           {category.name}
                         </option>

@@ -1,9 +1,9 @@
 import { useQuery, type UseQueryResult } from "react-query";
 import type { APIResponse } from "@/lib/types/api";
-import type { Category } from "@/lib/types/schema";
+import type { Analytics } from "@/lib/types/schema";
 import { ApplicationError, fetcher } from "@/lib/fetcher";
 
-type AdminOrderResponse = APIResponse<unknown>;
+type AdminOrderResponse = APIResponse<Analytics>;
 
 export function useAdminOrder(
   token: string | null,

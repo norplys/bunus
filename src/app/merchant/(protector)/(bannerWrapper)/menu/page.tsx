@@ -27,29 +27,43 @@ type MenuProps = {
 
 export default function MerchantMenu() {
   const viewportmeta = document.querySelector('meta[name="viewport"]');
+
   if (viewportmeta instanceof HTMLMetaElement) {
     viewportmeta.content =
       "width=device-width, minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0";
   }
+
   const { token } = useUser();
+
   const [open, setOpen] = useState(false);
+
   const [cartOpen, setCartOpen] = useState(false);
+
   const modalId = useRef("");
+
   const [category, setCategory] = useState<string>(
     "f338198b-9eee-43fc-a496-f99b0fd2cb67",
   );
+
   const searchParams = useSearchParams();
+
   const params = new URLSearchParams(searchParams.toString());
+
   const pathname = usePathname();
+
   const { push } = useRouter();
+
   const { data, isLoading } = useCategories();
+
   const setModalId = (id: string) => {
     modalId.current = id;
   };
+
   const createQueryString = (name: string, value: string) => {
     params.set(name, value);
     return params.toString();
   };
+
   useEffect(() => {
     const category = searchParams.get("category");
     if (category) {
@@ -60,15 +74,21 @@ export default function MerchantMenu() {
     push(pathname + "?" + createQueryString("category", category));
   }, [category]);
 
-  const { data: notif, isLoading: cartLoading } = useCartNotif(token);
+  const { data: notifData, isLoading: cartLoading } = useCartNotif(token);
+
   const { data: itemData, isLoading: itemLoading } = useMenuData(category);
+
+  const categories = data?.data;
+  const notif = notifData?.data;
+  const menuData = itemData?.data;
+
   return (
     <section className="bg-white z-0 mt-28 pb-32">
       <ul className="flex flex-wrap py-2 shadow-lg gap-x-3 gap-y-2 justify-center items-center">
         {isLoading ? (
           <LoadingImage />
         ) : (
-          data.map((categoryItem: CategoryProps, i: number) => {
+          categories?.map((categoryItem: CategoryProps, i: number) => {
             return (
               <li
                 key={i}
@@ -87,7 +107,7 @@ export default function MerchantMenu() {
         {itemLoading ? (
           <LoadingImage />
         ) : (
-          itemData.map((menu: MenuProps, i: number) => {
+          menuData?.map((menu: MenuProps, i: number) => {
             return (
               <MerchantMenuItem
                 key={i}

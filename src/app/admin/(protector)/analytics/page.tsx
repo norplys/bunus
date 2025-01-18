@@ -69,7 +69,11 @@ export default function Analytics() {
               <LoadingImage />
             ) : (
               <p className="text-center text-2xl font-bold">
-                {formatCurrency(adminOrder[item.value])}
+                {formatCurrency(
+                  adminOrder
+                    ? adminOrder[item.value as keyof typeof adminOrder]
+                    : 0,
+                )}
               </p>
             )}
           </div>

@@ -18,21 +18,31 @@ type CategoryProps = {
 
 export default function AdminMenu() {
   const { setToken } = useUser();
+
   useEffect(() => {
     setToken(localStorage.getItem("token"));
   }, []);
 
   const [open, setOpen] = useState(false);
+
   const [isCreateOpen, setIsCreateOpen] = useState(false);
+
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
+
   const modalId = useRef("");
+
   const { data, isLoading } = useCategories();
-  const { data: categoryCount, isLoading: categoryCountLoading } =
+
+  const { data: countData, isLoading: categoryCountLoading } =
     useCategoryCount();
 
   const setModalId = (id: string) => {
     modalId.current = id;
   };
+
+  const categories = data?.data;
+
+  const categoryCount = countData?.data;
 
   return (
     <div className="flex-1 w-full">
@@ -60,7 +70,7 @@ export default function AdminMenu() {
           {isLoading || categoryCountLoading ? (
             <LoadingImage />
           ) : (
-            data.map((category: CategoryProps, i: number) => {
+            categories?.map((category: CategoryProps, i: number) => {
               return (
                 <CashierCategory
                   key={i}
@@ -68,7 +78,7 @@ export default function AdminMenu() {
                   setIsOpen={setOpen}
                   isOpen={open}
                   setModalId={setModalId}
-                  count={categoryCount}
+                  count={categoryCount || 0}
                 />
               );
             })

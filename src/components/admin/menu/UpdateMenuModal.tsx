@@ -41,8 +41,14 @@ export default function UpdateMenuModal({
   setIsOpen: (value: boolean) => void;
   id: any;
 }) {
-  const { data, isLoading } = useDetailMenu(id.current);
-  const { data: categories, isLoading: categoriesLoading } = useCategories();
+  const { data: data, isLoading } = useDetailMenu(id.current);
+
+  const { data: categoriesData, isLoading: categoriesLoading } =
+    useCategories();
+
+  const detailMenu = data?.data;
+  const categories = categoriesData?.data;
+
   const {
     register,
     handleSubmit,
@@ -51,20 +57,25 @@ export default function UpdateMenuModal({
     reset,
   } = useForm({
     values: {
-      name: data?.name,
-      price: data?.price,
-      description: data?.description,
-      category: data?.category?.id,
+      name: detailMenu?.name,
+      price: detailMenu?.price,
+      description: detailMenu?.description,
+      category: detailMenu?.category?.id,
       image: null,
-      id: data?.id,
+      id: detailMenu?.id,
     },
   });
+
   const [image, setImage] = useState<any>(null);
+
   const imageFile = watch<any>("image");
+
   useEffect(() => {
     imageValidator(imageFile, setImage, image, reset);
   }, [imageFile]);
+
   const queryClient = useQueryClient();
+
   const handleUpdateMenu = async (data: any) => {
     const formData = new FormData();
     formData.append("name", data.name);
@@ -115,6 +126,7 @@ export default function UpdateMenuModal({
       console.log(error);
     }
   };
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -139,7 +151,7 @@ export default function UpdateMenuModal({
                 <div className="flex gap-5 flex-col md:flex-row">
                   <div className="overflow-hidden rounded-2xl shadow-xl h-72">
                     <Image
-                      src={image ? image : data?.image}
+                      src={image ? image : detailMenu?.image}
                       alt="menu1"
                       width={300}
                       height={300}
@@ -190,7 +202,7 @@ export default function UpdateMenuModal({
                 <div className="flex gap-2">
                   <button
                     className="py-1 md:px-3 font-bold rounded-xl mb-4 text-white md:text-lg shadow-lg bg-gradient-to-r from-primary-red via-purple-500 to-primary-orange bg-800% bg-50% hover:bg-100% duration-700 text-base px-2"
-                    onClick={() => deleteMenu(data.id)}
+                    onClick={() => deleteMenu(detailMenu!.id)}
                   >
                     Hapus Menu
                   </button>

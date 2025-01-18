@@ -1,9 +1,9 @@
 import { useQuery, type UseQueryResult } from "react-query";
 import type { APIResponse } from "@/lib/types/api";
-// import type { Category } from "@/lib/types/schema" chane to schema;
+import type { Menu } from "@/lib/types/schema";
 import { ApplicationError, fetcher } from "@/lib/fetcher";
 
-type MenuDataResponse = APIResponse<unknown>;
+type MenuDataResponse = APIResponse<Menu[]>;
 
 export function useMenuData(
   id: string,
