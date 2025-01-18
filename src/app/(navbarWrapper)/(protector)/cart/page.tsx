@@ -27,7 +27,7 @@ export default function Cart() {
         return;
       }
       const res = axios.post(
-        "https://bunus-be-production.up.railway.app/v1/orders",
+        "https://bunus.joywinata.my.id/v1/orders",
         {
           total,
           items,
