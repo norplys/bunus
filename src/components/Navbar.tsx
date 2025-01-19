@@ -19,6 +19,7 @@ export default function Navbar() {
 
   const [open, setOpen] = useState(false);
   const { data, isLoading } = useCartNotif(token);
+  const cartNotif = data?.data;
   const { push } = useRouter();
   const { user, setUser } = useUser();
   const logOut = () => {
@@ -66,7 +67,7 @@ export default function Navbar() {
                   ""
                 ) : (
                   <div className="rounded-full w-4 h-4 text-center bg-primary-red absolute -right-1 -top-1 text-xs text-white font-bold">
-                    {data}
+                    {cartNotif || 0}
                   </div>
                 )}
                 <FaShoppingCart className="text-md text-white" />
@@ -123,7 +124,7 @@ export default function Navbar() {
                           ""
                         ) : (
                           <div className="rounded-full w-4 h-4 text-center bg-primary-red absolute -right-1 -top-1 text-xs text-white font-bold">
-                            {data}
+                            {cartNotif || 0}
                           </div>
                         )}
                         <FaShoppingCart className="text-md text-white" />

@@ -29,6 +29,9 @@ export default function Category({
   isOpen: boolean;
 }) {
   const { data, isLoading } = useMenuData(category?.id);
+
+  const menus = data?.data;
+
   return (
     <section className="grid justify-items-center gap-4 mx-2">
       <h1 className="font-extrabold md:text-xl text-lg">
@@ -37,7 +40,7 @@ export default function Category({
       <section className="flex flex-wrap gap-6 justify-center items-center">
         {isLoading
           ? LoadingArray.map((item, i) => <MenuLoading key={i} />)
-          : data?.map((menu: MenuProps, i: number) => {
+          : menus?.map((menu: MenuProps, i: number) => {
               return (
                 <MenuItem
                   key={i}

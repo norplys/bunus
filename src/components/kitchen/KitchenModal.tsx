@@ -19,7 +19,11 @@ export default function KitchenModal({
   refId: any;
 }) {
   const { data, isLoading: isLoadingData } = useOrderDetail(refId.current);
+
+  const orderDetail = data?.data;
+
   const [isLoading, setLoading] = useState(false);
+
   const queryClient = useQueryClient();
 
   const setDone = async (id: string) => {
@@ -70,11 +74,11 @@ export default function KitchenModal({
               <>
                 <div className="bg-primary-orange text-white p-2 w-full text-center">
                   <p className="font-bold text-lg">
-                    {data.table || data.user.name}
+                    {orderDetail?.table || orderDetail?.user.name}
                   </p>
                 </div>
                 <div className="w-full font-semibold text-lg pl-2 py-5">
-                  <p>Tipe : {data.type}</p>
+                  <p>Tipe : {orderDetail?.type}</p>
                 </div>
                 <div className="bg-primary-orange text-white p-2 rounded-md w-full text-center">
                   <p className="font-bold text-lg">Barang</p>
@@ -82,7 +86,7 @@ export default function KitchenModal({
                 <OrderKitchenItem data={data} />
                 <div className="flex gap-5 pt-5">
                   <button
-                    onClick={() => setDone(data.id)}
+                    onClick={() => setDone(orderDetail!.id)}
                     className={`bg-green-500 text-white font-bold p-2 rounded-md`}
                   >
                     {isLoading ? (

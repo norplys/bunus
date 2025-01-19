@@ -1,9 +1,9 @@
 import { useQuery, type UseQueryResult } from "react-query";
 import type { APIResponse } from "@/lib/types/api";
-// import type { Category } from "@/lib/types/schema" chane to schema;
+import { Order } from "@/lib/types/schema";
 import { ApplicationError, fetcher } from "@/lib/fetcher";
 
-type OrderDataResponse = APIResponse<unknown>;
+type OrderDataResponse = APIResponse<Order[]>;
 
 export function useOrderData(
   token: string,

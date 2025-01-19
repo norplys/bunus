@@ -35,3 +35,30 @@ export type Analytics = {
   debit: number;
   total: number;
 };
+
+export type Order = BaseRecord & {
+  total: number;
+  userId: string;
+  isDone: boolean;
+  isCooked: boolean;
+  table: number;
+  type: "DINE_IN" | "TAKE_AWAY";
+  merchant: string;
+  user: {
+    name: string;
+    email: string;
+  };
+  payment: Payment;
+};
+
+export type OrderDetail = Order & {
+  items: CartItem &
+    {
+      menu: Menu;
+    }[];
+};
+
+export type Payment = BaseRecord & {
+  status: string;
+  method: "cash" | "debit" | "qris";
+};

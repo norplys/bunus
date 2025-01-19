@@ -23,6 +23,7 @@ export default function DetailModal({
   const queryClient = useQueryClient();
   const [count, setCount] = useState(0);
   const { data, isLoading } = useDetailMenu(id.current);
+  const detailMenu = data?.data;
   const [submitLoading, setSubmitLoading] = useState(false);
 
   useEffect(() => {
@@ -90,12 +91,12 @@ export default function DetailModal({
             ) : (
               <>
                 <Dialog.Title>
-                  <div className="text-xl font-bold">{data?.name}</div>
+                  <div className="text-xl font-bold">{detailMenu?.name}</div>
                 </Dialog.Title>
                 <div className="flex gap-5 flex-col md:flex-row">
                   <div className="overflow-hidden h-60 rounded-2xl shadow-2xl">
                     <Image
-                      src={data?.image}
+                      src={detailMenu!.image}
                       alt="menuImage"
                       width={300}
                       height={300}
@@ -104,16 +105,16 @@ export default function DetailModal({
                     />
                   </div>
                   <Dialog.Description className="overflow-y-auto text-justify text-sm w-72 border border-primary-orange md:h-full rounded-lg p-2 bg-orange-50 shadow-xl">
-                    {data?.description}
+                    {detailMenu?.description}
                   </Dialog.Description>
                 </div>
                 <div className="w-full grid grid-rows-1 grid-cols-2">
                   <div className="md:text-xl font-semibold flex text-xl mx-auto">
-                    {formatCurrency(data?.price)}
+                    {formatCurrency(detailMenu?.price || 0)}
                     <p className="text-xs flex items-end">/pcs</p>
                   </div>
                   <p className="font-semibold md:text-xl text-xl mx-auto">
-                    Total : {formatCurrency(data?.price * count)}
+                    Total : {formatCurrency((detailMenu?.price || 0) * count)}
                   </p>
                 </div>
                 <div className="flex gap-5 justify-beetween items-center">
