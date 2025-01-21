@@ -1,10 +1,10 @@
 "use client";
 import { CgProfile } from "react-icons/cg";
-import ProfileForm from "@/components/profile/ProfileForm";
+import ProfileForm from "@/components/profile/profile-form";
 import { useState } from "react";
 import { RiBillFill } from "react-icons/ri";
 import { LuUtensilsCrossed } from "react-icons/lu";
-import PaymentHistory from "@/components/profile/PaymentHistory";
+import PaymentHistory from "@/components/profile/payment-history";
 
 export default function Profile() {
   const [isProfile, setIsProfile] = useState(true);

@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
-import SideMerchant from "@/components/merchant/SideMerchant";
-import LoginMerchant from "@/components/merchant/LoginMerchant";
+import SideMerchant from "@/components/merchant/side-merchant";
+import LoginMerchant from "@/components/merchant/login-merchant";
 
 export default function MerchantLogin() {
   return (

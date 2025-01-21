@@ -1,11 +1,11 @@
 "use client";
 import Link from "next/link";
-import SideAdmin from "@/components/admin/SideAdmin";
-import LoginAdmin from "@/components/admin/LoginAdmin";
+import SideAdmin from "@/components/admin/side-admin";
+import LoginAdmin from "@/components/admin/login-admin";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { useUser } from "@/helper/context/userContext";
-import Protector from "@/components/Protector";
+import { useUser } from "@/lib/context/user-context";
+import Protector from "@/components/protector";
 
 export default function KitchenLogin() {
   const [loading, setLoading] = useState(true);

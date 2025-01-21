@@ -1,14 +1,14 @@
 "use client";
-import CashierCategory from "@/components/admin/menu/CashierCategory";
+import CashierCategory from "@/components/admin/menu/cashier-category";
 import { useState, useRef, useEffect } from "react";
-import CashierForm from "@/components/admin/menu/UpdateMenuModal";
-import { useCategoriesData } from "@/helper/hooks/useCategoryData";
-import { useUser } from "@/helper/context/userContext";
+import CashierForm from "@/components/admin/menu/update-menu-modal";
+import { useCategories } from "@/lib/hooks/query/use-categories";
+import { useUser } from "@/lib/context/user-context";
 import { FaPlusSquare } from "react-icons/fa";
-import CreateMenuModal from "@/components/admin/menu/CreateMenuModal";
-import CreateCategoryModal from "@/components/admin/menu/CreateCategoryModal";
-import LoadingImage from "@/components/LoadingImage";
-import { useCategoriesCount } from "@/helper/hooks/useCategoriesCount";
+import CreateMenuModal from "@/components/admin/menu/create-menu-modal";
+import CreateCategoryModal from "@/components/admin/menu/create-category-modal";
+import LoadingImage from "@/components/loading-image";
+import { useCategoryCount } from "@/lib/hooks/query/use-category-count";
 
 type CategoryProps = {
   id: string;
@@ -18,21 +18,31 @@ type CategoryProps = {
 
 export default function AdminMenu() {
   const { setToken } = useUser();
+
   useEffect(() => {
     setToken(localStorage.getItem("token"));
   }, []);
 
   const [open, setOpen] = useState(false);
+
   const [isCreateOpen, setIsCreateOpen] = useState(false);
+
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
+
   const modalId = useRef("");
-  const { data, isLoading } = useCategoriesData();
-  const { data: categoryCount, isLoading: categoryCountLoading } =
-    useCategoriesCount();
+
+  const { data, isLoading } = useCategories();
+
+  const { data: countData, isLoading: categoryCountLoading } =
+    useCategoryCount();
 
   const setModalId = (id: string) => {
     modalId.current = id;
   };
+
+  const categories = data?.data;
+
+  const categoryCount = countData?.data;
 
   return (
     <div className="flex-1 w-full">
@@ -60,7 +70,7 @@ export default function AdminMenu() {
           {isLoading || categoryCountLoading ? (
             <LoadingImage />
           ) : (
-            data.map((category: CategoryProps, i: number) => {
+            categories?.map((category: CategoryProps, i: number) => {
               return (
                 <CashierCategory
                   key={i}
@@ -68,7 +78,7 @@ export default function AdminMenu() {
                   setIsOpen={setOpen}
                   isOpen={open}
                   setModalId={setModalId}
-                  count={categoryCount}
+                  count={categoryCount || 0}
                 />
               );
             })

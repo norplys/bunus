@@ -1,9 +1,9 @@
 "use client";
 import { ReactNode } from "react";
 import { useEffect, useState } from "react";
-import Protector from "@/components/Protector";
+import Protector from "@/components/protector";
 import { useRouter } from "next/navigation";
-import { useUser } from "@/helper/context/userContext";
+import { useUser } from "@/lib/context/user-context";
 
 export default function CashierWrapper({ children }: { children: ReactNode }) {
   const { useAuth } = useUser();

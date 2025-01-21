@@ -1,12 +1,12 @@
 "use client";
-import Chef from "@/components/home/Chef";
-import Intro from "../../components/home/Intro";
-import FavouriteMenu from "../../components/home/FavouriteMenu";
-import Testimoni from "@/components/home/Testimoni";
-import Contact from "../../components/home/Contact";
+import Chef from "@/components/home/chef";
+import Intro from "@/components/home/intro";
+import FavouriteMenu from "@/components/home/favourite-menu";
+import Testimoni from "@/components/home/testimony";
+import Contact from "@/components/home/contact";
 import { useEffect } from "react";
 import { useSearchParams } from "next/navigation";
-import { useUser } from "@/helper/context/userContext";
+import { useUser } from "@/lib/context/user-context";
 import "swiper/css";
 import "swiper/css/pagination";
 

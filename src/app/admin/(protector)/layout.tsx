@@ -1,10 +1,10 @@
 "use client";
 import { ReactNode } from "react";
 import { useEffect, useState } from "react";
-import Protector from "@/components/Protector";
+import Protector from "@/components/protector";
 import { useRouter } from "next/navigation";
-import { useUser } from "@/helper/context/userContext";
-import SideBarAdmin from "@/components/admin/SideBarAdmin";
+import { useUser } from "@/lib/context/user-context";
+import SideBarAdmin from "@/components/admin/sidebar-admin";
 
 export default function SideBarWrapper({ children }: { children: ReactNode }) {
   const { useAuth } = useUser();

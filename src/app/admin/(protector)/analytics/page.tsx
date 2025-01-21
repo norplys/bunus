@@ -1,8 +1,8 @@
 "use client";
-import formatCurrency from "@/helper/currencyFormatter";
-import { useAdminOrder } from "@/helper/hooks/useAdminOrder";
-import { useUser } from "@/helper/context/userContext";
-import LoadingImage from "@/components/LoadingImage";
+import formatCurrency from "@/lib/currency-formatter";
+import { useAdminOrder } from "@/lib/hooks/query/use-admin-order";
+import { useUser } from "@/lib/context/user-context";
+import LoadingImage from "@/components/loading-image";
 import { useState, ChangeEvent } from "react";
 
 const array = [
@@ -26,14 +26,20 @@ const array = [
 
 export default function Analytics() {
   const { token } = useUser();
+
   const [date, setDate] = useState(new Date());
+
   const { data, isLoading } = useAdminOrder(
     token,
     date.toISOString().split("T")[0],
   );
+
   const handleChange = async (e: ChangeEvent<HTMLInputElement>) => {
     setDate(new Date(e.target.value ? e.target.value : new Date()));
   };
+
+  const adminOrder = data?.data;
+
   return (
     <div className="flex-1 w-full">
       <h1 className="w-full bg-primary-orange p-2 flex justify-end items-center">
@@ -63,7 +69,11 @@ export default function Analytics() {
               <LoadingImage />
             ) : (
               <p className="text-center text-2xl font-bold">
-                {formatCurrency(data[item.value])}
+                {formatCurrency(
+                  adminOrder
+                    ? adminOrder[item.value as keyof typeof adminOrder]
+                    : 0,
+                )}
               </p>
             )}
           </div>

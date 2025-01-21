@@ -3,8 +3,9 @@ import { IoLogoGoogle } from "react-icons/io5";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { toast } from "react-hot-toast";
-import SideLogo from "@/components/SideLogo";
-import LoginForm from "@/components/login/LoginForm";
+import SideLogo from "@/components/side-logo";
+import LoginForm from "@/components/login/login-form";
+import { NEXT_PUBLIC_BACKEND_URL } from "@/lib/env";
 
 export default function Login() {
   const { push } = useRouter();
@@ -15,7 +16,7 @@ export default function Login() {
       position: "bottom-left",
       duration: 1500,
     });
-    push(`${process.env.NEXT_PUBLIC_BACKEND_LINK}/auth/google`);
+    push(`${NEXT_PUBLIC_BACKEND_URL}/auth/google`);
   };
 
   return (

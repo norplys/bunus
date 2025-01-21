@@ -1,10 +1,10 @@
 "use client";
 import { ReactNode } from "react";
 import { useEffect, useState } from "react";
-import Protector from "@/components/Protector";
+import Protector from "@/components/protector";
 import { useRouter } from "next/navigation";
-import { useUser } from "@/helper/context/userContext";
-import OrderReceipt from "@/components/merchant/OrderReceipt";
+import { useUser } from "@/lib/context/user-context";
+import OrderReceipt from "@/components/merchant/order-receipt";
 
 export default function AdminWrapper({ children }: { children: ReactNode }) {
   const { push } = useRouter();
