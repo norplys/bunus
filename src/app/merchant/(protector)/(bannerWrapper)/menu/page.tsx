@@ -44,7 +44,7 @@ export default function MerchantMenu() {
   const modalId = useRef("");
 
   const [category, setCategory] = useState<string>(
-    "f338198b-9eee-43fc-a496-f99b0fd2cb67",
+    "cba6fc5e-0843-4c01-b929-b53aea9169ee",
   );
 
   const searchParams = useSearchParams();
