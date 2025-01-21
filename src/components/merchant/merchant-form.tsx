@@ -7,6 +7,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { useUser } from "@/lib/context/user-context";
 import { VscLoading } from "react-icons/vsc";
+import { NEXT_PUBLIC_BACKEND_URL } from "@/lib/env";
 
 export default function MerchantForm({
   type,
@@ -39,7 +40,7 @@ export default function MerchantForm({
         return;
       }
       const res = axios.post(
-        `${process.env.NEXT_PUBLIC_BACKEND_LINK}/v1/orders`,
+        `${NEXT_PUBLIC_BACKEND_URL}/v1/orders`,
         {
           total: data?.total,
           items,

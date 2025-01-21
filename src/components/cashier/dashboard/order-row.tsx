@@ -4,6 +4,8 @@ import axios from "axios";
 import { VscLoading } from "react-icons/vsc";
 import toast from "react-hot-toast";
 import { useQueryClient } from "react-query";
+import { NEXT_PUBLIC_BACKEND_URL } from "@/lib/env";
+
 type Order = {
   id: string;
   user: {
@@ -35,7 +37,7 @@ export default function OrderRow({
       setLoading(true);
       const token = localStorage.getItem("token");
       const res = axios.put(
-        `${process.env.NEXT_PUBLIC_BACKEND_LINK}/v1/orders/${id}`,
+        `${NEXT_PUBLIC_BACKEND_URL}/v1/orders/${id}`,
         {
           isDone: true,
         },

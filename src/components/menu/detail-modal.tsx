@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import formatCurrency from "@/lib/currency-formatter";
 import { VscLoading } from "react-icons/vsc";
+import { NEXT_PUBLIC_BACKEND_URL } from "@/lib/env";
 
 export default function DetailModal({
   isOpen,
@@ -39,7 +40,7 @@ export default function DetailModal({
         return;
       }
       const res = axios.post(
-        `${process.env.NEXT_PUBLIC_BACKEND_LINK}/v1/cart-item`,
+        `${NEXT_PUBLIC_BACKEND_URL}/v1/cart-item`,
         {
           menuId: id.current,
           quantity: count,

@@ -5,6 +5,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import axios, { AxiosError } from "axios";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import { NEXT_PUBLIC_BACKEND_URL } from "@/lib/env";
 
 export default function ForgotPassword() {
   const { push } = useRouter();
@@ -17,12 +18,9 @@ export default function ForgotPassword() {
   const handleForgot: SubmitHandler<Record<string, string>> = async (data) => {
     try {
       const { Email } = data;
-      const res = axios.post(
-        `${process.env.NEXT_PUBLIC_BACKEND_LINK}/v1/forgot-password`,
-        {
-          email: Email,
-        },
-      );
+      const res = axios.post(`${NEXT_PUBLIC_BACKEND_URL}/v1/forgot-password`, {
+        email: Email,
+      });
       await toast.promise(
         res,
         {

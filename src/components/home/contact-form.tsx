@@ -3,6 +3,7 @@ import LeftSlide from "@/lib/animation-framer/left-slide";
 import { useForm, SubmitHandler } from "react-hook-form";
 import toast from "react-hot-toast";
 import axios from "axios";
+import { NEXT_PUBLIC_BACKEND_URL } from "@/lib/env";
 
 export default function ContactForm() {
   const {
@@ -14,10 +15,7 @@ export default function ContactForm() {
     data: Record<string, string>,
   ) => {
     try {
-      const res = axios.post(
-        `${process.env.NEXT_PUBLIC_BACKEND_LINK}/v1/send-email`,
-        data,
-      );
+      const res = axios.post(`${NEXT_PUBLIC_BACKEND_URL}/v1/send-email`, data);
       await toast.promise(
         res,
         {

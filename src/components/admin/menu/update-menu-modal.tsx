@@ -11,6 +11,7 @@ import { useForm } from "react-hook-form";
 import AdminInput from "./cashier-input";
 import { useCategories } from "@/lib/hooks/query/use-categories";
 import LoadingImage from "@/components/loading-image";
+import { NEXT_PUBLIC_BACKEND_URL } from "@/lib/env";
 
 const inputArray = [
   {
@@ -87,7 +88,7 @@ export default function UpdateMenuModal({
     }
     try {
       const res = axios.put(
-        `${process.env.NEXT_PUBLIC_BACKEND_LINK}/v1/menus/${data.id}`,
+        `${NEXT_PUBLIC_BACKEND_URL}/v1/menus/${data.id}`,
         formData,
         {
           headers: {

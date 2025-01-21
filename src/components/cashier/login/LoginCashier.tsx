@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { toast } from "react-hot-toast";
 import { useUser } from "@/lib/context/user-context";
 import LoadingImage from "@/components/loading-image";
+import { NEXT_PUBLIC_BACKEND_URL } from "@/lib/env";
 
 const inputArray = [
   { label: "Email", type: "email", placeholder: "contoh@gmail.com" },
@@ -26,7 +27,7 @@ export default function LoginCashier() {
         password: data.Password,
       };
       const res = axios.post(
-        `${process.env.NEXT_PUBLIC_BACKEND_LINK}/v1/login/admin`,
+        `${NEXT_PUBLIC_BACKEND_URL}/v1/login/admin`,
         postData,
       );
       const res2 = await toast.promise(

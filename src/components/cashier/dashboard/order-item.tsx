@@ -6,6 +6,7 @@ import { VscLoading } from "react-icons/vsc";
 import OrderDetailItem from "./order-detail-item";
 import { getSockets } from "@/lib/socket";
 import { handlePrint } from "@/lib/printer";
+import { NEXT_PUBLIC_BACKEND_URL } from "@/lib/env";
 
 export default function OrderItem({
   data,
@@ -72,7 +73,7 @@ ${"Total:".padEnd(29 - data.total.toString().length)}${"Rp." + data.total.toStri
       setLoading(true);
       const token = localStorage.getItem("token");
       const res = axios.put(
-        `${process.env.NEXT_PUBLIC_BACKEND_LINK}/v1/orders/${id}`,
+        `${NEXT_PUBLIC_BACKEND_URL}/v1/orders/${id}`,
         {
           isDone: true,
         },

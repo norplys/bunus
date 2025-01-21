@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import formatCurrency from "@/lib/currency-formatter";
 import LoadingImage from "@/components/loading-image";
+import { NEXT_PUBLIC_BACKEND_URL } from "@/lib/env";
 
 const typeArray = ["cash", "qris", "debit"];
 
@@ -38,7 +39,7 @@ export default function OrderPayment({
     try {
       const token = localStorage.getItem("token");
       const res = axios.put(
-        `${process.env.NEXT_PUBLIC_BACKEND_LINK}/v1/orders/payment/${id}`,
+        `${NEXT_PUBLIC_BACKEND_URL}/v1/orders/payment/${id}`,
         {
           status: "settlement",
           method: type,

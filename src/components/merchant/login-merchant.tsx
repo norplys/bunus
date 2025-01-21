@@ -4,6 +4,7 @@ import axios, { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
 import { toast } from "react-hot-toast";
 import LoadingImage from "@/components/loading-image";
+import { NEXT_PUBLIC_BACKEND_URL } from "@/lib/env";
 
 const inputArray = [
   { label: "Email", type: "email", placeholder: "contoh@gmail.com" },
@@ -24,7 +25,7 @@ export default function LoginMerchant() {
         password: data.Password,
       };
       const res = axios.post(
-        `${process.env.NEXT_PUBLIC_BACKEND_LINK}/v1/login/merchant`,
+        `${NEXT_PUBLIC_BACKEND_URL}/v1/login/merchant`,
         postData,
       );
       const res2 = await toast.promise(

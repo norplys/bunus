@@ -4,6 +4,7 @@ import axios from "axios";
 import { useQueryClient } from "react-query";
 import toast from "react-hot-toast";
 import formatCurrency from "@/lib/currency-formatter";
+import { NEXT_PUBLIC_BACKEND_URL } from "@/lib/env";
 
 export default function CartItem({ item }: { item: any }) {
   const queryClient = useQueryClient();
@@ -11,7 +12,7 @@ export default function CartItem({ item }: { item: any }) {
     try {
       const token = localStorage.getItem("token");
       const res = axios.delete(
-        `${process.env.NEXT_PUBLIC_BACKEND_LINK}/v1/cart-item/${item.id}`,
+        `${NEXT_PUBLIC_BACKEND_URL}/v1/cart-item/${item.id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

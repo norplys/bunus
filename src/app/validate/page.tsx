@@ -5,6 +5,7 @@ import Protector from "@/components/protector";
 import { useSearchParams, useRouter } from "next/navigation";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { NEXT_PUBLIC_BACKEND_URL } from "@/lib/env";
 
 export default function Validate() {
   const { push } = useRouter();
@@ -22,7 +23,7 @@ export default function Validate() {
   const verify = async (token: string) => {
     try {
       const res = axios.put(
-        `${process.env.NEXT_PUBLIC_BACKEND_LINK}/v1/validate-email/${token}`,
+        `${NEXT_PUBLIC_BACKEND_URL}/v1/validate-email/${token}`,
       );
       await toast.promise(res, {
         loading: "Loading...",

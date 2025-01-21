@@ -8,6 +8,7 @@ import { useState } from "react";
 import { VscLoading } from "react-icons/vsc";
 import LoadingImage from "@/components/loading-image";
 import OrderKitchenItem from "./order-kitchen-item";
+import { NEXT_PUBLIC_BACKEND_URL } from "@/lib/env";
 
 export default function KitchenModal({
   isOpen,
@@ -31,7 +32,7 @@ export default function KitchenModal({
       setLoading(true);
       const token = localStorage.getItem("token");
       const res = axios.put(
-        `${process.env.NEXT_PUBLIC_BACKEND_LINK}/v1/orders/${id}`,
+        `${NEXT_PUBLIC_BACKEND_URL}/v1/orders/${id}`,
         {
           isCooked: true,
         },

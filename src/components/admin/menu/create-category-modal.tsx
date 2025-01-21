@@ -4,6 +4,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { useForm } from "react-hook-form";
 import { AnimatePresence, motion } from "framer-motion";
+import { NEXT_PUBLIC_BACKEND_URL } from "@/lib/env";
 
 export default function CreateCategoryModal({
   isOpen,
@@ -20,15 +21,11 @@ export default function CreateCategoryModal({
   const queryClient = useQueryClient();
   const handleAddToCategory = async (data: any) => {
     try {
-      const res = axios.post(
-        `${process.env.NEXT_PUBLIC_BACKEND_LINK}/v1/categories`,
-        data,
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
+      const res = axios.post(`${NEXT_PUBLIC_BACKEND_URL}/v1/categories`, data, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
-      );
+      });
       await toast.promise(res, {
         loading: "Menambahkan kategori...",
         success: "Kategori berhasil ditambahkan",

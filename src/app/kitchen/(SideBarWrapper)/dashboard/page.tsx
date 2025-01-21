@@ -6,8 +6,9 @@ import io from "socket.io-client";
 import { useQueryClient } from "react-query";
 import OrderKitchen from "@/components/kitchen/order-kitchen";
 import { useUser } from "@/lib/context/user-context";
+import { NEXT_PUBLIC_BACKEND_URL } from "@/lib/env";
 
-const socket = io(`${process.env.NEXT_PUBLIC_BACKEND_LINK}/`);
+const socket = io(`${NEXT_PUBLIC_BACKEND_URL}/`);
 export default function Kitchen() {
   const { token } = useUser();
   const queryClient = useQueryClient();

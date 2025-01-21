@@ -6,6 +6,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { useQueryClient } from "react-query";
 import { useUser } from "@/lib/context/user-context";
+import { NEXT_PUBLIC_BACKEND_URL } from "@/lib/env";
 
 type CategoryProps = {
   id: string;
@@ -47,7 +48,7 @@ export default function AdminCategory({
   const deleteCategory = async (id: string) => {
     try {
       const res = axios.delete(
-        `${process.env.NEXT_PUBLIC_BACKEND_LINK}/v1/categories/${id}`,
+        `${NEXT_PUBLIC_BACKEND_URL}/v1/categories/${id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -69,7 +70,7 @@ export default function AdminCategory({
   const changeCategoryOrder = async (id: string, orderIndex: number) => {
     try {
       const res = axios.put(
-        `${process.env.NEXT_PUBLIC_BACKEND_LINK}/v1/categories/order`,
+        `${NEXT_PUBLIC_BACKEND_URL}/v1/categories/order`,
         {
           id,
           newIndex: orderIndex,

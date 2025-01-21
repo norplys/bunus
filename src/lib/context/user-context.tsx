@@ -1,6 +1,7 @@
 "use client";
 import { createContext, useState, useContext } from "react";
 import axios from "axios";
+import { NEXT_PUBLIC_BACKEND_URL } from "@/lib/env";
 
 type User = {
   name: string;
@@ -28,7 +29,7 @@ export function UserProvider({ children }: any) {
       const token = localStorage.getItem("token");
       if (token) {
         const response = await axios.get(
-          `${process.env.NEXT_PUBLIC_BACKEND_LINK}/v1/${type ? `validate/${type}` : "get-me"}`,
+          `${NEXT_PUBLIC_BACKEND_URL}/v1/${type ? `validate/${type}` : "get-me"}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,

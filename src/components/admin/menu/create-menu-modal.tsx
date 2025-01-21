@@ -9,6 +9,7 @@ import { useForm } from "react-hook-form";
 import AdminInput from "./cashier-input";
 import { useCategories } from "@/lib/hooks/query/use-categories";
 import { AnimatePresence, motion } from "framer-motion";
+import { NEXT_PUBLIC_BACKEND_URL } from "@/lib/env";
 
 const inputArray = [
   {
@@ -75,15 +76,11 @@ export default function CreateMenuModal({
     formData.append("categoryId", data.category);
     formData.append("image", imageFile[0]);
     try {
-      const res = axios.post(
-        `${process.env.NEXT_PUBLIC_BACKEND_LINK}/v1/menus`,
-        formData,
-        {
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("token"),
-          },
+      const res = axios.post(`${NEXT_PUBLIC_BACKEND_URL}/v1/menus`, formData, {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
         },
-      );
+      });
       await toast.promise(res, {
         loading: "Menambahkan menu...",
         success: "Menu berhasil ditambahkan",

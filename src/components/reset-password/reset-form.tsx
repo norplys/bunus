@@ -3,7 +3,9 @@ import LoginInput from "@/components/login/login-input";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useSearchParams, useRouter } from "next/navigation";
 import axios, { AxiosError } from "axios";
+import { NEXT_PUBLIC_BACKEND_URL } from "@/lib/env";
 import toast from "react-hot-toast";
+
 const inputArray = [
   { label: "Password", type: "password", placeholder: "Password" },
   {
@@ -26,7 +28,7 @@ export default function ResetForm() {
   const onSubmit: SubmitHandler<Record<string, string>> = async (data) => {
     try {
       const res = axios.put(
-        `${process.env.NEXT_PUBLIC_BACKEND_LINK}/v1/reset-password/${token}`,
+        `${NEXT_PUBLIC_BACKEND_URL}/v1/reset-password/${token}`,
         {
           password: data.Password,
         },
