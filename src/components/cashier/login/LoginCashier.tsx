@@ -1,10 +1,10 @@
 import { useForm, SubmitHandler } from "react-hook-form";
-import LoginInput from "@/components/login/loginInput";
+import LoginInput from "@/components/login/login-input";
 import axios, { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
 import { toast } from "react-hot-toast";
 import { useUser } from "@/lib/context/user-context";
-import LoadingImage from "@/components/LoadingImage";
+import LoadingImage from "@/components/loading-image";
 
 const inputArray = [
   { label: "Email", type: "email", placeholder: "contoh@gmail.com" },

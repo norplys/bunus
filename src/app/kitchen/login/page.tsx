@@ -1,11 +1,11 @@
 "use client";
 import Link from "next/link";
-import SideKitchen from "@/components/kitchen/SideKitchen";
-import LoginKitchen from "@/components/kitchen/LoginKitchen";
+import SideKitchen from "@/components/kitchen/side-kitchen";
+import LoginKitchen from "@/components/kitchen/login-kitchen";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useUser } from "@/lib/context/user-context";
-import Protector from "@/components/Protector";
+import Protector from "@/components/protector";
 
 export default function KitchenLogin() {
   const [loading, setLoading] = useState(true);

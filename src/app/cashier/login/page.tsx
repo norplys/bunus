@@ -1,9 +1,9 @@
 "use client";
 import Link from "next/link";
-import SideCashier from "@/components/cashier/SideCashier";
+import SideCashier from "@/components/cashier/side-cashier";
 import LoginCashier from "@/components/cashier/login/LoginCashier";
 import { useEffect, useState } from "react";
-import Protector from "@/components/Protector";
+import Protector from "@/components/protector";
 import { useRouter } from "next/navigation";
 import { useUser } from "@/lib/context/user-context";
 

@@ -3,8 +3,8 @@ import { IoLogoGoogle } from "react-icons/io5";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { toast } from "react-hot-toast";
-import SideLogo from "@/components/SideLogo";
-import LoginForm from "@/components/login/LoginForm";
+import SideLogo from "@/components/side-logo";
+import LoginForm from "@/components/login/login-form";
 
 export default function Login() {
   const { push } = useRouter();

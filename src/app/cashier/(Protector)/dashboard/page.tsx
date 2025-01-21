@@ -1,12 +1,12 @@
 "use client";
 import { useOrderCashier } from "@/lib/hooks/query/use-order-cashier";
 import { useOrderFinish } from "@/lib/hooks/query/use-order-finish";
-import OrderTable from "@/components/cashier/dashboard/OrderTable";
-import OrderDetailModal from "@/components/cashier/dashboard/OrderDetailModal";
+import OrderTable from "@/components/cashier/dashboard/order-table";
+import OrderDetailModal from "@/components/cashier/dashboard/order-detail-modal";
 import { useState, useRef, useEffect, use } from "react";
 import { getSockets } from "@/lib/socket";
 import { useQueryClient } from "react-query";
-import OrderMobile from "@/components/cashier/dashboard/OrderMobile";
+import OrderMobile from "@/components/cashier/dashboard/order-mobile";
 import { useUser } from "@/lib/context/user-context";
 import { FaPrint } from "react-icons/fa";
 import { handleConnect } from "@/lib/printer";

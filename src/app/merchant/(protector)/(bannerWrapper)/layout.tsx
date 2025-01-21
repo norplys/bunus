@@ -1,4 +1,4 @@
-import Banner from "@/components/merchant/Banner";
+import Banner from "@/components/merchant/banner";
 import { ReactNode } from "react";
 
 export default function BannerWrapper({ children }: { children: ReactNode }) {

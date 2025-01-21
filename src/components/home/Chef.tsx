@@ -1,5 +1,5 @@
-import LeftSlide from "@/lib/animation-framer/LeftSlide";
-import RightSlide from "@/lib/animation-framer/RightSlide";
+import LeftSlide from "@/lib/animation-framer/left-slide";
+import RightSlide from "@/lib/animation-framer/right-slide";
 import Image from "next/image";
 export default function Chef() {
   return (

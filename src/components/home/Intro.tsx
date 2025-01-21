@@ -1,5 +1,5 @@
 import Image from "next/image";
-import SlideIn from "@/lib/animation-framer/SlideIn";
+import SlideIn from "@/lib/animation-framer/slide-in";
 import Link from "next/link";
 export default function Intro() {
   return (

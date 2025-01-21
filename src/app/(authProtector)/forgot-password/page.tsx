@@ -1,6 +1,6 @@
 "use client";
-import SideLogo from "@/components/SideLogo";
-import LoginInput from "@/components/login/loginInput";
+import SideLogo from "@/components/side-logo";
+import LoginInput from "@/components/login/login-input";
 import { useForm, SubmitHandler } from "react-hook-form";
 import axios, { AxiosError } from "axios";
 import toast from "react-hot-toast";

@@ -1,16 +1,16 @@
 "use client";
 
-import DetailModal from "@/components/menu/DetailModal";
+import DetailModal from "@/components/menu/detail-modal";
 import { useCategories } from "@/lib/hooks/query/use-categories";
 import { useUser } from "@/lib/context/user-context";
-import LoadingImage from "@/components/LoadingImage";
+import LoadingImage from "@/components/loading-image";
 import { useState, useRef, useEffect } from "react";
 import { useCartNotif } from "@/lib/hooks/query/use-cart-notif";
 import { FaShoppingCart, FaArrowRight } from "react-icons/fa";
-import CartModal from "@/components/merchant/CartModal";
+import CartModal from "@/components/merchant/cart-modal";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import { useMenuData } from "@/lib/hooks/query/use-menu-data";
-import MerchantMenuItem from "@/components/merchant/MerchantMenuItem";
+import MerchantMenuItem from "@/components/merchant/merchant-menu-item";
 
 type CategoryProps = {
   id: string;

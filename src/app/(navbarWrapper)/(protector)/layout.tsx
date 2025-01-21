@@ -1,6 +1,6 @@
 "use client";
 import { ReactNode, useState, useEffect } from "react";
-import Protector from "@/components/Protector";
+import Protector from "@/components/protector";
 import { useRouter } from "next/navigation";
 import { useUser } from "@/lib/context/user-context";
 

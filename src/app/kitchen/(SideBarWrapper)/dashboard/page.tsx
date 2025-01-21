@@ -1,10 +1,10 @@
 "use client";
 import { useOrderKitchen } from "@/lib/hooks/query/use-order-kitchen";
-import KitchenModal from "@/components/kitchen/KitchenModal";
+import KitchenModal from "@/components/kitchen/kitchen-modal";
 import { useState, useRef, useEffect } from "react";
 import io from "socket.io-client";
 import { useQueryClient } from "react-query";
-import OrderKitchen from "@/components/kitchen/OrderKitchen";
+import OrderKitchen from "@/components/kitchen/order-kitchen";
 import { useUser } from "@/lib/context/user-context";
 
 const socket = io(`${process.env.NEXT_PUBLIC_BACKEND_LINK}/`);

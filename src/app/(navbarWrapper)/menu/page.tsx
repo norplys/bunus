@@ -1,9 +1,9 @@
 "use client";
-import Category from "@/components/menu/Category";
+import Category from "@/components/menu/category";
 import { useState, useRef, useEffect } from "react";
-import DetailModal from "@/components/menu/DetailModal";
+import DetailModal from "@/components/menu/detail-modal";
 import { useCategories } from "@/lib/hooks/query/use-categories";
-import LoadingImage from "@/components/LoadingImage";
+import LoadingImage from "@/components/loading-image";
 import { useUser } from "@/lib/context/user-context";
 
 type CategoryProps = {

@@ -1,6 +1,6 @@
-import MenuItem from "./MenuItem";
+import MenuItem from "./menu-item";
 import { useMenuData } from "@/lib/hooks/query/use-menu-data";
-import MenuLoading from "../cashier/MenuLoading";
+import MenuLoading from "../cashier/menu-loading";
 
 type CategoryProps = {
   id: string;

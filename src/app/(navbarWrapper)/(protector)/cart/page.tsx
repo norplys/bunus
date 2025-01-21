@@ -1,5 +1,5 @@
 "use client";
-import CartItem from "@/components/cart/CartItem";
+import CartItem from "@/components/cart/cart-item";
 import { FaTrash } from "react-icons/fa";
 import { useCart } from "@/lib/hooks/query/use-cart";
 import axios from "axios";

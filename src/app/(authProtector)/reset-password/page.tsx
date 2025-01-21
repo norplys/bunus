@@ -1,6 +1,6 @@
 "use client";
-import SideLogo from "@/components/SideLogo";
-import ResetForm from "@/components/reset-password/ResetForm";
+import SideLogo from "@/components/side-logo";
+import ResetForm from "@/components/reset-password/reset-form";
 export default function ResetPassword() {
   return (
     <section className="flex h-screen items-center justify-center md:flex-col xl:flex-row overflow-hidden">

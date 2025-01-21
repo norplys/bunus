@@ -1,8 +1,8 @@
 "use client";
-import formatCurrency from "@/lib/currencyFormatter";
+import formatCurrency from "@/lib/currency-formatter";
 import { useAdminOrder } from "@/lib/hooks/query/use-admin-order";
 import { useUser } from "@/lib/context/user-context";
-import LoadingImage from "@/components/LoadingImage";
+import LoadingImage from "@/components/loading-image";
 import { useState, ChangeEvent } from "react";
 
 const array = [

@@ -1,13 +1,13 @@
 "use client";
-import CashierCategory from "@/components/admin/menu/CashierCategory";
+import CashierCategory from "@/components/admin/menu/cashier-category";
 import { useState, useRef, useEffect } from "react";
-import CashierForm from "@/components/admin/menu/UpdateMenuModal";
+import CashierForm from "@/components/admin/menu/update-menu-modal";
 import { useCategories } from "@/lib/hooks/query/use-categories";
 import { useUser } from "@/lib/context/user-context";
 import { FaPlusSquare } from "react-icons/fa";
-import CreateMenuModal from "@/components/admin/menu/CreateMenuModal";
-import CreateCategoryModal from "@/components/admin/menu/CreateCategoryModal";
-import LoadingImage from "@/components/LoadingImage";
+import CreateMenuModal from "@/components/admin/menu/create-menu-modal";
+import CreateCategoryModal from "@/components/admin/menu/create-category-modal";
+import LoadingImage from "@/components/loading-image";
 import { useCategoryCount } from "@/lib/hooks/query/use-category-count";
 
 type CategoryProps = {
