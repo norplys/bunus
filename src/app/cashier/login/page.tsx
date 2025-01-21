@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import SideCashier from "@/components/cashier/side-cashier";
-import LoginCashier from "@/components/cashier/login/LoginCashier";
+import LoginCashier from "@/components/cashier/login/login-cashier";
 import { useEffect, useState } from "react";
 import Protector from "@/components/protector";
 import { useRouter } from "next/navigation";
