@@ -27,6 +27,8 @@ export default function OrderTable({
   refId: any;
   now: boolean;
 }) {
+  console.log(data);
+
   return (
     <table className="w-full hidden lg:table">
       <thead className="bg-primary-cyan text-white">

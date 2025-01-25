@@ -12,10 +12,18 @@ export function useAudio(): Audio {
     setAudio(url);
   };
 
+  const stopAudio = (sound: HTMLAudioElement) => {
+    if (sound && !sound.paused) {
+      sound.pause();
+    }
+  };
+
   useEffect(() => {
     if (!audio) return;
 
     const sound = new Audio(audio);
+
+    stopAudio(sound);
 
     sound.play();
   }, [audio]);

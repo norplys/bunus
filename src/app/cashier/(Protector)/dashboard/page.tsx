@@ -13,20 +13,30 @@ import { handleConnect } from "@/lib/printer";
 
 export default function CashierDahboard() {
   const queryClient = useQueryClient();
+
   const [now, setNow] = useState(true);
+
   const [date, setDate] = useState(new Date());
+
   const [isOpen, setIsOpen] = useState(false);
+
   const id = useRef(null);
+
   const deviceCharacteristic = useRef<any>();
+
   const [deviceHandle, setDeviceHandle] = useState(null);
+
   const { token } = useUser();
+
   const socket = getSockets();
+
   useEffect(() => {
     socket.connect();
     return () => {
       socket.disconnect();
     };
   }, []);
+
   useEffect(() => {
     socket.on("order", () => {
       queryClient.invalidateQueries(["orderCashier"]);
@@ -36,7 +46,13 @@ export default function CashierDahboard() {
   const { data: finishData, isLoading: finishLoading } = useOrderFinish(
     date.toISOString().split("T")[0],
   );
+
   const { data, isLoading } = useOrderCashier(token!);
+
+  const finishOrderData = finishData?.data;
+
+  const cashierOrderData = data?.data;
+
   return (
     <div className="flex-1 w-full">
       <OrderDetailModal
@@ -79,13 +95,13 @@ export default function CashierDahboard() {
       )}
       <OrderTable
         now={now}
-        data={now ? data : finishData}
+        data={now ? cashierOrderData : finishOrderData}
         setIsOpen={setIsOpen}
         refId={id}
         isLoading={isLoading || finishLoading}
       />
       <OrderMobile
-        data={now ? data : finishData}
+        data={now ? cashierOrderData : finishOrderData}
         setIsOpen={setIsOpen}
         refId={id}
         isLoading={isLoading || finishLoading}
