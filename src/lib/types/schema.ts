@@ -2,6 +2,17 @@ export type BaseRecord = {
   id: string;
 };
 
+export type User = BaseRecord & {
+  email: string;
+  name: string;
+  role: "ADMIN" | "USER";
+  image: string;
+};
+
+export type UserWithToken = User & {
+  token: string;
+};
+
 export type Category = BaseRecord & {
   name: string;
   orderIndex: number;
