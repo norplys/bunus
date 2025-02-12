@@ -4,7 +4,7 @@ import Link from "next/link";
 import { MdDeliveryDining } from "react-icons/md";
 import { PiBowlFoodFill } from "react-icons/pi";
 import { FaBox } from "react-icons/fa";
-import { Button } from "../ui/button";
+import { LazyImage } from "../ui/lazy-image";
 
 export function HeroSection(): JSX.Element {
   const bannerImages = [
@@ -31,8 +31,10 @@ export function HeroSection(): JSX.Element {
         autoplay={true}
         className="max-h-[80vh]"
         loop={true}
+        slidesPerView={1}
+        spaceBetween={10}
       />
-      <div className="layout z-10 -my-14 relative grid gap-10">
+      <div className="layout z-10 -my-14 relative grid">
         <HeroLink />
         <SignUpButton />
       </div>
@@ -42,10 +44,17 @@ export function HeroSection(): JSX.Element {
 
 function SignUpButton(): JSX.Element {
   return (
-    <div className="px-6 py-12 text-center text-xl mt-10 rounded-md bg-accent/10">
+    <div className="relative flex px-6 py-12 items-center justify-end text-xl my-24 rounded-md bg-accent/10 overflow-hidden">
+      <LazyImage
+        src="/images/homepage/menu.png"
+        alt="Hero Section 1"
+        className="absolute -bottom-20 -left-20"
+        width={300}
+        height={300}
+      />
       Daftar sekarang dan dapatkan poin untuk ditukarkan dengan produk kami
       <Link
-        className="w-full bg-accent p-3 rounded-md text-primary ml-5"
+        className="bg-accent px-4 py-2 rounded-md text-primary ml-5"
         href="/register"
       >
         Daftar Sekarang

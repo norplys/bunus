@@ -1,8 +1,10 @@
 "use client";
 
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay } from "swiper/modules";
-import "swiper/css/bundle";
+import { Autoplay, FreeMode } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/autoplay";
+import "swiper/css/free-mode";
 import clsx from "clsx";
 import type { SwiperProps } from "swiper/react";
 
@@ -21,16 +23,14 @@ export function Carousel({
   return (
     <Swiper
       {...rest}
-      modules={[Autoplay]}
-      slidesPerView={1}
-      spaceBetween={10}
-      pagination={{ clickable: true }}
+      modules={[FreeMode, Autoplay]}
       className={clsx("w-full", className)}
     >
       {items.map((item, index) => (
         <SwiperSlide
-          className={clsx("flex justify-center items-center", slideClassName)}
           key={index}
+          className={slideClassName}
+          style={{ width: "fit-content" }}
         >
           {item}
         </SwiperSlide>

@@ -17,7 +17,7 @@ export function Header() {
   const { user } = useAuth();
 
   return (
-    <header className="sticky top-0 z-10 border-b border-border backdrop-blur-md bg-primary-foreground">
+    <header className="sticky top-0 z-50 backdrop-blur-md bg-primary-foreground/70">
       <div className="layout flex w-full justify-between items-center gap-4 p-4 md:gap-8">
         <Logo text={true} clickable={true} />
         <nav className="flex gap-5">
@@ -52,7 +52,7 @@ function NavItem({ name, href }: NavItemProps) {
   return (
     <li className="flex items-center text-primary">
       <Link href={href}>
-        <i>{name}</i>
+        <p>{name}</p>
       </Link>
     </li>
   );
