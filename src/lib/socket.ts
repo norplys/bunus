@@ -1,9 +1,6 @@
-import io from "socket.io-client";
-import { NEXT_PUBLIC_BACKEND_URL } from "@/lib/env";
+import { io } from "socket.io-client";
+import { NEXT_PUBLIC_BACKEND_URL } from "./env";
 
-const getSockets = () => {
-  const socket = io(`${NEXT_PUBLIC_BACKEND_URL}/`);
-  return socket;
-};
+const socket = io(NEXT_PUBLIC_BACKEND_URL);
 
-export { getSockets };
+export default socket;
