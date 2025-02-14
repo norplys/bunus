@@ -25,7 +25,7 @@ export default function RootLayout({
         <ReactQueryContext>
           <AuthContextProvider>
             {children}
-            <Toaster />
+            <Toaster position="bottom-right" />
           </AuthContextProvider>
         </ReactQueryContext>
       </body>

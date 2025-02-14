@@ -5,12 +5,14 @@ import { ApplicationError, fetcher } from "@/lib/fetcher";
 
 type MenuDataResponse = APIResponse<Menu[]>;
 
-export function useMenuData(
-  id: string,
+export function useMenu(
+  categoryId: string | null,
 ): UseQueryResult<MenuDataResponse, ApplicationError> {
+  const categoryQuery = categoryId ? `?categoryId=${categoryId}` : "";
+
   const result = useQuery<MenuDataResponse, ApplicationError>({
-    queryKey: ["menuData", id],
-    queryFn: (): Promise<MenuDataResponse> => fetcher(`/v1/menus?id=${id}`),
+    queryKey: ["menu", categoryId],
+    queryFn: (): Promise<MenuDataResponse> => fetcher(`/menus${categoryQuery}`),
   });
 
   return result;

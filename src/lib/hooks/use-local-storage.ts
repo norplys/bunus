@@ -7,11 +7,11 @@ export function useLocalStorage<T>(
   const [value, setValue] = useState(() => {
     const saved =
       typeof window !== "undefined" ? localStorage.getItem(key) : null;
-    return saved ? (JSON.parse(saved) as T) : initialValue;
+    return saved ? (saved as T) : initialValue;
   });
 
   useEffect(() => {
-    localStorage.setItem(key, JSON.stringify(value));
+    localStorage.setItem(key, value as string);
   }, [key, value]);
 
   return [value, setValue];

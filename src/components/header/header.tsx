@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Logo } from "../common/placeholder";
+import { Logo } from "../common/logo";
 import { HeaderProfile } from "./header-profile";
 import { useAuth } from "@/lib/context/auth-context";
 import { MdLogin } from "react-icons/md";
@@ -17,7 +17,7 @@ export function Header() {
   const { user } = useAuth();
 
   return (
-    <header className="sticky top-0 z-50 backdrop-blur-md bg-primary-foreground/70">
+    <header className="sticky top-0 z-50 backdrop-blur-md bg-primary/70 text-primary-foreground">
       <div className="layout flex w-full justify-between items-center gap-4 p-4 md:gap-8">
         <Logo text={true} clickable={true} />
         <nav className="flex gap-5">
@@ -31,7 +31,7 @@ export function Header() {
           ) : (
             <Link
               href="/login"
-              className="flex items-center gap-1 bg-accent p-2 rounded-md cursor-pointer text-primary"
+              className="flex items-center gap-1 bg-accent p-2 rounded-md cursor-pointer"
             >
               <MdLogin />
               Masuk
@@ -50,7 +50,7 @@ type NavItemProps = {
 
 function NavItem({ name, href }: NavItemProps) {
   return (
-    <li className="flex items-center text-primary">
+    <li className="flex items-center">
       <Link href={href}>
         <p>{name}</p>
       </Link>

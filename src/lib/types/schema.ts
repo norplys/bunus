@@ -2,10 +2,12 @@ export type BaseRecord = {
   id: string;
 };
 
+type Role = "ADMIN" | "USER" | "MERCHANT" | "KITCHEN" | "CASHIER";
+
 export type User = BaseRecord & {
   email: string;
   name: string;
-  role: "ADMIN" | "USER";
+  role: Role;
   image: string;
 };
 

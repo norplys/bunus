@@ -11,7 +11,7 @@ export function useCategories(): UseQueryResult<
 > {
   const result = useQuery<CategoriesResponse, ApplicationError>({
     queryKey: ["categories"],
-    queryFn: (): Promise<CategoriesResponse> => fetcher("/v1/categories"),
+    queryFn: (): Promise<CategoriesResponse> => fetcher("/categories"),
   });
 
   return result;

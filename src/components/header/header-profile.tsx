@@ -2,6 +2,7 @@ import { useAuth } from "@/lib/context/auth-context";
 import { Menu } from "@headlessui/react";
 import { AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import { RxAvatar } from "react-icons/rx";
 import { LazyImage } from "../ui/lazy-image";
 
 export function HeaderProfile() {
@@ -13,20 +14,23 @@ export function HeaderProfile() {
     <Menu className="relative" as="div">
       {({ open }) => (
         <>
-          <Menu.Button className="flex items-center gap-2">
-            <LazyImage
-              src={image ?? "/images/default-profile.jpg"}
-              alt={name as string}
-              width={32}
-              height={32}
-            />
-            <span className="text-primary">Hello, {name}</span>
+          <Menu.Button className="flex items-center gap-2 py-2">
+            {image ? (
+              <LazyImage
+                src={image}
+                alt="Profile picture"
+                className="w-8 h-8 rounded-full"
+              />
+            ) : (
+              <RxAvatar className="w-8 h-8" />
+            )}
+            <span>Hello, {name}</span>
           </Menu.Button>
           <AnimatePresence mode="wait">
             {open && (
               <Menu.Items
                 as="ul"
-                className="absolute right-0 flex flex-col gap-2 p-2 bg-white rounded-md shadow-lg"
+                className="absolute right-0 flex flex-col gap-2 bg-foreground rounded-md shadow-lg px-5 py-2"
               >
                 <MenuItem name="Profile" href="/profile" />
                 <MenuItem name="Logout" href="/" onClick={handleLogout} />

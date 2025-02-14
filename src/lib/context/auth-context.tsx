@@ -13,6 +13,7 @@ import { NEXT_PUBLIC_BACKEND_URL } from "../env";
 import { UserWithToken } from "../types/schema";
 import { APIResponse } from "../types/api";
 import { useRouter } from "next/navigation";
+import { json } from "stream/consumers";
 
 type AuthContextType = {
   user: UserWithToken | null;
@@ -39,9 +40,9 @@ export function AuthContextProvider({
     const fetchUser = async (): Promise<void> => {
       setLoading(true);
 
-      const token = localStorage.getItem("token");
+      const localToken = localStorage.getItem("token");
 
-      const existToken = token ?? token;
+      const existToken = localToken ?? token;
 
       if (!existToken) {
         setLoading(false);
@@ -52,17 +53,18 @@ export function AuthContextProvider({
       try {
         const response = await fetch(`${NEXT_PUBLIC_BACKEND_URL}/users/me`, {
           headers: { Authorization: `Bearer ${existToken}` },
+          credentials: "include",
         });
 
         const data = (await response.json()) as APIResponse<UserWithToken>;
 
         if (!response.ok)
-          throw new ApplicationError(data.message, response.status);
+          throw new Error(data.message ?? "Failed to fetch user");
 
         setUser(data.data);
         setLoading(false);
 
-        if (token) {
+        if (localToken) {
           setToken(existToken);
         }
       } catch (err) {
@@ -94,8 +96,11 @@ export function AuthContextProvider({
 
       const data = (await response.json()) as APIResponse<UserWithToken>;
 
+      const invalidCredentials =
+        response.status === 401 || response.status === 404;
+
       if (!response.ok) {
-        if (response.status === 401) {
+        if (invalidCredentials) {
           throw new ApplicationError(
             "Invalid email or password",
             response.status,

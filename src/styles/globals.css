@@ -15,8 +15,8 @@
     --box-shadow: 0 0% 0%;
     --background: 0 0% 100%;
     --foreground: 0 0% 35.3%;
-    --primary: 0 0% 100%;
-    --primary-foreground: 0 0% 0%;
+    --primary: 0 0% 0%;
+    --primary-foreground: 0 0% 100%;
     --secondary: 0 0% 96.1%;
     --secondary-foreground: 0 0% 9%;
     --muted: 0 0% 96.1%;
@@ -38,7 +38,7 @@
   }
 
   body {
-    @apply bg-background text-primary-foreground font-mono;
+    @apply bg-background text-primary font-mono;
   }
 }
 
@@ -61,5 +61,13 @@
 
   div.swiper-slide {
     width: fit-content !important;
+  }
+
+  .smooth-tab {
+    @apply rounded-md transition-shadow focus-visible:outline-none focus-visible:ring-2  focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background;
+  }
+
+  .custom-input {
+    @apply smooth-tab min-w-0 rounded-md border border-border bg-background px-4 py-3 outline-none transition disabled:brightness-75;
   }
 }

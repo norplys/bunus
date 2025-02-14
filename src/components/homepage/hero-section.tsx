@@ -54,7 +54,7 @@ function SignUpButton(): JSX.Element {
       />
       Daftar sekarang dan dapatkan poin untuk ditukarkan dengan produk kami
       <Link
-        className="bg-accent px-4 py-2 rounded-md text-primary ml-5"
+        className="bg-accent px-4 py-2 rounded-md ml-10 text-primary-foreground font-bold"
         href="/register"
       >
         Daftar Sekarang
@@ -83,12 +83,12 @@ function HeroLink(): JSX.Element {
   ];
 
   return (
-    <div className="flex text-primary gap-4">
+    <div className="flex gap-4 text-primary-foreground">
       {links.map((item, index) => (
         <Link
           key={index}
           href={item.href}
-          className="flex items-center backdrop-blur-3xl bg-primary-foreground/50 p-6 text-2xl w-full rounded-xl gap-4 font-semibold"
+          className="flex items-center backdrop-blur-3xl bg-primary/50 p-6 text-2xl w-full rounded-xl gap-4 font-semibold"
         >
           {item.icon}
           <p className="btn btn-primary">{item.name}</p>
