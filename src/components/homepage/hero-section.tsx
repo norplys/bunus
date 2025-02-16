@@ -13,14 +13,14 @@ export function HeroSection(): JSX.Element {
       alt="Hero Image 1"
       width={1920}
       height={1080}
-      className="bg-cover"
+      className="bg-cover w-full"
     />,
     <Image
       src="/images/homepage/home-banner-2.png"
       alt="Hero Image 2"
       width={1920}
       height={1080}
-      className="bg-cover"
+      className="bg-cover w-full"
     />,
   ];
 
@@ -29,7 +29,7 @@ export function HeroSection(): JSX.Element {
       <Carousel
         items={bannerImages}
         autoplay={true}
-        className="max-h-[80vh]"
+        className="max-h-[80vh] w-full"
         loop={true}
         slidesPerView={1}
         spaceBetween={10}

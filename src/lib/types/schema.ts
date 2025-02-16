@@ -32,10 +32,12 @@ export type CartItem = BaseRecord & {
 };
 
 export type Menu = BaseRecord & {
+  discountPrice?: number;
   name: string;
   image: string;
   price: number;
   description: string;
+  available: boolean;
 };
 
 export type DetailMenu = Menu & {

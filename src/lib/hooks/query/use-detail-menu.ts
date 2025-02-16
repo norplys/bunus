@@ -10,7 +10,7 @@ export function useDetailMenu(
 ): UseQueryResult<DetailMenuResponse, ApplicationError> {
   const result = useQuery<DetailMenuResponse, ApplicationError>({
     queryKey: ["detailMenu", id],
-    queryFn: (): Promise<DetailMenuResponse> => fetcher(`/v1/menus/${id}`),
+    queryFn: (): Promise<DetailMenuResponse> => fetcher(`/menus/${id}`),
   });
 
   return result;

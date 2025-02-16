@@ -11,7 +11,7 @@ export function useCart(
   const result = useQuery<CartResponse, ApplicationError>({
     queryKey: ["cart", token],
     queryFn: (): Promise<CartResponse> =>
-      fetcher(`/v1/cart`, {
+      fetcher(`/cart`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
