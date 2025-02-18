@@ -1,4 +1,4 @@
-import { useQuery, type UseQueryResult } from "react-query";
+import { useQuery, type UseQueryResult } from "@tanstack/react-query";
 import type { APIResponse } from "@/lib/types/api";
 import type { Analytics } from "@/lib/types/schema";
 import { ApplicationError, fetcher } from "@/lib/fetcher";

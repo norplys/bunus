@@ -3,7 +3,7 @@ import "@/styles/globals.css";
 import { Inter } from "next/font/google";
 import { AuthContextProvider } from "@/lib/context/auth-context";
 import { Toaster } from "react-hot-toast";
-import { ReactQueryContext } from "@/lib/context/react-query-context";
+import { ReactQueryProvider } from "@/lib/context/react-query-context";
 import type { Metadata } from "next";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -22,12 +22,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <ReactQueryContext>
+        <ReactQueryProvider>
           <AuthContextProvider>
             {children}
             <Toaster position="bottom-right" />
           </AuthContextProvider>
-        </ReactQueryContext>
+        </ReactQueryProvider>
       </body>
     </html>
   );

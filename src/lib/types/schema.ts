@@ -21,14 +21,21 @@ export type Category = BaseRecord & {
 };
 
 export type Cart = BaseRecord & {
-  items: CartItem[];
+  userId: string;
+  active: boolean;
+  _count: {
+    cartItem: number;
+  };
+  cartItem: CartItem[];
   total: number;
 };
 
 export type CartItem = BaseRecord & {
   total: number;
   quantity: number;
+  note?: string;
   menu: Menu;
+  menuId: string;
 };
 
 export type Menu = BaseRecord & {

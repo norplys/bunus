@@ -14,9 +14,9 @@ export default function Menu() {
   const { open, openModal, closeModal } = useModal();
   const { data, isLoading } = useMenu(categoryId);
 
-  const [id, setId] = useState<string | null>(null);
+  const [menuId, setMenuId] = useState<string | null>(null);
   const changeId = (id: string) => {
-    setId(id);
+    setMenuId(id);
     openModal();
   };
 
@@ -30,7 +30,7 @@ export default function Menu() {
 
   return (
     <>
-      <MenuCardModal open={open} closeModal={closeModal} id={id!} />
+      <MenuCardModal open={open} closeModal={closeModal} menuId={menuId} />
       <section className="layout min-h-screen pt-5">
         {menus?.length ? (
           <div className="grid gap-5 grid-cols-[repeat(auto-fill,minmax(300px,1fr))]">

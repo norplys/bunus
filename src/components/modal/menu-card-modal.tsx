@@ -1,5 +1,4 @@
 import { Modal } from "./modal";
-import { useAuth } from "@/lib/context/auth-context";
 import { useDetailMenu } from "@/lib/hooks/query/use-detail-menu";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -8,22 +7,36 @@ import { formatCurrency } from "@/lib/currency-formatter";
 import clsx from "clsx";
 import { LazyImage } from "../ui/lazy-image";
 import { Input } from "../ui/input";
-import { useForm } from "react-hook-form";
+import { useForm, type SubmitHandler } from "react-hook-form";
 import { useState } from "react";
 import { ImCross } from "react-icons/im";
+import { toast } from "react-hot-toast";
+import { useMutationCartItem } from "@/lib/hooks/mutation/use-mutation-cart-item";
+import { useCart } from "@/lib/hooks/query/use-cart";
+import { Cart } from "@/lib/types/schema";
 
 type MenuCardModalProps = {
-  id: string;
+  menuId: string | null;
   open: boolean;
   closeModal: () => void;
 };
 
-export function MenuCardModal({ id, open, closeModal }: MenuCardModalProps) {
-  const { data, isLoading } = useDetailMenu(id);
-  const menu = data?.data;
-  const imageUrl = menu?.image ?? "/images/menu/menu-placeholder.png";
+export function MenuCardModal({
+  menuId,
+  open,
+  closeModal,
+}: MenuCardModalProps) {
+  if (!menuId) {
+    open = false;
+    return null;
+  }
+  const { data: cartData, isPending: isCartPending } = useCart();
+  const cart = cartData?.data;
 
-  if (!id) open = false;
+  const { data, isLoading } = useDetailMenu(menuId);
+  const menu = data?.data;
+
+  const imageUrl = menu?.image ?? "/images/menu/menu-placeholder.png";
 
   return (
     <Modal
@@ -36,18 +49,23 @@ export function MenuCardModal({ id, open, closeModal }: MenuCardModalProps) {
         onClick={closeModal}
       />
 
-      {isLoading ? (
+      {isLoading || isCartPending ? (
         <Loading />
       ) : (
         <>
           <ImageSection
             imageUrl={imageUrl}
-            name={menu!.name}
-            price={menu!.price}
+            name={menu?.name ?? ""}
+            price={menu?.price ?? 0}
             discountPrice={menu?.discountPrice}
-            description={menu!.description}
+            description={menu?.description ?? ""}
           />
-          <OrderForm price={menu?.discountPrice ?? menu?.price ?? 0} />
+          <OrderForm
+            price={menu?.discountPrice ?? menu?.price ?? 0}
+            menuId={menuId}
+            closeModal={closeModal}
+            cart={cart}
+          />
         </>
       )}
     </Modal>
@@ -94,35 +112,57 @@ function ImageSection({
   );
 }
 
-const orderPayloadSchema = z.object({
+const cartItemPayload = z.object({
   quantity: z.number().int().positive(),
   note: z.string().optional(),
 });
 
-export type OrderPayload = z.infer<typeof orderPayloadSchema>;
+export type CartItemSchema = z.infer<typeof cartItemPayload>;
 
 type OrderFormProps = {
+  menuId: string;
   price: number;
+  closeModal: () => void;
+  cart?: Cart;
 };
 
-function OrderForm({ price }: OrderFormProps) {
-  const { register, handleSubmit } = useForm({
-    resolver: zodResolver(orderPayloadSchema),
+function OrderForm({ menuId, price, closeModal, cart }: OrderFormProps) {
+  const cartItemData = cart?.cartItem.find((item) => item.menuId === menuId);
+
+  const [quantity, setQuantity] = useState(cartItemData?.quantity ?? 0);
+
+  const { register, handleSubmit } = useForm<CartItemSchema>({
+    resolver: zodResolver(cartItemPayload),
+    values: {
+      quantity,
+    },
   });
-  const { token } = useAuth();
-  const [quantity, setQuantity] = useState(0);
+
+  const { updateCartItemMutation } = useMutationCartItem();
+
   const finalPrice = price * quantity;
 
-  const handleAdd = () => {
-    setQuantity((prev) => prev + 1);
+  const handleQuantity = (value: number) => {
+    setQuantity(value);
   };
 
-  const handleSubtract = () => {
-    setQuantity((prev) => (prev > 0 ? prev - 1 : 0));
-  };
+  const onSubmit: SubmitHandler<CartItemSchema> = (
+    data: CartItemSchema,
+  ): void => {
+    toast.dismiss();
 
-  const onSubmit = (data: any) => {
-    console.log(data);
+    updateCartItemMutation.mutate(
+      { data: { ...data, menuId } },
+      {
+        onSuccess: () => {
+          toast.success("Berhasil menambahkan ke keranjang");
+          closeModal();
+        },
+        onError: () => {
+          toast.error("Gagal menambahkan ke keranjang");
+        },
+      },
+    );
   };
 
   return (
@@ -137,17 +177,24 @@ function OrderForm({ price }: OrderFormProps) {
         placeholder="Please dont use..."
         register={register("note")}
       />
-      <div className="flex justify-between font-bold">
+      <div className="flex justify-between font-bold text-lg">
         <p>{formatCurrency(finalPrice)}</p>
         <div className="flex gap-2">
-          <button onClick={handleSubtract}>-</button>
+          <button
+            type="button"
+            onClick={() => handleQuantity(quantity > 0 ? quantity - 1 : 0)}
+          >
+            -
+          </button>
           <input
-            {...register("quantity")}
-            type="telephone"
+            type="number"
             className="text-center max-w-14"
             value={quantity}
+            onChange={(e) => handleQuantity(Number(e.target.value))}
           />
-          <button onClick={handleAdd}>+</button>
+          <button type="button" onClick={() => handleQuantity(quantity + 1)}>
+            +
+          </button>
         </div>
       </div>
       <button
