@@ -17,6 +17,12 @@ export function useCart(): UseQueryResult<CartResponse, ApplicationError> {
           Authorization: `Bearer ${token}`,
         },
       }),
+    retry: (failureCount, error) => {
+      const stopRetry = [400, 403, 401].includes(error.statusCode) || !token;
+      if (stopRetry) return false;
+
+      return failureCount < 3;
+    },
   });
 
   return result;

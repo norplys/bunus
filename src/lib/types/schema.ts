@@ -9,6 +9,7 @@ export type User = BaseRecord & {
   name: string;
   role: Role;
   image: string;
+  phoneNumber: string;
 };
 
 export type UserWithToken = User & {

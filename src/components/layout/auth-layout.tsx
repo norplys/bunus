@@ -2,7 +2,6 @@
 
 import { useState, useEffect, type ReactNode } from "react";
 import { useRouter } from "next/navigation";
-import { usePathname } from "next/navigation";
 import { useAuth } from "@/lib/context/auth-context";
 import { useSearchParams } from "next/navigation";
 import { sleep } from "@/lib/helper";

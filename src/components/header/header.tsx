@@ -17,7 +17,7 @@ export function Header() {
   const { user } = useAuth();
 
   return (
-    <header className="fixed top-0 w-full z-50 backdrop-blur-md bg-primary/70 text-primary-foreground">
+    <header className="fixed top-0 w-full z-50 backdrop-blur-md bg-primary/70 text-primary-foreground h-20">
       <div className="layout flex w-full justify-between items-center gap-4 p-4 md:gap-8">
         <Logo text={true} clickable={true} />
         <nav className="flex gap-5">

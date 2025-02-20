@@ -14,6 +14,8 @@ import { toast } from "react-hot-toast";
 import { useMutationCartItem } from "@/lib/hooks/mutation/use-mutation-cart-item";
 import { useCart } from "@/lib/hooks/query/use-cart";
 import { Cart } from "@/lib/types/schema";
+import { useAuth } from "@/lib/context/auth-context";
+import Link from "next/link";
 
 type MenuCardModalProps = {
   menuId: string | null;
@@ -38,6 +40,15 @@ export function MenuCardModal({
 
   const imageUrl = menu?.image ?? "/images/menu/menu-placeholder.png";
 
+  if (isLoading || isCartPending) {
+    return (
+      <Loading
+        className="w-screen h-screen fixed top-0 bg-primary/40 z-50 flex justify-center items-center"
+        iconClassName="text-5xl text-primary-foreground"
+      />
+    );
+  }
+
   return (
     <Modal
       open={open}
@@ -48,26 +59,21 @@ export function MenuCardModal({
         className="absolute rounded-full text-3xl p-1 cursor-pointer top-1 right-1"
         onClick={closeModal}
       />
-
-      {isLoading || isCartPending ? (
-        <Loading />
-      ) : (
-        <>
-          <ImageSection
-            imageUrl={imageUrl}
-            name={menu?.name ?? ""}
-            price={menu?.price ?? 0}
-            discountPrice={menu?.discountPrice}
-            description={menu?.description ?? ""}
-          />
-          <OrderForm
-            price={menu?.discountPrice ?? menu?.price ?? 0}
-            menuId={menuId}
-            closeModal={closeModal}
-            cart={cart}
-          />
-        </>
-      )}
+      <>
+        <ImageSection
+          imageUrl={imageUrl}
+          name={menu?.name ?? ""}
+          price={menu?.price ?? 0}
+          discountPrice={menu?.discountPrice}
+          description={menu?.description ?? ""}
+        />
+        <OrderForm
+          price={menu?.discountPrice ?? menu?.price ?? 0}
+          menuId={menuId}
+          closeModal={closeModal}
+          cart={cart}
+        />
+      </>
     </Modal>
   );
 }
@@ -127,6 +133,8 @@ type OrderFormProps = {
 };
 
 function OrderForm({ menuId, price, closeModal, cart }: OrderFormProps) {
+  const { user } = useAuth();
+
   const cartItemData = cart?.cartItem.find((item) => item.menuId === menuId);
 
   const [quantity, setQuantity] = useState(cartItemData?.quantity ?? 0);
@@ -135,6 +143,9 @@ function OrderForm({ menuId, price, closeModal, cart }: OrderFormProps) {
     resolver: zodResolver(cartItemPayload),
     values: {
       quantity,
+    },
+    defaultValues: {
+      note: cartItemData?.note,
     },
   });
 
@@ -187,7 +198,7 @@ function OrderForm({ menuId, price, closeModal, cart }: OrderFormProps) {
             -
           </button>
           <input
-            type="number"
+            type="telephone"
             className="text-center max-w-14"
             value={quantity}
             onChange={(e) => handleQuantity(Number(e.target.value))}
@@ -197,12 +208,21 @@ function OrderForm({ menuId, price, closeModal, cart }: OrderFormProps) {
           </button>
         </div>
       </div>
-      <button
-        type="submit"
-        className="bg-accent p-2 rounded-lg text-primary-foreground"
-      >
-        Add to cart
-      </button>
+      {user ? (
+        <button
+          type="submit"
+          className="bg-accent p-2 rounded-lg text-primary-foreground"
+        >
+          Add to cart
+        </button>
+      ) : (
+        <Link
+          className="bg-accent p-2 rounded-lg text-primary-foreground text-center"
+          href="/login?redirect=/menu"
+        >
+          Login untuk memesan
+        </Link>
+      )}
     </form>
   );
 }

@@ -19,6 +19,7 @@ export type InputProps = PropsWithChildren<{
   inputClassName?: string;
   additionalLabel?: ReactNode;
   containerClassName?: string;
+  value?: string | number;
 }>;
 
 export function Input({
@@ -38,6 +39,7 @@ export function Input({
   inputClassName,
   additionalLabel,
   containerClassName,
+  value,
 }: InputProps): JSX.Element {
   const inputErrorStyle =
     // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
@@ -67,6 +69,7 @@ export function Input({
           disabled={disabled}
           placeholder={placeholder}
           autoComplete={autoComplete}
+          value={value}
           {...register}
         />
       ) : (
@@ -79,6 +82,7 @@ export function Input({
           disabled={disabled}
           placeholder={placeholder}
           autoComplete={autoComplete}
+          value={value}
           {...register}
         />
       )}

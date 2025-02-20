@@ -11,7 +11,7 @@ export function Loading({
   iconClassName = "h-7 w-7",
 }: LoadingProps): JSX.Element {
   return (
-    <i className={clsx("grid justify-center", className)}>
+    <i className={clsx("grid justify-center ", className)}>
       <ImSpinner8 className={clsx("animate-spin text-accent", iconClassName)} />
     </i>
   );

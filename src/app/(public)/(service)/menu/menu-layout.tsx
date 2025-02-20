@@ -1,6 +1,7 @@
 "use client";
 
 import React, { ReactNode } from "react";
+import { clsx } from "clsx";
 import { useCategories } from "@/lib/hooks/query/use-categories";
 import { CategoryTab } from "@/components/category/category-tab";
 import { useSearchParams } from "next/navigation";
@@ -9,7 +10,7 @@ import { CartNotification } from "@/components/cart/cart-notification";
 export function MenuLayout({ children }: { children: ReactNode }) {
   return (
     <main className="mt-20">
-      <CategoryDashboard />
+      <CategoryDashboard className="bg-white border-b top-20" />
       {children}
       <CartNotification />
     </main>
@@ -21,17 +22,25 @@ const allCategoryTab = {
   name: "Semua",
 };
 
-function CategoryDashboard() {
+type CategoryDashboardProps = {
+  isService?: boolean;
+  className?: string;
+};
+
+export function CategoryDashboard({
+  isService,
+  className,
+}: CategoryDashboardProps) {
   const { data } = useCategories();
   const categories = [allCategoryTab, ...(data?.data || [])];
 
   const searchParams = useSearchParams();
   const categoryId = searchParams.get("categoryId");
   const selectedId = categoryId || "ALL";
-
+  // "bg-white py-4 border-b min-h-14 sticky top-16 z-30"
   return (
-    <div className="bg-white py-4 border-b min-h-14 sticky top-20 z-50">
-      <ul className="layout flex overflow-x-auto gap-5 bg-white">
+    <div className={clsx("min-h-14 sticky z-30 py-4", className)}>
+      <ul className="layout flex overflow-x-auto gap-5">
         {categories?.length ? (
           categories.map((category) => (
             <CategoryTab
@@ -39,6 +48,7 @@ function CategoryDashboard() {
               name={category.name}
               id={category.id}
               selectedId={selectedId}
+              isService={isService}
             />
           ))
         ) : (
