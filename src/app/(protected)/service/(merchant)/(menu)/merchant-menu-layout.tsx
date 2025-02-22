@@ -1,7 +1,7 @@
 import { MerchantBanner } from "@/components/merchant/merchant-banner";
 import { CategoryDashboard } from "@/app/(public)/(service)/menu/menu-layout";
-import type { ReactNode } from "react";
 import { CartNotification } from "@/components/cart/cart-notification";
+import type { ReactNode } from "react";
 
 export function MerchantMenuLayout({ children }: { children: ReactNode }) {
   return (

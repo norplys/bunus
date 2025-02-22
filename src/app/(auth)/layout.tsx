@@ -9,7 +9,7 @@ export default function Layout({ children }: { children: ReactNode }) {
     <AuthLayout>
       <main className="flex justify-center items-center min-h-screen bg-[url(/images/background/white-marmer.png)]">
         <div className="grid justify-center items-center mx-auto max-w-xl gap-5">
-          <Logo text={true} icon={true} logoClassName="rounded-full w-24" />
+          <Logo text={true} icon={true} logoClassName="w-24" />
           {children}
           <Alert
             variant="info"

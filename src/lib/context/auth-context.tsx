@@ -13,7 +13,6 @@ import { NEXT_PUBLIC_BACKEND_URL } from "../env";
 import { UserWithToken } from "../types/schema";
 import { APIResponse } from "../types/api";
 import { useRouter } from "next/navigation";
-import { json } from "stream/consumers";
 
 type AuthContextType = {
   user: UserWithToken | null;

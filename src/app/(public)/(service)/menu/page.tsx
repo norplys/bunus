@@ -6,6 +6,7 @@ import { Loading } from "@/components/ui/loading";
 import { MenuCard } from "@/components/menu/menu-card";
 import { useModal } from "@/lib/hooks/use-modal";
 import { MenuCardModal } from "@/components/modal/menu-card-modal";
+import { useCart } from "@/lib/hooks/query/use-cart";
 import { useState } from "react";
 
 export default function Menu() {
@@ -13,6 +14,9 @@ export default function Menu() {
   const categoryId = searchParams.get("categoryId");
   const { open, openModal, closeModal } = useModal();
   const { data, isLoading } = useMenu(categoryId);
+
+  const { data: cartData, isPending: isCartPending } = useCart();
+  const cart = cartData?.data;
 
   const [menuId, setMenuId] = useState<string | null>(null);
   const changeId = (id: string) => {
@@ -30,10 +34,16 @@ export default function Menu() {
 
   return (
     <>
-      <MenuCardModal open={open} closeModal={closeModal} menuId={menuId} />
+      <MenuCardModal
+        open={open}
+        closeModal={closeModal}
+        menuId={menuId}
+        cart={cart}
+        isCartPending={isCartPending}
+      />
       <section className="layout min-h-screen pt-5">
         {menus?.length ? (
-          <div className="grid gap-5 grid-cols-[repeat(auto-fill,minmax(300px,1fr))]">
+          <div className="grid gap-5 grid-cols-[repeat(auto-fill,minmax(280px,1fr))]">
             {menus?.map((menu) => (
               <MenuCard key={menu.id} {...menu} changeId={changeId} />
             ))}

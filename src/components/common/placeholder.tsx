@@ -7,7 +7,7 @@ export function Placeholder() {
         text={true}
         placeholder={true}
         icon={true}
-        logoClassName="rounded-full w-64 h-64"
+        logoClassName="w-64 h-64"
         className="text-primary-foreground animate-pulse"
       />
     </main>

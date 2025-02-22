@@ -40,10 +40,11 @@ export function Logo({
       {icon && (
         <LazyImage
           className={clsx(
+            "rounded-full",
             logoClassName,
             hideIconOnMobile && "hidden md:inline",
           )}
-          src="./images/logo.svg"
+          src="/images/logo.svg"
           alt="Bubur Nusantara Logo"
           width={500}
           height={500}

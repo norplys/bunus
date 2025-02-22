@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Input } from "@/components/ui/input";
 import { CiSquarePlus } from "react-icons/ci";
+import clsx from "clsx";
 
 export function OrderInformation() {
   const router = useRouter();
@@ -16,11 +17,42 @@ export function OrderInformation() {
         <IoChevronBack className="text-2xl" onClick={router.back} />
         <h1 className="title text-2xl">CheckOut</h1>
       </div>
-      <h2 className="font-semibold text-lg">Informasi Order</h2>
-      <Input label="Tipe Order" id="orderType" type="text" />
+      <OrderInput />
       <ContactInformation />
       <OrderSummary />
     </section>
+  );
+}
+
+const optionValue = [
+  { value: "DINE_IN", label: "Dine In" },
+  { value: "TAKE_AWAY", label: "Take Away" },
+  { value: "DELIVERY", label: "Delivery" },
+];
+
+function OrderInput() {
+  const router = useRouter();
+
+  return (
+    <>
+      <label htmlFor="orderType" className="font-bold">
+        Tipe Pesanan
+      </label>
+      <select
+        id="orderType"
+        name="orderType"
+        className="custom-input"
+        onChange={(e) =>
+          router.push(`/service/checkout?type=${e.target.value}`)
+        }
+      >
+        {optionValue.map((option) => (
+          <option key={option.value} value={option.value}>
+            {option.label}
+          </option>
+        ))}
+      </select>
+    </>
   );
 }
 
@@ -48,7 +80,11 @@ function ContactInformation() {
   );
 }
 
-function OrderSummary() {
+type OrderSummaryProps = {
+  isService?: boolean;
+};
+
+export function OrderSummary({ isService }: OrderSummaryProps) {
   const { data } = useCart();
   const cartItems = data?.data?.cartItem;
 
@@ -61,7 +97,12 @@ function OrderSummary() {
           Tambah Makanan
         </Link>
       </div>
-      <div className="grid gap-5 max-h-64 mt-5 overflow-y-auto">
+      <div
+        className={clsx(
+          "grid gap-5 mt-5 ",
+          !isService && "max-h-64 overflow-y-auto",
+        )}
+      >
         {cartItems?.map((cartItem) => (
           <CartCard key={cartItem.id} cartItem={cartItem} />
         ))}

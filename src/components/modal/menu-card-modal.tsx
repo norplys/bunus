@@ -2,7 +2,6 @@ import { Modal } from "./modal";
 import { useDetailMenu } from "@/lib/hooks/query/use-detail-menu";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Loading } from "../ui/loading";
 import { formatCurrency } from "@/lib/currency-formatter";
 import clsx from "clsx";
 import { LazyImage } from "../ui/lazy-image";
@@ -12,7 +11,6 @@ import { useState } from "react";
 import { ImCross } from "react-icons/im";
 import { toast } from "react-hot-toast";
 import { useMutationCartItem } from "@/lib/hooks/mutation/use-mutation-cart-item";
-import { useCart } from "@/lib/hooks/query/use-cart";
 import { Cart } from "@/lib/types/schema";
 import { useAuth } from "@/lib/context/auth-context";
 import Link from "next/link";
@@ -21,33 +19,23 @@ type MenuCardModalProps = {
   menuId: string | null;
   open: boolean;
   closeModal: () => void;
+  cart?: Cart;
+  isCartPending?: boolean;
 };
 
 export function MenuCardModal({
   menuId,
   open,
   closeModal,
+  cart,
+  isCartPending,
 }: MenuCardModalProps) {
-  if (!menuId) {
-    open = false;
-    return null;
-  }
-  const { data: cartData, isPending: isCartPending } = useCart();
-  const cart = cartData?.data;
-
-  const { data, isLoading } = useDetailMenu(menuId);
+  const { data, isLoading } = useDetailMenu(menuId!);
   const menu = data?.data;
 
   const imageUrl = menu?.image ?? "/images/menu/menu-placeholder.png";
 
-  if (isLoading || isCartPending) {
-    return (
-      <Loading
-        className="w-screen h-screen fixed top-0 bg-primary/40 z-50 flex justify-center items-center"
-        iconClassName="text-5xl text-primary-foreground"
-      />
-    );
-  }
+  const loading = isLoading || isCartPending;
 
   return (
     <Modal
@@ -59,21 +47,25 @@ export function MenuCardModal({
         className="absolute rounded-full text-3xl p-1 cursor-pointer top-1 right-1"
         onClick={closeModal}
       />
-      <>
-        <ImageSection
-          imageUrl={imageUrl}
-          name={menu?.name ?? ""}
-          price={menu?.price ?? 0}
-          discountPrice={menu?.discountPrice}
-          description={menu?.description ?? ""}
-        />
-        <OrderForm
-          price={menu?.discountPrice ?? menu?.price ?? 0}
-          menuId={menuId}
-          closeModal={closeModal}
-          cart={cart}
-        />
-      </>
+      {loading ? (
+        "loading"
+      ) : (
+        <>
+          <ImageSection
+            imageUrl={imageUrl}
+            name={menu?.name ?? ""}
+            price={menu?.price ?? 0}
+            discountPrice={menu?.discountPrice}
+            description={menu?.description ?? ""}
+          />
+          <OrderForm
+            price={menu?.discountPrice ?? menu?.price ?? 0}
+            menuId={menuId!}
+            closeModal={closeModal}
+            cart={cart}
+          />
+        </>
+      )}
     </Modal>
   );
 }
@@ -143,8 +135,6 @@ function OrderForm({ menuId, price, closeModal, cart }: OrderFormProps) {
     resolver: zodResolver(cartItemPayload),
     values: {
       quantity,
-    },
-    defaultValues: {
       note: cartItemData?.note,
     },
   });

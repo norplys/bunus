@@ -37,7 +37,7 @@ export function CategoryDashboard({
   const searchParams = useSearchParams();
   const categoryId = searchParams.get("categoryId");
   const selectedId = categoryId || "ALL";
-  // "bg-white py-4 border-b min-h-14 sticky top-16 z-30"
+
   return (
     <div className={clsx("min-h-14 sticky z-30 py-4", className)}>
       <ul className="layout flex overflow-x-auto gap-5">

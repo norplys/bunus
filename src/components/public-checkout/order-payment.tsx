@@ -3,7 +3,11 @@ import { Button } from "../ui/button";
 import { formatCurrency } from "@/lib/currency-formatter";
 import clsx from "clsx";
 
-export function Payment() {
+type PaymentProps = {
+  isService?: boolean;
+};
+
+export function Payment({ isService }: PaymentProps) {
   const { data } = useCart();
   const cart = data?.data;
 

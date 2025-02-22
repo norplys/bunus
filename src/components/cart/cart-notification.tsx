@@ -19,7 +19,8 @@ export function CartNotification({ isService }: CartNotificationProps) {
 
   const { token } = useAuth();
 
-  const isCartEmpty = cart?._count?.cartItem === 0;
+  const isCartEmpty = cart?._count?.cartItem === 0 || !cart;
+
   const showCartNotification = !isCartEmpty && !isPending && token;
 
   return (

@@ -64,8 +64,9 @@ export type Order = BaseRecord & {
   userId: string;
   isDone: boolean;
   isCooked: boolean;
-  table: number;
-  type: "DINE_IN" | "TAKE_AWAY";
+  cartId: string;
+  queue: number;
+  type: OrderType;
   merchant: string;
   user: {
     name: string;
@@ -73,6 +74,8 @@ export type Order = BaseRecord & {
   };
   payment: Payment;
 };
+
+export type OrderType = "DINE_IN" | "TAKE_AWAY" | "DELIVERY";
 
 export type OrderDetail = Order & {
   items: CartItem &
