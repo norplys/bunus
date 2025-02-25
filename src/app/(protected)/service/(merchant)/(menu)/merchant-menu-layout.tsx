@@ -1,5 +1,5 @@
 import { MerchantBanner } from "@/components/merchant/merchant-banner";
-import { CategoryDashboard } from "@/app/(public)/(service)/menu/menu-layout";
+import { CategoryDashboard } from "@/components/category/category-dashboard";
 import { CartNotification } from "@/components/cart/cart-notification";
 import type { ReactNode } from "react";
 

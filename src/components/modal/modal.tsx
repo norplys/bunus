@@ -33,7 +33,7 @@ export function Modal({
             aria-hidden="true"
             {...backdrop}
           />
-          <div className={clsx("fixed inset-0 overflow-y-auto p-4", className)}>
+          <div className={clsx("fixed inset-0 overflow-y-auto", className)}>
             <Dialog.Panel
               className={modalClassName}
               as={motion.div}

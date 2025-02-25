@@ -12,8 +12,11 @@ import { useState } from "react";
 export default function Menu() {
   const searchParams = useSearchParams();
   const categoryId = searchParams.get("categoryId");
+
   const { open, openModal, closeModal } = useModal();
+
   const { data, isLoading } = useMenu(categoryId);
+  const menus = data?.data ?? [];
 
   const { data: cartData, isPending: isCartPending } = useCart();
   const cart = cartData?.data;
@@ -23,8 +26,6 @@ export default function Menu() {
     setMenuId(id);
     openModal();
   };
-
-  const menus = data?.data ?? [];
 
   if (isLoading) {
     return (

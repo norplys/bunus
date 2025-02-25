@@ -5,17 +5,19 @@ type CategoryTabProps = {
   name: string;
   id: string;
   selectedId: string;
-  isService?: boolean;
+  rootUrl: string;
+  query: string;
+  date?: string;
 };
 
-export function CategoryTab({
+export function DashboardTab({
   name,
   id,
   selectedId,
-  isService,
+  rootUrl,
+  query,
 }: CategoryTabProps) {
-  const rootUrl = isService ? "/service/menu" : "/menu";
-  const url = id === "ALL" ? rootUrl : `${rootUrl}?categoryId=${id}`;
+  const url = id === "ALL" ? rootUrl : `${rootUrl}?${query}`;
   const selected = selectedId === id;
 
   return (

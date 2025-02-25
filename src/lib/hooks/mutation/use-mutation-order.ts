@@ -17,6 +17,10 @@ export type MutationOrder = {
     { data: Partial<Order> },
     MutationOrderResponse
   >;
+  updateOrderMutation: MutationResult<
+    { data: Partial<Order>; id: string },
+    MutationOrderResponse
+  >;
 };
 
 export function useMutationOrder(): MutationOrder {
@@ -44,8 +48,33 @@ export function useMutationOrder(): MutationOrder {
       }),
   });
 
+  const updateOrderMutation = useMutation<
+    MutationOrderResponse,
+    ApplicationError,
+    { data: Partial<Order>; id: string }
+  >({
+    mutationFn: ({ data, id }: { data: Partial<Order>; id: string }) =>
+      fetcher(`/orders/${id}`, {
+        method: "PATCH",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["order"],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["orderDetail"],
+      });
+    },
+  });
+
   return {
     queryClient,
     createOrderMutation,
+    updateOrderMutation,
   };
 }

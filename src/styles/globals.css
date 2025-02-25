@@ -31,6 +31,7 @@
     scroll-behavior: smooth;
     scroll-padding-top: 6rem;
     overflow-x: hidden;
+    scrollbar-gutter: stable;
   }
 
   * {

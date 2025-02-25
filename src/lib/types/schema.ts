@@ -62,29 +62,35 @@ export type Analytics = {
 export type Order = BaseRecord & {
   total: number;
   userId: string;
-  isDone: boolean;
-  isCooked: boolean;
   cartId: string;
-  queue: number;
+  queue: number | null;
   type: OrderType;
-  merchant: string;
-  user: {
-    name: string;
-    email: string;
-  };
+  status: OrderStatus;
+  point: number;
+  user: User;
   payment: Payment;
 };
 
-export type OrderType = "DINE_IN" | "TAKE_AWAY" | "DELIVERY";
-
 export type OrderDetail = Order & {
-  items: CartItem &
-    {
-      menu: Menu;
-    }[];
+  cart: Cart;
 };
 
 export type Payment = BaseRecord & {
-  status: string;
-  method: "cash" | "debit" | "qris";
+  status: PaymentStatus;
+  method: PaymentMethod;
 };
+
+export type PaymentMethod = "CASH" | "DEBIT" | "QRIS";
+
+export type OrderType = "DINE_IN" | "TAKE_AWAY" | "DELIVERY";
+
+export type OrderStatus =
+  | "UNPAID"
+  | "UNPAID_COOKING"
+  | "UNPAID_DELIVERING"
+  | "COOKING"
+  | "DELIVERING"
+  | "COMPLETED"
+  | "CANCELLED";
+
+export type PaymentStatus = "UNPAID" | "PENDING" | "SUCCESS" | "CANCELLED";

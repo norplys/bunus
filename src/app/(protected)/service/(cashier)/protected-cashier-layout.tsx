@@ -1,18 +1,18 @@
 "use client";
 
-import { Placeholder } from "@/components/common/placeholder";
 import { useAuth } from "@/lib/context/auth-context";
+import { Placeholder } from "@/components/common/placeholder";
 import Link from "next/link";
 import type { ReactNode } from "react";
 
-export function ProtectedMerchantLayout({ children }: { children: ReactNode }) {
+export function ProtectedCashierLayout({ children }: { children: ReactNode }) {
   const { user, loading } = useAuth();
 
   if (loading) {
     return <Placeholder />;
   }
 
-  const ALLOWED_USER_ROLES = ["MERCHANT", "ADMIN"];
+  const ALLOWED_USER_ROLES = ["CASHIER", "ADMIN"];
 
   const forbidden = user && !ALLOWED_USER_ROLES.includes(user.role);
 

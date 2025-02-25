@@ -5,7 +5,12 @@ import { useEffect, useState } from "react";
 import { useMutationCartItem } from "@/lib/hooks/mutation/use-mutation-cart-item";
 import toast from "react-hot-toast";
 
-export function CartCard({ cartItem }: { cartItem: CartItem }) {
+type CartCardProps = {
+  cartItem: CartItem;
+  isService?: boolean;
+};
+
+export function CartCard({ cartItem, isService }: CartCardProps) {
   const { updateCartItemMutation } = useMutationCartItem();
 
   const imageUrl = cartItem.menu.image ?? "/images/menu/menu-placeholder.png";
@@ -46,13 +51,15 @@ export function CartCard({ cartItem }: { cartItem: CartItem }) {
   return (
     <div className="flex items-center justify-between border-b border-gray-200 pb-5 text-lg font-bold">
       <div className="flex items-center space-x-4">
-        <LazyImage
-          src={imageUrl}
-          alt={cartItem.menu.name}
-          width={100}
-          height={100}
-          className="w-full h-full rounded-lg"
-        />
+        {!isService && (
+          <LazyImage
+            src={imageUrl}
+            alt={cartItem.menu.name}
+            width={100}
+            height={100}
+            className="w-full h-full rounded-lg"
+          />
+        )}
         <div>
           <h3>{cartItem.menu.name}</h3>
           <p className="text-sm font-normal">@{formatCurrency(menuPrice)}</p>
@@ -60,9 +67,9 @@ export function CartCard({ cartItem }: { cartItem: CartItem }) {
         </div>
       </div>
       <div className="flex gap-3">
-        <button onClick={handleSubtract}>-</button>
+        {!isService && <button onClick={handleSubtract}>-</button>}
         <span className="px-4">{quantity}</span>
-        <button onClick={handleAdd}>+</button>
+        {!isService && <button onClick={handleAdd}>+</button>}
       </div>
     </div>
   );

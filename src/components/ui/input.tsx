@@ -20,6 +20,7 @@ export type InputProps = PropsWithChildren<{
   additionalLabel?: ReactNode;
   containerClassName?: string;
   value?: string | number;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }>;
 
 export function Input({
@@ -40,6 +41,7 @@ export function Input({
   additionalLabel,
   containerClassName,
   value,
+  onChange,
 }: InputProps): JSX.Element {
   const inputErrorStyle =
     // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
@@ -83,6 +85,7 @@ export function Input({
           placeholder={placeholder}
           autoComplete={autoComplete}
           value={value}
+          onChange={onChange}
           {...register}
         />
       )}
