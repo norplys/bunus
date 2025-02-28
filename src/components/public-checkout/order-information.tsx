@@ -27,7 +27,7 @@ export function OrderInformation() {
 const optionValue = [
   { value: "DINE_IN", label: "Dine In" },
   { value: "TAKE_AWAY", label: "Take Away" },
-  { value: "DELIVERY", label: "Delivery" },
+  { value: "SELF_PICKUP", label: "Self Pickup" },
 ];
 
 function OrderInput() {
@@ -42,9 +42,7 @@ function OrderInput() {
         id="orderType"
         name="orderType"
         className="custom-input"
-        onChange={(e) =>
-          router.push(`/service/checkout?type=${e.target.value}`)
-        }
+        onChange={(e) => router.push(`/checkout?type=${e.target.value}`)}
       >
         {optionValue.map((option) => (
           <option key={option.value} value={option.value}>

@@ -5,6 +5,7 @@ import { PiHandbagBold } from "react-icons/pi";
 import { useCart } from "@/lib/hooks/query/use-cart";
 import { useAuth } from "@/lib/context/auth-context";
 import { formatCurrency } from "@/lib/currency-formatter";
+import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 
 type CartNotificationProps = {
@@ -15,7 +16,14 @@ export function CartNotification({ isService }: CartNotificationProps) {
   const { data, isPending } = useCart();
   const cart = data?.data;
 
-  const url = isService ? "/service/checkout" : "/checkout";
+  const searchParams = useSearchParams();
+  const queue = searchParams.get("queue");
+
+  const url = isService
+    ? "/service/checkout"
+    : queue
+      ? `/checkout?queue=${queue}`
+      : "/checkout";
 
   const { token } = useAuth();
 

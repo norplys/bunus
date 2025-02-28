@@ -76,6 +76,8 @@ export type OrderDetail = Order & {
 };
 
 export type Payment = BaseRecord & {
+  snapToken: string;
+  snapRedirectUrl: string;
   status: PaymentStatus;
   method: PaymentMethod;
 };

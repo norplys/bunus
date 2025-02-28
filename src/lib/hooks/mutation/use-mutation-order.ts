@@ -7,9 +7,10 @@ import { fetcher, type ApplicationError } from "@/lib/fetcher";
 import { useAuth } from "@/lib/context/auth-context";
 import type { APIResponse } from "@/lib/types/api";
 import type { MutationResult } from "@/lib/types/query";
-import type { Order } from "@/lib/types/schema";
+import type { Order, Payment } from "@/lib/types/schema";
 
 type MutationOrderResponse = APIResponse<Order>;
+type MutationPaymentResponse = APIResponse<Payment>;
 
 export type MutationOrder = {
   queryClient: QueryClient;
@@ -20,6 +21,10 @@ export type MutationOrder = {
   updateOrderMutation: MutationResult<
     { data: Partial<Order>; id: string },
     MutationOrderResponse
+  >;
+  createPublicOrderMutation: MutationResult<
+    { data: Partial<Order> },
+    MutationPaymentResponse
   >;
 };
 
@@ -72,9 +77,30 @@ export function useMutationOrder(): MutationOrder {
     },
   });
 
+  const createPublicOrderMutation = useMutation<
+    MutationPaymentResponse,
+    ApplicationError,
+    { data: Partial<Order> }
+  >({
+    mutationFn: ({ data }: { data: Partial<Order> }) =>
+      fetcher("/orders/public", {
+        method: "POST",
+        headers: {
+          authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      }),
+    onSuccess: () =>
+      queryClient.invalidateQueries({
+        queryKey: ["cart"],
+      }),
+  });
+
   return {
     queryClient,
     createOrderMutation,
     updateOrderMutation,
+    createPublicOrderMutation,
   };
 }
