@@ -16,7 +16,9 @@
   },
   "dependencies": {
     "@headlessui/react": "^1.7.18",
-    "axios": "^1.6.7",
+    "@hookform/resolvers": "^4.0.0",
+    "@tanstack/react-query": "^5.66.3",
+    "clsx": "^2.1.1",
     "framer-motion": "^11.0.5",
     "next": "14.0.4",
     "react": "^18",
@@ -24,8 +26,7 @@
     "react-full-screen": "^1.1.1",
     "react-hook-form": "^7.50.1",
     "react-hot-toast": "^2.4.1",
-    "react-icons": "^5.0.1",
-    "react-query": "^3.39.3",
+    "react-icons": "^5.4.0",
     "socket.io-client": "^4.7.5",
     "swiper": "^11.0.7",
     "zod": "^3.22.4"

@@ -1,0 +1,74 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* General */
+    --radius: 0.5rem;
+    --alert-info: 202 100% 50%;
+    --alert-error: 0 100% 50%;
+    --alert-warning: 49 100% 49%;
+    --alert-success: 107 51% 58%;
+
+    --border: 0 0% 89.8%;
+    --box-shadow: 0 0% 0%;
+    --background: 0 0% 100%;
+    --foreground: 0 0% 35.3%;
+    --primary: 0 0% 0%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 0% 96.1%;
+    --secondary-foreground: 0 0% 9%;
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 45.1%;
+    --accent: 39 100% 50%;
+    --accent-foreground: 39 100% 50%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
+    overflow-x: hidden;
+    scrollbar-gutter: stable;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    @apply bg-background text-primary font-mono;
+  }
+}
+
+.swiper-free-mode > .swiper-wrapper {
+  transition-timing-function: linear !important;
+}
+
+@layer components {
+  .title {
+    @apply text-5xl font-bold;
+  }
+
+  .layout {
+    @apply mx-auto max-w-7xl px-4;
+  }
+
+  .no-layout {
+    @apply mx-auto px-4;
+  }
+
+  div.swiper-slide {
+    width: fit-content !important;
+  }
+
+  .smooth-tab {
+    @apply rounded-md transition-shadow focus-visible:outline-none focus-visible:ring-2  focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background;
+  }
+
+  .custom-input {
+    @apply smooth-tab min-w-0 rounded-md border border-border bg-background px-4 py-3 outline-none transition disabled:brightness-75;
+  }
+}

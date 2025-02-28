@@ -1,9 +1,10 @@
-import type { Metadata } from "next";
+import "@/styles/globals.css";
+
 import { Inter } from "next/font/google";
-import "./globals.css";
-import { UserProvider } from "@/lib/context/user-context";
+import { AuthContextProvider } from "@/lib/context/auth-context";
 import { Toaster } from "react-hot-toast";
-import { ReactQueryContext } from "@/lib/context/react-query-context";
+import { ReactQueryProvider } from "@/lib/context/react-query-context";
+import type { Metadata } from "next";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,12 +22,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <ReactQueryContext>
-          <UserProvider>
+        <ReactQueryProvider>
+          <AuthContextProvider>
             {children}
-            <Toaster />
-          </UserProvider>
-        </ReactQueryContext>
+            <Toaster position="bottom-right" />
+          </AuthContextProvider>
+        </ReactQueryProvider>
       </body>
     </html>
   );
