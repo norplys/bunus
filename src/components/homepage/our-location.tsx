@@ -10,7 +10,7 @@ export function OurLocation(): JSX.Element {
       <h2 className="title mb-10">Kami Ada Disini, Ayo Kemari !</h2>
       <Link
         href={locationLink}
-        className="text-primary-foreground bg-accent text-xl px-6 py-2 rounded-md font-semibold hover:scale-105 duration-300"
+        className="text-primary-foreground bg-accent md:text-xl md:px-6 md:py-2 text-sm py-1 px-2 rounded-md font-semibold hover:scale-105 duration-300"
       >
         Lihat Lokasi
       </Link>

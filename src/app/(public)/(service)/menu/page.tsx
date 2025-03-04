@@ -42,7 +42,7 @@ export default function Menu() {
         cart={cart}
         isCartPending={isCartPending}
       />
-      <section className="layout min-h-screen pt-5">
+      <section className="layout min-h-screen md:pt-5 pt-16">
         {menus?.length ? (
           <div className="grid gap-5 grid-cols-[repeat(auto-fill,minmax(220px,1fr))] md:grid-cols-3">
             {menus?.map((menu) => (
