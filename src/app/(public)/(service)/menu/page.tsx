@@ -18,7 +18,7 @@ export default function Menu() {
   const { data, isLoading } = useMenu(categoryId);
   const menus = data?.data ?? [];
 
-  const { data: cartData, isPending: isCartPending } = useCart();
+  const { data: cartData, isLoading: isCartPending } = useCart();
   const cart = cartData?.data;
 
   const [menuId, setMenuId] = useState<string | null>(null);
@@ -44,7 +44,7 @@ export default function Menu() {
       />
       <section className="layout min-h-screen pt-5">
         {menus?.length ? (
-          <div className="grid gap-5 grid-cols-[repeat(auto-fill,minmax(280px,1fr))]">
+          <div className="grid gap-5 grid-cols-[repeat(auto-fill,minmax(220px,1fr))] md:grid-cols-3">
             {menus?.map((menu) => (
               <MenuCard key={menu.id} {...menu} changeId={changeId} />
             ))}

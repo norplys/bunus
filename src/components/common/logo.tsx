@@ -31,7 +31,7 @@ export function Logo({
     <Link
       href={href ?? "/"}
       className={clsx(
-        "flex shrink-0 items-center gap-5 text-2xl",
+        "flex shrink-0 items-center gap-5 md:text-2xl",
         clickable ? "pointer-events-auto" : "pointer-events-none",
         className,
       )}

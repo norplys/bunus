@@ -28,8 +28,10 @@ export function CategoryDashboard({
   const rootUrl = isService ? "/service/menu" : "/menu";
 
   return (
-    <div className={clsx("min-h-14 sticky z-30 py-4", className)}>
-      <ul className="layout flex overflow-x-auto gap-5">
+    <div
+      className={clsx("min-h-14 sticky z-30 py-4 overflow-x-auto", className)}
+    >
+      <ul className="layout flex gap-5">
         {categories?.length ? (
           categories.map((category) => (
             <DashboardTab

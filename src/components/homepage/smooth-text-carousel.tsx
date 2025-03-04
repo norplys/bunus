@@ -9,7 +9,7 @@ const items = [
 
 export function SmoothTextCarousel(): JSX.Element {
   return (
-    <section className="grid items-center justify-center text-6xl text-foreground/30 font-extrabold mt-10 gap-10">
+    <section className="md:grid hidden items-center justify-center text-6xl text-foreground/30 font-extrabold mt-10 gap-10">
       {items.map((item, index) => {
         const arrayOfText = new Array(10).fill(
           <div className="w-fit py-10">{item}</div>,

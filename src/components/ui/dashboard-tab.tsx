@@ -23,7 +23,7 @@ export function DashboardTab({
   return (
     <Link
       className={clsx(
-        "rounded-lg cursor-pointer duration-300",
+        "rounded-lg cursor-pointer duration-300 min-w-fit",
         selected && "text-accent",
       )}
       href={url}

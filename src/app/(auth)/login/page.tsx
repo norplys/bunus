@@ -1,5 +1,5 @@
 import { Login } from "./login";
 
-export default function LoginUser() {
+export default function Page() {
   return <Login admin={false} />;
 }

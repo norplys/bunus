@@ -25,7 +25,7 @@ export function MenuCard({
   };
 
   return (
-    <div className="bg-white border border-border rounded-lg relative">
+    <div className="bg-white border border-border rounded-lg relative grid">
       {!available && (
         <div className="absolute w-full h-full bg-black bg-opacity-50 flex items-center justify-center text-white text-xl font-bold rounded-lg">
           Tidak Tersedia

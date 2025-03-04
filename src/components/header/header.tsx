@@ -17,10 +17,10 @@ export function Header() {
   const { user } = useAuth();
 
   return (
-    <header className="fixed top-0 w-full z-40 backdrop-blur-md bg-primary/70 text-primary-foreground h-20">
+    <header className="fixed top-0 w-full z-40 backdrop-blur-md bg-primary/70 text-primary-foreground h-20 flex items-center">
       <div className="layout flex w-full justify-between items-center gap-4 p-4 md:gap-8">
         <Logo text={true} clickable={true} />
-        <nav className="flex gap-5">
+        <nav className="hidden md:flex gap-5">
           <ul className="flex gap-4">
             {headerNavList.map((navItem, index) => (
               <NavItem key={index} {...navItem} />

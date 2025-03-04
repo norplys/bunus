@@ -44,7 +44,7 @@ export function HeroSection(): JSX.Element {
 
 function SignUpButton(): JSX.Element {
   return (
-    <div className="relative flex px-6 py-12 items-center justify-end text-xl my-24 rounded-md bg-accent/10 overflow-hidden">
+    <div className="relative hidden md:flex px-6 py-12 items-center justify-end text-xl my-24 rounded-md bg-accent/10 overflow-hidden">
       <LazyImage
         src="/images/homepage/menu.png"
         alt="Hero Section 1"
@@ -54,7 +54,7 @@ function SignUpButton(): JSX.Element {
       />
       Daftar sekarang dan dapatkan poin untuk ditukarkan dengan produk kami
       <Link
-        className="bg-accent px-4 py-2 rounded-md ml-10 text-primary-foreground font-bold"
+        className="bg-accent px-4 py-2 rounded-md ml-10 text-primary-foreground font-bold hidden md:block"
         href="/register"
       >
         Daftar Sekarang
@@ -83,7 +83,7 @@ function HeroLink(): JSX.Element {
   ];
 
   return (
-    <div className="flex gap-4 text-primary-foreground">
+    <div className="md:flex gap-4 text-primary-foreground hidden">
       {links.map((item, index) => (
         <Link
           key={index}

@@ -14,6 +14,7 @@ import { useMutationCartItem } from "@/lib/hooks/mutation/use-mutation-cart-item
 import { Cart } from "@/lib/types/schema";
 import { useAuth } from "@/lib/context/auth-context";
 import Link from "next/link";
+import { Loading } from "../ui/loading";
 
 type MenuCardModalProps = {
   menuId: string | null;
@@ -48,7 +49,7 @@ export function MenuCardModal({
         onClick={closeModal}
       />
       {loading ? (
-        "loading"
+        <Loading />
       ) : (
         <>
           <ImageSection
