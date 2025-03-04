@@ -22,8 +22,8 @@ const images = imagesSrc.map((src) => (
 
 export function Testimony() {
   return (
-    <section className="layout flex gap-10 items-center mt-10">
-      <div className="w-[50%]">
+    <section className="layout flex md:gap-10 gap-5 md:items-center mt-10 flex-col-reverse md:flex-row">
+      <div className="md:w-[50%]">
         <Carousel
           items={images}
           autoplay={true}
@@ -35,9 +35,9 @@ export function Testimony() {
         />
       </div>
 
-      <h1 className="title leading-normal">
-        Apa Pendapat <br />
-        Mereka Tentang <br />
+      <h1 className="title text-start">
+        Apa Pendapat <br className="hidden md:block" />
+        Mereka Tentang <br className="hidden md:block" />
         Kami?
       </h1>
     </section>

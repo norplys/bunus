@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export function Contact(): JSX.Element {
   return (
-    <section className="min-h-screen bg-[url(/images/background/contact.png)] bg-cover mt-10 flex justify-center items-center">
+    <section className="min-h-screen bg-[url(/images/background/contact.png)] bg-cover mt-10 hidden lg:flex justify-center items-center">
       <div className="bg-primary-foreground relative w-[80%] h-96 rounded-xl border border-border">
         <div className="flex justify-center flex-col w-[50%] h-full gap-2 pl-40">
           <h1 className="title">Ada Pertanyaan ?</h1>

@@ -29,7 +29,7 @@ export function CategoryDashboard({
 
   return (
     <div
-      className={clsx("min-h-14 sticky z-30 py-4 overflow-x-auto", className)}
+      className={clsx("min-h-14 z-30 py-4 overflow-x-auto sticky", className)}
     >
       <ul className="layout flex gap-5">
         {categories?.length ? (

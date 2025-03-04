@@ -34,7 +34,8 @@ export function HeroSection(): JSX.Element {
         slidesPerView={1}
         spaceBetween={10}
       />
-      <div className="layout z-10 -my-14 relative grid">
+      <div className="layout z-10 md:-my-14 relative grid">
+        <MobileHeroLink />
         <HeroLink />
         <SignUpButton />
       </div>
@@ -63,25 +64,25 @@ function SignUpButton(): JSX.Element {
   );
 }
 
-function HeroLink(): JSX.Element {
-  const links = [
-    {
-      name: "Delivery",
-      href: "/delivery",
-      icon: <MdDeliveryDining className="text-6xl" />,
-    },
-    {
-      name: "Takeaway",
-      href: "/take-away",
-      icon: <FaBox className="text-4xl" />,
-    },
-    {
-      name: "Dine In",
-      href: "/dine-in",
-      icon: <PiBowlFoodFill className="text-5xl" />,
-    },
-  ];
+const links = [
+  {
+    name: "Delivery",
+    href: "/delivery",
+    icon: <MdDeliveryDining className="md:text-6xl text-3xl" />,
+  },
+  {
+    name: "Takeaway",
+    href: "/take-away",
+    icon: <FaBox className="md:text-4xl text-lg mt-1" />,
+  },
+  {
+    name: "Dine In",
+    href: "/dine-in",
+    icon: <PiBowlFoodFill className="md:text-5xl text-2xl" />,
+  },
+];
 
+function HeroLink(): JSX.Element {
   return (
     <div className="md:flex gap-4 text-primary-foreground hidden">
       {links.map((item, index) => (
@@ -92,6 +93,23 @@ function HeroLink(): JSX.Element {
         >
           {item.icon}
           <p className="btn btn-primary">{item.name}</p>
+        </Link>
+      ))}
+    </div>
+  );
+}
+
+export function MobileHeroLink(): JSX.Element {
+  return (
+    <div className="md:hidden flex justify-between gap-4 border-b border-border py-2">
+      {links.map((item, index) => (
+        <Link
+          key={index}
+          href={item.href}
+          className="flex flex-col justify-between items-center w-full h-full"
+        >
+          {item.icon}
+          <p className="btn btn-primary font-semibold">{item.name}</p>
         </Link>
       ))}
     </div>
