@@ -54,7 +54,7 @@ export function Logo({
         <span
           className={clsx(
             "font-bold",
-            placeholder && "text-6xl",
+            placeholder && "md:text-6xl text-3xl",
             hideTextOnMobile && "hidden md:inline",
           )}
         >
