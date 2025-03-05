@@ -12,7 +12,9 @@ export default function Page() {
   const router = useRouter();
 
   const validateToken = async () => {
-    const response = fetcher(`/auth/validate-email/${token}`);
+    const response = fetcher(`/auth/validate-email/${token}`, {
+      method: "POST",
+    });
 
     await toast
       .promise(response, {
