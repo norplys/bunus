@@ -13,7 +13,7 @@ export default function Layout({ children }: { children: ReactNode }) {
           {children}
           <Alert
             variant="info"
-            message={`Periksa URL untuk memastikan Anda masuk ke ${NEXT_PUBLIC_URL}. Serangan phishing sering kali menggunakan situs web palsu untuk mengakses informasi login Anda.`}
+            message={`Periksa URL untuk memastikan Anda masuk ke ${NEXT_PUBLIC_URL}. Serangan phishing sering kali menggunakan situs web palsu untuk mengakses informasi anda.`}
             className="rounded-md border border-border p-4 bg-primary-foreground/50 backdrop-blur-xl"
           />
         </div>
