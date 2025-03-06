@@ -1,4 +1,4 @@
-import { MerchantHeader } from "@/components/header/merchant-header";
+import { MerchantHeader } from "@/components/header/service-header";
 import { ProtectedCashierLayout } from "./protected-cashier-layout";
 import { CashierDashboard } from "@/components/cashier/cashier-dashboard";
 import type { ReactNode } from "react";

@@ -1,6 +1,6 @@
 "use client";
 
-import { MerchantHeader } from "@/components/header/merchant-header";
+import { MerchantHeader } from "@/components/header/service-header";
 import { useModal } from "@/lib/hooks/use-modal";
 import { MerchantCheckoutModal } from "@/components/modal/merchant-checkout-modal";
 import { Button } from "@/components/ui/button";
