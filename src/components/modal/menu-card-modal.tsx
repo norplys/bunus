@@ -56,7 +56,7 @@ export function MenuCardModal({
             imageUrl={imageUrl}
             name={menu?.name ?? ""}
             price={menu?.price ?? 0}
-            discountPrice={menu?.discountPrice}
+            discountPrice={menu?.discountPrice ?? 0}
             description={menu?.description ?? ""}
           />
           <OrderForm

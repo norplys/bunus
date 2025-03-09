@@ -10,11 +10,13 @@ const allCategoryTab = {
 };
 
 type CategoryDashboardProps = {
+  isAdmin?: boolean;
   isService?: boolean;
   className?: string;
 };
 
 export function CategoryDashboard({
+  isAdmin,
   isService,
   className,
 }: CategoryDashboardProps) {
@@ -25,7 +27,11 @@ export function CategoryDashboard({
   const categoryId = searchParams.get("categoryId");
   const selectedId = categoryId || "ALL";
 
-  const rootUrl = isService ? "/service/menu" : "/menu";
+  const rootUrl = isAdmin
+    ? "/dashboard/menu"
+    : isService
+      ? "/service/menu"
+      : "/menu";
 
   return (
     <div

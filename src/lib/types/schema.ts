@@ -40,12 +40,13 @@ export type CartItem = BaseRecord & {
 };
 
 export type Menu = BaseRecord & {
-  discountPrice?: number;
+  discountPrice?: number | null;
   name: string;
   image: string;
   price: number;
   description: string;
   available: boolean;
+  categoryId: string;
 };
 
 export type DetailMenu = Menu & {

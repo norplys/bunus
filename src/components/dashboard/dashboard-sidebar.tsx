@@ -27,7 +27,7 @@ const iconArray = [
 
 export function DashboardSidebar() {
   return (
-    <div className="md:min-h-screen w-screen md:w-fit fixed bottom-0 md:top-20 p-2 border-t-2 md:border-t-0 md:border-r-2 border-foreground flex md:flex-col items-center gap-5 text-2xl justify-around md:justify-start z-40">
+    <div className="md:min-h-screen w-screen md:w-fit fixed bottom-0 md:top-20 p-2 border-t-2 md:border-t-0 md:border-r-2 border-foreground flex md:flex-col items-center gap-5 text-2xl justify-around md:justify-start z-40 bg-primary-foreground">
       {iconArray.map((item, index) => (
         <Link href={item.link} key={index}>
           {item.icon}

@@ -9,11 +9,7 @@ import { MenuCardModal } from "@/components/modal/menu-card-modal";
 import { useCart } from "@/lib/hooks/query/use-cart";
 import { useState } from "react";
 
-type MenuProps = {
-  isAdmin?: boolean;
-};
-
-export default function Menu({ isAdmin }: MenuProps) {
+export default function Menu() {
   const searchParams = useSearchParams();
   const categoryId = searchParams.get("categoryId");
 
@@ -50,7 +46,7 @@ export default function Menu({ isAdmin }: MenuProps) {
         {menus?.length ? (
           <div className="grid gap-5 grid-cols-[repeat(auto-fill,minmax(220px,1fr))] md:grid-cols-3">
             {menus?.map((menu) => (
-              <MenuCard key={menu.id} {...menu} changeId={changeId} isAdmin />
+              <MenuCard key={menu.id} {...menu} changeId={changeId} />
             ))}
           </div>
         ) : (

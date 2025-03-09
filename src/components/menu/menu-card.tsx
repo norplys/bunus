@@ -5,7 +5,6 @@ import { clsx } from "clsx";
 
 type MenuCardProps = Menu & {
   changeId: (id: string) => void;
-  isAdmin?: boolean;
 };
 
 export function MenuCard({
@@ -17,7 +16,6 @@ export function MenuCard({
   available,
   discountPrice,
   changeId,
-  isAdmin,
 }: MenuCardProps) {
   const imageUrl = image || "/images/menu/menu-placeholder.png";
   const trimmedDescription = description?.slice(0, 100);
@@ -56,7 +54,7 @@ export function MenuCard({
           disabled={!available}
           onClick={handleChangeId}
         >
-          {isAdmin ? "Edit" : "Pesan"}
+          "Pesan"
         </button>
       </div>
     </div>
