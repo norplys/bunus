@@ -17,10 +17,13 @@ import { DashboardMenuModal } from "@/components/dashboard/dashboard-menu-modal"
 export default function Page() {
   const { data, isLoading } = useCategories();
 
+  const [isEditMode, setIsEditMode] = useState(false);
+
   const { open, openModal, closeModal } = useModal();
   const { menuId, changeMenuId } = useMenuId();
 
   const handleOpenModal = (menuId: string) => {
+    setIsEditMode(true);
     changeMenuId(menuId);
     openModal();
   };
@@ -32,7 +35,9 @@ export default function Page() {
         open={open}
         CloseModal={closeModal}
         menuId={menuId.current}
+        isEditMode={isEditMode}
       />
+      <ActionButton openMenuModal={openModal} />
       <div className="grid gap-5">
         {isLoading ? (
           <Loading />
@@ -87,13 +92,20 @@ function MenuCategoryCard({
   );
 }
 
-function ActionButton() {
+type ActionButtonProps = {
+  openMenuModal: () => void;
+};
+
+function ActionButton({ openMenuModal }: ActionButtonProps) {
   return (
     <div className="flex gap-4 items-center py-4 border-b">
       <Button className="bg-accent px-2 py-1 font-bold text-primary-foreground">
         Tambah Kategori
       </Button>
-      <Button className="bg-accent px-2 py-1 font-bold text-primary-foreground">
+      <Button
+        className="bg-accent px-2 py-1 font-bold text-primary-foreground"
+        onClick={openMenuModal}
+      >
         Tambah Produk
       </Button>
     </div>

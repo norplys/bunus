@@ -54,7 +54,7 @@ export function MenuCard({
           disabled={!available}
           onClick={handleChangeId}
         >
-          "Pesan"
+          Pesan
         </button>
       </div>
     </div>

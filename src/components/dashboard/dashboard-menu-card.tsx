@@ -1,6 +1,7 @@
 import { LazyImage } from "../ui/lazy-image";
 import { formatCurrency } from "@/lib/currency-formatter";
 import type { Menu } from "@/lib/types/schema";
+import clsx from "clsx";
 
 type DashboardMenuCardProps = {
   menu: Menu;
@@ -19,7 +20,7 @@ export function DashboardMenuCard({
 
   return (
     <li
-      className="border border-border flex rounded-lg gap-5"
+      className="border border-border flex rounded-lg gap-5 cursor-pointer overflow-hidden"
       onClick={handleClick}
     >
       <LazyImage
@@ -27,11 +28,18 @@ export function DashboardMenuCard({
         alt={menu.name}
         width={300}
         height={300}
-        className="object-cover h-full"
+        className="object-cover h-40 w-60"
       />
       <div className="py-4">
         <h1 className="text-lg font-semibold">{menu.name}</h1>
-        <p>{formatCurrency(menu.price ?? 0)}</p>
+        <p
+          className={clsx(menu?.discountPrice && "line-through text-gray-500")}
+        >
+          {formatCurrency(menu.price ?? 0)}
+        </p>
+        {menu?.discountPrice && (
+          <p>{formatCurrency(menu.discountPrice ?? 0)}</p>
+        )}
       </div>
     </li>
   );

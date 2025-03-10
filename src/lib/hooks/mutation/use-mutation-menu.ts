@@ -7,8 +7,22 @@ import { Menu } from "@/lib/types/schema";
 
 type MutationMenuResponse = APIResponse<Menu>;
 
+type CreateMenuSchema = Pick<
+  Menu,
+  | "name"
+  | "description"
+  | "image"
+  | "price"
+  | "discountPrice"
+  | "available"
+  | "categoryId"
+>;
+
 export type MutationMenu = {
-  // createMenuMutation: MutationResult<Menu, MutationMenuResponse>;
+  createMenuMutation: MutationResult<
+    { data: CreateMenuSchema },
+    MutationMenuResponse
+  >;
   updateMenuMutation: MutationResult<
     { data: Partial<Menu>; menuId: string },
     MutationMenuResponse
@@ -21,21 +35,29 @@ export function useMutationMenu(): MutationMenu {
 
   const queryClient = useQueryClient();
 
-  // const createMenuMutation = useMutation<
-  //   MutationMenuResponse,
-  //   ApplicationError,
-  //   Partial<Menu>
-  // >({
-  //   mutationFn: (data) =>
-  //     fetcher("/menus", {
-  //       method: "POST",
-  //       headers: {
-  //         Authorization: `Bearer ${token}`,
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify(data),
-  //     }),
-  // });
+  const createMenuMutation = useMutation<
+    MutationMenuResponse,
+    ApplicationError,
+    { data: CreateMenuSchema }
+  >({
+    mutationFn: ({ data }) =>
+      fetcher("/menus", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["menu"],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["detailMenu"],
+      });
+    },
+  });
 
   const updateMenuMutation = useMutation<
     MutationMenuResponse,
@@ -81,7 +103,7 @@ export function useMutationMenu(): MutationMenu {
   });
 
   return {
-    // createMenuMutation,
+    createMenuMutation,
     updateMenuMutation,
     deleteMenuMutation,
   };

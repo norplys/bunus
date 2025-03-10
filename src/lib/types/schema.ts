@@ -42,9 +42,9 @@ export type CartItem = BaseRecord & {
 export type Menu = BaseRecord & {
   discountPrice?: number | null;
   name: string;
-  image: string;
+  image?: string;
   price: number;
-  description: string;
+  description?: string;
   available: boolean;
   categoryId: string;
 };

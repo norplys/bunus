@@ -1,22 +1,23 @@
-import { Modal } from "../modal/modal";
+import { z } from "zod";
+import toast from "react-hot-toast";
+import Image from "next/image";
+import { useEffect, useState } from "react";
 import {
   useForm,
   type UseFormRegisterReturn,
   type FieldError,
 } from "react-hook-form";
-import { Input } from "../ui/input";
-import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useDetailMenu } from "@/lib/hooks/query/use-detail-menu";
-import { Button } from "../ui/button";
-import { useCategories } from "@/lib/hooks/query/use-categories";
-import { Category } from "@/lib/types/schema";
-import { useEffect, useState } from "react";
-import Image from "next/image";
-import { useMutationMenu } from "@/lib/hooks/mutation/use-mutation-menu";
-import { fetcher } from "@/lib/fetcher";
 import { useAuth } from "@/lib/context/auth-context";
-import toast from "react-hot-toast";
+import { fetcher } from "@/lib/fetcher";
+import { useCategories } from "@/lib/hooks/query/use-categories";
+import { useDetailMenu } from "@/lib/hooks/query/use-detail-menu";
+import { useMutationMenu } from "@/lib/hooks/mutation/use-mutation-menu";
+import { Category } from "@/lib/types/schema";
+import { Modal } from "../modal/modal";
+import { Input } from "../ui/input";
+import { Button } from "../ui/button";
+import { Loading } from "../ui/loading";
 
 type DashboardMenuModalProps = {
   open: boolean;
@@ -25,12 +26,12 @@ type DashboardMenuModalProps = {
   isEditMode?: boolean;
 };
 
-const ACCEPTED_IMAGE_TYPES = [
-  "image/jpeg",
-  "image/jpg",
-  "image/png",
-  "image/webp",
-];
+// const ACCEPTED_IMAGE_TYPES = [
+//   "image/jpeg",
+//   "image/jpg",
+//   "image/png",
+//   "image/webp",
+// ];
 
 const MenuPayload = z.object({
   name: z.string(),
@@ -56,7 +57,9 @@ export function DashboardMenuModal({
   const { data: categoryData, isLoading: categoryLoading } = useCategories();
   const categories = categoryData?.data;
 
-  const { updateMenuMutation } = useMutationMenu();
+  const loading = isLoading || categoryLoading;
+
+  const { updateMenuMutation, createMenuMutation } = useMutationMenu();
 
   const { token } = useAuth();
 
@@ -68,7 +71,7 @@ export function DashboardMenuModal({
     } else {
       setFile(null);
     }
-  }, [open]);
+  }, [open, menu]);
 
   const handleCloseModal = () => {
     if (file) {
@@ -78,7 +81,6 @@ export function DashboardMenuModal({
     setFile(null);
     reset();
 
-    console.log("close modal");
     CloseModal();
   };
 
@@ -122,18 +124,31 @@ export function DashboardMenuModal({
       delete payload.image;
     }
 
-    updateMenuMutation.mutate(
-      { data: payload, menuId: menuId! },
-      {
-        onSuccess: () => {
-          toast.success("Berhasil mengubah menu");
-          handleCloseModal();
-        },
-        onError: (error) => {
-          toast.error(error.message);
-        },
-      },
-    );
+    isEditMode
+      ? updateMenuMutation.mutate(
+          { data: payload, menuId: menuId! },
+          {
+            onSuccess: () => {
+              toast.success("Berhasil mengubah menu");
+              handleCloseModal();
+            },
+            onError: (error) => {
+              toast.error(error.message);
+            },
+          },
+        )
+      : createMenuMutation.mutate(
+          { data: payload },
+          {
+            onSuccess: () => {
+              toast.success("Berhasil membuat menu");
+              handleCloseModal();
+            },
+            onError: (error) => {
+              toast.error(error.message);
+            },
+          },
+        );
   };
 
   const {
@@ -158,64 +173,74 @@ export function DashboardMenuModal({
 
   return (
     <Modal open={open} closeModal={handleCloseModal}>
-      <form
-        className="grid gap-5 bg-primary-foreground p-5 rounded-lg max-w-xl w-screen max-h-[80vh] overflow-y-auto"
-        onSubmit={handleSubmit(submitHandler)}
-      >
-        <h1 className="text-2xl font-bold">Edit Menu</h1>
-        <ImageInput
-          register={register("image", {
-            onChange: handleImageChange,
-          })}
-          imageUrl={file}
-        />
-        <Input
-          label="Nama Menu"
-          placeholder="Nama Menu"
-          register={register("name")}
-          id="name"
-          type="text"
-          error={errors.name}
-        />
-        <Input
-          label="Harga"
-          placeholder="Harga"
-          register={register("price")}
-          id="price"
-          type="number"
-          error={errors.price}
-        />
-        <Input
-          label="Harga Diskon (optional)"
-          placeholder="Harga Diskon"
-          register={register("discountPrice")}
-          id="discountPrice"
-          type="number"
-          error={errors.price}
-        />
-        <Input
-          label="Deskripsi"
-          placeholder="Deskripsi"
-          register={register("description")}
-          id="description"
-          type="textarea"
-          error={errors.description}
-        />
-        <CategoryInput
-          categories={categories}
-          register={register("categoryId")}
-        />
-        <div className="flex items-center gap-2">
-          <input type="checkbox" {...register("available")} />
-          <label htmlFor="available">Tersedia</label>
-        </div>
-        <Button
-          className="bg-accent text-primary-foreground py-2"
-          type="submit"
+      {loading ? (
+        <Loading />
+      ) : (
+        <form
+          className="grid gap-5 bg-primary-foreground p-5 rounded-lg max-w-xl w-screen max-h-[80vh] overflow-y-auto"
+          onSubmit={handleSubmit(submitHandler)}
         >
-          Ubah
-        </Button>
-      </form>
+          <h1 className="text-2xl font-bold">
+            {isEditMode ? "Edit" : "Buat"} Menu
+          </h1>
+          <ImageInput
+            register={register("image", {
+              onChange: handleImageChange,
+            })}
+            imageUrl={file}
+          />
+          <Input
+            label="Nama Menu"
+            placeholder="Nama Menu"
+            register={register("name")}
+            id="name"
+            type="text"
+            error={errors.name}
+          />
+          <Input
+            label="Harga"
+            placeholder="Harga"
+            register={register("price", {
+              valueAsNumber: true,
+            })}
+            id="price"
+            type="number"
+            error={errors.price}
+          />
+          <Input
+            label="Harga Diskon (optional)"
+            placeholder="Harga Diskon"
+            register={register("discountPrice", {
+              valueAsNumber: true,
+            })}
+            id="discountPrice"
+            type="number"
+            error={errors.price}
+          />
+          <Input
+            label="Deskripsi"
+            placeholder="Deskripsi"
+            register={register("description")}
+            id="description"
+            type="textarea"
+            error={errors.description}
+          />
+          <CategoryInput
+            categories={categories}
+            register={register("categoryId")}
+          />
+          <div className="flex items-center gap-2">
+            <input type="checkbox" {...register("available")} />
+            <label htmlFor="available">Tersedia</label>
+          </div>
+          <Button
+            className="bg-accent text-primary-foreground py-2"
+            type="submit"
+          >
+            {isEditMode ? "Edit" : "Buat"} Menu
+          </Button>
+        </form>
+      )}
     </Modal>
   );
 }
