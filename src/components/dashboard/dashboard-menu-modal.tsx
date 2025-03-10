@@ -59,7 +59,8 @@ export function DashboardMenuModal({
 
   const loading = isLoading || categoryLoading;
 
-  const { updateMenuMutation, createMenuMutation } = useMutationMenu();
+  const { updateMenuMutation, createMenuMutation, deleteMenuMutation } =
+    useMutationMenu();
 
   const { token } = useAuth();
 
@@ -82,6 +83,18 @@ export function DashboardMenuModal({
     reset();
 
     CloseModal();
+  };
+
+  const handleDeleteMenu = () => {
+    deleteMenuMutation.mutate(menuId!, {
+      onSuccess: () => {
+        toast.success("Berhasil menghapus menu");
+        handleCloseModal();
+      },
+      onError: (error) => {
+        toast.error(error.message);
+      },
+    });
   };
 
   const defaultValues = {
@@ -239,6 +252,14 @@ export function DashboardMenuModal({
           >
             {isEditMode ? "Edit" : "Buat"} Menu
           </Button>
+          {isEditMode && (
+            <Button
+              className="bg-red-500 text-primary-foreground py-2"
+              onClick={handleDeleteMenu}
+            >
+              Hapus Menu
+            </Button>
+          )}
         </form>
       )}
     </Modal>

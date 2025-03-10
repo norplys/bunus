@@ -20,11 +20,23 @@ export default function Page() {
   const [isEditMode, setIsEditMode] = useState(false);
 
   const { open, openModal, closeModal } = useModal();
+
+  const {
+    open: categoryOpen,
+    openModal: categoryOpenModal,
+    closeModal: categoryCloseModal,
+  } = useModal();
+
   const { menuId, changeMenuId } = useMenuId();
 
   const handleOpenModal = (menuId: string) => {
     setIsEditMode(true);
     changeMenuId(menuId);
+    openModal();
+  };
+
+  const handleCreateOpenModal = () => {
+    setIsEditMode(false);
     openModal();
   };
 
@@ -37,7 +49,7 @@ export default function Page() {
         menuId={menuId.current}
         isEditMode={isEditMode}
       />
-      <ActionButton openMenuModal={openModal} />
+      <ActionButton openMenuModal={handleCreateOpenModal} />
       <div className="grid gap-5">
         {isLoading ? (
           <Loading />
