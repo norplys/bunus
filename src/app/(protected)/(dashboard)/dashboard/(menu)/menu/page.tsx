@@ -11,8 +11,8 @@ import { useModal } from "@/lib/hooks/use-modal";
 import { DashboardMenuCard } from "@/components/dashboard/dashboard-menu-card";
 import { Button } from "@/components/ui/button";
 import { useMenuId } from "@/lib/hooks/use-menu-id";
-import { DashboardMenuModal } from "@/components/dashboard/dashboard-menu-modal";
-import { DashboardCategoryModal } from "@/components/dashboard/dashboard-category-modal";
+import { DashboardMenuModal } from "@/components/modal/dashboard-menu-modal";
+import { DashboardCategoryModal } from "@/components/modal/dashboard-category-modal";
 import { useMutationCategory } from "@/lib/hooks/mutation/use-mutation-category";
 import toast from "react-hot-toast";
 
@@ -36,29 +36,40 @@ export default function Page() {
 
   const { menuId, changeMenuId } = useMenuId();
 
-  const handleOpenModal = (menuId: string) => {
-    setIsEditMode(true);
+  const handleOpenMenuModal = (menuId: string | null, isEditMode: boolean) => {
+    setIsEditMode(isEditMode);
     changeMenuId(menuId);
     openModal();
   };
 
+  const handleOpenModal = (menuId: string) => {
+    handleOpenMenuModal(menuId, true);
+  };
+
   const handleCreateOpenModal = () => {
-    setIsEditMode(false);
-    openModal();
+    handleOpenMenuModal(null, false);
   };
 
-  const handleCreateCategoryOpenModal = () => {
-    setIsCategoryEditMode(false);
-    categoryOpenModal();
-  };
-
-  const handleEditCategory = (categoryId: string, initialName: string) => {
-    setIsCategoryEditMode(true);
+  const handleOpenCategoryModal = (
+    categoryId: string | null,
+    initialName: string | null,
+    isEditMode: boolean,
+  ) => {
+    setIsCategoryEditMode(isEditMode);
     setInitialCategoryName(initialName);
 
     setCategoryId(categoryId);
     categoryOpenModal();
   };
+
+  const handleCreateCategoryOpenModal = () => {
+    handleOpenCategoryModal(null, null, false);
+  };
+
+  const handleEditCategory = (categoryId: string, initialName: string) => {
+    handleOpenCategoryModal(categoryId, initialName, true);
+  };
+
   const categories = data?.data;
   return (
     <>

@@ -14,7 +14,7 @@ import { useCategories } from "@/lib/hooks/query/use-categories";
 import { useDetailMenu } from "@/lib/hooks/query/use-detail-menu";
 import { useMutationMenu } from "@/lib/hooks/mutation/use-mutation-menu";
 import { Category } from "@/lib/types/schema";
-import { Modal } from "../modal/modal";
+import { Modal } from "./modal";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { Loading } from "../ui/loading";
@@ -72,6 +72,8 @@ export function DashboardMenuModal({
     } else {
       setFile(null);
     }
+
+    reset();
   }, [open, menu]);
 
   const handleCloseModal = () => {
