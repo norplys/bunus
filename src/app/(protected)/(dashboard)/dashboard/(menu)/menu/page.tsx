@@ -8,17 +8,18 @@ import { Category, Menu } from "@/lib/types/schema";
 import { BiTrash } from "react-icons/bi";
 import { FaEdit } from "react-icons/fa";
 import { useModal } from "@/lib/hooks/use-modal";
-import { MenuCardModal } from "@/components/modal/menu-card-modal";
 import { DashboardMenuCard } from "@/components/dashboard/dashboard-menu-card";
 import { Button } from "@/components/ui/button";
 import { useMenuId } from "@/lib/hooks/use-menu-id";
 import { DashboardMenuModal } from "@/components/dashboard/dashboard-menu-modal";
+import { DashboardCategoryModal } from "@/components/dashboard/dashboard-category-modal";
+import { useMutationCategory } from "@/lib/hooks/mutation/use-mutation-category";
+import toast from "react-hot-toast";
 
 export default function Page() {
   const { data, isLoading } = useCategories();
 
   const [isEditMode, setIsEditMode] = useState(false);
-
   const { open, openModal, closeModal } = useModal();
 
   const {
@@ -26,6 +27,12 @@ export default function Page() {
     openModal: categoryOpenModal,
     closeModal: categoryCloseModal,
   } = useModal();
+
+  const [isCategoryEditMode, setIsCategoryEditMode] = useState<boolean>(false);
+  const [initialCategoryName, setInitialCategoryName] = useState<string | null>(
+    null,
+  );
+  const [categoryId, setCategoryId] = useState<string | null>(null);
 
   const { menuId, changeMenuId } = useMenuId();
 
@@ -40,6 +47,18 @@ export default function Page() {
     openModal();
   };
 
+  const handleCreateCategoryOpenModal = () => {
+    setIsCategoryEditMode(false);
+    categoryOpenModal();
+  };
+
+  const handleEditCategory = (categoryId: string, initialName: string) => {
+    setIsCategoryEditMode(true);
+    setInitialCategoryName(initialName);
+
+    setCategoryId(categoryId);
+    categoryOpenModal();
+  };
   const categories = data?.data;
   return (
     <>
@@ -49,7 +68,17 @@ export default function Page() {
         menuId={menuId.current}
         isEditMode={isEditMode}
       />
-      <ActionButton openMenuModal={handleCreateOpenModal} />
+      <DashboardCategoryModal
+        open={categoryOpen}
+        CloseModal={categoryCloseModal}
+        categoryId={categoryId}
+        isEditMode={isCategoryEditMode}
+        initialName={initialCategoryName}
+      />
+      <ActionButton
+        openMenuModal={handleCreateOpenModal}
+        openCategoryModal={handleCreateCategoryOpenModal}
+      />
       <div className="grid gap-5">
         {isLoading ? (
           <Loading />
@@ -59,6 +88,7 @@ export default function Page() {
               key={i}
               category={category}
               handleOpenModal={handleOpenModal}
+              handleEditCategory={handleEditCategory}
             />
           ))
         ) : (
@@ -72,22 +102,40 @@ export default function Page() {
 type MenucategoryCardProps = {
   category: Category;
   handleOpenModal: (menuId: string) => void;
+  handleEditCategory: (categoryId: string, initialName: string) => void;
 };
 
 function MenuCategoryCard({
   category,
   handleOpenModal,
+  handleEditCategory,
 }: MenucategoryCardProps) {
   const { data, isLoading } = useMenu(category.id);
+  const { deleteCategoryMutation } = useMutationCategory();
 
   const menus = data?.data;
+
+  const editCategory = () => {
+    handleEditCategory(category.id, category.name);
+  };
+
+  const handleDeleteCategory = () => {
+    deleteCategoryMutation.mutate(category.id, {
+      onSuccess: () => {
+        toast.success("Kategori berhasil dihapus");
+      },
+      onError: (err) => {
+        toast.error(err.message);
+      },
+    });
+  };
 
   return (
     <div>
       <div className="flex text-center items-center gap-2 text-xl">
         <h1 className="text-2xl font-bold py-5">{category.name}</h1>
-        <BiTrash />
-        <FaEdit />
+        <BiTrash className="cursor-pointer" onClick={handleDeleteCategory} />
+        <FaEdit className="cursor-pointer" onClick={editCategory} />
       </div>
       {isLoading ? (
         <Loading />
@@ -106,12 +154,16 @@ function MenuCategoryCard({
 
 type ActionButtonProps = {
   openMenuModal: () => void;
+  openCategoryModal: () => void;
 };
 
-function ActionButton({ openMenuModal }: ActionButtonProps) {
+function ActionButton({ openMenuModal, openCategoryModal }: ActionButtonProps) {
   return (
     <div className="flex gap-4 items-center py-4 border-b">
-      <Button className="bg-accent px-2 py-1 font-bold text-primary-foreground">
+      <Button
+        className="bg-accent px-2 py-1 font-bold text-primary-foreground"
+        onClick={openCategoryModal}
+      >
         Tambah Kategori
       </Button>
       <Button
