@@ -1,4 +1,4 @@
-import { MerchantHeader } from "@/components/header/service-header";
+import { ServiceHeader } from "@/components/header/service-header";
 import { ProtectedCashierLayout } from "./protected-cashier-layout";
 import { CashierDashboard } from "@/components/cashier/cashier-dashboard";
 import type { ReactNode } from "react";
@@ -6,7 +6,7 @@ import type { ReactNode } from "react";
 export default function Layout({ children }: { children: ReactNode }) {
   return (
     <ProtectedCashierLayout>
-      <MerchantHeader />
+      <ServiceHeader />
       <CashierDashboard />
       <main className="layout mt-20">{children}</main>
     </ProtectedCashierLayout>

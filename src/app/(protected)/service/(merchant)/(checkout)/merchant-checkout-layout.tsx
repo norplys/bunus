@@ -1,6 +1,6 @@
 "use client";
 
-import { MerchantHeader } from "@/components/header/service-header";
+import { ServiceHeader } from "@/components/header/service-header";
 import { useModal } from "@/lib/hooks/use-modal";
 import { MerchantCheckoutModal } from "@/components/modal/merchant-checkout-modal";
 import { Button } from "@/components/ui/button";
@@ -16,7 +16,7 @@ export function MerchantCheckoutLayout({ children }: { children: ReactNode }) {
 
   return (
     <>
-      <MerchantHeader />
+      <ServiceHeader />
       <MerchantCheckoutModal open={open} closeModal={closeModal} />
       <main className="layout mt-24">{children}</main>
       <MerchantCheckoutButton openModal={openModal} cart={cart} />
