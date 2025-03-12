@@ -8,7 +8,7 @@ import { LazyImage } from "../ui/lazy-image";
 export function HeaderProfile() {
   const { user, handleLogout } = useAuth();
 
-  const { name, image, email } = user || {};
+  const { image } = user || {};
 
   return (
     <Menu className="relative" as="div">
@@ -24,7 +24,6 @@ export function HeaderProfile() {
             ) : (
               <RxAvatar className="w-8 h-8" />
             )}
-            <span>Hello, {name}</span>
           </Menu.Button>
           <AnimatePresence mode="wait">
             {open && (
@@ -53,7 +52,7 @@ function MenuItem({ name, href, onClick }: MenuItemProps) {
   return (
     <Menu.Item as="li">
       <Link href={href} onClick={onClick}>
-        <i>{name}</i>
+        {name}
       </Link>
     </Menu.Item>
   );

@@ -7,7 +7,7 @@ import { Contact } from "@/components/homepage/contact";
 
 export default function Home() {
   return (
-    <main className="md:mt-20 mt-14">
+    <main>
       <HeroSection />
       <OurDeals />
       <SmoothTextCarousel />

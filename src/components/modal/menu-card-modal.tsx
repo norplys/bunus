@@ -56,7 +56,7 @@ export function MenuCardModal({
             imageUrl={imageUrl}
             name={menu?.name ?? ""}
             price={menu?.price ?? 0}
-            discountPrice={menu?.discountPrice}
+            discountPrice={menu?.discountPrice ?? 0}
             description={menu?.description ?? ""}
           />
           <OrderForm
@@ -93,12 +93,12 @@ function ImageSection({
         alt={name}
         width={500}
         height={500}
-        className="rounded-lg"
+        className="rounded-lg max-h-96 object-cover"
       />
       <h1 className="text-xl">{name}</h1>
       <p className="font-normal">{description || "Tidak ada deskripsi"}</p>
       <div className="flex gap-2 text-lg">
-        {discountPrice && <p>{formatCurrency(discountPrice)}</p>}
+        {discountPrice ? <p>{formatCurrency(discountPrice)}</p> : ""}
         <p
           className={clsx(
             discountPrice ? "line-through text-md opacity-30" : "",

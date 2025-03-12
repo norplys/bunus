@@ -54,7 +54,7 @@ export function MenuCard({
           disabled={!available}
           onClick={handleChangeId}
         >
-          Tambah
+          Pesan
         </button>
       </div>
     </div>
