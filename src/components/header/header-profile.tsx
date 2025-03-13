@@ -1,3 +1,5 @@
+"use client";
+
 import { useAuth } from "@/lib/context/auth-context";
 import { Menu } from "@headlessui/react";
 import { AnimatePresence } from "framer-motion";
@@ -14,7 +16,7 @@ export function HeaderProfile() {
     <Menu className="relative" as="div">
       {({ open }) => (
         <>
-          <Menu.Button className="flex items-center gap-2 py-2">
+          <Menu.Button className="flex items-center gap-2 md:py-2">
             {image ? (
               <LazyImage
                 src={image}
@@ -29,7 +31,7 @@ export function HeaderProfile() {
             {open && (
               <Menu.Items
                 as="ul"
-                className="absolute right-0 flex flex-col gap-2 bg-foreground rounded-md shadow-lg px-5 py-2"
+                className="absolute right-10 bottom-0 md:bottom-auto md:right-0 flex flex-col gap-2 bg-foreground rounded-md shadow-lg px-5 py-2"
               >
                 <MenuItem name="Profile" href="/profile" />
                 <MenuItem name="Logout" href="/" onClick={handleLogout} />

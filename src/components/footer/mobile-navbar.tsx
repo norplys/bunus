@@ -1,35 +1,35 @@
 import { FaHome } from "react-icons/fa";
 import { BiSolidFoodMenu } from "react-icons/bi";
 import { CiGift } from "react-icons/ci";
-import { RxAvatar } from "react-icons/rx";
+import { HeaderProfile } from "../header/header-profile";
 import Link from "next/link";
 
 const links = [
   {
     name: "Home",
     href: "/",
-    icon: <FaHome />,
+    icon: <FaHome className="w-8 h-8" />,
   },
   {
     name: "Menu",
     href: "/menu",
-    icon: <BiSolidFoodMenu />,
+    icon: <BiSolidFoodMenu className="w-8 h-8" />,
   },
   {
     name: "Promo",
     href: "/deals",
-    icon: <CiGift className="text-lg" />,
+    icon: <CiGift className="w-8 h-8" />,
   },
   {
     name: "Profile",
-    href: "/profile",
-    icon: <RxAvatar className="text-lg" />,
+    href: "/",
+    icon: <HeaderProfile />,
   },
 ];
 
 export function MobileNavbar() {
   return (
-    <div className="md:hidden flex justify-between items-center bg-foreground sticky bottom-0 py-3 w-full z-40 text-primary-foreground">
+    <div className="md:hidden flex bg-foreground sticky bottom-0 py-3 w-full z-40 text-primary-foreground">
       {links.map((item, index) => (
         <Link
           key={index}
