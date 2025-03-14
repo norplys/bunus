@@ -5,23 +5,23 @@ import clsx from "clsx";
 
 type DashboardMenuCardProps = {
   menu: Menu;
-  handleOpenModal: (menuId: string) => void;
+  handleOpenMenuModal: (menuId: string | null, isEditMode: boolean) => void;
 };
 
 export function DashboardMenuCard({
   menu,
-  handleOpenModal,
+  handleOpenMenuModal,
 }: DashboardMenuCardProps) {
   const defaultImage = "/images/menu/menu-placeholder.png";
 
-  const handleClick = () => {
-    handleOpenModal(menu.id);
+  const editMenu = () => {
+    handleOpenMenuModal(menu.id, true);
   };
 
   return (
     <li
       className="border border-border flex rounded-lg gap-5 cursor-pointer overflow-hidden"
-      onClick={handleClick}
+      onClick={editMenu}
     >
       <LazyImage
         src={menu.image ?? defaultImage}

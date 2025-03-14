@@ -46,10 +46,6 @@ export default function Page() {
     handleOpenMenuModal(menuId, true);
   };
 
-  const handleCreateOpenModal = () => {
-    handleOpenMenuModal(null, false);
-  };
-
   const handleOpenCategoryModal = (
     categoryId: string | null,
     initialName: string | null,
@@ -60,10 +56,6 @@ export default function Page() {
 
     setCategoryId(categoryId);
     categoryOpenModal();
-  };
-
-  const handleCreateCategoryOpenModal = () => {
-    handleOpenCategoryModal(null, null, false);
   };
 
   const handleEditCategory = (categoryId: string, initialName: string) => {
@@ -87,8 +79,8 @@ export default function Page() {
         initialName={initialCategoryName}
       />
       <ActionButton
-        openMenuModal={handleCreateOpenModal}
-        openCategoryModal={handleCreateCategoryOpenModal}
+        handleOpenCategoryModal={handleOpenCategoryModal}
+        handleOpenMenuModal={handleOpenMenuModal}
       />
       <div className="grid gap-5">
         {isLoading ? (
@@ -98,8 +90,8 @@ export default function Page() {
             <MenuCategoryCard
               key={i}
               category={category}
-              handleOpenModal={handleOpenModal}
-              handleEditCategory={handleEditCategory}
+              handleOpenCategoryModal={handleOpenCategoryModal}
+              handleOpenMenuModal={handleOpenMenuModal}
             />
           ))
         ) : (
@@ -112,14 +104,18 @@ export default function Page() {
 
 type MenucategoryCardProps = {
   category: Category;
-  handleOpenModal: (menuId: string) => void;
-  handleEditCategory: (categoryId: string, initialName: string) => void;
+  handleOpenMenuModal: (menuId: string | null, isEditMode: boolean) => void;
+  handleOpenCategoryModal: (
+    categoryId: string | null,
+    initialName: string | null,
+    isEditMode: boolean,
+  ) => void;
 };
 
 function MenuCategoryCard({
   category,
-  handleOpenModal,
-  handleEditCategory,
+  handleOpenMenuModal,
+  handleOpenCategoryModal,
 }: MenucategoryCardProps) {
   const { data, isLoading } = useMenu(category.id);
   const { deleteCategoryMutation } = useMutationCategory();
@@ -127,7 +123,7 @@ function MenuCategoryCard({
   const menus = data?.data;
 
   const editCategory = () => {
-    handleEditCategory(category.id, category.name);
+    handleOpenCategoryModal(category.id, category.name, true);
   };
 
   const handleDeleteCategory = () => {
@@ -153,7 +149,10 @@ function MenuCategoryCard({
       ) : menus?.length ? (
         <ul className="grid gap-2">
           {menus?.map((menu) => (
-            <DashboardMenuCard menu={menu} handleOpenModal={handleOpenModal} />
+            <DashboardMenuCard
+              menu={menu}
+              handleOpenMenuModal={handleOpenMenuModal}
+            />
           ))}
         </ul>
       ) : (
@@ -164,11 +163,26 @@ function MenuCategoryCard({
 }
 
 type ActionButtonProps = {
-  openMenuModal: () => void;
-  openCategoryModal: () => void;
+  handleOpenMenuModal: (menuId: string | null, isEditMode: boolean) => void;
+  handleOpenCategoryModal: (
+    categoryId: string | null,
+    initialName: string | null,
+    isEditMode: boolean,
+  ) => void;
 };
 
-function ActionButton({ openMenuModal, openCategoryModal }: ActionButtonProps) {
+function ActionButton({
+  handleOpenMenuModal,
+  handleOpenCategoryModal,
+}: ActionButtonProps) {
+  const openMenuModal = () => {
+    handleOpenMenuModal(null, false);
+  };
+
+  const openCategoryModal = () => {
+    handleOpenCategoryModal(null, null, false);
+  };
+
   return (
     <div className="flex gap-4 items-center py-4 border-b">
       <Button

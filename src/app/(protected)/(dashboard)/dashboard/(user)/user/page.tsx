@@ -1,15 +1,36 @@
 "use client";
+import { Button } from "@/components/ui/button";
 import { Loading } from "@/components/ui/loading";
+import { useState } from "react";
 import { useServiceUsers } from "@/lib/hooks/query/use-service-users";
+import { useModal } from "@/lib/hooks/use-modal";
 import { User } from "@/lib/types/schema";
 import { RxAvatar } from "react-icons/rx";
+import { DashboardUserModal } from "@/components/modal/dashboard-user-modal";
 
 export default function Page() {
   const { data, isLoading } = useServiceUsers();
   const users = data?.data;
 
+  const { open, openModal, closeModal } = useModal();
+  const [isEditMode, setIsEditMode] = useState<boolean>(false);
+  const [user, setUser] = useState<User | null>(null);
+
+  const handleOpenModal = (user: User | null, isEditMode: boolean) => {
+    setIsEditMode(isEditMode);
+    setUser(user);
+    openModal();
+  };
+
   return (
-    <div>
+    <>
+      <DashboardUserModal
+        open={open}
+        closeModal={closeModal}
+        user={user}
+        isEditMode={isEditMode}
+      />
+      <ActionButton handleOpenModal={handleOpenModal} />
       {isLoading ? (
         <Loading />
       ) : (
@@ -17,7 +38,7 @@ export default function Page() {
           {users?.map((user) => <ServiceUserCard key={user.id} user={user} />)}
         </ul>
       )}
-    </div>
+    </>
   );
 }
 
@@ -34,5 +55,26 @@ function ServiceUserCard({ user }: ServiceUserCardProps) {
         <p>{user.email}</p>
       </div>
     </li>
+  );
+}
+
+type ActionButtonProps = {
+  handleOpenModal: (user: User | null, isEditMode: boolean) => void;
+};
+
+function ActionButton({ handleOpenModal }: ActionButtonProps) {
+  const createUser = () => {
+    handleOpenModal(null, false);
+  };
+
+  return (
+    <div className="flex gap-4 items-center py-4 border-b">
+      <Button
+        className="bg-accent px-2 py-1 font-bold text-primary-foreground"
+        onClick={createUser}
+      >
+        Tambah User
+      </Button>
+    </div>
   );
 }
