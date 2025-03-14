@@ -113,7 +113,7 @@ function QueueInput({ orderType }: QueueInputProps) {
       {
         onSuccess: () => {
           toast.success("Berhasil memesan");
-          router.replace("/service/menu");
+          router.replace("/service/merchant");
         },
         onError: () => {
           toast.error("Gagal memesan");
@@ -125,7 +125,7 @@ function QueueInput({ orderType }: QueueInputProps) {
   return (
     <form className="grid gap-5" onSubmit={handleSubmit(handleCheckout)}>
       <Input
-        label="Queue Number"
+        label="Nomor Antrian"
         type="number"
         register={register("queue", {
           valueAsNumber: true,
