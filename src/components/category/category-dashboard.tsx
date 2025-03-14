@@ -30,7 +30,7 @@ export function CategoryDashboard({
   const rootUrl = isAdmin
     ? "/dashboard/menu"
     : isService
-      ? "/service/menu"
+      ? "/service/merchant"
       : "/menu";
 
   return (
