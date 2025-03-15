@@ -86,11 +86,13 @@ export function OrderSummary({ isService }: OrderSummaryProps) {
   const { data } = useCart();
   const cartItems = data?.data?.cartItem;
 
+  const rootUrl = isService ? "/service/merchant" : "/menu";
+
   return (
     <section>
       <div className="flex justify-between items-center">
         <h1 className="title text-xl">Ringkasan Pesanan</h1>
-        <Link className="text-accent flex items-center gap-1" href={"/menu"}>
+        <Link className="text-accent flex items-center gap-1" href={rootUrl}>
           <CiSquarePlus className="text-2xl" />
           Tambah Makanan
         </Link>

@@ -34,7 +34,7 @@ export default function Page() {
       {isLoading ? (
         <Loading />
       ) : (
-        <ul>
+        <ul className="grid gap-2 mt-2">
           {users?.map((user) => <ServiceUserCard key={user.id} user={user} />)}
         </ul>
       )}

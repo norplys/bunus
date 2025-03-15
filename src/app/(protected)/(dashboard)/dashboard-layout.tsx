@@ -8,7 +8,9 @@ export function DashboardLayout({ children }: { children: ReactNode }) {
     <ProtectedDashboardLayout>
       <ServiceHeader isAdmin />
       <DashboardSidebar />
-      <main className="layout">{children}</main>
+      <main className="mx-auto max-w-7xl px-4 md:pl-12 xl:pl-0">
+        {children}
+      </main>
     </ProtectedDashboardLayout>
   );
 }
