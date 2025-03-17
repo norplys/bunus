@@ -11,7 +11,7 @@ import type { MutationResult } from "@/lib/types/query";
 
 type MutationUserResponse = APIResponse<User>;
 
-type CreateServiceUserSchema = Pick<
+export type CreateServiceUserSchema = Pick<
   User,
   "email" | "name" | "password" | "role"
 >;
@@ -22,6 +22,11 @@ export type MutationUser = {
     { data: CreateServiceUserSchema },
     MutationUserResponse
   >;
+  updateServiceUserMutation: MutationResult<
+    { data: Partial<User>; id: string },
+    MutationUserResponse
+  >;
+  deleteServiceUserMutation: MutationResult<string, MutationUserResponse>;
 };
 
 export function useMutationUser(): MutationUser {
@@ -50,8 +55,50 @@ export function useMutationUser(): MutationUser {
     },
   });
 
+  const updateServiceUserMutation = useMutation<
+    MutationUserResponse,
+    ApplicationError,
+    { data: Partial<User>; id: string }
+  >({
+    mutationFn: ({ data, id }: { data: Partial<User>; id: string }) =>
+      fetcher(`/users/service/${id}`, {
+        method: "PATCH",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["serviceUsers"],
+      });
+    },
+  });
+
+  const deleteServiceUserMutation = useMutation<
+    MutationUserResponse,
+    ApplicationError,
+    string
+  >({
+    mutationFn: (id: string) =>
+      fetcher(`/users/service/${id}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["serviceUsers"],
+      });
+    },
+  });
+
   return {
     queryClient,
+    updateServiceUserMutation,
     createServiceUserMutation,
+    deleteServiceUserMutation,
   };
 }

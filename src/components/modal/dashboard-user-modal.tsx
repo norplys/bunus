@@ -9,6 +9,7 @@ import toast from "react-hot-toast";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { UserRole } from "@/lib/types/enum";
+import type { CreateServiceUserSchema } from "@/lib/hooks/mutation/use-mutation-user";
 
 export type DashboardUserModalProps = {
   open: boolean;
@@ -23,14 +24,20 @@ const ALLOWED_ROLES = [
   "KITCHEN",
 ] as const satisfies UserRole[];
 
-const UserSchema = z.object({
-  name: z.string(),
-  email: z.string(),
-  password: z.string().min(6),
-  role: z.enum(ALLOWED_ROLES),
-});
+const UserSchema = (isEditMode: boolean) =>
+  z.object({
+    name: z.string(),
+    email: z
+      .string()
+      .email()
+      .regex(/@bunus\.com$/, {
+        message: `Email must be a "bunus.com" email`,
+      }),
+    password: isEditMode ? z.string().optional() : z.string().min(6),
+    role: z.enum(ALLOWED_ROLES),
+  });
 
-type UserSchema = z.infer<typeof UserSchema>;
+type UserSchema = z.infer<ReturnType<typeof UserSchema>>;
 
 export function DashboardUserModal({
   open,
@@ -38,22 +45,45 @@ export function DashboardUserModal({
   user,
   isEditMode,
 }: DashboardUserModalProps) {
+  const defaultValues = {
+    name: user?.name ?? "",
+    email: user?.email ?? "",
+    role: user?.role ?? "",
+  } as UserSchema;
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<UserSchema>({
-    resolver: zodResolver(UserSchema),
+    resolver: zodResolver(UserSchema(isEditMode)),
+    values: defaultValues,
   });
 
-  const { createServiceUserMutation } = useMutationUser();
+  const { createServiceUserMutation, updateServiceUserMutation } =
+    useMutationUser();
 
   const handleUser = (data: UserSchema) => {
     if (isEditMode) {
-      // Edit user
+      if (!data.password) {
+        delete data.password;
+      }
+
+      updateServiceUserMutation.mutate(
+        { data, id: user!.id },
+        {
+          onSuccess: () => {
+            toast.success("User berhasil diupdate");
+            closeModal();
+          },
+          onError: (error) => {
+            toast.error(error.message);
+          },
+        },
+      );
     } else {
       createServiceUserMutation.mutate(
-        { data },
+        { data: data as CreateServiceUserSchema },
         {
           onSuccess: () => {
             toast.success("User berhasil dibuat");
