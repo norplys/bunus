@@ -18,7 +18,7 @@ export function MerchantCheckoutLayout({ children }: { children: ReactNode }) {
     <>
       <ServiceHeader />
       <MerchantCheckoutModal open={open} closeModal={closeModal} />
-      <main className="layout mt-24">{children}</main>
+      <main className="layout mt-5">{children}</main>
       <MerchantCheckoutButton openModal={openModal} cart={cart} />
     </>
   );

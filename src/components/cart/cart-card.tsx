@@ -57,7 +57,7 @@ export function CartCard({ cartItem, isService }: CartCardProps) {
             alt={cartItem.menu.name}
             width={100}
             height={100}
-            className="w-full h-full rounded-lg"
+            className="w-28 h-28 object-cover rounded-lg"
           />
         )}
         <div>

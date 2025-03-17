@@ -7,6 +7,7 @@ type Role = "ADMIN" | "USER" | "MERCHANT" | "KITCHEN" | "CASHIER";
 export type User = BaseRecord & {
   email: string;
   name: string;
+  password: string;
   role: Role;
   image: string;
   phoneNumber: string;
