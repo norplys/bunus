@@ -72,6 +72,7 @@ export function PaymentForm({
         onSuccess: () => {
           toast.success("Pembayaran berhasil");
           closeModal();
+          setShowPayment(false);
         },
         onError: () => {
           toast.error("Pembayaran gagal, mohon coba kembali");
