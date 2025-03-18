@@ -7,7 +7,9 @@ const locationLink =
 export function OurLocation(): JSX.Element {
   return (
     <section className="layout grid mt-14 justify-items-center items-center">
-      <h2 className="title mb-10">Kami Ada Disini, Ayo Kemari !</h2>
+      <h2 className="title mb-10 w-full md:w-fit">
+        Kami Ada Disini, Ayo Kemari !
+      </h2>
       <Link
         href={locationLink}
         className="text-primary-foreground bg-accent md:text-xl md:px-6 md:py-2 text-sm py-1 px-2 rounded-md font-semibold hover:scale-105 duration-300"

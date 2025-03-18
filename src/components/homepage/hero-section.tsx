@@ -67,17 +67,17 @@ function SignUpButton(): JSX.Element {
 const links = [
   {
     name: "Delivery",
-    href: "/delivery",
+    href: "/menu",
     icon: <MdDeliveryDining className="md:text-6xl text-3xl" />,
   },
   {
     name: "Takeaway",
-    href: "/take-away",
+    href: "/menu",
     icon: <FaBox className="md:text-4xl text-lg mt-1" />,
   },
   {
     name: "Dine In",
-    href: "/dine-in",
+    href: "/menu",
     icon: <PiBowlFoodFill className="md:text-5xl text-2xl" />,
   },
 ];

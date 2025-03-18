@@ -24,7 +24,7 @@ export function HeaderProfile() {
                 className="w-8 h-8 rounded-full"
               />
             ) : (
-              <RxAvatar className="w-8 h-8" />
+              <RxAvatar className="md:w-8 md:h-8 w-6 h-6" />
             )}
           </Menu.Button>
           <AnimatePresence mode="wait">
