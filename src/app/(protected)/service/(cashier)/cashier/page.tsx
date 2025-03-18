@@ -3,11 +3,29 @@ import { Loading } from "@/components/ui/loading";
 import { useServiceOrder } from "@/lib/hooks/query/use-service-order";
 import { CashierCard } from "@/components/cashier/cashier-card";
 import { useModal } from "@/lib/hooks/use-modal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CashierCardModal } from "@/components/cashier/cashier-card-modal";
+import socket from "@/lib/socket";
 
 export default function Page() {
-  const { data, isPending } = useServiceOrder();
+  const { data, isPending, refetch } = useServiceOrder();
+
+  useEffect(() => {
+    const events = ["order:update", "order:create"];
+
+    events.forEach((event) => {
+      socket.on(event, () => {
+        refetch();
+      });
+    });
+
+    return () => {
+      events.forEach((event) => {
+        socket.off(event);
+      });
+    };
+  }, [refetch]);
+
   const orders = data?.data;
 
   const [id, setId] = useState<string | null>(null);

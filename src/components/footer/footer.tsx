@@ -1,6 +1,6 @@
 export function Footer() {
   return (
-    <footer className="bg-primary hidden md:grid justify-center items-center gap-10 p-5 text-sm mt-5">
+    <footer className="bg-primary hidden md:grid justify-center items-center gap-10 p-5 text-sm">
       <div className="flex justify-around">
         <div className="grid grid-cols-2 text-slate-50 font-thin gap-1">
           <h1 className="col-span-2 font-bold">Jam Buka</h1>

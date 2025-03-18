@@ -8,7 +8,7 @@ export default function Layout({ children }: { children: ReactNode }) {
     <ProtectedCashierLayout>
       <ServiceHeader />
       <CashierDashboard />
-      <main className="layout mt-20">{children}</main>
+      <main className="layout">{children}</main>
     </ProtectedCashierLayout>
   );
 }

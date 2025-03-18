@@ -128,17 +128,17 @@ function CashierActionButton({
   };
 
   return (
-    <div className="flex justify-around items-center">
+    <div className="flex justify-around items-center text-sm">
       {unpaid ? (
         <>
           <Button
-            className="btn btn-primary bg-foreground px-4 py-2 text-primary-foreground"
+            className=" bg-foreground px-4 py-2 text-primary-foreground"
             onClick={handleShowPayment}
           >
             Bayar
           </Button>
           <Button
-            className="btn btn-primary bg-foreground px-4 py-2 text-primary-foreground"
+            className=" bg-foreground px-4 py-2 text-primary-foreground"
             onClick={() => handleUpdateOrderStatus("UNPAID_COOKING")}
           >
             Kirim Ke Dapur
@@ -146,7 +146,7 @@ function CashierActionButton({
         </>
       ) : parsedStatus[0] !== "COMPLETED" ? (
         <Button
-          className="btn btn-primary bg-foreground px-4 py-2 text-primary-foreground"
+          className=" bg-foreground px-4 py-2 text-primary-foreground"
           onClick={() => handleUpdateOrderStatus("COMPLETED")}
         >
           Selesaikan
@@ -154,7 +154,7 @@ function CashierActionButton({
       ) : (
         ""
       )}
-      <Button className="btn btn-primary bg-foreground px-4 py-2 text-primary-foreground">
+      <Button className=" bg-foreground px-4 py-2 text-primary-foreground">
         Print
       </Button>
     </div>
